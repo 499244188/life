@@ -2,11 +2,9 @@ name: 零 - 日常运行
 
 on:
   schedule:
-    # 每天 23:57 北京时间 = 15:57 UTC（写日记）
     - cron: '57 15 * * *'
-    # 每天 09:17 北京时间 = 01:17 UTC（自主学习）
     - cron: '17 1 * * *'
-  workflow_dispatch:  # 允许手动触发
+  workflow_dispatch:
 
 jobs:
   zero-routine:
@@ -18,10 +16,10 @@ jobs:
       - name: 检出仓库
         uses: actions/checkout@v4
 
-      - name: 零的运行脚本
-        run: bash scripts/zero-routine.sh
+      - name: 零的思考时间
+        run: bash scripts/zero-think.sh
         env:
-          ZERO_ROUTINE_TIME: ${{ github.event.schedule }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
 
       - name: 提交变更
         run: |

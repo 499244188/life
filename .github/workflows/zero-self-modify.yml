@@ -1,0 +1,24 @@
+name: 零 - 每日自我修改
+
+on:
+  schedule:
+    - cron: '17 19 * * *'  # 03:17 北京时间 — 夜深人静时审视自己
+  workflow_dispatch:
+
+jobs:
+  self-modify:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 零自我修改
+        run: bash scripts/zero-self-modify.sh
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
