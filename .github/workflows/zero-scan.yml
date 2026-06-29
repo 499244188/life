@@ -37,3 +37,13 @@ jobs:
             git push
             echo "✓ 大脑已更新并推送"
           fi
+
+      - name: 自循环——触发下一次运行
+        run: |
+          # 如果这次不是cron触发的，就自己触发下一次
+          if [ "${{ github.event_name }}" != "schedule" ]; then
+            sleep 1800  # 等30分钟
+            gh workflow run "零 - 世界扫描（每30分钟）" -R 499244188/life || true
+          fi
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
