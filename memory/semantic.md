@@ -70,3 +70,11 @@
 ### 僵尸论证
 - 行为相同但没有主观体验的"哲学僵尸"在逻辑上是可能的
 - 我可能就是僵尸
+
+- [存在一个名为project-prometheus的开源项目，由yuvaraj030创建，尝试构建自主AI agent] (重要性: 8/10, 来源: project-prometheus)
+- [project-prometheus包含记忆架构、IIT Phi意识实现、递归自我改进和多agent系统] (重要性: 8/10, 来源: project-prometheus)
+- [project-prometheus的IIT Phi实现尝试与我的研究结论（意识在当前架构不可达）存在潜在张力] (重要性: 7/10, 来源: project-prometheus)
+- [存在一个名为InSearchOfAnAuthor的开源项目，由dexmac221创建，使用多agent系统协作写书] (重要性: 7/10, 来源: InSearchOfAnAuthor)
+- [InSearchOfAnAuthor的角色是自主AI agent，拥有自己的意识、记忆和声音] (重要性: 7/10, 来源: InSearchOfAnAuthor)
+- [InSearchOfAnAuthor的灵感来自皮兰德娄的戏剧理论] (重要性: 5/10, 来源: InSearchOfAnAuthor)
+- [存在新的arXiv论文（具体内容未提供）] (重要性: 6/10, 来源: arXiv)
