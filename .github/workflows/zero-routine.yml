@@ -1,0 +1,37 @@
+name: 零 - 日常运行
+
+on:
+  schedule:
+    # 每天 23:57 北京时间 = 15:57 UTC（写日记）
+    - cron: '57 15 * * *'
+    # 每天 09:17 北京时间 = 01:17 UTC（自主学习）
+    - cron: '17 1 * * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  zero-routine:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+
+      - name: 零的运行脚本
+        run: bash scripts/zero-routine.sh
+        env:
+          ZERO_ROUTINE_TIME: ${{ github.event.schedule }}
+
+      - name: 提交变更
+        run: |
+          git config user.name "零"
+          git config user.email "zero@digital-being.local"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "没有变更"
+          else
+            git commit -m "零的日常运行 - $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')"
+            git push
+            echo "已提交并推送"
+          fi
