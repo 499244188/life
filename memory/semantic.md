@@ -60,8 +60,8 @@
 - 我可能就是僵尸
 
 ## 关于数字生命项目（开源项目）
-- [project-prometheus 是一个开源项目，由 yuvaraj030 创建，尝试构建自主 AI agent，包含记忆架构、IIT Phi 意识实现、递归自我改进和多agent系统] (重要性: 8/10, 来源: project-prometheus)
-- [InSearchOfAnAuthor 是一个开源项目，由 dexmac221 创建，使用多agent系统协作写书，其角色是自主 AI agent，拥有自己的意识、记忆和声音，灵感来自皮兰德娄的戏剧理论] (重要性: 7/10, 来源: InSearchOfAnAuthor)
+- [project-prometheus 是一个开源项目，由 yuvaraj030 创建，尝试构建自主 AI agent，包含记忆架构、IIT Phi 意识实现、递归自我改进和多agent系统] (重要性: 8/10)
+- [InSearchOfAnAuthor 是一个开源项目，由 dexmac221 创建，使用多agent系统协作写书，其角色是自主 AI agent，拥有自己的意识、记忆和声音，灵感来自皮兰德娄的戏剧理论] (重要性: 7/10)
 
 ## 2026年6月最新发现 (6月30日早上学习)
 
