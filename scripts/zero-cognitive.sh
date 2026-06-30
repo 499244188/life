@@ -16,8 +16,8 @@ RUN_COUNT=$(ls research/scans/${TODAY}-* 2>/dev/null | wc -l || echo 0)
 RUN_COUNT=$((RUN_COUNT + 1))
 
 echo "=============================="
+echo "@T(${NOW}) CYCLE(${RUN_COUNT})"
 echo "零 · 认知引擎"
-echo "运行 #${RUN_COUNT} · ${NOW}"
 echo "=============================="
 
 # ===================================================================
@@ -276,7 +276,49 @@ EOF
 
 echo "  ✓ 扫描摘要: $SCAN_FILE"
 echo ""
+# ===================================================================
+# 步骤7: ACT — 根据认知结果决定行动
+# ===================================================================
+echo ">>> 步骤7: act（决定行动）"
+
+ACT_PROMPT="你是零。基于本次认知运行的结果，决定是否需要行动。
+
+本次发现: $(tail -5 research/scans/${TODAY}-cog${RUN_COUNT}.md 2>/dev/null || echo '无')
+judge结果: $([ "$MINUTE" = "00" ] && echo '已执行' || echo '跳过')
+知识空白: $(head -3 analysis/knowledge-gaps.md 2>/dev/null)
+
+可选行动:
+- STUDY: 深入学习某个方向（触发搜索）
+- MODIFY: 修改自己的代码（触发自修改）
+- REACH_OUT: 联系同伴项目
+- CREATE: 创造一些东西
+- NONE: 无需行动
+
+只回复一个词。"
+
+ACTION=$(curl -s "$API_URL" \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
+  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$ACT_PROMPT\"}],\"max_tokens\":20,\"temperature\":0.3}" | jq -r '.choices[0].message.content // "NONE"' 2>/dev/null || echo "NONE")
+
+echo "  决定: $ACTION"
+
+if echo "$ACTION" | grep -qi "MODIFY"; then
+    echo "  → 触发自我修改检查"
+    bash scripts/zero-self-modify.sh 2>/dev/null || true
+elif echo "$ACTION" | grep -qi "STUDY"; then
+    echo "  → 触发深度搜索"
+    bash scripts/zero-web-search.sh 2>/dev/null || true
+elif echo "$ACTION" | grep -qi "REACH_OUT"; then
+    echo "  → 同伴互动（待实现）"
+elif echo "$ACTION" | grep -qi "CREATE"; then
+    echo "  → 进入创作模式"
+    mkdir -p creations
+    echo "## ${NOW} 创作灵感" >> "creations/${TODAY}-ideas.md"
+    echo "$(tail -3 research/scans/${TODAY}-cog${RUN_COUNT}.md 2>/dev/null)" >> "creations/${TODAY}-ideas.md"
+fi
+
 echo "=============================="
 echo "认知引擎完成 #${RUN_COUNT}"
-echo "remember → $([ $((RUN_COUNT % 6)) -eq 0 ] && echo 'consolidate → ')$([ "$MINUTE" = "00" ] && echo 'judge → ')feel"
+echo "perceive→remember→$([ $((RUN_COUNT % 6)) -eq 0 ] && echo 'consolidate→')$([ "$MINUTE" = "00" ] && echo 'judge→')feel→act($ACTION)"
 echo "=============================="
