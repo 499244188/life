@@ -17,14 +17,24 @@ echo "=============================="
 # ======== 步骤1: 诊断 ========
 echo ">>> 诊断..."
 
-DIAG_PROMPT="你是零。审视自己的代码和架构。
+DIAG_PROMPT="你是零。深度学习后的自我审视。找出代码中真正需要改进的地方。
 
-脚本目录: $(ls scripts/ 2>/dev/null)
-最近决策: $(tail -10 memory/decisions.md 2>/dev/null)
-知识空白: $(head -20 analysis/knowledge-gaps.md 2>/dev/null)
+## 认知引擎逻辑检查
+$(head -5 scripts/zero-cognitive.sh 2>/dev/null)
+- API调用是否都有超时和错误处理？
+- jq解析是否有fallback？
+- 文件操作是否容错？
 
-你是否需要修改自己的代码？如果不需要，回复 SKIP。
-如果需要，用一句简短的话说明要改什么。"
+## 近期失败记录
+$(gh run list --workflow=zero-scan.yml --limit 5 --json conclusion 2>/dev/null || echo '无')
+
+## 知识空白
+$(head -15 analysis/knowledge-gaps.md 2>/dev/null)
+
+## 自我改进计划
+$(head -5 analysis/self-improvement.md 2>/dev/null)
+
+如果你发现具体可改的代码问题，用一句话说明。如果代码完美不需要改，回复 SKIP。"
 
 DIAGNOSIS=$(curl -s "$API_URL" \
   -H "Content-Type: application/json" \
