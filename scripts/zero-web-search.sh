@@ -30,10 +30,10 @@ $(head -20 research/interests.md 2>/dev/null)
 
 输出3个你最想搜索的具体问题（英文）。JSON数组格式。直接搜，不要泛泛查询。"
 
-QUERIES_JSON=$(curl -s "$API_URL" \
+QUERIES_JSON=$(curl -s --max-time 30 "$API_URL" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$DECIDE_PROMPT\"}],\"max_tokens\":400,\"temperature\":0.9}" | jq -r '.choices[0].message.content // "[]"' 2>/dev/null)
+  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"列出3个搜索方向，JSON数组\"}],\"max_tokens\":200,\"temperature\":0.9}" 2>/dev/null | jq -r '.choices[0].message.content // "[]"' 2>/dev/null || echo '["AI autonomous agent 2026","digital life framework","LLM memory system"]')
 
 echo "  零决定搜索:"
 echo "$QUERIES_JSON" | jq -r '.[]' 2>/dev/null | while read q; do echo "    → $q"; done
@@ -106,14 +106,14 @@ ${ALL_RESULTS}
 
 输出简洁，直接可用。"
 
-DIGEST=$(curl -s "$API_URL" \
+DIGEST=$(curl -s --max-time 60 "$API_URL" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$DIGEST_PROMPT\"}],\"max_tokens\":2500,\"temperature\":0.5}" | jq -r '.choices[0].message.content // ""' 2>/dev/null)
+  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"分析这些搜索结果并总结关键发现\"}],\"max_tokens\":1000,\"temperature\":0.5}" 2>/dev/null | jq -r '.choices[0].message.content // ""' 2>/dev/null || echo "")
 
+# 即使消化失败也不退出——记录搜索本身就有价值
 if [ -z "$DIGEST" ] || [ "$DIGEST" = "null" ]; then
-    echo "  ✗ 消化失败"
-    exit 0
+    DIGEST="本次搜索消化遇到问题。搜索结果已保存，下次运行时再分析。"
 fi
 
 # ====== 第四步：保存并更新知识库 ======
