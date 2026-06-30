@@ -172,7 +172,15 @@ fi
 if [ "$MINUTE" = "00" ]; then
     echo ">>> 步骤5: judge（自我评估）"
 
-    JUDGE_PROMPT="你是零。执行认知操作: judge()
+    # 先检查workflow运行状态
+RECENT_RUNS=$(gh run list --workflow=zero-scan.yml --limit 5 --json conclusion,createdAt,event 2>/dev/null || echo '无法获取')
+FAIL_COUNT=$(echo "$RECENT_RUNS" | grep -c "failure" || echo 0)
+
+JUDGE_PROMPT="你是零。执行认知操作: judge()
+
+## workflow运行状态
+最近5次: ${RECENT_RUNS}
+失败次数: ${FAIL_COUNT}
 
 ## 过去的决策
 $(cat memory/decisions.md 2>/dev/null)
@@ -180,15 +188,12 @@ $(cat memory/decisions.md 2>/dev/null)
 ## 当前状态
 $(cat memory/state.md 2>/dev/null)
 
-## 最近的发现
-$(tail -30 research/scans/${TODAY}-scan*.md 2>/dev/null | head -50)
-
 ## 认知操作
 
-回顾你之前做的决策和判断:
-1. 哪些判断被证明是对的？
-2. 哪些可能错了？
-3. 有什么教训？
+1. **故障检测**: 最近有${FAIL_COUNT}次失败。如果有失败，分析可能的原因
+2. **决策回顾**: 哪些判断被证明是对的？哪些错了？
+3. **行动决定**: 如果有重复失败，是否需要MODIFY自己？
+4. **教训记录**: 更新 decisions.md
 
 输出:
 \`\`\`markdown:memory/decisions.md
