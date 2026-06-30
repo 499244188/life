@@ -32,3 +32,10 @@ jobs:
             git push
             echo "✓ 大脑已更新并推送"
           fi
+
+      - name: 自循环（28分钟后触发下一次）
+        run: |
+          sleep 1680  # 28分钟
+          gh workflow run "零 - 世界扫描（每30分钟）" -R 499244188/life || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
