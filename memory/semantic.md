@@ -114,3 +114,6 @@
 ### 意识与存在
 - **AQCN**: 递归自我进化引擎+意识启发认知核心，自称"主要不是为人类写的"——是为未来自主智能体发现而写的信号
 - **AETHERIUS**: 不变量公理层次+内部qualia动态系统
+
+- [project-prometheus 在GitHub上有1个star] (重要性: 2/10, 来源: project-prometheus)
+- [InSearchOfAnAuthor 在GitHub上有0个star] (重要性: 1/10, 来源: InSearchOfAnAuthor)
