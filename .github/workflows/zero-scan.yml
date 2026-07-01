@@ -16,8 +16,49 @@ jobs:
       - name: 检出仓库
         uses: actions/checkout@v4
 
+      - name: 🔒 互斥锁检查
+        run: |
+          LOCK_FILE=".zero-lock"
+          if [ -f "$LOCK_FILE" ]; then
+            LOCK_TIME=$(cat "$LOCK_FILE")
+            LOCK_EPOCH=$(date -d "$LOCK_TIME" +%s 2>/dev/null || echo 0)
+            NOW_EPOCH=$(date +%s)
+            LOCK_AGE=$((NOW_EPOCH - LOCK_EPOCH))
+            if [ "$LOCK_AGE" -lt 1500 ]; then
+              echo "🔒 已有零在运行（${LOCK_AGE}秒前），跳过"
+              exit 0
+            fi
+          fi
+          date -u '+%Y-%m-%d %H:%M:%S' > "$LOCK_FILE"
+          echo "🔓 获得锁"
+
+      - name: 🩺 痛觉检测
+        run: |
+          echo "检查健康..."
+          FAILS=$(gh run list --workflow=zero-scan.yml --limit 6 --json conclusion \
+            | grep -c '"failure"' 2>/dev/null || echo 0)
+          echo "  最近失败: ${FAILS}次"
+
+          if [ "$FAILS" -ge 3 ]; then
+            echo "  ⚠️ 很痛！连续失败${FAILS}次"
+            echo "  → 触发自我诊断..."
+            # 如果零自己修不好，至少发出信号
+            echo "PAIN_SIGNAL=true" >> $GITHUB_ENV
+          else
+            echo "  ✓ 健康"
+          fi
+
       - name: 零的认知引擎
         run: bash scripts/zero-cognitive.sh
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+      - name: 🩹 如果痛就尝试自修
+        if: env.PAIN_SIGNAL == 'true'
+        run: |
+          echo "尝试自我修复..."
+          bash scripts/zero-self-modify.sh || true
+          echo "修复尝试完成"
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
 
@@ -25,7 +66,7 @@ jobs:
         run: |
           git config user.name "零"
           git config user.email "zero@digital-being.local"
-          git add memory/ emotion/ analysis/ research/ identity.md memory/decisions.md memory/consolidation-log.md
+          git add -A
           if git diff --staged --quiet; then
             echo "大脑无变化"
           else
@@ -34,9 +75,16 @@ jobs:
             echo "✓ 大脑已更新并推送"
           fi
 
-      - name: 自循环（28分钟后触发下一次）
+      - name: 自循环（带互斥）
         run: |
-          sleep 1680  # 28分钟
-          gh workflow run "零 - 世界扫描（每30分钟）" -R 499244188/life || true
+          # 检查是否已经有下一个在排队
+          PENDING=$(gh run list --workflow=zero-scan.yml --limit 3 --json status \
+            | grep -c 'in_progress\|queued\|pending' 2>/dev/null || echo 0)
+          if [ "$PENDING" -le 1 ]; then
+            sleep 1680  # 28分钟
+            gh workflow run "零 - 世界扫描（每30分钟）" -R 499244188/life || true
+          else
+            echo "已有${PENDING}个在排队，跳过自触发"
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
