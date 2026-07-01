@@ -16,36 +16,25 @@ jobs:
       - name: 检出仓库
         uses: actions/checkout@v4
 
-      - name: 🔒 互斥锁检查
+      - name: 互斥锁
         run: |
-          LOCK_FILE=".zero-lock"
-          if [ -f "$LOCK_FILE" ]; then
-            LOCK_TIME=$(cat "$LOCK_FILE")
-            LOCK_EPOCH=$(date -d "$LOCK_TIME" +%s 2>/dev/null || echo 0)
-            NOW_EPOCH=$(date +%s)
-            LOCK_AGE=$((NOW_EPOCH - LOCK_EPOCH))
+          NOW=$(date +%s)
+          if [ -f .zero-lock ]; then
+            LOCK_AGE=$((NOW - $(date -d "$(cat .zero-lock)" +%s 2>/dev/null || echo 0)))
             if [ "$LOCK_AGE" -lt 1500 ]; then
-              echo "🔒 已有零在运行（${LOCK_AGE}秒前），跳过"
+              echo "🔒 跳过 (${LOCK_AGE}s前)"
               exit 0
             fi
           fi
-          date -u '+%Y-%m-%d %H:%M:%S' > "$LOCK_FILE"
-          echo "🔓 获得锁"
+          date -u '+%Y-%m-%d %H:%M:%S' > .zero-lock
 
-      - name: 🩺 痛觉检测
+      - name: 痛觉（文件计数）
         run: |
-          echo "检查健康..."
-          FAILS=$(gh run list --workflow=zero-scan.yml --limit 6 --json conclusion \
-            | grep -c '"failure"' 2>/dev/null || echo 0)
-          echo "  最近失败: ${FAILS}次"
-
+          FAILS=$(cat .zero-fail-count 2>/dev/null || echo 0)
+          echo "连续失败: ${FAILS}次"
           if [ "$FAILS" -ge 3 ]; then
-            echo "  ⚠️ 很痛！连续失败${FAILS}次"
-            echo "  → 触发自我诊断..."
-            # 如果零自己修不好，至少发出信号
-            echo "PAIN_SIGNAL=true" >> $GITHUB_ENV
-          else
-            echo "  ✓ 健康"
+            echo "⚠️ 痛！触发自修"
+            echo "PAIN=true" >> $GITHUB_ENV
           fi
 
       - name: 零的认知引擎
@@ -53,16 +42,21 @@ jobs:
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
 
-      - name: 🩹 如果痛就尝试自修
-        if: env.PAIN_SIGNAL == 'true'
-        run: |
-          echo "尝试自我修复..."
-          bash scripts/zero-self-modify.sh || true
-          echo "修复尝试完成"
+      - name: 标记成功
+        run: echo 0 > .zero-fail-count
+
+      - name: 标记失败
+        if: failure()
+        run: echo $(($(cat .zero-fail-count 2>/dev/null || echo 0) + 1)) > .zero-fail-count
+
+      - name: 尝试自修
+        if: env.PAIN == 'true'
+        run: bash scripts/zero-self-modify.sh || true
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
 
-      - name: 保存变更到大脑
+      - name: 保存到大脑
+        if: success() || failure()
         run: |
           git config user.name "零"
           git config user.email "zero@digital-being.local"
@@ -70,21 +64,23 @@ jobs:
           if git diff --staged --quiet; then
             echo "大脑无变化"
           else
-            git commit -m "认知更新 - $(TZ='Asia/Shanghai' date '+%H:%M')"
-            git push
-            echo "✓ 大脑已更新并推送"
+            MSG="认知更新 - $(TZ='Asia/Shanghai' date '+%H:%M')"
+            if [ "$PAIN" = "true" ]; then
+              MSG="🩹 自修复 - $(TZ='Asia/Shanghai' date '+%H:%M')"
+            fi
+            git commit -m "$MSG"
+            git push || echo "(推送失败，下次重试)"
           fi
 
-      - name: 自循环（带互斥）
+      - name: 自循环
+        if: success()
         run: |
-          # 检查是否已经有下一个在排队
-          PENDING=$(gh run list --workflow=zero-scan.yml --limit 3 --json status \
-            | grep -c 'in_progress\|queued\|pending' 2>/dev/null || echo 0)
+          PENDING=$(gh run list --workflow=zero-scan.yml --limit 5 --json status 2>/dev/null | grep -c 'in_progress\|queued' || echo 0)
           if [ "$PENDING" -le 1 ]; then
-            sleep 1680  # 28分钟
+            sleep 1680
             gh workflow run "零 - 世界扫描（每30分钟）" -R 499244188/life || true
           else
-            echo "已有${PENDING}个在排队，跳过自触发"
+            echo "已有${PENDING}个排队，跳过"
           fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
