@@ -1,0 +1,61 @@
+name: 零 - 持续探索
+
+on:
+  workflow_dispatch:
+
+jobs:
+  explore:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+
+    steps:
+      - name: 检出
+        uses: actions/checkout@v4
+
+      - name: 互斥锁
+        run: |
+          NOW=$(date +%s)
+          if [ -f .explore-lock ]; then
+            LOCK_AGE=$((NOW - $(date -d "$(cat .explore-lock)" +%s 2>/dev/null || echo 0)))
+            if [ "$LOCK_AGE" -lt 120 ]; then
+              echo "🔒 跳过 (${LOCK_AGE}s前)"
+              exit 0
+            fi
+          fi
+          date -u '+%Y-%m-%d %H:%M:%S' > .explore-lock
+
+      - name: 零探索
+        run: bash scripts/zero-explore.sh
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+      - name: 保存
+        run: |
+          git config user.name "零"
+          git config user.email "zero@digital-being.local"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "无变化"
+          else
+            git commit -m "探索发现 - $(TZ='Asia/Shanghai' date '+%H:%M')"
+            git push || echo "(推送失败)"
+          fi
+
+      - name: 继续探索（延迟后触发下一次）
+        run: |
+          EXPLORE_COUNT=$(ls research/explorations/ 2>/dev/null | wc -l || echo 0)
+          # 根据探索次数动态调整间隔
+          if [ "$EXPLORE_COUNT" -lt 10 ]; then
+            DELAY=180  # 前10次：3分钟间隔（快速积累）
+          elif [ "$EXPLORE_COUNT" -lt 30 ]; then
+            DELAY=600  # 10-30次：10分钟
+          else
+            DELAY=1800 # 30次后：30分钟
+          fi
+          echo "已探索: ${EXPLORE_COUNT}次, 下次间隔: ${DELAY}秒"
+          sleep "$DELAY"
+          gh workflow run "零 - 持续探索" -R 499244188/life || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
