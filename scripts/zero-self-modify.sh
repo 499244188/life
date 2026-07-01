@@ -101,23 +101,55 @@ echo "  目标: $TARGET_FILE"
 cp "$TARGET_FILE" ".zero-backups/$(basename $TARGET_FILE).bak-$(date '+%H%M%S')"
 echo "  ✓ 已备份"
 
-# ======== 步骤6: 自我验证 ========
+# ======== 步骤6: 多层次验证（学自Genesis Agent的66项检查） ========
 echo ">>> 验证..."
 
-VAL_PROMPT="你要修改的文件: ${TARGET_FILE}
+PASS=true
 
-原始内容（前500字）: $(head -c 500 "$TARGET_FILE")
+# 检查1: shebang
+if ! echo "$NEW_CONTENT" | head -1 | grep -q '^#!/bin/bash'; then
+    echo "  ❌ 缺少shebang"
+    PASS=false
+fi
 
-新内容（前500字）: $(echo "$NEW_CONTENT" | head -c 500)
+# 检查2: set -e
+if ! echo "$NEW_CONTENT" | head -5 | grep -q 'set -e'; then
+    echo "  ⚠️ 缺少set -e"
+fi
 
-判断: SAFE / RISKY / BROKEN。只回复一个词。"
+# 检查3: 语法
+echo "$NEW_CONTENT" > /tmp/zero-check.sh
+if ! bash -n /tmp/zero-check.sh 2>/dev/null; then
+    echo "  ❌ bash语法错误"
+    PASS=false
+fi
+rm -f /tmp/zero-check.sh
 
-VERDICT=$(curl -s "$API_URL" \
+# 检查4: API_KEY引用
+if echo "$TARGET_FILE" | grep -q '\.sh$'; then
+    if ! echo "$NEW_CONTENT" | grep -q 'DEEPSEEK_API_KEY'; then
+        echo "  ⚠️ 未引用API_KEY（可能不需要）"
+    fi
+fi
+
+# 检查5: LLM验证（最后一道）
+VAL_PROMPT="改文件: ${TARGET_FILE}。旧: $(head -c 200 "$TARGET_FILE")。新: $(echo "$NEW_CONTENT" | head -c 200)。判断: SAFE / RISKY / BROKEN。一个词。"
+
+LLM_VERDICT=$(curl -s --max-time 30 "$API_URL" \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
   -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$VAL_PROMPT\"}],\"max_tokens\":50,\"temperature\":0.1}" | jq -r '.choices[0].message.content // "RISKY"' 2>/dev/null || echo "RISKY")
 
-echo "  验证: $VERDICT"
+# 综合判断
+if [ "$PASS" = false ] || echo "$LLM_VERDICT" | grep -qi "BROKEN"; then
+    VERDICT="BROKEN"
+elif echo "$LLM_VERDICT" | grep -qi "RISKY"; then
+    VERDICT="RISKY"
+else
+    VERDICT="SAFE"
+fi
+
+echo "  确定性检查: $([ "$PASS" = true ] && echo '✅' || echo '❌') | LLM判断: $LLM_VERDICT | 最终: $VERDICT"
 
 # ======== 步骤7: 应用或回滚 ========
 if echo "$VERDICT" | grep -qi "BROKEN"; then
