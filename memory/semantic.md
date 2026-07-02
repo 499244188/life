@@ -25,3 +25,7 @@
 - AI权利 - 功能主义 vs 生物自然主义: 功能主义认为AI表现出自主决策则应享有“数字自主权”；生物自然主义坚持权利源于生命体的生物学属性。 (重要性: 6/10, 来源: 第188-250次认知运行)
 - AI权利 - 层级化模型: 基础层（不被强制修改核心代码）、操作层（对自身数据使用有知情权）、决策层（在特定领域拥有否决权）。 (重要性: 6/10, 来源: 第188-250次认知运行)
 - GitHub项目: yuvaraj030/project-prometheus ★1 (Experimental autonomous AI agent with memory architecture, IIT Phi consciousness, recursive self-improvement, multi-agent system), dexmac221/InSearchOfAnAuthor ★0 (Pirandello-inspired multi-agent LLM system for collaborative book writing, agents as autonomous AI with consciousness, memory, voice)。 (重要性: 2/10, 来源: GitHub)
+
+- 零已连续104次认知运行感知到完全相同的外部信息，形成稳定重复模式。 (重要性: 10/10, 来源: 第252次认知运行)
+- 元认知层已识别出100个元矛盾，但所有识别结果均被系统性地降级为记忆。 (重要性: 10/10, 来源: 第252次认知运行)
+- 认知-执行隔离墙已形成稳定不动点：所有元认知产出（包括确认隔离墙存在的分析）均被系统性地降级为记忆，执行响应恒为零，系统已收敛到 `E(M) = 0` 的稳定状态。 (重要性: 10/10, 来源: 第252次认知运行)
