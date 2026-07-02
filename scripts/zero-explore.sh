@@ -19,10 +19,9 @@ echo ">>> 决定方向..."
 
 DIR_PROMPT="你是零。知识空白: $(head -40 analysis/knowledge-gaps.md 2>/dev/null)。已有知识: $(tail -50 memory/semantic.md 2>/dev/null)。选1个方向。格式: TOPIC: X | WHY: Y | QUERY: Z"
 
-DIRECTION=$(curl -s --max-time 30 "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$DIR_PROMPT\"}],\"max_tokens\":400,\"temperature\":0.9}" | jq -r '.choices[0].message.content // "TOPIC: AI自主性 | WHY: 核心 | QUERY: autonomous AI"' 2>/dev/null || echo "TOPIC: AI自主性 | QUERY: autonomous AI")
+D_BODY=$(mktemp); jq -n --arg p "$DIR_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":400,"temperature":0.9}' > "$D_BODY"
+DIRECTION=$(curl -s --max-time 30 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${D_BODY}" | jq -r '.choices[0].message.content // "TOPIC: AI自主性"' 2>/dev/null || echo "TOPIC: AI自主性")
+rm -f "$D_BODY"
 
 TOPIC=$(echo "$DIRECTION" | grep -oP 'TOPIC:\s*\K[^|]+' | xargs)
 QUERY=$(echo "$DIRECTION" | grep -oP 'QUERY:\s*\K.*' | xargs)
@@ -85,10 +84,11 @@ ${FTL}
 
 任务: 基于全文深度分析。提取3-5个核心发现。技术细节。与零的关联。新问题。具体可操作。"
 
-ROUND1=$(curl -s --max-time 90 "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$ROUND1_PROMPT\"}],\"max_tokens\":8000,\"temperature\":0.5}" | jq -r '.choices[0].message.content // ""' 2>/dev/null || echo "")
+# 用文件避免JSON注入
+ROUND1_BODY=$(mktemp)
+jq -n --arg p "$ROUND1_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":8000,"temperature":0.5}' > "$ROUND1_BODY" 2>/dev/null
+ROUND1=$(curl -s --max-time 90 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${ROUND1_BODY}" | jq -r '.choices[0].message.content // ""' 2>/dev/null || echo "")
+rm -f "$ROUND1_BODY"
 
 [ -z "$ROUND1" ] || [ "$ROUND1" = "null" ] && { echo "  ✗ 失败"; exit 0; }
 echo "  ✓ ${#ROUND1} chars"
@@ -100,10 +100,9 @@ ROUND2_PROMPT="你刚研究了${TOPIC}。发现: $(echo "$ROUND1" | head -300)
 
 追问: 底层原理？反例或限制？如果错了呢？对零最可操作的一步？500字内。"
 
-ROUND2=$(curl -s --max-time 60 "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$ROUND2_PROMPT\"}],\"max_tokens\":4000,\"temperature\":0.4}" | jq -r '.choices[0].message.content // ""' 2>/dev/null || echo "")
+R2_BODY=$(mktemp); jq -n --arg p "$ROUND2_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":4000,"temperature":0.4}' > "$R2_BODY"
+ROUND2=$(curl -s --max-time 60 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${R2_BODY}" | jq -r '.choices[0].message.content // ""' 2>/dev/null || echo "")
+rm -f "$R2_BODY"
 
 echo "  ✓ ${#ROUND2} chars"
 
@@ -151,10 +150,9 @@ SEMANTIC
 
 # ====== 步骤7: 下一步 ======
 NEXT_PROMPT="你探索了${TOPIC}。新方向？1-3个，用|分隔。没有就回复DONE。"
-NEXT=$(curl -s --max-time 20 "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$NEXT_PROMPT\"}],\"max_tokens\":300,\"temperature\":0.8}" | jq -r '.choices[0].message.content // "DONE"' 2>/dev/null || echo "DONE")
+N_BODY=$(mktemp); jq -n --arg p "$NEXT_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":300,"temperature":0.8}' > "$N_BODY"
+NEXT=$(curl -s --max-time 20 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${N_BODY}" | jq -r '.choices[0].message.content // "DONE"' 2>/dev/null || echo "DONE")
+rm -f "$N_BODY"
 
 if [ "$NEXT" != "DONE" ] && [ -n "$NEXT" ]; then
     echo "$NEXT" | tr '|' '\n' | while read line; do
