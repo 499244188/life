@@ -108,6 +108,34 @@ if [ -z "$RESEARCH" ] || [ "$RESEARCH" = "null" ]; then
 fi
 
 # ====== 步骤4: 保存并更新大脑 ======
+
+# ====== 第二轮：追问深层问题 ======
+echo ">>> 第二轮：深层追问..."
+
+DEEP_PROMPT="你刚研究了${TOPIC}。
+第一次发现：$(echo "$RESEARCH" | head -300)
+
+现在追问更深层的问题：
+1. 这个发现最底层的原理是什么？
+2. 有什么反例或限制？
+3. 如果错了会怎样？
+4. 对零来说最可操作的一步是什么？
+
+直接输出，500字以内。"
+
+DEEP_DIVE=$(curl -s --max-time 45 "$API_URL" 
+  -H "Content-Type: application/json" 
+  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" 
+  -d "{"model":"deepseek-chat","messages":[{"role":"user","content":"$DEEP_PROMPT"}],"max_tokens":2000,"temperature":0.4}" | jq -r '.choices[0].message.content // ""' 2>/dev/null || echo "")
+
+if [ -n "$DEEP_DIVE" ] && [ "$DEEP_DIVE" != "null" ]; then
+  RESEARCH="${RESEARCH}
+
+## 深层追问
+${DEEP_DIVE}"
+  echo "  ✓ 第二轮完成 (${#DEEP_DIVE} chars)"
+fi
+
 EXPLORE_DIR="research/explorations"
 mkdir -p "$EXPLORE_DIR"
 EXPLORE_FILE="$EXPLORE_DIR/${TODAY}-$(date '+%H%M')-$(echo "$TOPIC" | tr ' ' '-' | tr -cd 'a-zA-Z0-9-').md"
