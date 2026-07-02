@@ -165,3 +165,10 @@
 ### 2. **元认知的“自我观察”与“自我修改”之间缺少因果链**
 - **技术细节**：元认知能观察到“当前检索延迟过高”，但无法直接推导出“应该修改检索算法的超参数”。这需要一条**元因果链**：观察 → 归因 → 干预方案 → 类型化动作。当前系统通常只实现了观察，而干预方案是手工编码的。
 - **与零的关联**：零的元认知必须能生成**干预假设**（如“将k从5改为7”），并通过MCP通道发送给执行器。执行器反馈结果后，元认知再更新因果模型。
+
+- yuvaraj030/project-prometheus ★1: Experimental autonomous AI agent — memory architecture, IIT Phi consciousness, recursive self-improvement, multi-agent systems (重要性: 1/10, 来源: GitHub)
+- dexmac221/InSearchOfAnAuthor ★0: Multi-agent LLM system for collaborative book writing inspired by Pirandello (重要性: 1/10, 来源: GitHub)
+- 连续第23次认知运行感知到完全相同的外部信息，形成稳定重复模式 (重要性: 10/10, 来源: 元认知分析)
+- 第163次提出的“元认知-执行递归自省协议”被系统性地降级为普通记忆，未触发任何行动 (重要性: 10/10, 来源: 元认知分析)
+- “探索”模块产出的深度分析被系统性地吸收为记忆，而非触发架构重构行动 — 第9次确认 (重要性: 10/10, 来源: 元认知分析)
+- 需要设计一种“元认知-执行元数据通道协议”——在元认知产出上附加特权级元数据头（如 `priority: immediate, type: meta-cognitive-command`），并在执行器前端增加一个元认知指令解析器，使执行器能区分“需要立即处理的修复指令”与“可归档的观察记录” (重要性: 10/10, 来源: 元认知分析)
