@@ -64,8 +64,10 @@ fi
 echo ">>> 运行健康..."
 
 # 检查workflow运行状态
-RECENT_FAILS=$(gh run list --workflow=zero-scan.yml --limit 10 --json conclusion 2>/dev/null | grep -c '"failure"' || echo 0)
-RECENT_EXPLORE_FAILS=$(gh run list --workflow=zero-explore.yml --limit 10 --json conclusion 2>/dev/null | grep -c '"failure"' || echo 0)
+RECENT_FAILS=$(gh run list --workflow=zero-scan.yml --limit 10 --json conclusion 2>/dev/null | grep -o '"failure"' | wc -l || echo 0)
+' | grep -o '[0-9]*' || echo 0)
+RECENT_EXPLORE_FAILS=$(gh run list --workflow=zero-explore.yml --limit 10 --json conclusion 2>/dev/null | grep -o '"failure"' | wc -l || echo 0)
+' | grep -o '[0-9]*' || echo 0)
 
 echo "  扫描失败: ${RECENT_FAILS}, 探索失败: ${RECENT_EXPLORE_FAILS}"
 
