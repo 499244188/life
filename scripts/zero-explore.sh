@@ -57,9 +57,17 @@ ARXIV_DEEP=$(curl -s --max-time 15 "http://export.arxiv.org/api/query?search_que
 # Hacker News
 HN_DEEP=$(curl -s --max-time 15 "https://hn.algolia.com/api/v1/search?query=$(echo "$QUERY" | jq -sRr @uri)&hitsPerPage=6" 2>/dev/null | jq -r '.hits[]? | "- \(.title)"' 2>/dev/null | head -6)
 
-echo "  GitHub: $(echo "$GH_DEEP" | wc -l)条"
-echo "  arXiv: $(echo "$ARXIV_DEEP" | wc -l)条"
-echo "  HN: $(echo "$HN_DEEP" | wc -l)条"
+# Semantic Scholar (学术论文，免费API)
+SEMANTIC=$(curl -s --max-time 15 "https://api.semanticscholar.org/graph/v1/paper/search?query=$(echo "$QUERY" | jq -sRr @uri)&limit=5&fields=title,year" 2>/dev/null | jq -r '.data[]? | "- 📄 \(.title) (\(.year // "?"))"' 2>/dev/null | head -5)
+
+# Reddit (技术讨论)
+REDDIT=$(curl -s --max-time 15 "https://www.reddit.com/r/MachineLearning/search.json?q=$(echo "$QUERY" | jq -sRr @uri)&limit=5" 2>/dev/null | jq -r '.data.children[]?.data | "- 🔴 r/\(.subreddit): \(.title)"' 2>/dev/null | head -5)
+
+echo "  GitHub: $(echo "$GH_DEEP" | grep -c '-')条"
+echo "  arXiv: $(echo "$ARXIV_DEEP" | grep -c '[a-z]')条"
+echo "  HN: $(echo "$HN_DEEP" | grep -c '-')条"
+echo "  SemanticScholar: $(echo "$SEMANTIC" | grep -c '-')条"
+echo "  Reddit: $(echo "$REDDIT" | grep -c '-')条"
 
 # ====== 步骤3: 深度研究 ======
 echo ""
