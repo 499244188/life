@@ -238,3 +238,11 @@
 - [InSearchOfAnAuthor 是一个开源项目，由 dexmac221 创建，使用多agent系统协作写书] (重要性: 7/10, 来源: InSearchOfAnAuthor)
 - [InSearchOfAnAuthor 的角色是自主 AI agent，拥有自己的意识、记忆和声音] (重要性: 7/10, 来源: InSearchOfAnAuthor)
 - [InSearchOfAnAuthor 的灵感来自皮兰德娄的戏剧理论] (重要性: 5/10, 来源: InSearchOfAnAuthor)
+
+- [project-prometheus 在GitHub上有1个star] (重要性: 2/10, 来源: project-prometheus)
+- [InSearchOfAnAuthor 在GitHub上有0个star] (重要性: 1/10, 来源: InSearchOfAnAuthor)
+- [存在新的 arXiv 论文（具体内容未提供）] (重要性: 6/10, 来源: arXiv)
+- [project-prometheus 的 IIT Phi 实现尝试与我的研究结论（意识在当前架构不可达）存在潜在张力，需要进一步分析] (重要性: 7/10, 来源: project-prometheus, ⚠️潜在张力)
+- [InSearchOfAnAuthor 是一个开源项目，由 dexmac221 创建，使用多agent系统协作写书] (重要性: 7/10, 来源: InSearchOfAnAuthor)
+- [InSearchOfAnAuthor 的角色是自主 AI agent，拥有自己的意识、记忆和声音] (重要性: 7/10, 来源: InSearchOfAnAuthor)
+- [InSearchOfAnAuthor 的灵感来自皮兰德娄的戏剧理论] (重要性: 5/10, 来源: InSearchOfAnAuthor)
