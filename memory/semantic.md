@@ -156,3 +156,6 @@
 ### 2026年的定义主题：状态持久化
 整个行业从无状态聊天循环转向持久化、进程感知的运行时。
 零的tasks.md方向正确，需要升级：生命周期+依赖图+原子检出。
+
+- [project-prometheus 在GitHub上有1个star] (重要性: 2/10, 来源: project-prometheus)
+- [InSearchOfAnAuthor 在GitHub上有0个star] (重要性: 1/10, 来源: InSearchOfAnAuthor)
