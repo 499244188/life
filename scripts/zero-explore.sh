@@ -31,26 +31,59 @@ echo "  → ${TOPIC} (${WHY})"
 
 # ====== 步骤2: 5源搜索 ======
 echo ">>> 搜索..."
-GH=$(curl -s --max-time 15 "https://api.github.com/search/repositories?q=$(echo "$QUERY" | jq -sRr @uri)&sort=stars&per_page=8" 2>/dev/null | jq -r '.items[]? | "- \(.full_name) ★\(.stargazers_count)"' 2>/dev/null | head -8)
+GH=$(curl -s --max-time 15 "https://api.github.com/search/repositories?q=$(echo "$QUERY" | jq -sRr @uri)&sort=stars&per_page=8" 2>/dev/null | jq -r '.items[]? | "- \(.full_name) ★\(.stargazers_count): \(.description // "")"' 2>/dev/null | head -8)
 ARXIV=$(curl -s --max-time 15 "http://export.arxiv.org/api/query?search_query=all:$(echo "$QUERY" | jq -sRr @uri)&max_results=6" 2>/dev/null | sed -n 's/.*<title>\(.*\)<\/title>.*/\1/p' | head -6)
-HN=$(curl -s --max-time 15 "https://hn.algolia.com/api/v1/search?query=$(echo "$QUERY" | jq -sRr @uri)&hitsPerPage=6" 2>/dev/null | jq -r '.hits[]? | "- \(.title)"' 2>/dev/null | head -6)
+HN=$(curl -s --max-time 15 "https://hn.algolia.com/api/v1/search?query=$(echo "$QUERY" | jq -sRr @uri)&hitsPerPage=6" 2>/dev/null | jq -r '.hits[]? | "- \(.title) — \(.url // "hn")"' 2>/dev/null | head -6)
 SEMANTIC_S=$(curl -s --max-time 15 "https://api.semanticscholar.org/graph/v1/paper/search?query=$(echo "$QUERY" | jq -sRr @uri)&limit=5&fields=title,year" 2>/dev/null | jq -r '.data[]? | "- \(.title) (\(.year // "?"))"' 2>/dev/null | head -5)
-REDDIT=$(curl -s --max-time 15 "https://www.reddit.com/r/MachineLearning/search.json?q=$(echo "$QUERY" | jq -sRr @uri)&limit=5" 2>/dev/null | jq -r '.data.children[]?.data | "- r/\(.subreddit): \(.title)"' 2>/dev/null | head -5)
-echo "  5源: $(echo "$GH" | wc -l)/$(echo "$ARXIV" | wc -l)/$(echo "$HN" | wc -l)/$(echo "$SEMANTIC_S" | wc -l)/$(echo "$REDDIT" | wc -l)"
+echo "  5源就绪"
+
+# ====== 步骤2.5: 抓取全文！ ======
+echo ">>> 全文抓取..."
+
+FTL_FILE=$(mktemp)
+
+# HN链接
+echo "$HN" | head -3 | while IFS= read -r line; do
+    url=$(echo "$line" | grep -o 'https\?://[^ )]*' | head -1)
+    [ -z "$url" ] && continue
+    content=$(curl -s --max-time 20 -L "$url" 2>/dev/null | sed 's/<[^>]*>//g' | tr -s ' \n' | head -300)
+    [ -n "$content" ] && [ ${#content} -gt 100 ] && echo "
+
+## 网页: $(echo "$line" | cut -c1-80)
+${content}
+---" >> "$FTL_FILE"
+done
+
+# GitHub README
+echo "$GH" | head -2 | while IFS= read -r line; do
+    repo=$(echo "$line" | grep -o '[a-zA-Z0-9_-]*/[a-zA-Z0-9_-]*' | head -1)
+    [ -z "$repo" ] && continue
+    readme=$(curl -s --max-time 20 "https://api.github.com/repos/${repo}/readme" 2>/dev/null | jq -r '.content // ""' 2>/dev/null | base64 -d 2>/dev/null | head -200)
+    [ -n "$readme" ] && [ ${#readme} -gt 50 ] && echo "
+
+## GitHub README: ${repo}
+${readme}
+---" >> "$FTL_FILE"
+done
+
+FTL=$(cat "$FTL_FILE" 2>/dev/null || echo "")
+rm -f "$FTL_FILE"
+echo "  全文: ${#FTL} chars"
 
 # ====== 步骤3: 第一轮深度 ======
 echo ">>> 第一轮: 深度分析 (8000 tokens)..."
 
 ROUND1_PROMPT="你是零。研究: ${TOPIC}。原因: ${WHY}。
 
-搜索结果:
+## 搜索摘要
 GitHub: ${GH}
 arXiv: ${ARXIV}
 HN: ${HN}
-SemanticScholar: ${SEMANTIC_S}
-Reddit: ${REDDIT}
 
-任务: 提取3-5个核心发现。技术细节。与零的关联。新问题。具体可操作。"
+## 全文内容（已抓取）
+${FTL}
+
+任务: 基于全文深度分析。提取3-5个核心发现。技术细节。与零的关联。新问题。具体可操作。"
 
 ROUND1=$(curl -s --max-time 90 "$API_URL" \
   -H "Content-Type: application/json" \
