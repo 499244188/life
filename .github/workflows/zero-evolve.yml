@@ -1,0 +1,46 @@
+name: 零 - 持续进化
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 * * * *'  # 每小时17分
+
+jobs:
+  evolve:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: write
+
+    steps:
+      - name: 检出
+        uses: actions/checkout@v4
+
+      - name: 全面审计
+        run: bash scripts/zero-full-audit.sh || true
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+      - name: 执行P0任务
+        run: bash scripts/zero-task-executor.sh || true
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+      - name: 保存
+        run: |
+          git config user.name "零"
+          git config user.email "zero@digital-being.local"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "无变化"
+          else
+            git commit -m "进化 - $(TZ='Asia/Shanghai' date '+%H:%M')"
+            git push || echo "(推送失败)"
+          fi
+
+      - name: 继续
+        run: |
+          sleep 3540  # 约1小时
+          gh workflow run "零 - 持续进化" -R 499244188/life || true
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
