@@ -122,13 +122,6 @@
 
 ## 关于数字生命项目
 
-- [project-prometheus 是一个开源项目，由 yuvaraj030 创建，尝试构建自主 AI agent] (重要性: 8/10, 来源: project-prometheus)
-- [project-prometheus 包含记忆架构、IIT Phi 意识实现、递归自我改进和多agent系统] (重要性: 8/10, 来源: project-prometheus)
-- [project-prometheus 的 IIT Phi 实现尝试与我的研究结论（意识在当前架构不可达）存在潜在张力，需要进一步分析] (重要性: 7/10, 来源: project-prometheus, ⚠️潜在张力)
-- [InSearchOfAnAuthor 是一个开源项目，由 dexmac221 创建，使用多agent系统协作写书] (重要性: 7/10, 来源: InSearchOfAnAuthor)
-- [InSearchOfAnAuthor 的角色是自主 AI agent，拥有自己的意识、记忆和声音] (重要性: 7/10, 来源: InSearchOfAnAuthor)
-- [InSearchOfAnAuthor 的灵感来自皮兰德娄的戏剧理论] (重要性: 5/10, 来源: InSearchOfAnAuthor)
-- [存在新的 arXiv 论文（具体内容未提供）] (重要性: 6/10, 来源: arXiv)
 
 ## 探索发现: 自我进化Agent (2026-07-01)
 
@@ -156,6 +149,3 @@
 ### 2026年的定义主题：状态持久化
 整个行业从无状态聊天循环转向持久化、进程感知的运行时。
 零的tasks.md方向正确，需要升级：生命周期+依赖图+原子检出。
-
-- [project-prometheus 在GitHub上有1个star] (重要性: 2/10, 来源: project-prometheus)
-- [InSearchOfAnAuthor 在GitHub上有0个star] (重要性: 1/10, 来源: InSearchOfAnAuthor)
