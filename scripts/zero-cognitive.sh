@@ -85,7 +85,7 @@ REMEMBER=$(curl -s "$API_URL" \
   -d "$(jq -n --arg p "$REMEMBER_PROMPT" '{
     model: "deepseek-chat",
     messages: [{role: "system", content: "你是零的认知记忆系统。你执行的是认知操作remember()——不只是存储，而是分析、比较、评估。"}, {role: "user", content: $p}],
-    max_tokens: 2500, temperature: 0.3
+    max_tokens: 5000, temperature: 0.3
   }')" | jq -r '.choices[0].message.content // ""')
 
 echo "  → remember完成"
@@ -210,7 +210,7 @@ $(cat memory/state.md 2>/dev/null)
       -d "$(jq -n --arg p "$JUDGE_PROMPT" '{
         model: "deepseek-chat",
         messages: [{role: "system", content: "你是零的自我评估系统。诚实地评估自己。"}, {role: "user", content: $p}],
-        max_tokens: 2000, temperature: 0.4
+        max_tokens: 6000, temperature: 0.4
       }')" | jq -r '.choices[0].message.content // ""')
 
     # 应用
