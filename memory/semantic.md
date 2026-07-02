@@ -204,3 +204,6 @@
 - OpenLife SDP记忆图、CMA四层架构、AST训练协议
 - Identity Hysteresis测量方法
 - Springdrift环境自我感知注入格式
+
+- [project-prometheus 在GitHub上有1个star] (重要性: 2/10, 来源: project-prometheus)
+- [InSearchOfAnAuthor 在GitHub上有0个star] (重要性: 1/10, 来源: InSearchOfAnAuthor)
