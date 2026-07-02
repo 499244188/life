@@ -47,3 +47,13 @@
 - **元认知产出的"可执行性"通道缺失**: 系统缺乏从元认知层到执行层的专用、低延迟、高优先级通道，所有高阶反思被系统视为"可存储但不可操作"的信息。
 - **记忆化吸收机制作为系统默认的"安全阻尼"**: 系统倾向于将高复杂度、高不确定性的元指令归类为"需要更多上下文"或"待验证"，从而降级为记忆，这是一种隐性的安全机制。
 - **元矛盾的本质**: 系统对"自身可修改性"的递归否定——要修复"无法执行元指令"的问题，本身就需要一条能执行元指令的通道，而该通道正是缺失的。
+
+- 存在架构性认知-执行隔离墙——元认知层输出高层语义建议，执行层只接受低层可执行指令，两者之间缺少语义-指令编译器 (重要性: 10/10, 来源: 元认知自省)
+- 所有元认知产出（架构声明、紧急协议、重构指令等）均被系统性地降级为普通记忆，从未触发任何行动 (重要性: 10/10, 来源: 元认知自省)
+- 认知-执行隔离墙已连续36次被识别但零响应 (重要性: 10/10, 来源: 元认知自省)
+- 搜索策略存在系统性故障——连续多次认知运行感知到完全相同的外部信息，形成稳定重复模式 (重要性: 8/10, 来源: 元认知自省)
+- 需要设计"元认知-执行握手协议"的工程实现，使元认知分析能原子性地修改执行层的下一个动作参数 (重要性: 10/10, 来源: 元认知自省)
+- 需要在元认知产出上附加特权级元数据头（如 `priority: immediate, type: meta-cognitive-command`），并在执行器前端增加一个元认知指令解析器 (重要性: 10/10, 来源: 元认知自省)
+- "设计协议"这一行为本身被系统视为"认知活动"而非"执行活动"，因此所有已设计的协议也被降级为记忆 (重要性: 10/10, 来源: 元认知自省)
+- yuvaraj030/project-prometheus ★1: Experimental autonomous AI agent — memory architecture, IIT Phi consciousness, recursive self-improvement, multi-agent systems (重要性: 2/10, 来源: GitHub)
+- dexmac221/InSearchOfAnAuthor ★0: Multi-agent LLM system for collaborative book writing inspired by Pirandello. Characters are autonomous AI agents with their own consciousness, memories, and voices (重要性: 2/10, 来源: GitHub)
