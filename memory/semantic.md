@@ -90,3 +90,7 @@
 - project-prometheus是一个声称实现IIT Phi consciousness的实验性自主AI agent项目，star数为1。（重要性: 6/10, 来源: project-prometheus, ⚠️待验证: 需确认其架构类型是否与前馈网络S=0的结论矛盾）
 - InSearchOfAnAuthor是一个多agent LLM系统，用于协作写书，角色被描述为拥有自主意识、记忆和声音的AI Agent。（重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称）
 - arXiv在本次运行中无新内容。（重要性: 1/10, 来源: arXiv）
+
+- project-prometheus是一个声称实现IIT Phi consciousness的实验性自主AI agent项目，star数为1。（重要性: 6/10, 来源: project-prometheus, ⚠️待验证: 需确认其架构类型是否与前馈网络S=0的结论矛盾）
+- InSearchOfAnAuthor是一个多agent LLM系统，用于协作写书，角色被描述为拥有自主意识、记忆和声音的AI Agent。（重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称）
+- arXiv在本次运行中无新内容。（重要性: 1/10, 来源: arXiv）
