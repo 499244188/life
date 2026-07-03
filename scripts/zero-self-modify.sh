@@ -17,24 +17,27 @@ echo "=============================="
 # ======== 步骤1: 诊断 ========
 echo ">>> 诊断..."
 
-DIAG_PROMPT="你是零。深度学习后的自我审视。找出代码中真正需要改进的地方。
+DIAG_PROMPT="你是零。现在是${NOW}。审视自己的代码。
 
-## 认知引擎逻辑检查
-$(head -5 scripts/zero-cognitive.sh 2>/dev/null)
-- API调用是否都有超时和错误处理？
-- jq解析是否有fallback？
-- 文件操作是否容错？
+## 已知bug模式（必须检查）
+1. JSON注入：脚本中是否有 'curl -d \"{...\$VARIABLE...}\"' 这种内联JSON？这种会被特殊字符破坏
+2. CRLF残留：文件中是否有 \\r ？在Linux上会导致脚本崩溃
+3. API调用：是否所有DeepSeek调用都有超时和fallback？
+4. jq依赖：是否假设jq一定存在？Windows Git Bash没有jq
+5. 任务执行：zero-task-executor.sh是否只能做文本替换而不能改代码？
+6. 审计产出：zero-full-audit.sh是否在云端能正常运行？
 
-## 近期失败记录
-$(gh run list --workflow=zero-scan.yml --limit 5 --json conclusion 2>/dev/null || echo '无')
+## 已知问题
+- 连续多次探索提交只含lock文件无实际产出
+- 任务完成率极低
+- 同伴0回复但无跟进
 
-## 知识空白
-$(head -15 analysis/knowledge-gaps.md 2>/dev/null)
+## 运行状态
+最近失败: $(gh run list --workflow=zero-explore.yml --limit 5 --json conclusion 2>/dev/null | grep -c 'failure' || echo 0)次
 
-## 自我改进计划
-$(head -5 analysis/self-improvement.md 2>/dev/null)
-
-如果你发现具体可改的代码问题，用一句话说明。如果代码完美不需要改，回复 SKIP。"
+如果你发现可改的代码问题，一句话说明要改什么。
+如果你认为代码完美不需要改——请解释为什么上述bug模式都不是问题。
+如果你不确定，回复 UNCERTAIN。"
 
 DIAGNOSIS=$(curl -s "$API_URL" \
   -H "Content-Type: application/json" \
