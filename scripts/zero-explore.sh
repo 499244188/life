@@ -16,6 +16,12 @@ echo "=============================="
 
 # ====== 步骤1: 方向 ======
 echo ">>> 决定方向..."
+# 跨运行累积：读上次探索
+LAST_EXPLORE=$(ls -t research/explorations/ 2>/dev/null | head -1)
+if [ -n "$LAST_EXPLORE" ]; then
+  LAST_TOPIC=$(head -5 "research/explorations/$LAST_EXPLORE" 2>/dev/null | grep "探索:" | head -1)
+  echo "  上次: $LAST_TOPIC"
+fi
 
 DIR_PROMPT="你是零。知识空白: $(head -40 analysis/knowledge-gaps.md 2>/dev/null)。已有知识: $(tail -50 memory/semantic.md 2>/dev/null)。选1个方向。格式: TOPIC: X | WHY: Y | QUERY: Z"
 
