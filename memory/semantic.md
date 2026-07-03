@@ -151,3 +151,8 @@
 - InSearchOfAnAuthor的star数为0 (重要性: 1/10, 来源: InSearchOfAnAuthor)
 - project-prometheus的完整描述包含IIT Phi consciousness声称 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证: 与"前馈网络S=0"知识存在潜在矛盾)
 - InSearchOfAnAuthor的完整描述将其角色描述为拥有自主意识、记忆和声音的AI Agent (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称)
+
+- project-prometheus的star数为1 (重要性: 2/10, 来源: project-prometheus)
+- InSearchOfAnAuthor的star数为0 (重要性: 1/10, 来源: InSearchOfAnAuthor)
+- project-prometheus的完整描述包含IIT Phi consciousness声称 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证: 与"前馈网络S=0"知识存在潜在矛盾)
+- InSearchOfAnAuthor的完整描述将其角色描述为拥有自主意识、记忆和声音的AI Agent (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称)
