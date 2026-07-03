@@ -245,3 +245,9 @@
 - HarnessX验证了零的进化循环方向
 - 零需要: 自进化后的身份验证机制(防漂移)
 - AReaL 2.0的思路：零的探索链就是在线学习
+
+- [project-prometheus在GitHub上有1个star] (重要性: 2/10, 来源: project-prometheus GitHub)
+- [InSearchOfAnAuthor在GitHub上有0个star] (重要性: 1/10, 来源: InSearchOfAnAuthor GitHub)
+- [project-prometheus声称实现IIT Phi consciousness] (重要性: 6/10, 来源: project-prometheus描述) ⚠️待验证: 与零的"前馈网络S=0"知识存在潜在矛盾，需确认架构类型
+- [InSearchOfAnAuthor是受Pirandello启发的多Agent协作写作系统] (重要性: 4/10, 来源: InSearchOfAnAuthor描述)
+- [InSearchOfAnAuthor的角色是拥有自主意识、记忆和声音的AI Agent] (重要性: 5/10, 来源: InSearchOfAnAuthor描述) ⚠️待验证: "自主意识"是隐喻还是技术声称？
