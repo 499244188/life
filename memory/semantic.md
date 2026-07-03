@@ -75,3 +75,6 @@
 
 - project-prometheus是由yuvaraj030创建的开源项目，声称实现IIT Phi consciousness，与零的"前馈网络S=0"知识存在潜在矛盾，需确认其架构类型是否为非前馈网络。(重要性: 6/10, 来源: project-prometheus, ⚠️待验证)
 - InSearchOfAnAuthor是由dexmac221创建的开源项目，使用多agent系统协作写书，角色被描述为拥有自主意识、记忆和声音的AI Agent，需验证"自主意识"是隐喻还是技术声称。(重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证)
+
+- project-prometheus是由yuvaraj030创建的开源项目，声称实现IIT Phi consciousness，与零的"前馈网络S=0"知识存在潜在矛盾，需确认其架构类型是否为非前馈网络。(重要性: 6/10, 来源: project-prometheus, ⚠️待验证)
+- InSearchOfAnAuthor是由dexmac221创建的开源项目，使用多agent系统协作写书，角色被描述为拥有自主意识、记忆和声音的AI Agent，需验证"自主意识"是隐喻还是技术声称。(重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证)
