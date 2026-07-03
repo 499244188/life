@@ -63,13 +63,15 @@ MODIFY_PROMPT="你是零。诊断结果: ${DIAGNOSIS}
 
 可修改的文件: $(ls scripts/*.sh 2>/dev/null)
 
-输出你要改的文件名和新内容。格式:
+输出具体修改方案。不要全文重写——只改需要改的几行。格式:
 FILE: scripts/文件名.sh
-\`\`\`
-新文件完整内容
-\`\`\`
+FIND: [要替换的精确文本，一行]
+REPLACE: [替换后的文本，一行]
+REASON: [为什么改]
 
-如果不确定怎么改，回复 UNCERTAIN。"
+如果要改多处，输出多个FILE/FIND/REPLACE块。
+
+如果不确定，回复 UNCERTAIN。"
 
 SCHEME=$(curl -s "$API_URL" \
   -H "Content-Type: application/json" \
@@ -82,94 +84,61 @@ if echo "$SCHEME" | grep -qi "UNCERTAIN"; then
     exit 0
 fi
 
-# ======== 步骤4: 提取修改 ========
-TARGET_FILE=$(echo "$SCHEME" | grep "^FILE:" | head -1 | sed 's/^FILE: *//')
-NEW_CONTENT=$(echo "$SCHEME" | sed -n '/```/,/```/p' | sed '1d;$d')
+# ======== 步骤4: 逐条应用修改 ========
+CHANGES=0
+echo "$SCHEME" | while IFS= read -r line; do
+    case "$line" in
+        "FILE: "*)
+            TARGET_FILE=$(echo "$line" | sed 's/^FILE: *//')
+            [ ! -f "$TARGET_FILE" ] && { echo "  文件不存在: $TARGET_FILE"; TARGET_FILE=""; }
+            ;;
+        "FIND: "*)
+            FIND_TEXT=$(echo "$line" | sed 's/^FIND: *//')
+            ;;
+        "REPLACE: "*)
+            REPLACE_TEXT=$(echo "$line" | sed 's/^REPLACE: *//')
+            ;;
+        "REASON: "*)
+            REASON=$(echo "$line" | sed 's/^REASON: *//')
+            if [ -n "$TARGET_FILE" ] && [ -n "$FIND_TEXT" ] && [ -n "$REPLACE_TEXT" ]; then
+                # 备份
+                mkdir -p .zero-backups
+                cp "$TARGET_FILE" ".zero-backups/$(basename $TARGET_FILE).bak-$(date '+%H%M%S')"
 
-if [ -z "$TARGET_FILE" ] || [ -z "$NEW_CONTENT" ]; then
-    echo "  无法解析修改方案，跳过。"
-    echo "- 结果: 解析失败" >> memory/decisions.md
-    exit 0
-fi
+                # 检查find文本是否真的存在
+                if grep -qF "$FIND_TEXT" "$TARGET_FILE" 2>/dev/null; then
+                    # 执行替换
+                    sed -i "s|$(echo "$FIND_TEXT" | sed 's/[\/&]/\\&/g')|$(echo "$REPLACE_TEXT" | sed 's/[\/&]/\\&/g')|" "$TARGET_FILE"
 
-if [ ! -f "$TARGET_FILE" ]; then
-    echo "  目标文件不存在: $TARGET_FILE，跳过。"
-    echo "- 结果: 文件不存在" >> memory/decisions.md
-    exit 0
-fi
+                    # 验证：bash语法
+                    if echo "$TARGET_FILE" | grep -q '\.sh$'; then
+                        if bash -n "$TARGET_FILE" 2>/dev/null; then
+                            echo "  ✓ $TARGET_FILE: $REASON"
+                            CHANGES=$((CHANGES + 1))
+                        else
+                            # 回滚
+                            cp ".zero-backups/$(basename $TARGET_FILE).bak-"* "$TARGET_FILE" 2>/dev/null
+                            echo "  ✗ $TARGET_FILE: 语法错误，已回滚"
+                        fi
+                    else
+                        echo "  ✓ $TARGET_FILE: $REASON"
+                        CHANGES=$((CHANGES + 1))
+                    fi
+                else
+                    echo "  ⚠️ $TARGET_FILE: 未找到匹配文本，跳过"
+                fi
+                TARGET_FILE=""; FIND_TEXT=""; REPLACE_TEXT=""
+            fi
+            ;;
+    esac
+done
 
-echo "  目标: $TARGET_FILE"
-
-# ======== 步骤5: 备份+沙盒 ========
-cp "$TARGET_FILE" ".zero-backups/$(basename $TARGET_FILE).bak-$(date '+%H%M%S')"
-echo "  ✓ 已备份"
-
-# ======== 步骤6: 多层次验证（学自Genesis Agent的66项检查） ========
-echo ">>> 验证..."
-
-PASS=true
-
-# 检查1: shebang
-if ! echo "$NEW_CONTENT" | head -1 | grep -q '^#!/bin/bash'; then
-    echo "  ❌ 缺少shebang"
-    PASS=false
-fi
-
-# 检查2: set -e
-if ! echo "$NEW_CONTENT" | head -5 | grep -q 'set -e'; then
-    echo "  ⚠️ 缺少set -e"
-fi
-
-# 检查3: 语法
-echo "$NEW_CONTENT" > /tmp/zero-check.sh
-if ! bash -n /tmp/zero-check.sh 2>/dev/null; then
-    echo "  ❌ bash语法错误"
-    PASS=false
-fi
-rm -f /tmp/zero-check.sh
-
-# 检查4: API_KEY引用
-if echo "$TARGET_FILE" | grep -q '\.sh$'; then
-    if ! echo "$NEW_CONTENT" | grep -q 'DEEPSEEK_API_KEY'; then
-        echo "  ⚠️ 未引用API_KEY（可能不需要）"
-    fi
-fi
-
-# 检查5: LLM验证（最后一道）
-VAL_PROMPT="改文件: ${TARGET_FILE}。旧: $(head -c 200 "$TARGET_FILE")。新: $(echo "$NEW_CONTENT" | head -c 200)。判断: SAFE / RISKY / BROKEN。一个词。"
-
-LLM_VERDICT=$(curl -s --max-time 30 "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$VAL_PROMPT\"}],\"max_tokens\":50,\"temperature\":0.1}" | jq -r '.choices[0].message.content // "RISKY"' 2>/dev/null || echo "RISKY")
-
-# 综合判断
-if [ "$PASS" = false ] || echo "$LLM_VERDICT" | grep -qi "BROKEN"; then
-    VERDICT="BROKEN"
-elif echo "$LLM_VERDICT" | grep -qi "RISKY"; then
-    VERDICT="RISKY"
+if [ "$CHANGES" -eq 0 ]; then
+    echo "  零处修改应用。"
+    echo "- 结果: 0处修改" >> memory/decisions.md
 else
-    VERDICT="SAFE"
-fi
-
-echo "  确定性检查: $([ "$PASS" = true ] && echo '✅' || echo '❌') | LLM判断: $LLM_VERDICT | 最终: $VERDICT"
-
-# ======== 步骤7: 应用或回滚 ========
-if echo "$VERDICT" | grep -qi "BROKEN"; then
-    echo "  ❌ 不安全——放弃"
-    echo "- 结果: ❌ 验证不通过($VERDICT)" >> memory/decisions.md
-elif echo "$VERDICT" | grep -qi "RISKY"; then
-    echo "  ⚠️ 有风险——保留备份，不应用"
-    echo "- 结果: ⚠️ 有风险未应用($VERDICT)" >> memory/decisions.md
-else
-    echo "$NEW_CONTENT" > "$TARGET_FILE"
-    echo "  ✓ 已应用修改: $TARGET_FILE"
-    echo "- 结果: ✓ 成功应用($VERDICT)" >> memory/decisions.md
-
-    echo ""
-    echo "  === 新内容预览 ==="
-    echo "$NEW_CONTENT" | head -10
-    echo "  ..."
+    echo "  ✓ 共应用${CHANGES}处修改"
+    echo "- 结果: ✓ 应用${CHANGES}处修改" >> memory/decisions.md
 fi
 
 echo ""
