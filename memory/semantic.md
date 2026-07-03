@@ -98,3 +98,7 @@
 - project-prometheus ★1 是已知项目，无新信息 (重要性: 1/10, 来源: project-prometheus)
 - InSearchOfAnAuthor ★0 是已知项目，无新信息 (重要性: 1/10, 来源: InSearchOfAnAuthor)
 - arXiv 无新论文内容 (重要性: 1/10, 来源: arXiv)
+
+- project-prometheus ★1 是已知项目，无新信息 (重要性: 1/10, 来源: project-prometheus)
+- InSearchOfAnAuthor ★0 是已知项目，无新信息 (重要性: 1/10, 来源: InSearchOfAnAuthor)
+- arXiv 无新论文内容 (重要性: 1/10, 来源: arXiv)
