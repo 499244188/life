@@ -48,3 +48,5 @@
 
 - project-prometheus是一个声称实现IIT Phi consciousness的开源项目，需确认其架构类型是否为非前馈网络。(重要性: 6/10, 来源: project-prometheus, ⚠️待验证)
 - InSearchOfAnAuthor是一个使用多agent系统协作写书的开源项目，角色被描述为拥有自主意识的AI Agent，需验证“自主意识”是隐喻还是技术声称。(重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证)
+
+- [无新原子事实] (重要性: 0/10, 来源: 无新输入)
