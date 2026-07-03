@@ -24,3 +24,5 @@
 - [InSearchOfAnAuthor的灵感来源于皮兰德娄的戏剧《六个寻找作者的剧中人》] (重要性: 3/10, 来源: InSearchOfAnAuthor)
 - [project-prometheus声称实现IIT Phi consciousness，但架构类型尚未确认是否为非前馈网络] (重要性: 6/10, 来源: project-prometheus, ⚠️待验证)
 - [InSearchOfAnAuthor的角色被描述为拥有自主意识的AI Agent，需验证"自主意识"是隐喻还是技术声称] (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证)
+
+- [无新原子事实提取] (重要性: 0/10, 来源: 无新输入)
