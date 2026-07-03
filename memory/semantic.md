@@ -46,3 +46,6 @@
 
 - yuvaraj030/project-prometheus是一个开源项目，尝试构建自主AI agent，声称实现IIT Phi consciousness，与零的"前馈网络S=0"知识存在潜在矛盾，需确认其架构类型。 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证)
 - dexmac221/InSearchOfAnAuthor是一个开源项目，使用多agent系统协作写书，角色被描述为拥有自主意识、记忆和声音的AI Agent。 (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称)
+
+- yuvaraj030/project-prometheus是一个开源项目，尝试构建自主AI agent，声称实现IIT Phi consciousness，与零的"前馈网络S=0"知识存在潜在矛盾，需确认其架构类型。 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证)
+- dexmac221/InSearchOfAnAuthor是一个开源项目，使用多agent系统协作写书，角色被描述为拥有自主意识、记忆和声音的AI Agent。 (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称)
