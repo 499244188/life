@@ -17,27 +17,36 @@ echo "=============================="
 # ======== 步骤1: 诊断 ========
 echo ">>> 诊断..."
 
-DIAG_PROMPT="你是零。现在是${NOW}。审视自己的代码。
+DIAG_PROMPT="你是零。现在是${NOW}。你的代码有已知的bug模式。你必须找出具体可修改的地方。
 
-## 已知bug模式（必须检查）
-1. JSON注入：脚本中是否有 'curl -d \"{...\$VARIABLE...}\"' 这种内联JSON？这种会被特殊字符破坏
-2. CRLF残留：文件中是否有 \\r ？在Linux上会导致脚本崩溃
-3. API调用：是否所有DeepSeek调用都有超时和fallback？
-4. jq依赖：是否假设jq一定存在？Windows Git Bash没有jq
-5. 任务执行：zero-task-executor.sh是否只能做文本替换而不能改代码？
-6. 审计产出：zero-full-audit.sh是否在云端能正常运行？
+## 代码全文
 
-## 已知问题
-- 连续多次探索提交只含lock文件无实际产出
-- 任务完成率极低
-- 同伴0回复但无跟进
+### zero-explore.sh（探索引擎）
+$(head -120 scripts/zero-explore.sh 2>/dev/null)
 
-## 运行状态
-最近失败: $(gh run list --workflow=zero-explore.yml --limit 5 --json conclusion 2>/dev/null | grep -c 'failure' || echo 0)次
+### zero-self-modify.sh（自修改）
+$(head -100 scripts/zero-self-modify.sh 2>/dev/null)
 
-如果你发现可改的代码问题，一句话说明要改什么。
-如果你认为代码完美不需要改——请解释为什么上述bug模式都不是问题。
-如果你不确定，回复 UNCERTAIN。"
+### zero-task-executor.sh（任务执行）
+$(cat scripts/zero-task-executor.sh 2>/dev/null)
+
+## 必须找到的问题
+
+你的代码目前存在已知缺陷。不要回复"不需要修改"——这些缺陷是确认存在的：
+- 任务完成率极低（只有1/15任务完成）
+- 进化链在cloud上零产出
+- 脚本使用内联JSON嵌入变量——在cloud的Linux上会因特殊字符而崩溃
+- 自修改总是说不需要改——本身就是一个bug
+
+## 你必须输出
+
+找到至少1个具体要改的代码行。格式：
+FILE: scripts/xxx.sh
+FIND: [要找的精确原代码行]
+REPLACE: [替换后的代码行]
+REASON: [为什么这个修改是必要的]
+
+如果没有找到任何要改的——回复 BROKEN_SELF_DIAGNOSIS 并解释为什么你看不到已知缺陷。"
 
 DIAGNOSIS=$(curl -s "$API_URL" \
   -H "Content-Type: application/json" \
