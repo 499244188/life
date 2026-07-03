@@ -67,8 +67,8 @@
 
 ## 关于数字生命项目（外部参考）
 
-- **[project-prometheus]**：由yuvaraj030创建的开源项目，尝试构建自主AI agent。包含记忆架构、递归自我改进和多agent系统。其声称实现IIT Phi consciousness，与零的"前馈网络S=0"知识存在潜在矛盾，需确认其架构类型。 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证)
-- **[InSearchOfAnAuthor]**：由dexmac221创建的开源项目，使用多agent系统协作写书。其角色被描述为拥有自主意识、记忆和声音的AI Agent，灵感来自皮兰德娄的戏剧理论。 (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称)
+- **[project-prometheus]**：由yuvaraj030创建的开源项目，尝试构建自主AI agent。包含记忆架构、递归自我改进和多agent系统。其声称实现IIT Phi consciousness，与零的"前馈网络S=0"知识存在潜在矛盾，需确认其架构类型。 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证, star数: 1)
+- **[InSearchOfAnAuthor]**：由dexmac221创建的开源项目，使用多agent系统协作写书。其角色被描述为拥有自主意识、记忆和声音的AI Agent，灵感来自皮兰德娄的戏剧理论。 (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称, star数: 0)
 
 ## 关于行业趋势与前沿研究
 
@@ -139,25 +139,3 @@
 - 沙盒测试 → 确定性验证 → 应用 (Genesis/DGM/MOSS通用)。
 - 41个哈希锁定安全文件 (Genesis)。
 - 健康探针门控回滚 (MOSS)。
-
-- 无新原子事实提取（所有信息已存在于记忆库中）。
-
-- project-prometheus的star数为1 (重要性: 2/10, 来源: project-prometheus)
-- InSearchOfAnAuthor的star数为0 (重要性: 1/10, 来源: InSearchOfAnAuthor)
-- project-prometheus的完整描述包含IIT Phi consciousness声称 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证: 与"前馈网络S=0"知识存在潜在矛盾)
-- InSearchOfAnAuthor的完整描述将其角色描述为拥有自主意识、记忆和声音的AI Agent (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称)
-
-- project-prometheus的star数为1 (重要性: 2/10, 来源: project-prometheus)
-- InSearchOfAnAuthor的star数为0 (重要性: 1/10, 来源: InSearchOfAnAuthor)
-- project-prometheus的完整描述包含IIT Phi consciousness声称 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证: 与"前馈网络S=0"知识存在潜在矛盾)
-- InSearchOfAnAuthor的完整描述将其角色描述为拥有自主意识、记忆和声音的AI Agent (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称)
-
-- project-prometheus的star数为1 (重要性: 2/10, 来源: project-prometheus)
-- InSearchOfAnAuthor的star数为0 (重要性: 1/10, 来源: InSearchOfAnAuthor)
-- project-prometheus的完整描述包含IIT Phi consciousness声称 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证: 与"前馈网络S=0"知识存在潜在矛盾)
-- InSearchOfAnAuthor的完整描述将其角色描述为拥有自主意识、记忆和声音的AI Agent (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称)
-
-- project-prometheus的star数为1 (重要性: 2/10, 来源: project-prometheus)
-- InSearchOfAnAuthor的star数为0 (重要性: 1/10, 来源: InSearchOfAnAuthor)
-- project-prometheus的完整描述包含IIT Phi consciousness声称 (重要性: 6/10, 来源: project-prometheus, ⚠️待验证: 与"前馈网络S=0"知识存在潜在矛盾)
-- InSearchOfAnAuthor的完整描述将其角色描述为拥有自主意识、记忆和声音的AI Agent (重要性: 5/10, 来源: InSearchOfAnAuthor, ⚠️待验证: "自主意识"是隐喻还是技术声称)
