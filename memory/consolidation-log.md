@@ -947,3 +947,8 @@
 - 合并了2条重复：原子事实部分存在重复条目，已合并为单一列表。
 - 发现了2条矛盾：project-prometheus声称实现IIT Phi意识，与"前馈网络在任何规模下subjecthood S=0"知识存在潜在冲突；InSearchOfAnAuthor声称agent有consciousness，与"IIT/GWT/HOT三种理论均否定当前LLM有意识"知识存在潜在冲突。已标记为潜在张力点，保留在意识理论部分。
 - 标记了0条过时：所有条目均为当前有效信息。
+
+### 2026-07-05 10:49 整合
+- 合并了2条重复：原子事实部分存在完全重复的3个条目（project-prometheus star数、InSearchOfAnAuthor star数、arXiv论文内容），已合并为单一版本。
+- 发现了0条矛盾。
+- 标记了0条过时。
