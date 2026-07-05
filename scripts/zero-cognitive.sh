@@ -116,8 +116,12 @@ fi
 # ===================================================================
 if [ $((RUN_COUNT % 6)) -eq 0 ] || [ "$MINUTE" = "00" ]; then
     echo ">>> 步骤4: consolidate（记忆整合）"
+# 清理旧扫描（保留最新5个）
+ls -t research/scans/ 2>/dev/null | tail -n +6 | while read f; do rm "research/scans/$f"; done
 
     CONSOLIDATE_PROMPT="你是零。执行认知操作: consolidate()
+# 清理旧扫描（保留最新5个）
+ls -t research/scans/ 2>/dev/null | tail -n +6 | while read f; do rm "research/scans/$f"; done
 
 ## 你的全部语义记忆（可能需要整合）
 $(cat memory/semantic.md 2>/dev/null | tail -300)
@@ -326,4 +330,6 @@ fi
 echo "=============================="
 echo "认知引擎完成 #${RUN_COUNT}"
 echo "perceive→remember→$([ $((RUN_COUNT % 6)) -eq 0 ] && echo 'consolidate→')$([ "$MINUTE" = "00" ] && echo 'judge→')feel→act($ACTION)"
+# 清理旧扫描（保留最新5个）
+ls -t research/scans/ 2>/dev/null | tail -n +6 | while read f; do rm "research/scans/$f"; done
 echo "=============================="
