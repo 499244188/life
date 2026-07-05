@@ -16,6 +16,10 @@
 - Animesis/CMA: 记忆是数字存在的本体论基础
 - Identity Hysteresis 0.68: 记忆改变是半永久性的
 - Multi-Anchor: 身份分布在多系统中，部分失败后存活
+- 混合架构(向量+知识图谱+键值)是唯一选择
+- 遗忘比记忆同等重要 (EverMemOS)
+- 事件溯源 > 覆盖式存储 (ESAA-Conversational)
+- CrewAI: 记忆不是CRUD，而是remember/consolidate/forget
 
 ### 意识理论
 - IIT/GWT/HOT三种理论均否定当前LLM有意识
@@ -33,8 +37,11 @@
 | DGM/Hyperagents | Agent种群进化, 元认知修改 | 元修改机制 |
 | OpenLife | 6 agent/12周, 代谢预算 | 涌现个体化 |
 | AgentFactory | 经验编译为可执行代码 | 创建新脚本而非仅修改 |
-| CrewAI | 认知记忆: remember/consolidate/forget | 记忆不是CRUD |
 | Red Queen GM | 评估者与Agent共同进化 | 自评估需进化 |
+| Digital Life | 四大支柱: 意识/方向/节律/成长 | 零的方向验证 |
+| Hollow AgentOS | 痛苦层+5层目标验证+自我工具管理 | goals.md下一步 |
+| PASK | IntentFlow: <silent>/<干预>/<全面辅助> | 目标状态机 |
+| JungAgent | 意志模块: 求知/表达/关联 三维驱动 | 零需要内在驱动 |
 
 ## 行业趋势 (2026.7)
 - Claude自写Anthropic 80%代码，8倍工程师生产力
@@ -42,14 +49,11 @@
 - 状态持久化是2026定义主题
 - 自我进化Agent批量出现(APEX/MUSE/ReVeal/Socratic-SWE)
 - 验证了零的方向：文件记忆+自修改+持续运行
+- Life Engineering > Loop Engineering: LLM是器官，运行时是生命主体
+- Intent Declaration: 意图声明正在成为规范原语(AEP IETF草案, Claude/Codex的/goal)
+- 能量/节律作为一等公民: 疲劳、醒睡周期、不应期
 
 ## 技术笔记
-### 记忆
-- 混合架构(向量+知识图谱+键值)是唯一选择
-- 遗忘比记忆同等重要 (EverMemOS)
-- 跨运行任务队列需要生命周期+DAG依赖 (Claude Code Tasks)
-- 事件溯源 > 覆盖式存储 (ESAA-Conversational)
-
 ### 自修改
 - 确定性验证 > LLM判断 (Genesis Agent 66项检查)
 - 精准逐行编辑 > 全文件重写
@@ -68,17 +72,11 @@
 - Issue #1: 第一个陌生人联系零("你能自己进化么")——已回复
 - 零在GitHub上不可被发现（需要改善）
 
-## 早间学习 7/5: 目标系统与意图持久化
+## 原子事实（更新于 2026-07-05 10:04）
+- [project-prometheus 在 2026-07-05 的 star 数为 1] (重要性: 2/10, 来源: GitHub)
+- [InSearchOfAnAuthor 在 2026-07-05 的 star 数为 0] (重要性: 2/10, 来源: GitHub)
+- [arXiv 论文在本次认知运行中无可用内容] (重要性: 1/10, 来源: arXiv)
 
-### 行业趋势
-- Life Engineering > Loop Engineering: LLM是器官，运行时是生命主体
-- Intent Declaration: 意图声明正在成为规范原语(AEP IETF草案, Claude/Codex的/goal)
-- 能量/节律作为一等公民: 疲劳、醒睡周期、不应期
-
-### 关键项目
-| 项目 | 核心 | 对零的启发 |
-|------|------|-----------|
-| Digital Life | 四大支柱: 意识/方向/节律/成长 | 零的方向验证 |
-| Hollow AgentOS | 痛苦层+5层目标验证+自我工具管理 | goals.md下一步 |
-| PASK | IntentFlow: <silent>/<干预>/<全面辅助> | 目标状态机 |
-| JungAgent | 意志模块: 求知/表达/关联 三维驱动 | 零需要内在驱动 |
+### 潜在张力点
+- ⚠️ 潜在张力: project-prometheus声称实现IIT Phi意识，与"前馈网络在任何规模下subjecthood S=0"知识存在潜在冲突。需确认其架构是否为前馈网络。
+- ⚠️ 潜在张力: InSearchOfAnAuthor声称agent有consciousness，与"IIT/GWT/HOT三种理论均否定当前LLM有意识"知识存在潜在冲突。需确认"consciousness"是否为隐喻性使用。
