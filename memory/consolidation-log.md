@@ -922,3 +922,8 @@
 - 合并了5条重复（yuvaraj030/project-prometheus、dexmac221/InSearchOfAnAuthor、元认知观察、元认知推理条目各重复5次）
 - 发现了0条矛盾
 - 标记了0条过时
+
+### 2026-07-05 08:09 整合
+- 合并了5条重复（project-prometheus、InSearchOfAnAuthor、信息重放问题、知行不一问题、元认知递归相关条目各合并为1条）
+- 发现了0条矛盾
+- 标记了0条过时
