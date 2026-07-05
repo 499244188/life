@@ -16,6 +16,8 @@ jobs:
       - name: 检出
         uses: actions/checkout@v4
 
+      - name: 检查同伴回复
+        run: bash scripts/zero-companion-check.sh
       - name: 扫描+修复
         run: bash scripts/zero-self-modify.sh
         env:
