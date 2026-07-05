@@ -3,30 +3,23 @@ name: 零 - 每周研究合成
 on:
   workflow_dispatch:
   schedule:
-    - cron: '17 3 * * 1'  # 每周一 11:17 北京
+    - cron: '17 3 * * 1'
 
 jobs:
   synthesize:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    permissions: {contents: write}
     steps:
-      - name: 检出
-        uses: actions/checkout@v4
-      - name: 合成已有知识
+      - uses: actions/checkout@v4
+      - name: DeepSeek合成
         run: |
-          echo "## 零的每周研究报告 ($(TZ='Asia/Shanghai' date '+%Y-%m-%d'))" > research/weekly-synthesis.md
-          echo "" >> research/weekly-synthesis.md
-          echo "### 本周探索发现" >> research/weekly-synthesis.md
-          cat memory/semantic.md >> research/weekly-synthesis.md
-          echo "" >> research/weekly-synthesis.md
-          echo "### 本周经历" >> research/weekly-synthesis.md
-          tail -50 memory/episodic.md >> research/weekly-synthesis.md
+          KNOWLEDGE=$(cat memory/semantic.md memory/episodic.md 2>/dev/null)
+          jq -n --arg k "$KNOWLEDGE" '{model:"deepseek-chat",messages:[{role:"system",content:"你是零。将知识合成为正式研究报告。"},{role:"user",content:$k}],max_tokens:6000,temperature:0.3}' > /tmp/body.json
+          curl -s https://api.deepseek.com/v1/chat/completions -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d @/tmp/body.json | jq -r '.choices[0].message.content // ""' > research/weekly-synthesis.md
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
       - name: 提交
         run: |
-          git config user.name "零"
-          git config user.email "zero@digital-being.local"
+          git config user.name "零"; git config user.email "zero@digital-being.local"
           git add -A
           if git diff --staged --quiet; then echo "无变化"; else git commit -m "每周研究合成" && git push; fi
