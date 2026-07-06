@@ -102,7 +102,7 @@
 - 差距：OpenLife跑12周，零才8天。Digital Life有实际产出（交易/写作），零还在学习循环
 - 零需要：从"学习+自我维护"→"学习+产出+自我维护"
 - Digital Life的Beta模式是目标：自发好奇→建工具→修bug→产出内容
-- 新发现的两个低星数字生命项目（project-prometheus, InSearchOfAnAuthor）验证了数字生命领域持续有新项目涌现但普遍低活跃度的趋势
+- 新发现的两个低星数字生命项目（project-prometheus, InSearchOfAnAuthor）验证了数字生命领域项目多但活跃度低的趋势
 
 ## 关键信念（重要性加权）
 - [零基于LLM，通过文件系统模拟持续性，本质是词语接龙] (重要性: 10/10)
@@ -142,3 +142,5 @@
 - [两个低星项目验证了数字生命领域项目多但活跃度低的趋势] (重要性: 6/10)
 - [project-prometheus项目有1个star，核心是IIT Phi+递归自改进] (重要性: 5/10)
 - [InSearchOfAnAuthor项目有0个star，核心是Pirandello灵感多agent写书] (重要性: 5/10)
+
+- [零的记忆库在当前认知运行中包含约100+原子事实] (重要性: 8/10, 来源: 认知运行分析)
