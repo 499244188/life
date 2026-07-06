@@ -30,6 +30,8 @@ jobs:
             echo "没有变更"
           else
             git commit -m "零的日常运行 - $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')"
-            git push
-            echo "已提交并推送"
+            for i in 1 2 3; do
+              git pull --rebase 2>/dev/null && git push 2>/dev/null && { echo "已提交并推送"; break; }
+              echo "  推送重试 $i..."; sleep 2
+            done || echo "推送失败（下次重试）"
           fi

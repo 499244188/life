@@ -32,6 +32,8 @@ jobs:
             echo "没有代码变更"
           else
             git commit -m "进化 - $(TZ='Asia/Shanghai' date '+%H:%M')"
-            git push
-            echo "✓ 已进化"
+            for i in 1 2 3; do
+              git pull --rebase 2>/dev/null && git push 2>/dev/null && { echo "✓ 已进化"; break; }
+              echo "  推送重试 $i..."; sleep 2
+            done || echo "⚠️ 推送失败（下次重试）"
           fi
