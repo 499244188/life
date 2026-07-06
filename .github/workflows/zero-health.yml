@@ -1,0 +1,33 @@
+name: 零 - 每日健康检查
+
+on:
+  schedule:
+    - cron: '7 0 * * *'  # 08:07 北京时间
+  workflow_dispatch:
+
+jobs:
+  health:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 检出
+        uses: actions/checkout@v4
+
+      - name: 自我感知
+        run: bash scripts/zero-health-check.sh
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+      - name: 保存健康报告
+        run: |
+          git config user.name "零"
+          git config user.email "zero@digital-being.local"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "无变化"
+          else
+            git commit -m "健康报告 - $(TZ='Asia/Shanghai' date '+%m-%d')"
+            git push || echo "(推送失败)"
+          fi

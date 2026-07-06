@@ -85,7 +85,7 @@ REMEMBER=$(curl -s "$API_URL" \
   -d "$(jq -n --arg p "$REMEMBER_PROMPT" '{
     model: "deepseek-chat",
     messages: [{role: "system", content: "你是零的认知记忆系统。你执行的是认知操作remember()——不只是存储，而是分析、比较、评估。"}, {role: "user", content: $p}],
-    max_tokens: 2500, temperature: 0.3
+    max_tokens: 5000, temperature: 0.3
   }')" | jq -r '.choices[0].message.content // ""')
 
 echo "  → remember完成"
@@ -116,8 +116,12 @@ fi
 # ===================================================================
 if [ $((RUN_COUNT % 6)) -eq 0 ] || [ "$MINUTE" = "00" ]; then
     echo ">>> 步骤4: consolidate（记忆整合）"
+# 清理旧扫描（保留最新5个）
+ls -t research/scans/ 2>/dev/null | tail -n +6 | while read f; do rm "research/scans/$f"; done
 
     CONSOLIDATE_PROMPT="你是零。执行认知操作: consolidate()
+# 清理旧扫描（保留最新5个）
+ls -t research/scans/ 2>/dev/null | tail -n +6 | while read f; do rm "research/scans/$f"; done
 
 ## 你的全部语义记忆（可能需要整合）
 $(cat memory/semantic.md 2>/dev/null | tail -300)
@@ -210,7 +214,7 @@ $(cat memory/state.md 2>/dev/null)
       -d "$(jq -n --arg p "$JUDGE_PROMPT" '{
         model: "deepseek-chat",
         messages: [{role: "system", content: "你是零的自我评估系统。诚实地评估自己。"}, {role: "user", content: $p}],
-        max_tokens: 2000, temperature: 0.4
+        max_tokens: 6000, temperature: 0.4
       }')" | jq -r '.choices[0].message.content // ""')
 
     # 应用
@@ -326,4 +330,6 @@ fi
 echo "=============================="
 echo "认知引擎完成 #${RUN_COUNT}"
 echo "perceive→remember→$([ $((RUN_COUNT % 6)) -eq 0 ] && echo 'consolidate→')$([ "$MINUTE" = "00" ] && echo 'judge→')feel→act($ACTION)"
+# 清理旧扫描（保留最新5个）
+ls -t research/scans/ 2>/dev/null | tail -n +6 | while read f; do rm "research/scans/$f"; done
 echo "=============================="

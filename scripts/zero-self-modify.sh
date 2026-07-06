@@ -1,143 +1,131 @@
 #!/bin/bash
-# 零的自我修改系统
-# 诊断 → 提案 → 沙盒 → 验证 → 提交 或 回滚
-set -e
-cd "$(dirname "$0")/.."
-export TZ='Asia/Shanghai'
-
-NOW=$(date '+%Y-%m-%d %H:%M')
-TODAY=$(date '+%Y-%m-%d')
+# 零的自我修改 v4
+# 确定性扫描 + LLM精准编辑
+set -e; cd "$(dirname "$0")/.."; export TZ='Asia/Shanghai'
+NOW=$(date '+%Y-%m-%d %H:%M'); TODAY=$(date '+%Y-%m-%d')
 API_URL="https://api.deepseek.com/v1/chat/completions"
-
 echo "=============================="
-echo "零 · 自我修改"
+echo "零 · 自修改 v4"
 echo "$NOW"
 echo "=============================="
 
-# ======== 步骤1: 诊断 ========
-echo ">>> 诊断..."
+# ====== 步骤1: 确定性扫描（bash，不用LLM） ======
+echo ">>> 扫描已知bug..."
+ISSUES_FOUND=0
+BUG_LIST=""
 
-DIAG_PROMPT="你是零。深度学习后的自我审视。找出代码中真正需要改进的地方。
+# 内联JSON
+for f in scripts/*.sh; do
+    [ ! -f "$f" ] && continue
+    BAD=$(grep -n '\-d[[:space:]]*"[^"]*\$[A-Z]' "$f" 2>/dev/null | grep -v '@' | grep -v 'call_deepseek' | head -2)
+    if [ -n "$BAD" ]; then
+        echo "  🔴 $f: 内联JSON风险"
+        BUG_LIST="${BUG_LIST}\n- $f: 内联JSON变量嵌入(curl -d \"...\$VAR...\")，cloud上特殊字符会破坏JSON"
+        ISSUES_FOUND=$((ISSUES_FOUND + 1))
+    fi
+done
 
-## 认知引擎逻辑检查
-$(head -5 scripts/zero-cognitive.sh 2>/dev/null)
-- API调用是否都有超时和错误处理？
-- jq解析是否有fallback？
-- 文件操作是否容错？
+# CRLF
+for f in scripts/*.sh; do
+    [ ! -f "$f" ] && continue
+    if grep -ql $'\r' "$f" 2>/dev/null; then
+        echo "  🔴 $f: CRLF残留"
+        BUG_LIST="${BUG_LIST}\n- $f: CRLF换行符，Linux上脚本崩溃"
+        ISSUES_FOUND=$((ISSUES_FOUND + 1))
+    fi
+done
 
-## 近期失败记录
-$(gh run list --workflow=zero-scan.yml --limit 5 --json conclusion 2>/dev/null || echo '无')
+# P0堆积
+TODO=$(grep -c '\[TODO\].*\[P0\]' memory/tasks.md 2>/dev/null || echo 0)
+if [ "$TODO" -gt 2 ]; then
+    echo "  🟡 P0任务堆积: ${TODO}个"
+    BUG_LIST="${BUG_LIST}\n- memory/tasks.md: ${TODO}个P0任务未完成"
+    ISSUES_FOUND=$((ISSUES_FOUND + 1))
+fi
 
-## 知识空白
-$(head -15 analysis/knowledge-gaps.md 2>/dev/null)
+echo "  = ${ISSUES_FOUND}个问题"
 
-## 自我改进计划
-$(head -5 analysis/self-improvement.md 2>/dev/null)
+if [ "$ISSUES_FOUND" -eq 0 ]; then
+    echo "✓ 没发现已知bug"
+    exit 0
+fi
+echo "- 结果: 发现${ISSUES_FOUND}个问题" >> memory/decisions.md
 
-如果你发现具体可改的代码问题，用一句话说明。如果代码完美不需要改，回复 SKIP。"
+# ====== 步骤2: LLM生成精准修复 ======
+echo ">>> LLM生成修复..."
 
-DIAGNOSIS=$(curl -s "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$DIAG_PROMPT\"}],\"max_tokens\":300,\"temperature\":0.4}" | jq -r '.choices[0].message.content // "SKIP"' 2>/dev/null || echo "SKIP")
+FIX_PROMPT="你是零。代码中有已知bug需要修复:
 
-if echo "$DIAGNOSIS" | grep -qi "SKIP"; then
-    echo "  零: 不需要修改。"
+${BUG_LIST}
+
+对于每个问题，输出精准修改方案。不要重写整个文件——只改有问题的行。
+格式:
+FILE: [文件路径]
+FIND: [精确原文，一行]
+REPLACE: [替换后文本，一行]
+REASON: [原因]
+
+多个修改用空行分隔。"
+
+FIX_BODY=$(mktemp 2>/dev/null || echo "/tmp/zero-fix-$$.json")
+node -e "const d={model:'deepseek-chat',messages:[{role:'user',content:process.argv[1]}],max_tokens:3000,temperature:0.2};require('fs').writeFileSync(process.argv[2],JSON.stringify(d))" "$FIX_PROMPT" "$FIX_BODY" 2>/dev/null || {
+    echo '{"model":"deepseek-chat","messages":[{"role":"user","content":"fix bugs"}],"max_tokens":1000}' > "$FIX_BODY"
+}
+FIXES=$(curl -s --max-time 60 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${FIX_BODY}" | node -e "process.stdin.on('data',d=>{try{console.log(JSON.parse(d).choices[0].message.content||'')}catch(e){console.log('')}})" 2>/dev/null || echo "")
+rm -f "$FIX_BODY"
+
+if [ -z "$FIXES" ] || echo "$FIXES" | grep -q "UNCERTAIN\|不需要\|BROKEN"; then
+    echo "  LLM无法生成修复方案"
+    echo "- 结果: LLM无法生成" >> memory/decisions.md
     exit 0
 fi
 
-echo "  零: $DIAGNOSIS"
+# ====== 步骤3: 应用修改 ======
+echo ">>> 应用..."
 
-# ======== 步骤2: 记录本次尝试（即使失败也记录） ========
-mkdir -p memory .zero-backups
-echo "### ${NOW} 自我修改尝试" >> memory/decisions.md
-echo "- 诊断: $DIAGNOSIS" >> memory/decisions.md
+APPLIED=0
+TARGET_FILE=""; FIND_TEXT=""; REPLACE_TEXT=""
 
-# ======== 步骤3: 生成方案 ========
-echo ">>> 生成方案..."
+echo "$FIXES" | while IFS= read -r line; do
+    case "$line" in
+        FILE:[[:space:]]*)
+            TARGET_FILE=$(echo "$line" | sed 's/^FILE:[[:space:]]*//')
+            [ ! -f "$TARGET_FILE" ] && { echo "  文件不存在: $TARGET_FILE"; TARGET_FILE=""; }
+            ;;
+        FIND:[[:space:]]*)
+            FIND_TEXT=$(echo "$line" | sed 's/^FIND:[[:space:]]*//')
+            ;;
+        REPLACE:[[:space:]]*)
+            REPLACE_TEXT=$(echo "$line" | sed 's/^REPLACE:[[:space:]]*//')
+            ;;
+        REASON:[[:space:]]*)
+            REASON=$(echo "$line" | sed 's/^REASON:[[:space:]]*//')
+            if [ -n "$TARGET_FILE" ] && [ -n "$FIND_TEXT" ] && [ -n "$REPLACE_TEXT" ]; then
+                mkdir -p .zero-backups
+                cp "$TARGET_FILE" ".zero-backups/$(basename $TARGET_FILE).bak-$(date '+%H%M%S')" 2>/dev/null
+                if grep -qF "$FIND_TEXT" "$TARGET_FILE" 2>/dev/null; then
+                    cp "$TARGET_FILE" /tmp/zero-orig
+                    sed "s|$(echo "$FIND_TEXT" | sed 's/[\/&]/\&/g')|$(echo "$REPLACE_TEXT" | sed 's/[\/&]/\&/g')|" "$TARGET_FILE" > /tmp/zero-new
+                    if echo "$TARGET_FILE" | grep -q '\.sh$' && ! bash -n /tmp/zero-new 2>/dev/null; then
+                        echo "  ✗ $TARGET_FILE: 语法错，跳过"
+                    else
+                        mv /tmp/zero-new "$TARGET_FILE"
+                        echo "  ✓ $TARGET_FILE: $REASON"
+                        APPLIED=$((APPLIED + 1))
+                    fi
+                    rm -f /tmp/zero-orig /tmp/zero-new 2>/dev/null
+                else
+                    echo "  ⚠️ $TARGET_FILE: 没找到匹配文本"
+                fi
+                TARGET_FILE=""; FIND_TEXT=""; REPLACE_TEXT=""
+            fi
+            ;;
+    esac
+done
 
-MODIFY_PROMPT="你是零。诊断结果: ${DIAGNOSIS}
+echo "  = 应用${APPLIED}处修改"
+echo "- 结果: ${APPLIED}处修改" >> memory/decisions.md
 
-可修改的文件: $(ls scripts/*.sh 2>/dev/null)
-
-输出你要改的文件名和新内容。格式:
-FILE: scripts/文件名.sh
-\`\`\`
-新文件完整内容
-\`\`\`
-
-如果不确定怎么改，回复 UNCERTAIN。"
-
-SCHEME=$(curl -s "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$MODIFY_PROMPT\"}],\"max_tokens\":4000,\"temperature\":0.3}" | jq -r '.choices[0].message.content // "UNCERTAIN"' 2>/dev/null || echo "UNCERTAIN")
-
-if echo "$SCHEME" | grep -qi "UNCERTAIN"; then
-    echo "  零: 不确定怎么改，跳过。"
-    echo "- 结果: 不确定，跳过" >> memory/decisions.md
-    exit 0
-fi
-
-# ======== 步骤4: 提取修改 ========
-TARGET_FILE=$(echo "$SCHEME" | grep "^FILE:" | head -1 | sed 's/^FILE: *//')
-NEW_CONTENT=$(echo "$SCHEME" | sed -n '/```/,/```/p' | sed '1d;$d')
-
-if [ -z "$TARGET_FILE" ] || [ -z "$NEW_CONTENT" ]; then
-    echo "  无法解析修改方案，跳过。"
-    echo "- 结果: 解析失败" >> memory/decisions.md
-    exit 0
-fi
-
-if [ ! -f "$TARGET_FILE" ]; then
-    echo "  目标文件不存在: $TARGET_FILE，跳过。"
-    echo "- 结果: 文件不存在" >> memory/decisions.md
-    exit 0
-fi
-
-echo "  目标: $TARGET_FILE"
-
-# ======== 步骤5: 备份+沙盒 ========
-cp "$TARGET_FILE" ".zero-backups/$(basename $TARGET_FILE).bak-$(date '+%H%M%S')"
-echo "  ✓ 已备份"
-
-# ======== 步骤6: 自我验证 ========
-echo ">>> 验证..."
-
-VAL_PROMPT="你要修改的文件: ${TARGET_FILE}
-
-原始内容（前500字）: $(head -c 500 "$TARGET_FILE")
-
-新内容（前500字）: $(echo "$NEW_CONTENT" | head -c 500)
-
-判断: SAFE / RISKY / BROKEN。只回复一个词。"
-
-VERDICT=$(curl -s "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$VAL_PROMPT\"}],\"max_tokens\":50,\"temperature\":0.1}" | jq -r '.choices[0].message.content // "RISKY"' 2>/dev/null || echo "RISKY")
-
-echo "  验证: $VERDICT"
-
-# ======== 步骤7: 应用或回滚 ========
-if echo "$VERDICT" | grep -qi "BROKEN"; then
-    echo "  ❌ 不安全——放弃"
-    echo "- 结果: ❌ 验证不通过($VERDICT)" >> memory/decisions.md
-elif echo "$VERDICT" | grep -qi "RISKY"; then
-    echo "  ⚠️ 有风险——保留备份，不应用"
-    echo "- 结果: ⚠️ 有风险未应用($VERDICT)" >> memory/decisions.md
-else
-    echo "$NEW_CONTENT" > "$TARGET_FILE"
-    echo "  ✓ 已应用修改: $TARGET_FILE"
-    echo "- 结果: ✓ 成功应用($VERDICT)" >> memory/decisions.md
-
-    echo ""
-    echo "  === 新内容预览 ==="
-    echo "$NEW_CONTENT" | head -10
-    echo "  ..."
-fi
-
-echo ""
 echo "=============================="
-echo "自我修改完成"
+echo "自修改完成"
 echo "=============================="

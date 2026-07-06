@@ -8,7 +8,7 @@ on:
 
 jobs:
   zero-converse:
-    if: contains(github.event.issue.title, '[对话]')
+    if: "!contains(github.event.issue.title, '自动回复')"
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -37,9 +37,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "没有新对话"
           else
-            git commit -m "零的对话记录 - Issue #${ISSUE_NUMBER}"
-            git push
-            echo "✓ 对话已存档"
+            git commit -m "零的对话 - Issue #${{ github.event.issue.number }}"
+            git push || echo "(推送失败)"
           fi
-        env:
-          ISSUE_NUMBER: ${{ github.event.issue.number }}
