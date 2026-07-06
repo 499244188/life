@@ -100,3 +100,4 @@
 - 差距：OpenLife跑12周，零才9天。Digital Life有实际产出（交易/写作），零还在学习循环
 - 零需要：从"学习+自我维护"→"学习+产出+自我维护"
 - Digital Life的Beta模式是目标：自发好奇→建工具→修bug→产出内容
+- 新发现的两个低星数字生命项目（project-prometheus, InSearchOfAnAuthor）验证了数字生命领域持续有新项目涌现但普遍低活跃度的趋势
