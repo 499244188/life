@@ -305,10 +305,10 @@ judge结果: $([ "$MINUTE" = "00" ] && echo '已执行' || echo '跳过')
 
 只回复一个词。"
 
-ACTION=$(curl -s "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "{\"model\":\"deepseek-chat\",\"messages\":[{\"role\":\"user\",\"content\":\"$ACT_PROMPT\"}],\"max_tokens\":20,\"temperature\":0.3}" | jq -r '.choices[0].message.content // "NONE"' 2>/dev/null || echo "NONE")
+	ACT_BODY=$(mktemp)
+	jq -n --arg p "$ACT_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":20,"temperature":0.3}' > "$ACT_BODY"
+	ACTION=$(curl -s "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${ACT_BODY}" | jq -r '.choices[0].message.content // "NONE"' 2>/dev/null || echo "NONE")
+	rm -f "$ACT_BODY"
 
 echo "  决定: $ACTION"
 

@@ -1,6 +1,9 @@
 name: 零 - 持续探索
 
 on:
+  schedule:
+    - cron: '47 2 * * *'   # 10:47 北京时间
+    - cron: '47 14 * * *'  # 22:47 北京时间
   workflow_dispatch:
 
 jobs:

@@ -5,6 +5,11 @@ on:
     - cron: '3,33 * * * *'
   workflow_dispatch:
 
+# 防止雪崩：同一时间只允许一个扫描运行
+concurrency:
+  group: zero-scan
+  cancel-in-progress: false
+
 jobs:
   zero-cognitive:
     runs-on: ubuntu-latest
@@ -33,9 +38,3 @@ jobs:
             echo "✓ 大脑已更新并推送"
           fi
 
-      - name: 自循环（28分钟后触发下一次）
-        run: |
-          sleep 1680  # 28分钟
-          gh workflow run "零 - 世界扫描（每30分钟）" -R 499244188/life || true
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
