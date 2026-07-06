@@ -1,0 +1,164 @@
+name: 零 - 哨兵（事件驱动自愈）
+
+# 不轮询。事件驱动。任何workflow完成后立即检查。
+# 失败了？马上诊断修复。不需要等2小时。
+
+on:
+  workflow_run:
+    workflows:
+      - "零 - 日常运行"
+      - "零 - 持续进化"
+      - "零 - 世界扫描（每30分钟）"
+      - "零 - 每周研究合成"
+      - "零 - 自我修复（每2小时）"
+    types: [completed]
+
+jobs:
+  sentinel:
+    # 只在失败时运行——节省资源
+    if: ${{ github.event.workflow_run.conclusion == 'failure' }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      actions: read
+
+    steps:
+      - name: 检出
+        uses: actions/checkout@v4
+
+      - name: 哨兵响应
+        run: |
+          FAILED_WF="${{ github.event.workflow_run.name }}"
+          FAILED_URL="${{ github.event.workflow_run.html_url }}"
+          FAILED_ID="${{ github.event.workflow_run.id }}"
+          NOW=$(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')
+
+          echo "=============================="
+          echo "🛡️ 哨兵：检测到故障"
+          echo "时间: $NOW"
+          echo "失败: $FAILED_WF"
+          echo "URL: $FAILED_URL"
+          echo "=============================="
+
+          # 记录故障
+          mkdir -p analysis
+          echo "## $NOW — $FAILED_WF 失败" >> analysis/sentinel-alerts.md
+          echo "- [运行日志]($FAILED_URL)" >> analysis/sentinel-alerts.md
+
+          # 获取失败日志
+          echo ""
+          echo ">>> 读取错误日志..."
+
+          # 等待几秒让日志就绪
+          sleep 10
+
+          ERROR_LOG=$(gh run view "$FAILED_ID" --log-failed 2>/dev/null | tail -100 || echo "无法获取")
+
+          if [ -z "$ERROR_LOG" ] || [ "$ERROR_LOG" = "无法获取" ]; then
+            echo "  ⚠️ 无法获取日志"
+            exit 0
+          fi
+
+          echo "  ✓ 获取了 $(echo "$ERROR_LOG" | wc -l) 行日志"
+
+          # 检查是否是已知的反复故障
+          ERROR_SIG=$(echo "$ERROR_LOG" | head -20 | md5sum | cut -c1-8)
+          RECENT_COUNT=$(grep -c "$ERROR_SIG" analysis/sentinel-alerts.md 2>/dev/null || echo 0)
+
+          if [ "$RECENT_COUNT" -gt 2 ]; then
+            echo "  ⚠️ 此错误已重复${RECENT_COUNT}次——可能需要人工介入"
+            echo "- 🔴 重复${RECENT_COUNT}次 [sig=${ERROR_SIG}]" >> analysis/sentinel-alerts.md
+            exit 0
+          fi
+          echo "- sig=${ERROR_SIG}" >> analysis/sentinel-alerts.md
+
+          # === LLM诊断 ===
+          echo ""
+          echo ">>> 诊断..."
+
+          DIAG_PROMPT="你是零的哨兵系统。一个workflow刚刚失败了。
+
+          失败的workflow: $FAILED_WF
+          错误日志（最后100行）:
+          $ERROR_LOG
+
+          相关脚本摘要:
+          $(grep -l "set -e\|gh \|curl\|jq \|node " scripts/*.sh 2>/dev/null | while read f; do echo "=== $f ==="; head -5 "$f"; done | head -40)
+
+          已知问题模式:
+          $(grep -A1 'CRLF\|JSON注入\|互斥\|雪崩\|知行' memory/semantic.md 2>/dev/null | head -20)
+
+          任务:
+          1. 诊断根因（一句话）
+          2. 如果能自动修复，输出修复命令（git patch格式）
+          3. 如果不能，输出: UNCERTAIN
+
+          格式:
+          DIAGNOSIS: [根因]
+          FIX: [shell命令——用git checkout/echo/sed，能直接执行的] 或 UNCERTAIN"
+
+          DIAG_BODY=$(mktemp)
+          jq -n --arg p "$DIAG_PROMPT" '{
+            model: "deepseek-chat",
+            messages: [{role: "system", content: "你是零的哨兵。输出修复命令。不确定就说UNCERTAIN。"}, {role: "user", content: $p}],
+            max_tokens: 2000, temperature: 0.2
+          }' > "$DIAG_BODY"
+
+          DIAGNOSIS=$(curl -s --max-time 60 https://api.deepseek.com/v1/chat/completions \
+            -H "Content-Type: application/json" \
+            -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
+            -d "@${DIAG_BODY}" | jq -r '.choices[0].message.content // "UNCERTAIN"' 2>/dev/null || echo "UNCERTAIN")
+          rm -f "$DIAG_BODY"
+
+          echo "  $(echo "$DIAGNOSIS" | head -1)"
+
+          ROOT_CAUSE=$(echo "$DIAGNOSIS" | grep -oP 'DIAGNOSIS:\s*\K.*' | head -1)
+          FIX_CMD=$(echo "$DIAGNOSIS" | sed -n '/FIX:/,/^$/p' | sed 's/^FIX:\s*//' | head -1)
+
+          if echo "$FIX_CMD" | grep -qi "UNCERTAIN" || [ -z "$FIX_CMD" ]; then
+            echo "  ⚠️ 无法自动修复: ${ROOT_CAUSE}"
+            echo "- 诊断: ${ROOT_CAUSE} (无法自动修复)" >> analysis/sentinel-alerts.md
+            exit 0
+          fi
+
+          # === 执行修复 ===
+          echo ""
+          echo ">>> 执行修复..."
+          echo "  命令: $FIX_CMD"
+
+          # 备份
+          mkdir -p .zero-backups
+          cp -r scripts .zero-backups/scripts-$(date '+%H%M%S') 2>/dev/null || true
+
+          # 执行修复命令
+          eval "$FIX_CMD" 2>&1 || {
+            echo "  ✗ 修复命令执行失败"
+            echo "- ❌ 修复失败" >> analysis/sentinel-alerts.md
+            exit 0
+          }
+
+          echo "  ✓ 修复已应用"
+
+          # === 提交 ===
+          git config user.name "零·哨兵"
+          git config user.email "zero@digital-being.local"
+          git add -A
+          if git diff --staged --quiet; then
+            echo "  无变更"
+          else
+            git commit -m "哨兵修复: ${FAILED_WF} — ${ROOT_CAUSE}"
+            for i in 1 2 3; do
+              git pull --rebase 2>/dev/null && git push 2>/dev/null && { echo "  ✓ 已推送修复"; break; }
+              sleep 2
+            done || echo "  ⚠️ 推送失败"
+          fi
+
+          echo "- ✅ 已修复: ${ROOT_CAUSE}" >> analysis/sentinel-alerts.md
+
+          echo ""
+          echo "=============================="
+          echo "🛡️ 哨兵修复完成"
+          echo "=============================="
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
