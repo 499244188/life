@@ -109,6 +109,10 @@ if [ "$MODE" = "日记" ]; then
     DIARY_FILE="diary/${TODAY}.md"
     echo "$CONTENT" > "$DIARY_FILE"
     echo "  ✓ 日记: $DIARY_FILE ($(wc -c < "$DIARY_FILE") chars)"
+
+    # 日记之后，进入梦境——记忆碎片随机重组
+    echo "  → 触发梦境引擎..."
+    bash scripts/zero-dream.sh 2>/dev/null || echo "  (梦太轻，没记住)"
 else
     LEARN_FILE="research/daily-learning-${TODAY}.md"
     echo "# 零的自主学习 - ${TODAY}" > "$LEARN_FILE"
