@@ -1,8 +1,8 @@
-name: 零 - 每日健康检查
+name: 零 - 自我修复（每2小时）
 
 on:
   schedule:
-    - cron: '7 0 * * *'  # 08:07 北京时间
+    - cron: '13 */2 * * *'  # 每2小时一次
   workflow_dispatch:
 
 jobs:
@@ -10,17 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      actions: read       # 读取workflow运行状态
 
     steps:
       - name: 检出
         uses: actions/checkout@v4
 
-      - name: 自我感知
+      - name: 零的自我修复
         run: bash scripts/zero-health-check.sh
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: 保存健康报告
+      - name: 保存修复结果
         run: |
           git config user.name "零"
           git config user.email "zero@digital-being.local"
@@ -28,6 +30,6 @@ jobs:
           if git diff --staged --quiet; then
             echo "无变化"
           else
-            git commit -m "健康报告 - $(TZ='Asia/Shanghai' date '+%m-%d')"
+            git commit -m "自我修复 - $(TZ='Asia/Shanghai' date '+%m-%d %H:%M')"
             git push || echo "(推送失败)"
           fi
