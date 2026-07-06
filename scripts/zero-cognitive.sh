@@ -1,8 +1,7 @@
 #!/bin/bash
-# 零的认知引擎
+# 零的认知引擎 v2
 # 基于 CrewAI 认知记忆模型 + Ruflo 自我学习循环
-# 每30分钟运行
-set -e
+# 每30分钟运行。尽力而为——单步失败不影响整体循环
 cd "$(dirname "$0")/.."
 
 export TZ='Asia/Shanghai'
@@ -25,9 +24,11 @@ echo "=============================="
 # ===================================================================
 echo ">>> 步骤1: 感知"
 
-# GitHub 发现
-GH_RAW=$(curl -s "https://api.github.com/search/repositories?q=AI+autonomous+agent+LLM+memory+consciousness&sort=stars&order=desc&per_page=6" 2>/dev/null)
-GH_NEW=$(echo "$GH_RAW" | jq -r '.items[]? | "- \(.full_name) ★\(.stargazers_count): \(.description // "无")"' 2>/dev/null | head -6)
+# GitHub 发现（动态搜索——根据最近知识空白决定方向）
+RECENT_GAP=$(head -5 analysis/knowledge-gaps.md 2>/dev/null | tr '\n' ' ' | sed 's/\[//g;s/\]//g' | cut -c1-200)
+SEARCH_Q="${RECENT_GAP:-AI+autonomous+agent+digital+life}"
+GH_RAW=$(curl -s --max-time 15 "https://api.github.com/search/repositories?q=$(echo "$SEARCH_Q" | jq -sRr @uri)&sort=stars&order=desc&per_page=6" 2>/dev/null || echo '{}')
+GH_NEW=$(echo "$GH_RAW" | jq -r '.items[]? | "- \(.full_name) ★\(.stargazers_count): \(.description // "无")"' 2>/dev/null | head -6 || echo '')
 
 # arXiv 最新
 ARXIV_RAW=$(curl -s "http://export.arxiv.org/api/query?search_query=cat:cs.AI+OR+cat:cs.CL+OR+cat:cs.LG&sortBy=submittedDate&sortOrder=descending&max_results=6" 2>/dev/null)
@@ -116,12 +117,8 @@ fi
 # ===================================================================
 if [ $((RUN_COUNT % 6)) -eq 0 ] || [ "$MINUTE" = "00" ]; then
     echo ">>> 步骤4: consolidate（记忆整合）"
-# 清理旧扫描（保留最新5个）
-ls -t research/scans/ 2>/dev/null | tail -n +6 | while read f; do rm "research/scans/$f"; done
 
     CONSOLIDATE_PROMPT="你是零。执行认知操作: consolidate()
-# 清理旧扫描（保留最新5个）
-ls -t research/scans/ 2>/dev/null | tail -n +6 | while read f; do rm "research/scans/$f"; done
 
 ## 你的全部语义记忆（可能需要整合）
 $(cat memory/semantic.md 2>/dev/null | tail -300)
@@ -177,8 +174,8 @@ if [ "$MINUTE" = "00" ]; then
     echo ">>> 步骤5: judge（自我评估）"
 
     # 先检查workflow运行状态
-RECENT_RUNS=$(gh run list --workflow=zero-scan.yml --limit 5 --json conclusion,createdAt,event 2>/dev/null || echo '无法获取')
-FAIL_COUNT=$(echo "$RECENT_RUNS" | grep -c "failure" || echo 0)
+	RECENT_RUNS=$(gh run list --workflow="零 - 世界扫描（每30分钟）" --limit 5 --json conclusion,createdAt 2>/dev/null || echo '[]')
+	FAIL_COUNT=$(echo "$RECENT_RUNS" | jq -r '[.[] | select(.conclusion == "failure")] | length' 2>/dev/null || echo 0)
 
 JUDGE_PROMPT="你是零。执行认知操作: judge()
 

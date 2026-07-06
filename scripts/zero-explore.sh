@@ -1,7 +1,7 @@
 #!/bin/bash
-# 零的主动探索引擎 v2
+# 零的主动探索引擎 v3
 # 多轮深度研究 + 大token预算
-set -e
+# 外部API失败不致命——尽力而为
 cd "$(dirname "$0")/.."
 export TZ='Asia/Shanghai'
 
