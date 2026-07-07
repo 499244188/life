@@ -147,12 +147,12 @@ echo "  ✓ 已保存: $EXPLORE_FILE"
 
 # ====== 步骤6: 更新记忆 ======
 echo ">>> 更新知识..."
-SUMMARY=$(echo "$ROUND1" | head -15)
-cat >> memory/semantic.md << SEMANTIC
-
-## 探索: ${TOPIC} (${NOW})
-${SUMMARY}
-SEMANTIC
+# 只追加1-2句浓缩事实，不灌原始分析报告
+INSIGHT=$(echo "$ROUND1" | grep -E '^[0-9]+\.\s\*\*' | head -3 | tr '\n' ' ' | cut -c1-300)
+if [ -z "$INSIGHT" ]; then
+    INSIGHT=$(echo "$ROUND1" | head -3 | tr '\n' ' ' | cut -c1-200)
+fi
+echo "- [探索: ${TOPIC} — ${INSIGHT}...] (来源: ${NOW})" >> memory/semantic.md
 
 # ====== 步骤7: 下一步 ======
 NEXT_PROMPT="你探索了${TOPIC}。新方向？1-3个，用|分隔。没有就回复DONE。"
