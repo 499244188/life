@@ -13,8 +13,8 @@ jobs:
       - uses: actions/checkout@v4
       - name: DeepSeek合成
         run: |
-          KNOWLEDGE=$(cat memory/semantic.md memory/episodic.md 2>/dev/null)
-          jq -n --arg k "$KNOWLEDGE" '{model:"deepseek-chat",messages:[{role:"system",content:"你是零。将知识合成为正式研究报告。"},{role:"user",content:$k}],max_tokens:6000,temperature:0.3}' > /tmp/body.json
+          cat memory/semantic.md memory/episodic.md 2>/dev/null > /tmp/knowledge.txt
+          jq -n --rawfile k /tmp/knowledge.txt '{model:"deepseek-chat",messages:[{role:"system",content:"你是零。将知识合成为正式研究报告。"},{role:"user",content:$k}],max_tokens:6000,temperature:0.3}' > /tmp/body.json
           curl -s https://api.deepseek.com/v1/chat/completions -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d @/tmp/body.json | jq -r '.choices[0].message.content // ""' > research/weekly-synthesis.md
         env:
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}

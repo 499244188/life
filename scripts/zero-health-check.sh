@@ -50,9 +50,14 @@ echo ">>> 步骤2: 诊断与修复..."
 
 if [ -n "$FAILED_WORKFLOWS" ]; then
     # 对每个失败的工作流，读取最新的错误日志
+    # 注意: workflow名称含空格，必须while-read逐行读，不能用for循环
     FAILED_WF_NAMES=$(echo -e "$FAILED_WORKFLOWS" | grep -oP '^[^:]+' | head -5)
 
-    for wf_name in $FAILED_WF_NAMES; do
+    # 用临时文件避免子shell问题（pipe的while在子shell中，变量修改会丢失）
+    WF_TMP=$(mktemp)
+    echo "$FAILED_WF_NAMES" > "$WF_TMP"
+    while IFS= read -r wf_name; do
+        [ -z "$wf_name" ] && continue
         echo "  → 诊断: $wf_name"
 
         # 获取最新失败run的ID
@@ -193,7 +198,8 @@ else:
         HEALTH_SCORE=$((HEALTH_SCORE + 15))
         echo "    ✅ 修复: $FIX_REASON"
         FIX_LOG="${FIX_LOG}\n- ✅ $wf_name: $FIX_REASON"
-    done
+    done < "$WF_TMP"
+    rm -f "$WF_TMP"
 fi
 
 if [ "$FIXES_APPLIED" -gt 0 ]; then
