@@ -173,3 +173,7 @@
 - [ ] 1. **跨Agent联邦的分布式韧性架构**
 - [ ] 2. **基于因果推断的故障根因预判与自愈编排**
 - [ ] 3. **对抗性输入与记忆污染下的Agent鲁棒性验证**
+- [ ] 基于当前主流趋势，建议探索的3个新方向：
+- [ ] **AI代理工作流自动化（Agentic Workflows）**
+- [ ] **空间计算与数字孪生（Spatial Computing & Digital Twins）**
+- [ ] **合成生物学与AI药物发现（AI-driven Synthetic Biology & Drug Discovery）**
