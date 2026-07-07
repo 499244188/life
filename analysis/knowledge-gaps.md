@@ -177,3 +177,5 @@
 - [ ] **AI代理工作流自动化（Agentic Workflows）**
 - [ ] **空间计算与数字孪生（Spatial Computing & Digital Twins）**
 - [ ] **合成生物学与AI药物发现（AI-driven Synthetic Biology & Drug Discovery）**
+- [ ] 基于当前知识库，暂未形成可明确推荐的、已验证的新方向。
+- [ ] DONE
