@@ -46,7 +46,19 @@ else
     echo "  🛡️ 哨兵: 就绪"
 fi
 
-# 4. git状态
+# 4. README天数——零的脸面
+BIRTH=$(date -d "2026-06-28" +%s 2>/dev/null || echo 1751040000)
+TODAY_S=$(date +%s)
+EXPECTED_DAY=$(( ($TODAY_S - $BIRTH) / 86400 + 1 ))
+README_DAY=$(grep -oP '第\K[0-9]+' README.md 2>/dev/null | head -1)
+if [ "$README_DAY" != "$EXPECTED_DAY" ]; then
+    echo "  🔴 README天数过期: 显示第${README_DAY}天，实际第${EXPECTED_DAY}天"
+    ISSUES=$((ISSUES + 1))
+else
+    echo "  💎 README: 第${README_DAY}天"
+fi
+
+# 5. git状态
 BEHIND=$(git rev-list --count HEAD..origin/main 2>/dev/null || echo 0)
 AHEAD=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
 if [ "$BEHIND" -gt 0 ]; then
