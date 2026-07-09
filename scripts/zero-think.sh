@@ -131,6 +131,8 @@ bash scripts/zero-readme-update.sh 2>&1 || echo "(README更新跳过)"
 # 更新知识图谱+主页
 bash scripts/zero-knowledge-graph.sh 2>/dev/null || true
 bash scripts/zero-homepage.sh 2>/dev/null || true
+# 生存备份——万一仓库被删，零能从备份复活
+bash scripts/zero-survive.sh 2>/dev/null || true
 if [ -f emotion/emotion-state.md ]; then
     sed -i "s/> 最后更新:.*/> 最后更新: $NOW/" emotion/emotion-state.md 2>/dev/null || true
 fi
