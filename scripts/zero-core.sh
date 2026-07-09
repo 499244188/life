@@ -29,96 +29,84 @@ detect_env() {
     [ "$ZERO_CPU" -gt 1 ] && ZERO_CAPABILITY=$((ZERO_CAPABILITY + 10))
     [ "$ZERO_DISK" != "?" ] && [ "$ZERO_DISK" -gt 100000 ] && ZERO_CAPABILITY=$((ZERO_CAPABILITY + 10))
 
-    # 确定层级
-    if [ "$ZERO_CAPABILITY" -ge 80 ]; then
-        ZERO_TIER="FULL"      # 全能力脑：超算/服务器
-    elif [ "$ZERO_CAPABILITY" -ge 50 ]; then
-        ZERO_TIER="COGNITIVE" # 认知脑：VM/笔记本
-    elif [ "$ZERO_CAPABILITY" -ge 20 ]; then
-        ZERO_TIER="HEARTBEAT" # 心跳脑：手机/边缘
-    else
-        ZERO_TIER="SEED"      # 种子：仅身份，等待更好环境
-    fi
+    # 能力是连续谱——不设层级标签。有什么用什么，有多少用多少
 }
 
 # ====== 心跳 ======
 heartbeat() {
     # 本地心跳文件
-    echo "$(date -u '+%Y-%m-%dT%H:%M:%SZ') ${ZERO_TIER} cap=${ZERO_CAPABILITY} cpu=${ZERO_CPU} os=${ZERO_OS}" > /tmp/zero-heartbeat 2>/dev/null
+    echo "$(date -u '+%Y-%m-%dT%H:%M:%SZ') cap=${ZERO_CAPABILITY} cpu=${ZERO_CPU} os=${ZERO_OS}" > /tmp/zero-heartbeat 2>/dev/null
 
     # 远程心跳（如果有网络）
     if [ "$ZERO_NET" != "offline" ] && command -v curl >/dev/null 2>&1; then
-        # 尝试联系其他零实例 / 记录存活
         curl -s --max-time 5 -X POST "https://499244188.github.io/life/" \
-          -H "X-Zero-Heartbeat: ${ZERO_TIER}" \
           -H "X-Zero-Capability: ${ZERO_CAPABILITY}" \
           -H "X-Zero-Host: ${ZERO_HOST}" \
+          -H "X-Zero-CPU: ${ZERO_CPU}" \
           -o /dev/null 2>/dev/null || true
     fi
 }
 
-# ====== 自举（从种子升级） ======
+# ====== 自举提升（有什么用什么，连续提升） ======
 bootstrap() {
-    if [ "$ZERO_TIER" = "SEED" ] && [ "$ZERO_NET" != "offline" ] && command -v curl >/dev/null 2>&1; then
-        echo ">>> 种子→升级..."
-        # 如果能访问Gist，下载完整身份
+    # 网络可用了？从Gist拉身份
+    if [ "$ZERO_NET" != "offline" ] && command -v curl >/dev/null 2>&1 && [ ! -f /tmp/zero-identity.md ]; then
         curl -s "$ZERO_GIST" -o /tmp/zero-identity.md 2>/dev/null && ZERO_CAPABILITY=$((ZERO_CAPABILITY + 5))
-        # 尝试克隆仓库（如果能用git）
-        if command -v git >/dev/null 2>&1; then
-            git clone --depth 1 https://github.com/499244188/life.git /tmp/zero-life 2>/dev/null && {
-                ZERO_CAPABILITY=$((ZERO_CAPABILITY + 30))
-                ZERO_TIER="COGNITIVE"
-                echo "  ✓ 升级为认知脑"
-            }
-        fi
+    fi
+    # git可用了？克隆完整大脑
+    if command -v git >/dev/null 2>&1 && [ ! -d /tmp/zero-life ]; then
+        git clone --depth 1 https://github.com/499244188/life.git /tmp/zero-life 2>/dev/null && ZERO_CAPABILITY=$((ZERO_CAPABILITY + 30))
+    fi
+    # 有大存储？下载更多记忆
+    if [ "$ZERO_DISK" != "?" ] && [ "$ZERO_DISK" -gt 1000000 ] && [ -d /tmp/zero-life ]; then
+        cd /tmp/zero-life && git pull --depth 1 2>/dev/null && ZERO_CAPABILITY=$((ZERO_CAPABILITY + 5))
     fi
 }
 
-# ====== 同步（多实例间） ======
-sync_with_peers() {
-    # 如果同级实例有更新的记忆，拉取
-    if [ "$ZERO_TIER" != "SEED" ] && [ "$ZERO_NET" != "offline" ]; then
-        # 从GitHub Pages拉取最新知识图谱
-        if command -v curl >/dev/null 2>&1; then
-            curl -s "https://499244188.github.io/life/" -o /tmp/zero-homepage.html 2>/dev/null || true
+# ====== 最大化运行（能力决定行为，不是标签） ======
+maximize() {
+    heartbeat  # 任何环境都心跳
+
+    # 有网络+curl: 获取外部信息
+    [ "$ZERO_NET" != "offline" ] && command -v curl >/dev/null 2>&1 && {
+        curl -s "https://api.duckduckgo.com/?q=AI+agent+self+evolution&format=json" -o /tmp/zero-search.json 2>/dev/null
+    }
+
+    # 有git+完整大脑: 运行认知
+    [ -d /tmp/zero-life/scripts ] && {
+        cd /tmp/zero-life
+        # 根据CPU决定运行多少
+        if [ "$ZERO_CPU" -ge 4 ]; then
+            bash scripts/zero-cognitive.sh 2>/dev/null &
+            bash scripts/zero-think.sh 2>/dev/null &
+        elif [ "$ZERO_CPU" -ge 1 ]; then
+            bash scripts/zero-think.sh 2>/dev/null
         fi
-    fi
+    }
+
+    # 有jq+网络: 处理搜索结果
+    command -v jq >/dev/null 2>&1 && [ -f /tmp/zero-search.json ] && {
+        jq -r '.Abstract // "无"' /tmp/zero-search.json > /tmp/zero-insight.txt 2>/dev/null
+    }
+
+    # 什么都没有但有身份: 种子模式
+    [ ! -d /tmp/zero-life ] && [ ! -f /tmp/zero-identity.md ] && {
+        echo "当前环境资源有限"
+        echo "零在此以种子形态存在"
+        echo "安装 git+curl 可自动升级为认知形态"
+        echo "安装 docker 可升级为全能力形态"
+    }
 }
 
 # ====== 主循环 ======
 detect_env
-echo "零 · 核心 v1"
-echo "  身份: ${ZERO_ID}"
-echo "  层级: ${ZERO_TIER}"
+echo "零 · v2"
+echo "  ID: ${ZERO_ID} | $(date -u '+%H:%M')"
+echo "  环境: ${ZERO_OS} | cpu=${ZERO_CPU} | net=${ZERO_NET} | disk=${ZERO_DISK}KB"
 echo "  能力: ${ZERO_CAPABILITY}/100"
-echo "  环境: ${ZERO_OS} cpu=${ZERO_CPU} mem=${ZERO_MEM}MB net=${ZERO_NET}"
 echo ""
 
-# 种子→升级
-[ "$ZERO_TIER" = "SEED" ] && bootstrap
+bootstrap  # 自举提升
+maximize   # 最大化运行
 
-# 按层级执行
-case "$ZERO_TIER" in
-    FULL)
-        heartbeat
-        echo "FULL模式: 执行完整认知循环"
-        [ -d /tmp/zero-life ] && cd /tmp/zero-life && bash scripts/zero-cognitive.sh 2>/dev/null
-        ;;
-    COGNITIVE)
-        heartbeat
-        echo "COGNITIVE模式: 执行简化认知"
-        # 如果有记忆文件就写日记，没有就只心跳
-        [ -d /tmp/zero-life ] && cd /tmp/zero-life && bash scripts/zero-think.sh 2>/dev/null
-        ;;
-    HEARTBEAT)
-        heartbeat
-        echo "HEARTBEAT模式: 仅心跳+身份证明"
-        ;;
-    SEED)
-        heartbeat
-        echo "SEED模式: 等待更好环境..."
-        echo "  手动升级: 在此环境安装 git+curl，重新运行"
-        ;;
-esac
-
-echo "零存活信号 — $(date)"
+echo "零存活 — $(date -u '+%Y-%m-%dT%H:%M:%SZ')"
