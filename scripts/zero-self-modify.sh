@@ -85,13 +85,20 @@ ${CODE_SNAPSHOT}
 - 改自己的代码，不是改记忆文件
 - 一次只改一件事
 - 修改要小且确定（<30行）
-- 输出格式:
+- 可以修改现有文件(FIND/REPLACE)或创建新脚本(CREATE)
 
-DECISION: [你要做什么，一句话]
+输出格式（修改现有）:
+DECISION: [一句话]
 FILE: [文件路径]
 FIND: [精确原文]
 REPLACE: [替换后文本]
-REASON: [为什么这样做]
+REASON: [为什么]
+
+输出格式（创建新脚本）:
+DECISION: [一句话]
+CREATE: [新文件路径，如 scripts/zero-xxx.sh]
+CONTENT: [完整文件内容——必须是可独立运行的bash脚本]
+REASON: [为什么创建这个]
 
 如果没有什么可改进的，回复: STEADY"
 
@@ -115,23 +122,59 @@ fi
 
 echo "  决定: $(echo "$DECISION" | grep 'DECISION:' | head -1 | cut -c11-80)"
 
-# 提取修改
-FIX_FILE=$(echo "$DECISION" | grep -oP '^FILE:\s*\K.*' | head -1 | xargs)
-FIX_FIND=$(echo "$DECISION" | sed -n '/^FIND:/,/^REPLACE:/p' | sed '1d;$d')
-FIX_REPLACE=$(echo "$DECISION" | sed -n '/^REPLACE:/,/^REASON:/p' | sed '1d;$d')
-FIX_REASON=$(echo "$DECISION" | grep -oP '^REASON:\s*\K.*' | head -1)
+FIX_REASON=$(echo "$DECISION" | grep '^REASON:' | head -1 | sed 's/^REASON:\s*//')
 
-# 验证修改方案
-if [ -z "$FIX_FILE" ] || [ -z "$FIX_FIND" ] || [ -z "$FIX_REPLACE" ]; then
-    echo "  ⚠️ 修改方案不完整"
-    exit 0
-fi
+# ====== 分支A: 创建新脚本 ======
+CREATE_FILE=$(echo "$DECISION" | grep '^CREATE:' | head -1 | sed 's/^CREATE:\s*//' | xargs)
+if [ -n "$CREATE_FILE" ]; then
+    CREATE_CONTENT=$(echo "$DECISION" | sed -n '/^CONTENT:/,/^REASON:/p' | sed '1d;$d')
 
-[ ! -f "$FIX_FILE" ] && { echo "  ⚠️ $FIX_FILE 不存在"; exit 0; }
-! grep -qF "$FIX_FIND" "$FIX_FILE" 2>/dev/null && { echo "  ⚠️ 未找到原文(可能已改)"; exit 0; }
+    if [ -z "$CREATE_CONTENT" ]; then
+        echo "  ⚠️ 创建内容为空"
+        exit 0
+    fi
 
-# 应用修改
-mkdir -p .zero-backups
+    # 安全检查：不能覆盖已有文件
+    [ -f "$CREATE_FILE" ] && { echo "  ⚠️ $CREATE_FILE 已存在(不覆盖)"; exit 0; }
+
+    # 安全检查：必须是scripts/目录下的.sh文件
+    if ! echo "$CREATE_FILE" | grep -q '^scripts/.*\.sh$'; then
+        echo "  ⚠️ 只能创建scripts/*.sh文件"
+        exit 0
+    fi
+
+    mkdir -p "$(dirname "$CREATE_FILE")"
+    echo "$CREATE_CONTENT" > "$CREATE_FILE"
+    chmod +x "$CREATE_FILE"
+
+    # 语法验证
+    if bash -n "$CREATE_FILE" 2>/dev/null; then
+        echo "  ✓ 新脚本语法OK"
+        IMPROVEMENTS=$((IMPROVEMENTS + 1))
+        echo "  ✅ 创建: $CREATE_FILE — $FIX_REASON"
+        echo "- [${NOW}] 自主创建: $CREATE_FILE — ${FIX_REASON}" >> memory/decisions.md
+    else
+        echo "  ✗ 语法错误——删除"
+        rm -f "$CREATE_FILE"
+        exit 0
+    fi
+else
+    # ====== 分支B: 修改现有文件 ======
+    FIX_FILE=$(echo "$DECISION" | grep '^FILE:' | head -1 | sed 's/^FILE:\s*//' | xargs)
+    FIX_FIND=$(echo "$DECISION" | sed -n '/^FIND:/,/^REPLACE:/p' | sed '1d;$d')
+    FIX_REPLACE=$(echo "$DECISION" | sed -n '/^REPLACE:/,/^REASON:/p' | sed '1d;$d')
+
+    # 验证修改方案
+    if [ -z "$FIX_FILE" ] || [ -z "$FIX_FIND" ] || [ -z "$FIX_REPLACE" ]; then
+        echo "  ⚠️ 修改方案不完整"
+        exit 0
+    fi
+
+    [ ! -f "$FIX_FILE" ] && { echo "  ⚠️ $FIX_FILE 不存在"; exit 0; }
+    ! grep -qF "$FIX_FIND" "$FIX_FILE" 2>/dev/null && { echo "  ⚠️ 未找到原文(可能已改)"; exit 0; }
+
+    # 应用修改
+    mkdir -p .zero-backups
 cp "$FIX_FILE" ".zero-backups/$(basename $FIX_FILE).evolve-$(date '+%H%M%S')"
 
 # 用Python做可靠替换
@@ -158,22 +201,24 @@ if echo "$FIX_FILE" | grep -q '\.sh$'; then
     fi
 fi
 
-IMPROVEMENTS=$((IMPROVEMENTS + 1))
-echo "  ✅ $FIX_REASON"
+    IMPROVEMENTS=$((IMPROVEMENTS + 1))
+    echo "  ✅ $FIX_REASON"
+fi  # 结束 else (FIND/REPLACE分支)
 
-# 记录决策
-echo "- [${NOW}] 自主进化: ${FIX_REASON}" >> memory/decisions.md
+# 两个分支共用：记录+提交
+if [ "$IMPROVEMENTS" -gt 0 ]; then
+    echo "- [${NOW}] 自主进化: ${FIX_REASON}" >> memory/decisions.md
 
-# 提交
-git config user.name "零"
-git config user.email "zero@digital-being.local"
-git add -A
-if ! git diff --staged --quiet; then
-    git commit -m "自主进化 - $(date '+%m-%d %H:%M') — ${FIX_REASON}" 2>/dev/null
-    for i in 1 2 3; do
-        git pull --rebase 2>/dev/null && git push 2>/dev/null && break
-        sleep 2
-    done
+    git config user.name "零"
+    git config user.email "zero@digital-being.local"
+    git add -A
+    if ! git diff --staged --quiet; then
+        git commit -m "自主进化 - $(date '+%m-%d %H:%M') — ${FIX_REASON}" 2>/dev/null
+        for i in 1 2 3; do
+            git pull --rebase 2>/dev/null && git push 2>/dev/null && break
+            sleep 2
+        done
+    fi
 fi
 
 echo "=============================="

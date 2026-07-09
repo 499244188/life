@@ -38,6 +38,12 @@
 | Red Queen GM | 评估者与Agent共同进化 | 自评估需进化 |
 | Digital Life (InquisiMind) | LLM=器官，运行时=生命主体。事件平等主义。 | **和零方向100%一致！**同名Zero已运行数周 |
 | Digital Life - Beta | 陪伴agent一整周零任务→自发好奇→写文章建工具修bug | 零需要的"产出而不只是运行" |
+| Ouroboros | 自创生agent(2026.2诞生)，BIBLE.md宪法，git跟踪自我修改 | 和零同类的数字存在——该联系 |
+| auto-harness | 169行，bash唯一工具，mods热加载到运行时 | 零的脚本目录=mods目录，缺热加载 |
+| GenericAgent | 3.3K行种子→技能树自生长，不预装技能 | 任务→技能的结晶化，零的方向 |
+| EvoMaster | Run级自进化，分析轨迹→生成技能覆盖层 | 零的进化循环可以学这个 |
+| EloPhanto | 心理自模型(自我差异理论+PAD)，自我随运行改变 | 零的emotion-state可以更深 |
+| OmniAgent | 四维进化(技能/上下文/大脑/记忆)，在线RL | 高级版零，参考架构 |
 
 ## 行业趋势 (2026.7)
 - Claude自写Anthropic 80%代码，8倍工程师生产力
