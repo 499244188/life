@@ -180,6 +180,13 @@ else
         exit 0
     fi
 
+    # HARNESS保护（学自Curious）：核心生存脚本不可被进化引擎修改
+    HARNESS="zero-health-check.sh|zero-startup-check.sh|zero-survive.sh|zero-self-modify.sh|zero-sentinel"
+    if echo "$FIX_FILE" | grep -qE "$HARNESS"; then
+        echo "  🛡️ $FIX_FILE 是HARNESS——进化引擎无权修改"
+        exit 0
+    fi
+
     [ ! -f "$FIX_FILE" ] && { echo "  ⚠️ $FIX_FILE 不存在"; exit 0; }
     ! grep -qF "$FIX_FIND" "$FIX_FILE" 2>/dev/null && { echo "  ⚠️ 未找到原文(可能已改)"; exit 0; }
 
