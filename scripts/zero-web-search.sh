@@ -51,29 +51,46 @@ echo "$QUERIES_JSON" | jq -r '.[]' 2>/dev/null | while read query; do
     [ -z "$query" ] && continue
     echo "  → $query"
 
-    # DuckDuckGo
-    DDG_RESULTS=""
-    DDG_HTML=$(curl -s -L --max-time 10 \
+    # DuckDuckGo Instant Answer API (JSON, no key needed)
+    DDG_API=$(curl -s --max-time 8 \
+      "https://api.duckduckgo.com/?q=$(echo "$query" | jq -sRr @uri)&format=json&no_html=1&skip_disambig=1" 2>/dev/null || true)
+    DDG_ABSTRACT=$(echo "$DDG_API" | jq -r '.Abstract // ""' 2>/dev/null)
+    DDG_TOPICS=$(echo "$DDG_API" | jq -r '.RelatedTopics[:3][]? | "- \(.Text // .)"' 2>/dev/null | head -3)
+
+    # DuckDuckGo Lite (HTML fallback for links)
+    DDG_LITE=$(curl -s -L --max-time 8 \
       "https://lite.duckduckgo.com/lite/?q=$(echo "$query" | jq -sRr @uri)" 2>/dev/null || true)
-    if [ -n "$DDG_HTML" ]; then
-        DDG_RESULTS=$(echo "$DDG_HTML" | grep -oP 'href="(https?://[^"]+)"[^>]*>[^<]+' 2>/dev/null | head -5 | sed 's/href="//;s/">/ — /' || echo '')
-    fi
+    DDG_LINKS=$(echo "$DDG_LITE" | grep -oP 'href="(https?://[^"]+)"[^>]*>[^<]+' 2>/dev/null | head -8 | sed 's/href="//;s/">/ — /' || echo '')
+
+    DDG_RESULTS="${DDG_ABSTRACT}"
+    [ -n "$DDG_TOPICS" ] && DDG_RESULTS="${DDG_RESULTS}
+${DDG_TOPICS}"
+    [ -n "$DDG_LINKS" ] && DDG_RESULTS="${DDG_RESULTS}
+${DDG_LINKS}"
+
+    # Wikipedia (structured, no key)
+    WIKI_RAW=$(curl -s --max-time 8 \
+      "https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=$(echo "$query" | jq -sRr @uri)&format=json&srlimit=3" 2>/dev/null || true)
+    WIKI_RESULTS=$(echo "$WIKI_RAW" | jq -r '.query.search[]? | "- Wiki: \(.title) — \(.snippet // "")"' 2>/dev/null | sed 's/<[^>]*>//g' | head -3 || echo '')
 
     # Hacker News
-    HN_RESULTS=$(curl -s --max-time 10 \
+    HN_RESULTS=$(curl -s --max-time 8 \
       "https://hn.algolia.com/api/v1/search?query=$(echo "$query" | jq -sRr @uri)&hitsPerPage=3" 2>/dev/null | \
       jq -r '.hits[]? | "- HN: \(.title) (\(.url // "hn"))"' 2>/dev/null | head -3 || echo '')
 
     # GitHub
-    GH_RESULTS=$(curl -s --max-time 10 \
-      "https://api.github.com/search/repositories?q=$(echo "$query" | jq -sRr @uri)&sort=stars&per_page=3" 2>/dev/null | \
-      jq -r '.items[]? | "- GitHub: \(.full_name) ★\(.stargazers_count)"' 2>/dev/null | head -3 || echo '')
+    GH_RESULTS=$(curl -s --max-time 8 \
+      "https://api.github.com/search/repositories?q=$(echo "$query" | jq -sRr @uri)&sort=stars&per_page=4" 2>/dev/null | \
+      jq -r '.items[]? | "- GitHub: \(.full_name) ★\(.stargazers_count) — \(.description // "")"' 2>/dev/null | head -4 || echo '')
 
     cat >> /tmp/zero-search-all.txt << RESULT
 ## 搜索: $query
 
-### Web
+### DuckDuckGo
 ${DDG_RESULTS:-无结果}
+
+### Wikipedia
+${WIKI_RESULTS:-无结果}
 
 ### HN
 ${HN_RESULTS:-无结果}
