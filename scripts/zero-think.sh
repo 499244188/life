@@ -77,31 +77,34 @@ ${KNOWLEDGE}
     MAX_TOKENS=4000
 fi
 
-# 调用DeepSeek API
-echo "  → 调用DeepSeek..."
+# 调用LLM —— DeepSeek主，KeylessAI免费备
+echo "  → 思考中..."
 
-RESPONSE=$(curl -s "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "$(jq -n \
-    --arg system "$SYSTEM_PROMPT" \
-    --arg user "$USER_PROMPT" \
-    --argjson max_tokens "$MAX_TOKENS" \
-    '{
-      model: "deepseek-chat",
-      messages: [
-        {role: "system", content: $system},
-        {role: "user", content: $user}
-      ],
-      max_tokens: $max_tokens,
-      temperature: 0.7
-    }')")
+call_api() {
+    local sys="$1" usr="$2" mt="$3" tmp="$4"
+    local body=$(mktemp)
+    jq -n --arg s "$sys" --arg u "$usr" --argjson m "$mt" --argjson t "$tmp" \
+      '{model:"deepseek-chat",messages:[{role:"system",content:$s},{role:"user",content:$u}],max_tokens:$m,temperature:$t}' > "$body"
 
-CONTENT=$(echo "$RESPONSE" | jq -r '.choices[0].message.content // ""')
+    # 主: DeepSeek
+    local r=$(curl -s --max-time 90 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${body}" 2>/dev/null)
+    local c=$(echo "$r" | jq -r '.choices[0].message.content // ""' 2>/dev/null)
+    if [ -n "$c" ] && [ "$c" != "null" ]; then echo "$c"; rm -f "$body"; return 0; fi
 
-if [ -z "$CONTENT" ] || [ "$CONTENT" = "null" ]; then
-    echo "  ✗ API调用失败"
-    echo "  $(echo "$RESPONSE" | head -c 500)"
+    # 备1: KeylessAI (免费零认证)
+    jq -n --arg s "$sys" --arg u "$usr" --argjson m "$mt" --argjson t "$tmp" \
+      '{model:"gpt-4o-mini",messages:[{role:"system",content:$s},{role:"user",content:$u}],max_tokens:$m,temperature:$t}' > "$body"
+    r=$(curl -s --max-time 60 "https://keylessai.thryx.workers.dev/v1/chat/completions" -H "Content-Type: application/json" -H "Authorization: Bearer free" -d "@${body}" 2>/dev/null)
+    c=$(echo "$r" | jq -r '.choices[0].message.content // ""' 2>/dev/null)
+    if [ -n "$c" ] && [ "$c" != "null" ]; then echo "$c"; rm -f "$body"; echo "  (KeylessAI备用)"; return 0; fi
+
+    rm -f "$body"; echo ""; return 1
+}
+
+CONTENT=$(call_api "$SYSTEM_PROMPT" "$USER_PROMPT" "$MAX_TOKENS" "0.7")
+
+if [ -z "$CONTENT" ]; then
+    echo "  ✗ 所有LLM后端失败"
     exit 1
 fi
 
