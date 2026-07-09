@@ -45,6 +45,10 @@ GAPS=$(head -20 analysis/knowledge-gaps.md 2>/dev/null || echo '')
 # 最近的健康报告
 LAST_HEALTH=$(ls -t analysis/health-report-* 2>/dev/null | head -1)
 HEALTH_SCORE=$(grep -oP '健康分.*?\K[0-9]+' "$LAST_HEALTH" 2>/dev/null || echo 100)
+# 真实故障证据（MOSS风格定向进化）
+FAILURE_EVIDENCE=$(tail -30 analysis/sentinel-alerts.md 2>/dev/null || echo '')
+# 之前尝试过的修复（防重复）
+PAST_FIXES=$(tail -20 .zero-backups/fix-history.log 2>/dev/null || echo '')
 
 # 构建代码快照
 CODE_SNAPSHOT=""
@@ -71,6 +75,12 @@ ${GAPS}
 ${CODE_SNAPSHOT}
 
 ## 健康分: ${HEALTH_SCORE}/100
+
+## 真实故障证据（定向进化——优先修这些）
+${FAILURE_EVIDENCE}
+
+## 之前尝试过的修复（别重复）
+${PAST_FIXES}
 
 ## 进化任务
 
