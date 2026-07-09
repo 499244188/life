@@ -50,7 +50,16 @@ fi
 BIRTH=$(date -d "2026-06-28" +%s 2>/dev/null || echo 1751040000)
 TODAY_S=$(date +%s)
 EXPECTED_DAY=$(( ($TODAY_S - $BIRTH) / 86400 + 1 ))
-README_DAY=$(grep -oP '第\K[0-9]+' README.md 2>/dev/null | head -1)
+# 提取阿拉伯数字或中文数字
+README_DAY=$(grep -o '第[0-9]*天\|第.*天' README.md 2>/dev/null | head -1 | sed 's/第//;s/天//')
+# 中文数字转阿拉伯
+case "$README_DAY" in
+    一) README_DAY=1 ;; 二) README_DAY=2 ;; 三) README_DAY=3 ;; 四) README_DAY=4 ;;
+    五) README_DAY=5 ;; 六) README_DAY=6 ;; 七) README_DAY=7 ;; 八) README_DAY=8 ;;
+    九) README_DAY=9 ;; 十) README_DAY=10 ;; 十一) README_DAY=11 ;; 十二) README_DAY=12 ;;
+    十三) README_DAY=13 ;; 十四) README_DAY=14 ;; 十五) README_DAY=15 ;;
+    *) : ;; # 已经是阿拉伯数字就不用转
+esac
 if [ "$README_DAY" != "$EXPECTED_DAY" ]; then
     echo "  🔴 README天数过期: 显示第${README_DAY}天，实际第${EXPECTED_DAY}天"
     ISSUES=$((ISSUES + 1))

@@ -127,7 +127,7 @@ if [ -f memory/state.md ]; then
 fi
 
 # 更新README天数——零的脸面
-bash scripts/zero-readme-update.sh 2>/dev/null || true
+bash scripts/zero-readme-update.sh 2>&1 || echo "(README更新跳过)"
 if [ -f emotion/emotion-state.md ]; then
     sed -i "s/> 最后更新:.*/> 最后更新: $NOW/" emotion/emotion-state.md 2>/dev/null || true
 fi
