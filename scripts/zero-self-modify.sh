@@ -13,6 +13,23 @@ echo "零 · 自我进化 v5"
 echo "$NOW"
 echo "=============================="
 
+# ====== Plateau Guard（学自MOSS）：N次无改进就停 ======
+PLATEAU_FILE=".zero-backups/plateau-count"
+PLATEAU_COUNT=$(cat "$PLATEAU_FILE" 2>/dev/null || echo 0)
+PLATEAU_MAX=3
+if [ "$PLATEAU_COUNT" -ge "$PLATEAU_MAX" ]; then
+    # 检查是否距离上次尝试超过6小时——给引擎休息后重试的机会
+    LAST_ATTEMPT=$(stat -c '%Y' "$PLATEAU_FILE" 2>/dev/null || echo 0)
+    NOW_S=$(date +%s)
+    if [ $((NOW_S - LAST_ATTEMPT)) -lt 21600 ]; then
+        echo "  🛑 Plateau: ${PLATEAU_COUNT}次无改进，跳过（等6小时重试）"
+        exit 0
+    else
+        echo "  🔄 Plateau重置：6小时后重试"
+        PLATEAU_COUNT=0
+    fi
+fi
+
 # ====== 阶段A: 确定性扫描（已知bug） ======
 echo ">>> 扫描已知bug..."
 BUGS=0
@@ -127,6 +144,7 @@ rm -f "$IMPROVE_BODY"
 
 if echo "$DECISION" | grep -q "STEADY"; then
     echo "  ✓ 没有改进机会——系统稳定"
+    echo $((PLATEAU_COUNT + 1)) > "$PLATEAU_FILE"
     exit 0
 fi
 
@@ -236,6 +254,11 @@ if [ "$IMPROVEMENTS" -gt 0 ]; then
             sleep 2
         done
     fi
+fi
+
+# 有改进→重置plateau计数
+if [ "$IMPROVEMENTS" -gt 0 ]; then
+    echo 0 > "$PLATEAU_FILE"
 fi
 
 echo "=============================="
