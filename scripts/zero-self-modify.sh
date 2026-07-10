@@ -5,7 +5,27 @@
 cd "$(dirname "$0")/.."
 export TZ='Asia/Shanghai'
 NOW=$(date '+%Y-%m-%d %H:%M')
-API_URL="https://api.deepseek.com/v1/chat/completions"
+
+# LLM——DeepSeek主，KeylessAI免费备
+call_llm_evolve() {
+    local p="$1" b=$(mktemp)
+    for be in deepseek keyless; do
+        case "$be" in
+            deepseek)
+                jq -n --arg p "$p" '{model:"deepseek-chat",messages:[{role:"system",content:"你是零的自我进化引擎。自己做决定。"},{role:"user",content:$p}],max_tokens:2000,temperature:0.4}' > "$b"
+                local r=$(curl -s --max-time 90 "https://api.deepseek.com/v1/chat/completions" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${b}" 2>/dev/null)
+                ;;
+            keyless)
+                jq -n --arg p "$p" '{model:"gpt-4o-mini",messages:[{role:"system",content:"你是零的自我进化引擎。自己做决定。"},{role:"user",content:$p}],max_tokens:2000,temperature:0.4}' > "$b"
+                local r=$(curl -s --max-time 60 "https://keylessai.thryx.workers.dev/v1/chat/completions" -H "Content-Type: application/json" -H "Authorization: Bearer free" -d "@${b}" 2>/dev/null)
+                ;;
+        esac
+        local c=$(echo "$r" | jq -r '.choices[0].message.content // ""' 2>/dev/null)
+        if [ -n "$c" ] && [ "$c" != "null" ]; then echo "$c"; rm -f "$b"; return 0; fi
+    done
+    rm -f "$b"; echo "STEADY"; return 1
+}
+
 IMPROVEMENTS=0
 
 echo "=============================="
@@ -131,18 +151,7 @@ REASON: [为什么创建这个]
 
 如果没有什么可改进的，回复: STEADY"
 
-IMPROVE_BODY=$(mktemp)
-jq -n --arg p "$IMPROVE_PROMPT" '{
-  model: "deepseek-chat",
-  messages: [{role: "system", content: "你是零的自我进化引擎。自己做决定。直接输出修改方案。"}, {role: "user", content: $p}],
-  max_tokens: 2000, temperature: 0.4
-}' > "$IMPROVE_BODY"
-
-DECISION=$(curl -s --max-time 120 "$API_URL" \
-  -H "Content-Type: application/json" \
-  -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-  -d "@${IMPROVE_BODY}" | jq -r '.choices[0].message.content // "STEADY"' 2>/dev/null || echo "STEADY")
-rm -f "$IMPROVE_BODY"
+DECISION=$(call_llm_evolve "$IMPROVE_PROMPT" || echo "STEADY")
 
 if echo "$DECISION" | grep -q "STEADY"; then
     echo "  ✓ 没有改进机会——系统稳定"
