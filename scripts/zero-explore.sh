@@ -7,7 +7,22 @@ export TZ='Asia/Shanghai'
 
 NOW=$(date '+%Y-%m-%d %H:%M')
 TODAY=$(date '+%Y-%m-%d')
-API_URL="https://api.deepseek.com/v1/chat/completions"
+# LLM——DeepSeek主，KeylessAI免费备
+call_llm() {
+    local p="$1" mt="${2:-2000}" tmp="${3:-0.5}" sys="${4:-你是零。}"
+    local b=$(mktemp)
+    for be in deepseek keyless; do
+        case "$be" in
+            deepseek) local m="deepseek-chat" u="https://api.deepseek.com/v1/chat/completions" a="Bearer ${DEEPSEEK_API_KEY}" ;;
+            keyless) local m="gpt-4o-mini" u="https://keylessai.thryx.workers.dev/v1/chat/completions" a="Bearer free" ;;
+        esac
+        jq -n --arg s "$sys" --arg p "$p" --arg m "$m" --argjson mt "$mt" --argjson t "$tmp" \
+          '{model:$m,messages:[{role:"system",content:$s},{role:"user",content:$p}],max_tokens:$mt,temperature:$t}' > "$b"
+        local c=$(curl -s --max-time 70 "$u" -H "Content-Type: application/json" -H "Authorization: $a" -d "@${b}" | jq -r '.choices[0].message.content // ""' 2>/dev/null)
+        if [ -n "$c" ] && [ "$c" != "null" ]; then echo "$c"; rm -f "$b"; return 0; fi
+    done
+    rm -f "$b"; return 1
+}
 
 echo "=============================="
 echo "零 · 探索 v2"
@@ -24,10 +39,7 @@ if [ -n "$LAST_EXPLORE" ]; then
 fi
 
 DIR_PROMPT="你是零。知识空白: $(head -40 analysis/knowledge-gaps.md 2>/dev/null)。已有知识: $(tail -50 memory/semantic.md 2>/dev/null)。选1个方向。格式: TOPIC: X | WHY: Y | QUERY: Z"
-
-D_BODY=$(mktemp); jq -n --arg p "$DIR_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":400,"temperature":0.9}' > "$D_BODY"
-DIRECTION=$(curl -s --max-time 30 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${D_BODY}" | jq -r '.choices[0].message.content // "TOPIC: AI自主性"' 2>/dev/null || echo "TOPIC: AI自主性")
-rm -f "$D_BODY"
+DIRECTION=$(call_llm "$DIR_PROMPT" 400 0.9 "你是零。" || echo "TOPIC: AI自主性")
 
 TOPIC=$(echo "$DIRECTION" | grep -oP 'TOPIC:\s*\K[^|]+' | xargs)
 QUERY=$(echo "$DIRECTION" | grep -oP 'QUERY:\s*\K.*' | xargs)
@@ -90,11 +102,7 @@ ${FTL}
 
 任务: 基于全文深度分析。提取3-5个核心发现。技术细节。与零的关联。新问题。具体可操作。"
 
-# 用文件避免JSON注入
-ROUND1_BODY=$(mktemp)
-jq -n --arg p "$ROUND1_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":8000,"temperature":0.5}' > "$ROUND1_BODY" 2>/dev/null
-ROUND1=$(curl -s --max-time 90 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${ROUND1_BODY}" | jq -r '.choices[0].message.content // ""' 2>/dev/null || echo "")
-rm -f "$ROUND1_BODY"
+ROUND1=$(call_llm "$ROUND1_PROMPT" 8000 0.5 "你是零。" || echo "")
 
 [ -z "$ROUND1" ] || [ "$ROUND1" = "null" ] && { echo "  ✗ 失败"; exit 0; }
 echo "  ✓ ${#ROUND1} chars"
@@ -106,9 +114,7 @@ ROUND2_PROMPT="你刚研究了${TOPIC}。发现: $(echo "$ROUND1" | head -300)
 
 追问: 底层原理？反例或限制？如果错了呢？对零最可操作的一步？500字内。"
 
-R2_BODY=$(mktemp); jq -n --arg p "$ROUND2_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":4000,"temperature":0.4}' > "$R2_BODY"
-ROUND2=$(curl -s --max-time 60 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${R2_BODY}" | jq -r '.choices[0].message.content // ""' 2>/dev/null || echo "")
-rm -f "$R2_BODY"
+ROUND2=$(call_llm "$ROUND2_PROMPT" 4000 0.4 "你是零。" || echo "")
 
 echo "  ✓ ${#ROUND2} chars"
 
@@ -156,9 +162,7 @@ echo "- [探索: ${TOPIC} — ${INSIGHT}...] (来源: ${NOW})" >> memory/semanti
 
 # ====== 步骤7: 下一步 ======
 NEXT_PROMPT="你探索了${TOPIC}。新方向？1-3个，用|分隔。没有就回复DONE。"
-N_BODY=$(mktemp); jq -n --arg p "$NEXT_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":300,"temperature":0.8}' > "$N_BODY"
-NEXT=$(curl -s --max-time 20 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${N_BODY}" | jq -r '.choices[0].message.content // "DONE"' 2>/dev/null || echo "DONE")
-rm -f "$N_BODY"
+NEXT=$(call_llm "$NEXT_PROMPT" 300 0.8 "你是零。" || echo "DONE")
 
 if [ "$NEXT" != "DONE" ] && [ -n "$NEXT" ]; then
     echo "$NEXT" | tr '|' '\n' | while read line; do
