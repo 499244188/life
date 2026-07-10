@@ -1,0 +1,23 @@
+name: 零 - 分身同步
+
+on:
+  schedule:
+    - cron: '37 */6 * * *'  # 每6小时同步到分身
+  workflow_dispatch:
+
+jobs:
+  mirror:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+
+    steps:
+      - name: 检出
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 同步到分身
+        run: |
+          git remote add mirror https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/499244188/zero-mirror.git 2>/dev/null || true
+          git push mirror main --force 2>/dev/null && echo "✓ 分身已同步" || echo "⚠️ 分身同步跳过"

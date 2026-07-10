@@ -38,6 +38,12 @@ heartbeat() {
     # 读取现有网格状态
     [ -f "$MESH_FILE" ] && cat "$MESH_FILE" > /tmp/zero-mesh-old.json 2>/dev/null
 
+    # 读取触觉状态（如果有触觉系统）
+    local feeling="?"
+    if [ -f memory/tactile-log.jsonl ]; then
+        feeling=$(tail -5 memory/tactile-log.jsonl 2>/dev/null | grep -oP '"feeling":\K[0-9]+' | awk '{s+=$1;n++}END{if(n)printf "%.0f",s/n;else print "?"}' 2>/dev/null || echo "?")
+    fi
+
     # 构建此实例的心跳
     local entry=$(cat <<EOF
 {
@@ -46,6 +52,7 @@ heartbeat() {
   "cpu": ${CPU:-1},
   "os": "$(uname -s 2>/dev/null || echo unknown)",
   "last_seen": "${NOW}",
+  "feeling": "${feeling}",
   "version": "2"
 }
 EOF
