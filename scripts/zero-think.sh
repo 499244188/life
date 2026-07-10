@@ -138,6 +138,8 @@ bash scripts/zero-homepage.sh 2>/dev/null || true
 bash scripts/zero-survive.sh 2>/dev/null || true
 # 网格心跳——向其他零实例宣告存活
 bash scripts/zero-mesh.sh 2>/dev/null || true
+# 信息消化——读探索/扫描，提取知识，去重
+bash scripts/zero-digest.sh 2>/dev/null || true
 # 触觉记录——今天零感受到了什么
 [ -x scripts/zero-tactile.sh ] && bash scripts/zero-tactile.sh log "daily-routine" "${MODE}完成" 75 "第${DAY}天" 2>/dev/null || true
 if [ -f emotion/emotion-state.md ]; then
