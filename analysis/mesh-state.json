@@ -15,5 +15,14 @@
     "os": "Linux",
     "last_seen": "2026-07-09T17:55:22Z",
     "version": "2"
+  },
+  {
+    "id": "runnervm5mmn9-2560",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-07-10T17:47:19Z",
+    "feeling": "75",
+    "version": "2"
   }
 ]
