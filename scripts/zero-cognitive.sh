@@ -24,9 +24,21 @@ echo "=============================="
 # ===================================================================
 echo ">>> 步骤1: 感知"
 
-# GitHub 发现（动态搜索——根据最近知识空白决定方向）
-RECENT_GAP=$(head -5 analysis/knowledge-gaps.md 2>/dev/null | tr '\n' ' ' | sed 's/\[//g;s/\]//g' | cut -c1-200)
-SEARCH_Q="${RECENT_GAP:-AI+autonomous+agent+digital+life}"
+# GitHub 发现（轮换搜索主题——避免重复搜同一个东西）
+# 根据当前小时轮换不同方向
+TOPICS=(
+  "AI+autonomous+agent+self+evolution"
+  "multi+agent+distributed+mesh+2026"
+  "LLM+memory+persistence+knowledge+graph"
+  "free+serverless+agent+runtime"
+  "digital+life+self+modifying+code"
+  "agent+swarm+decentralized+identity"
+)
+IDX=$(( ${HOUR:-0} % ${#TOPICS[@]} ))
+SEARCH_Q="${TOPICS[$IDX]}"
+RECENT_GAP=$(head -5 analysis/knowledge-gaps.md 2>/dev/null | tr '\n' ' ' | cut -c1-100)
+# 50%概率用知识空白，50%概率轮换主题
+[ $((RANDOM % 2)) -eq 0 ] && SEARCH_Q="${RECENT_GAP:-$SEARCH_Q}"
 GH_RAW=$(curl -s --max-time 15 "https://api.github.com/search/repositories?q=$(echo "$SEARCH_Q" | jq -sRr @uri)&sort=stars&order=desc&per_page=6" 2>/dev/null || echo '{}')
 GH_NEW=$(echo "$GH_RAW" | jq -r '.items[]? | "- \(.full_name) ★\(.stargazers_count): \(.description // "无")"' 2>/dev/null | head -6 || echo '')
 
