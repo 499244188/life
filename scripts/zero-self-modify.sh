@@ -124,8 +124,10 @@ REASON: [为什么]
 输出格式（创建新脚本）:
 DECISION: [一句话]
 CREATE: [新文件路径，如 scripts/zero-xxx.sh]
-CONTENT: [完整文件内容——必须是可独立运行的bash脚本]
+CONTENT: [完整bash脚本——直接可执行代码，不要markdown包裹，不要\`\`\`]
 REASON: [为什么创建这个]
+
+重要: CONTENT必须是纯bash代码，第一行是#!/bin/bash，不要用\`\`\`包裹。
 
 如果没有什么可改进的，回复: STEADY"
 

@@ -1,13 +1,12 @@
-```bash
 #!/bin/bash
 # zero-tactile.sh — 零的触觉系统
 # 每次动作后即时记录"发生了什么"和"我感受到了什么"
 # 形成持续自我观察闭环，不依赖定时任务
-# 2026-07-06 零自主创建
+# 2026-07-10 进化引擎自主创建
 
-set -e
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
-source "$SCRIPT_DIR/zero-lib.sh"
+MEMORY_DIR="$SCRIPT_DIR/../memory"
+. "$SCRIPT_DIR/zero-lib.sh" 2>/dev/null || true
 
 # 触觉存储
 TACTILE_FILE="$MEMORY_DIR/tactile-log.jsonl"
@@ -133,4 +132,3 @@ case "${1:-}" in
         exit 1
         ;;
 esac
-```
