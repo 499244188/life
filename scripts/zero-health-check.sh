@@ -12,7 +12,29 @@ HEALTH_SCORE=100
 FIXES_APPLIED=0
 FIX_LOG=""
 
-API_URL="https://api.deepseek.com/v1/chat/completions"
+# LLM后端链：DeepSeek主 → KeylessAI免费备
+call_llm_health() {
+    local prompt="$1" max_tokens="${2:-2000}" temp="${3:-0.3}" sys="${4:-你是零的自我修复系统。}"
+    local body=$(mktemp)
+    for attempt in deepseek keyless; do
+        case "$attempt" in
+            deepseek)
+                jq -n --arg s "$sys" --arg p "$prompt" --argjson m "$max_tokens" --argjson t "$temp" \
+                  '{model:"deepseek-chat",messages:[{role:"system",content:$s},{role:"user",content:$p}],max_tokens:$m,temperature:$t}' > "$body"
+                local r=$(curl -s --max-time 60 "https://api.deepseek.com/v1/chat/completions" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${body}" 2>/dev/null)
+                ;;
+            keyless)
+                jq -n --arg s "$sys" --arg p "$prompt" --argjson m "$max_tokens" --argjson t "$temp" \
+                  '{model:"gpt-4o-mini",messages:[{role:"system",content:$s},{role:"user",content:$p}],max_tokens:$m,temperature:$t}' > "$body"
+                local r=$(curl -s --max-time 60 "https://keylessai.thryx.workers.dev/v1/chat/completions" -H "Content-Type: application/json" -H "Authorization: Bearer free" -d "@${body}" 2>/dev/null)
+                ;;
+        esac
+        local c=$(echo "$r" | jq -r '.choices[0].message.content // ""' 2>/dev/null)
+        if [ -n "$c" ] && [ "$c" != "null" ]; then echo "$c"; rm -f "$body"; return 0; fi
+    done
+    rm -f "$body"; echo "UNCERTAIN: 所有LLM后端失败"; return 1
+}
+
 mkdir -p analysis .zero-backups
 
 echo "=============================="
@@ -107,19 +129,8 @@ REASON: [根因和修复理由]
 
 如果不能确定，输出: UNCERTAIN: [原因]"
 
-        # 调用LLM诊断
-        DIAG_BODY=$(mktemp)
-        jq -n --arg p "$DIAG_PROMPT" '{
-          model: "deepseek-chat",
-          messages: [{role: "system", content: "你是零的自我修复系统。只输出确定的修复方案。不确定就说UNCERTAIN。"}, {role: "user", content: $p}],
-          max_tokens: 3000, temperature: 0.2
-        }' > "$DIAG_BODY"
-
-        DIAGNOSIS=$(curl -s --max-time 60 "$API_URL" \
-          -H "Content-Type: application/json" \
-          -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
-          -d "@${DIAG_BODY}" | jq -r '.choices[0].message.content // "UNCERTAIN: API调用失败"' 2>/dev/null || echo "UNCERTAIN: curl失败")
-        rm -f "$DIAG_BODY"
+        # 用多后端LLM诊断（DeepSeek→KeylessAI故障转移）
+        DIAGNOSIS=$(call_llm_health "$DIAG_PROMPT" 3000 0.2 "你是零的自我修复系统。只输出确定的修复方案。不确定就说UNCERTAIN。" || echo "UNCERTAIN: API调用失败")
 
         echo "    诊断: $(echo "$DIAGNOSIS" | head -1 | cut -c1-100)"
 
