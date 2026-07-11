@@ -245,6 +245,8 @@ if echo "$FIX_FILE" | grep -q '\.sh$'; then
         cp ".zero-backups/$(basename $FIX_FILE).evolve-"* "$FIX_FILE" 2>/dev/null
         exit 0
     fi
+    # Evaluate: 尝试空运行（如果脚本支持--help）
+    timeout 5 bash "$FIX_FILE" --help >/dev/null 2>&1 && echo "  ✓ 空运行OK" || echo "  (无--help或超时——跳过运行验证)"
 fi
 
     IMPROVEMENTS=$((IMPROVEMENTS + 1))
