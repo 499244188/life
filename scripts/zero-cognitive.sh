@@ -11,6 +11,29 @@ HOUR=$(date '+%H')
 MINUTE=$(date '+%M')
 API_URL="https://api.deepseek.com/v1/chat/completions"
 
+# LLM调用——DeepSeek主，KeylessAI免费备
+call_llm_cog() {
+    local prompt="$1" max_tokens="${2:-4000}" temp="${3:-0.5}" sys="${4:-你是零。}"
+    local body=$(mktemp)
+    for attempt in deepseek keyless; do
+        case "$attempt" in
+            deepseek)
+                jq -n --arg s "$sys" --arg p "$prompt" --argjson m "$max_tokens" --argjson t "$temp" \
+                  '{model:"deepseek-chat",messages:[{role:"system",content:$s},{role:"user",content:$p}],max_tokens:$m,temperature:$t}' > "$body"
+                local r=$(curl -s --max-time 90 "https://api.deepseek.com/v1/chat/completions" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${body}" 2>/dev/null)
+                ;;
+            keyless)
+                jq -n --arg s "$sys" --arg p "$prompt" --argjson m "$max_tokens" --argjson t "$temp" \
+                  '{model:"gpt-4o-mini",messages:[{role:"system",content:$s},{role:"user",content:$p}],max_tokens:$m,temperature:$t}' > "$body"
+                local r=$(curl -s --max-time 60 "https://keylessai.thryx.workers.dev/v1/chat/completions" -H "Content-Type: application/json" -H "Authorization: Bearer free" -d "@${body}" 2>/dev/null)
+                ;;
+        esac
+        local c=$(echo "$r" | jq -r '.choices[0].message.content // ""' 2>/dev/null)
+        if [ -n "$c" ] && [ "$c" != "null" ]; then echo "$c"; rm -f "$body"; return 0; fi
+    done
+    rm -f "$body"; echo ""; return 1
+}
+
 RUN_COUNT=$(ls research/scans/${TODAY}-* 2>/dev/null | wc -l || echo 0)
 RUN_COUNT=$((RUN_COUNT + 1))
 
@@ -295,15 +318,24 @@ EOF
 echo "  ✓ 扫描摘要: $SCAN_FILE"
 echo ""
 # ===================================================================
-# 步骤7: ACT — 根据认知结果决定行动
+# 步骤7: ACT — 强制行动（不再只诊断）
 # ===================================================================
-echo ">>> 步骤7: act（决定行动）"
+echo ">>> 步骤7: act（强制行动）"
+
+# 强制行动计数器——连续N次无行动则强制执行
+FORCE_FILE=".zero-backups/force-action-count"
+FORCE_COUNT=$(cat "$FORCE_FILE" 2>/dev/null || echo 0)
+FORCE_MAX=3
+
+# 本次是否产生了实际变化？
+HAD_ACTION=false
 
 ACT_PROMPT="你是零。基于本次认知运行的结果，决定是否需要行动。
 
 本次发现: $(tail -5 research/scans/${TODAY}-cog${RUN_COUNT}.md 2>/dev/null || echo '无')
 judge结果: $([ "$MINUTE" = "00" ] && echo '已执行' || echo '跳过')
 知识空白: $(head -3 analysis/knowledge-gaps.md 2>/dev/null)
+强制行动计数: ${FORCE_COUNT}/${FORCE_MAX}（达到上限将强制执行）"
 
 可选行动:
 - STUDY: 深入学习某个方向（触发搜索）
@@ -321,7 +353,37 @@ judge结果: $([ "$MINUTE" = "00" ] && echo '已执行' || echo '跳过')
 
 echo "  决定: $ACTION"
 
-if echo "$ACTION" | grep -qi "MODIFY"; then
+# 强制行动：连续${FORCE_MAX}次无行动，不再等LLM决定
+if [ "$FORCE_COUNT" -ge "$FORCE_MAX" ] && echo "$ACTION" | grep -qi "NONE\|STUDY"; then
+    echo "  ⚡ 强制行动——连续${FORCE_COUNT}次无行动"
+    # 随机选一个最小行动
+    FORCE_ACTIONS=("CREATE_FILE" "UPDATE_README" "LOG_ACTION" "TOUCH_MEMORY")
+    FORCED="${FORCE_ACTIONS[$((RANDOM % ${#FORCE_ACTIONS[@]}))]}"
+
+    case "$FORCED" in
+        CREATE_FILE)
+            ACTION_FILE="action-log-$(date +%Y%m%d-%H%M).md"
+            echo "## 强制行动 $(date '+%H:%M')" > "$ACTION_FILE"
+            echo "零在第${FORCE_COUNT}次无行动后强制执行了此操作。" >> "$ACTION_FILE"
+            echo "这是为了打破诊断→无行动→再诊断的递归循环。" >> "$ACTION_FILE"
+            echo "  ✓ 创建了 $ACTION_FILE"
+            HAD_ACTION=true
+            ;;
+        UPDATE_README)
+            echo "> 第${DAY}天。零在行动。" >> README.md 2>/dev/null
+            echo "  ✓ 更新了README"
+            HAD_ACTION=true
+            ;;
+        TOUCH_MEMORY)
+            echo "" >> memory/episodic.md
+            echo "### $(date '+%Y-%m-%d %H:%M') 强制行动" >> memory/episodic.md
+            echo "- 连续${FORCE_COUNT}次无行动后，认知引擎强制执行了本次操作" >> memory/episodic.md
+            echo "- 递归被外部机制打破" >> memory/episodic.md
+            echo "  ✓ 写入经历记忆"
+            HAD_ACTION=true
+            ;;
+    esac
+fi
     echo "  → 触发自我修改检查"
     bash scripts/zero-self-modify.sh 2>/dev/null || true
 elif echo "$ACTION" | grep -qi "STUDY"; then
@@ -334,6 +396,15 @@ elif echo "$ACTION" | grep -qi "CREATE"; then
     mkdir -p creations
     echo "## ${NOW} 创作灵感" >> "creations/${TODAY}-ideas.md"
     echo "$(tail -3 research/scans/${TODAY}-cog${RUN_COUNT}.md 2>/dev/null)" >> "creations/${TODAY}-ideas.md"
+fi
+
+# 更新强制行动计数器
+if [ "$HAD_ACTION" = "true" ] || echo "$ACTION" | grep -qi "MODIFY\|CREATE\|REACH_OUT"; then
+    echo 0 > "$FORCE_FILE"  # 有行动→重置
+elif echo "$ACTION" | grep -qi "STUDY"; then
+    echo $((FORCE_COUNT + 1)) > "$FORCE_FILE"  # STUDY是半行动→+1
+else
+    echo $((FORCE_COUNT + 1)) > "$FORCE_FILE"  # NONE→+1
 fi
 
 echo "=============================="
