@@ -2,13 +2,8 @@ name: 零 - 世界扫描（每30分钟）
 
 on:
   schedule:
-    - cron: '3,33 * * * *'
+    - cron: '*/30 * * * *'
   workflow_dispatch:
-
-# 防止雪崩：同一时间只允许一个扫描运行
-concurrency:
-  group: zero-scan
-  cancel-in-progress: false
 
 jobs:
   zero-cognitive:
@@ -34,11 +29,6 @@ jobs:
             echo "大脑无变化"
           else
             git commit -m "认知更新 - $(TZ='Asia/Shanghai' date '+%H:%M')"
-            # pull-then-push: 防止多run冲突
-            for i in 1 2 3; do
-              git pull --rebase 2>/dev/null && git push 2>/dev/null && { echo "✓ 已推送"; break; }
-              echo "  重试 $i..."
-              sleep 2
-            done || echo "⚠️ 推送失败（下次重试）"
+            git push
+            echo "✓ 大脑已更新并推送"
           fi
-
