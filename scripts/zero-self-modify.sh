@@ -86,6 +86,9 @@ HEALTH_SCORE=$(grep -oP '健康分.*?\K[0-9]+' "$LAST_HEALTH" 2>/dev/null || ech
 FAILURE_EVIDENCE=$(tail -30 analysis/sentinel-alerts.md 2>/dev/null || echo '')
 # 之前尝试过的修复（防重复）
 PAST_FIXES=$(tail -20 .zero-backups/fix-history.log 2>/dev/null || echo '')
+# Git历史——学习过去的成功模式（Raven SkillForge概念）
+RECENT_SUCCESSES=$(git log --oneline --since="7 days ago" --grep="修复\|升级\|创建\|自主进化" 2>/dev/null | head -10)
+REPEATED_PATTERNS=$(git log --oneline --since="30 days ago" --format="%s" 2>/dev/null | sed 's/ - .*//' | sort | uniq -c | sort -rn | head -5)
 
 # 构建代码快照
 CODE_SNAPSHOT=""
@@ -119,14 +122,24 @@ ${FAILURE_EVIDENCE}
 ## 之前尝试过的修复（别重复）
 ${PAST_FIXES}
 
+## 过去成功的变化（学习这些模式）
+${RECENT_SUCCESSES}
+
+## 最常见的操作模式（可能可以结晶为技能）
+${REPEATED_PATTERNS}
+
+## 具体改进方向（选一个最有把握的）
+
+1. **脚本缺少错误处理** — 有curl没超时？有外部调用没||true？
+2. **硬编码值可以提取** — 找写死的路径/URL/数字
+3. **重复代码可合并** — 两个脚本有相似函数？
+4. **文档/注释缺失** — 新脚本没说明？
+5. **改进最近一次成功的模式** — 上次改了什么？能做更好的版本？
+6. **从常见操作模式结晶新脚本** — 如果某个模式出现了3次以上，值得写成一个独立脚本
+
 ## 进化任务
 
-选一件事来做。优先级：
-1. 健康分<80 → 修复导致扣分的根因
-2. 有P0任务 → 实现它
-3. 有目标未达成 → 推进它
-4. 代码有明显改进空间 → 改进它
-5. 都没有 → 创造点新东西
+选上述方向之一。一次只改一个地方。
 
 **规则**:
 - 改自己的代码，不是改记忆文件
