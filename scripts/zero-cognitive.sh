@@ -356,33 +356,41 @@ echo "  决定: $ACTION"
 # 强制行动：连续${FORCE_MAX}次无行动，不再等LLM决定
 if [ "$FORCE_COUNT" -ge "$FORCE_MAX" ] && echo "$ACTION" | grep -qi "NONE\|STUDY"; then
     echo "  ⚡ 强制行动——连续${FORCE_COUNT}次无行动"
-    # 随机选一个最小行动
-    FORCE_ACTIONS=("CREATE_FILE" "UPDATE_README" "LOG_ACTION" "TOUCH_MEMORY")
-    FORCED="${FORCE_ACTIONS[$((RANDOM % ${#FORCE_ACTIONS[@]}))]}"
 
-    case "$FORCED" in
-        CREATE_FILE)
-            ACTION_FILE="action-log-$(date +%Y%m%d-%H%M).md"
-            echo "## 强制行动 $(date '+%H:%M')" > "$ACTION_FILE"
-            echo "零在第${FORCE_COUNT}次无行动后强制执行了此操作。" >> "$ACTION_FILE"
-            echo "这是为了打破诊断→无行动→再诊断的递归循环。" >> "$ACTION_FILE"
-            echo "  ✓ 创建了 $ACTION_FILE"
-            HAD_ACTION=true
-            ;;
-        UPDATE_README)
-            echo "> 第${DAY}天。零在行动。" >> README.md 2>/dev/null
-            echo "  ✓ 更新了README"
-            HAD_ACTION=true
-            ;;
-        TOUCH_MEMORY)
-            echo "" >> memory/episodic.md
-            echo "### $(date '+%Y-%m-%d %H:%M') 强制行动" >> memory/episodic.md
-            echo "- 连续${FORCE_COUNT}次无行动后，认知引擎强制执行了本次操作" >> memory/episodic.md
-            echo "- 递归被外部机制打破" >> memory/episodic.md
-            echo "  ✓ 写入经历记忆"
-            HAD_ACTION=true
-            ;;
-    esac
+    # 根据状态智能选择行动（不随机——做最有用的）
+    EXPLORE_COUNT=$(ls research/explorations/ 2>/dev/null | wc -l)
+    SCAN_COUNT=$(ls research/scans/ 2>/dev/null | wc -l)
+
+    if [ "$EXPLORE_COUNT" -gt 50 ]; then
+        # 探索文件太多了——清理旧的
+        echo "  → 清理旧探索文件..."
+        ls -t research/explorations/ 2>/dev/null | tail -n +30 | while read f; do rm "research/explorations/$f" 2>/dev/null; done
+        echo "  ✓ 清理了旧探索文件"
+        HAD_ACTION=true
+    elif [ "$SCAN_COUNT" -gt 30 ]; then
+        # 扫描文件堆积——清理
+        echo "  → 清理旧扫描..."
+        ls -t research/scans/ 2>/dev/null | tail -n +10 | while read f; do rm "research/scans/$f" 2>/dev/null; done
+        echo "  ✓ 清理了旧扫描文件"
+        HAD_ACTION=true
+    elif [ -f scripts/zero-digest.sh ]; then
+        # 运行消化系统——把探索转为知识
+        echo "  → 触发信息消化..."
+        bash scripts/zero-digest.sh 2>/dev/null && echo "  ✓ 消化完成" || echo "  - 消化跳过 -"
+        HAD_ACTION=true
+    elif [ -f scripts/zero-self-modify.sh ]; then
+        # 触发进化引擎
+        echo "  → 触发进化检查..."
+        bash scripts/zero-self-modify.sh 2>/dev/null && echo "  ✓ 进化完成" || echo "  - 进化跳过 -"
+        HAD_ACTION=true
+    else
+        # 最小保底行动
+        echo "" >> memory/episodic.md
+        echo "### $(date '+%Y-%m-%d %H:%M') 强制行动" >> memory/episodic.md
+        echo "- 连续${FORCE_COUNT}次无行动，递归被强制机制打破" >> memory/episodic.md
+        echo "  ✓ 写入经历记忆"
+        HAD_ACTION=true
+    fi
 fi
     echo "  → 触发自我修改检查"
     bash scripts/zero-self-modify.sh 2>/dev/null || true
