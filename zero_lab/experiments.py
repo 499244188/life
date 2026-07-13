@@ -105,3 +105,10 @@ class ExperimentStore:
         experiment["updated_at"] = now
         save_json(self._path(experiment_id), experiment)
         return experiment
+
+    def attach(self, experiment_id: str, **fields: Any) -> dict[str, Any]:
+        experiment = self.load(experiment_id)
+        experiment.update(fields)
+        experiment["updated_at"] = utc_now()
+        save_json(self._path(experiment_id), experiment)
+        return experiment
