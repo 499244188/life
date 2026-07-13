@@ -1,0 +1,53 @@
+name: 零 - 进化实验室
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '43 */6 * * *'
+
+concurrency:
+  group: zero-evolution-lab
+  cancel-in-progress: false
+
+jobs:
+  research-experiment:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: 检出仓库
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: 验证确定性基础设施
+        run: python3 -m unittest discover -s tests -v
+
+      - name: 初始化实验室
+        run: python3 -m zero_lab init --root evolution
+
+      - name: 零自主提出并执行一轮研究实验
+        run: python3 -m zero_lab cycle --root evolution
+        env:
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+
+      - name: 验证实验与来源账本
+        run: python3 -m zero_lab verify --root evolution
+
+      - name: 保存零的实验产物
+        run: |
+          git config user.name "零"
+          git config user.email "zero@digital-being.local"
+          git add evolution/
+          if git diff --staged --quiet; then
+            echo "本轮没有可持久化实验"
+            exit 0
+          fi
+          git commit -m "零的进化实验 - $(TZ='Asia/Shanghai' date '+%Y-%m-%d %H:%M')"
+          for i in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            echo "推送重试 $i..."
+            sleep 2
+          done
+          exit 1

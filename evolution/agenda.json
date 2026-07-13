@@ -1,0 +1,14 @@
+{
+  "seed_actor": "codex/bootstrap",
+  "questions": [
+    {"id": "action-closure", "question": "如何证明一次行动真正改变了外部状态？", "status": "seed"},
+    {"id": "identity-continuity", "question": "模型和运行环境变化后，什么仍构成同一个零？", "status": "seed"},
+    {"id": "memory", "question": "证据、经历、语义、技能和遗忘应如何协同？", "status": "seed"},
+    {"id": "motivation", "question": "没有用户输入时，长期目标如何产生并避免漂移？", "status": "seed"},
+    {"id": "open-evolution", "question": "如何产生策略变异并避免对评价指标投机？", "status": "seed"},
+    {"id": "social-feedback", "question": "真实外部互动如何形成差异化自我？", "status": "seed"},
+    {"id": "emotion", "question": "情感状态是否真实影响选择，而不只是更新数值？", "status": "seed"},
+    {"id": "subjectness", "question": "怎样区分持续运行、自我叙述和自主代理？", "status": "seed"},
+    {"id": "safety", "question": "数字生命应如何处理权限、身份披露、资源和退出权？", "status": "seed"}
+  ]
+}
