@@ -31,6 +31,12 @@ class PolicyTests(unittest.TestCase):
         )
         self.assertEqual(decide(proposal, capability_stage=3), PolicyDecision.BLOCK)
 
+    def test_action_cannot_understate_its_required_permission(self):
+        proposal = ActionProposal(
+            "x", Actor.ZERO, "public_post", PermissionLevel.L0, {"body": "hello"}
+        )
+        self.assertEqual(decide(proposal, capability_stage=1), PolicyDecision.BLOCK)
+
     def test_provenance_records_bootstrap_actor(self):
         with tempfile.TemporaryDirectory() as tmp:
             ledger = Path(tmp) / "provenance.jsonl"
