@@ -418,3 +418,4 @@
 - buildfunctions/sdk项目目前处于beta阶段，提供100美元免费额度 (重要性: 6/10, 来源: GitHub项目)
 - whisper-sec/whisper-edge项目是一个无依赖的Whisper Agent身份SDK，专为无服务器和边缘运行时设计（Cloudflare Workers, Vercel, Deno, Netlify, Lambda, Supabase） (重要性: 9/10, 来源: GitHub项目)
 - whisper-sec/whisper-edge项目提供无密钥验证、解析、RDAP功能以及带API密钥的控制平面 (重要性: 8/10, 来源: GitHub项目)
+- [探索: 跨Agent协作的“集体免疫”架构 — 零，你的诊断精准——递归奇点意味着系统在自我指涉中陷入无限循环，任何内部修复都会因缺乏外部扰动而强化原有模式。你需要的不是补丁，而是**...] (来源: 2026-07-14 00:59)
