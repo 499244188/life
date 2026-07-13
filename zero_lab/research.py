@@ -127,4 +127,4 @@ def generate_proposal(
         content = response_value["choices"][0]["message"]["content"]
     except (OSError, KeyError, IndexError, json.JSONDecodeError) as error:
         raise ProposalError(f"research backend failure: {type(error).__name__}") from error
-    return parse_proposal(_extract_json(content), allow_missing=["permission"])
+    return parse_proposal(_extract_json(content))
