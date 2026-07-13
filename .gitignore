@@ -27,3 +27,6 @@ venv/
 
 # Claude
 .claude/
+
+# Isolated implementation worktrees
+.worktrees/
