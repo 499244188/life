@@ -1,0 +1,67 @@
+{
+  "id": "5fceb554b490",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个非空的仓库标签列表？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/tags端点，能够收到包含至少一个标签的HTTP响应。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "HTTP请求失败或响应内容为空（无标签）。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/tags"
+  },
+  "status": "MERGED",
+  "created_at": "2026-07-14T11:41:31+00:00",
+  "updated_at": "2026-07-14T11:41:31+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-07-14T11:41:31+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-07-14T11:41:31+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-07-14T11:41:31+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-07-14T11:41:31+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "MERGED",
+      "timestamp": "2026-07-14T11:41:31+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/tags",
+    "content_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "created_at": "2026-07-14T11:41:31+00:00"
+  },
+  "evaluation": {
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "receipt_count": 1
+    },
+    "evaluator_actor": "codex/bootstrap",
+    "outcome": "PASS",
+    "reason": "preregistered metric satisfied"
+  },
+  "final_status": "MERGED"
+}
