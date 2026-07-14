@@ -1,0 +1,67 @@
+{
+  "id": "68eb77e604a3",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取至少一个有效的事件响应，即使使用不同的端点？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/events端点，能够收到至少一个包含有效事件数据的HTTP响应。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "HTTP请求失败（非2xx状态码）或响应体为空，或响应内容无法解析为有效JSON数组。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/events"
+  },
+  "status": "MERGED",
+  "created_at": "2026-07-14T08:53:49+00:00",
+  "updated_at": "2026-07-14T08:53:50+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-07-14T08:53:49+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-07-14T08:53:49+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-07-14T08:53:50+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-07-14T08:53:50+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "MERGED",
+      "timestamp": "2026-07-14T08:53:50+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/events",
+    "content_sha256": "387cf2dec356e09d74f316fbe0a8333c8b7d0e3f9a7611d4b9cfde6ffe5b9281",
+    "created_at": "2026-07-14T08:53:50+00:00"
+  },
+  "evaluation": {
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "receipt_count": 1
+    },
+    "evaluator_actor": "codex/bootstrap",
+    "outcome": "PASS",
+    "reason": "preregistered metric satisfied"
+  },
+  "final_status": "MERGED"
+}
