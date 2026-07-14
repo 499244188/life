@@ -1,3 +1,5 @@
 {"actor":"codex/bootstrap","artifact":"evolution/","kind":"infrastructure","summary":"建立研究实验室第一阶段的确定性基础设施","timestamp":"2026-07-13T12:10:00+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/e9cbb570dc14.json", "kind": "research_proposal", "summary": "验证零能否成功执行外部读取操作并获取数据，这是后续所有外部交互的基础。当前阶段仅public_read可产生可客观评价的receipt_count指标。", "timestamp": "2026-07-14T02:20:19+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/e9cbb570dc14.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T02:20:19+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/57a03444fa36.json", "kind": "research_proposal", "summary": "验证零能否访问非事件类公共端点，扩展已验证的能力范围。", "timestamp": "2026-07-14T03:47:09+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/57a03444fa36.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T03:47:09+00:00"}
