@@ -1,0 +1,31 @@
+{
+  "experiment_id": "e9cbb570dc14",
+  "actor": "zero/autonomous",
+  "question": "零能否通过公开读取GitHub API获得至少一个有效的仓库事件响应？",
+  "hypothesis": "零通过public_read访问GitHub公共事件API，能够收到至少一个包含有效事件数据的HTTP响应。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "public_read",
+    "url": "https://api.github.com/events",
+    "content_sha256": "0909adef104173161850df8e3ea55bff7076f0c66ab073e214c0bb7dd0d8ef98",
+    "created_at": "2026-07-14T02:20:19+00:00"
+  },
+  "evaluation": {
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "receipt_count": 1
+    },
+    "evaluator_actor": "codex/bootstrap",
+    "outcome": "PASS",
+    "reason": "preregistered metric satisfied"
+  },
+  "created_at": "2026-07-14T02:20:19+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}
