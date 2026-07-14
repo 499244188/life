@@ -43,6 +43,17 @@ class ResearchTests(unittest.TestCase):
         with self.assertRaises(ProposalError):
             parse_proposal(value)
 
+    def test_permission_is_derived_from_action_instead_of_trusting_model(self):
+        value = dict(VALID_PROPOSAL)
+        value["permission"] = "repository_write"
+        value["action"] = {
+            "type": "repository_write",
+            "path": "evolution/reports/note.md",
+            "content": "research note",
+        }
+        parsed = parse_proposal(value)
+        self.assertEqual(parsed["permission"], 1)
+
 
 if __name__ == "__main__":
     unittest.main()
