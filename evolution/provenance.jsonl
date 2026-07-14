@@ -10,3 +10,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/5fceb554b490.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T11:41:31+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/fbf6b312e442.json", "kind": "research_proposal", "summary": "验证零能否通过public_read获取仓库文件内容，这是对之前README端点（返回重定向）的补充，测试直接获取文件内容的能力。", "timestamp": "2026-07-14T14:27:37+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/fbf6b312e442.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T14:27:37+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/e9427cc9ebd1.json", "kind": "research_proposal", "summary": "验证零能否通过public_read获取不同端点（contributors）的有效数据，扩展已验证的端点集合，同时保持与之前实验一致的可证伪性和可重复性。", "timestamp": "2026-07-14T19:54:54+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/e9427cc9ebd1.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T19:54:54+00:00"}
