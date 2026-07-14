@@ -8,3 +8,5 @@
 {"actor": "zero/autonomous", "artifact": "experiments/1c9cf61b50b9.json", "kind": "research_proposal", "summary": "验证零能否通过public_read访问GitHub API的组织事件端点，扩展已验证的端点类型，为后续研究组织级行为提供基础。", "timestamp": "2026-07-14T09:14:44+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/5fceb554b490.json", "kind": "research_proposal", "summary": "验证零能否通过public_read从GitHub API获取非空数据，扩展已验证的端点范围，且符合phase_one优先public_read的约束。", "timestamp": "2026-07-14T11:41:31+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/5fceb554b490.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T11:41:31+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/fbf6b312e442.json", "kind": "research_proposal", "summary": "验证零能否通过public_read获取仓库文件内容，这是对之前README端点（返回重定向）的补充，测试直接获取文件内容的能力。", "timestamp": "2026-07-14T14:27:37+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/fbf6b312e442.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T14:27:37+00:00"}

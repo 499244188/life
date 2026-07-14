@@ -1,0 +1,6 @@
+{
+  "kind": "public_read",
+  "url": "https://api.github.com/repos/octocat/hello-world/contents/README",
+  "content_sha256": "f6595a40256ac7da06903d9c030ab636bcf895f75da7e133fb71e1766db2580c",
+  "created_at": "2026-07-14T14:27:37+00:00"
+}
