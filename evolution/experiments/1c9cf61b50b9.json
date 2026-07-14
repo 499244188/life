@@ -1,0 +1,32 @@
+{
+  "id": "1c9cf61b50b9",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取至少一个有效的组织事件响应？",
+  "hypothesis": "零通过public_read访问GitHub API的/orgs/octocat/events端点，能够收到至少一个包含有效事件数据的HTTP响应。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "HTTP请求失败或返回空响应体或响应体无法解析为有效JSON数组。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/orgs/octocat/events"
+  },
+  "status": "RUNNING",
+  "created_at": "2026-07-14T09:14:44+00:00",
+  "updated_at": "2026-07-14T09:14:44+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-07-14T09:14:44+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-07-14T09:14:44+00:00"
+    }
+  ]
+}

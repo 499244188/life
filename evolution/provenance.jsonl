@@ -5,3 +5,4 @@
 {"actor": "codex/bootstrap", "artifact": "reports/57a03444fa36.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T03:47:09+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/68eb77e604a3.json", "kind": "research_proposal", "summary": "验证零能否通过不同端点（仓库事件）成功读取公共数据，以扩展已验证的API访问能力。", "timestamp": "2026-07-14T08:53:49+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/68eb77e604a3.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T08:53:50+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/1c9cf61b50b9.json", "kind": "research_proposal", "summary": "验证零能否通过public_read访问GitHub API的组织事件端点，扩展已验证的端点类型，为后续研究组织级行为提供基础。", "timestamp": "2026-07-14T09:14:44+00:00"}
