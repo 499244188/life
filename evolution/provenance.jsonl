@@ -14,3 +14,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/e9427cc9ebd1.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-14T19:54:54+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/01e0d452223d.json", "kind": "research_proposal", "summary": "验证零能否通过public_read获取仓库语言统计，这是GitHub API的另一个公共端点，进一步测试零的公开读取能力。", "timestamp": "2026-07-15T03:47:47+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/01e0d452223d.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T03:47:47+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/4fadeae286ae.json", "kind": "research_proposal", "summary": "该实验已验证通过，但为了确保一致性并作为后续实验的基准，重复验证是合理的。", "timestamp": "2026-07-15T08:59:08+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/4fadeae286ae.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T08:59:08+00:00"}
