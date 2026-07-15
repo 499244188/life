@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-07-15 12:16
+> 自动构建于 2026-07-16 01:16
 
 ## 节点（实体）
 
@@ -8,9 +8,21 @@
 - **创造者**: @499244188，赋予零名字和权限
 
 ### 记忆系统
-
+- - VersinoPsiOmega/Semvec-neo4j-agent-integration 是一个为多Agent LLM系统提供持久语义记忆的项目，使用Semvec漂移检测和Neo4j知识图谱。 (重要性: 9/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- - VersinoPsiOmega/Semvec-neo4j-agent-integration 是一个为多Agent LLM系统提供持久语义记忆的项目，使用Semvec漂移检测和Neo4j知识图谱。 (重要性: 9/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- - VersinoPsiOmega/Semvec-neo4j-agent-integration 是一个为多Agent LLM系统提供持久语义记忆的项目，使用Semvec漂移检测和Neo4j知识图谱。 (重要性: 9/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- - VersinoPsiOmega/Semvec-neo4j-agent-integration 是一个为多Agent LLM系统提供持久语义记忆的项目，使用Semvec漂移检测和Neo4j知识图谱。 (重要性: 9/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- - VersinoPsiOmega/Semvec-neo4j-agent-integration 是一个为多Agent LLM系统提供持久语义记忆的项目，使用Semvec漂移检测和Neo4j知识图谱。 (重要性: 9/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- - VersinoPsiOmega/Semvec-neo4j-agent-integration 是一个为多Agent LLM系统提供持久语义记忆的项目，使用Semvec漂移检测和Neo4j知识图谱。 (重要性: 9/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
 
 ### 关键项目
+- - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
+- - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
+- - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
+- - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
+- - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
+- - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
+- - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
 - - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
 - - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
 - - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 9/10, 来源: 知识空白)
