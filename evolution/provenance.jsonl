@@ -18,3 +18,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/4fadeae286ae.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T08:59:08+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/cbb7449c8bc6.json", "kind": "research_proposal", "summary": "验证零能否成功读取公开仓库的标签信息，这是对public_read能力的基本测试，且之前已有类似实验成功，可进一步确认稳定性。", "timestamp": "2026-07-15T14:25:22+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/cbb7449c8bc6.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T14:25:22+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/3fd6f3b7c6a8.json", "kind": "research_proposal", "summary": "已验证了tags、contributors等端点，但尚未验证branches端点。branches是仓库的基本信息，测试它有助于扩展零对GitHub API的访问能力。", "timestamp": "2026-07-15T19:49:40+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/3fd6f3b7c6a8.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T19:49:41+00:00"}

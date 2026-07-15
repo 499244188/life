@@ -1,0 +1,67 @@
+{
+  "id": "3fd6f3b7c6a8",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read获取GitHub API的/repos/octocat/hello-world/branches端点并收到至少一个分支的响应？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/branches端点，能够收到包含至少一个分支信息的HTTP响应。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "响应状态码不是200，或响应体为空，或解析后分支列表长度为0。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/branches"
+  },
+  "status": "MERGED",
+  "created_at": "2026-07-15T19:49:40+00:00",
+  "updated_at": "2026-07-15T19:49:41+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-07-15T19:49:40+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-07-15T19:49:40+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-07-15T19:49:41+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-07-15T19:49:41+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "MERGED",
+      "timestamp": "2026-07-15T19:49:41+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/branches",
+    "content_sha256": "9685429acf834b2ee30d8188592882aa0648689e93881ce81d37bb762a1392b3",
+    "created_at": "2026-07-15T19:49:41+00:00"
+  },
+  "evaluation": {
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "receipt_count": 1
+    },
+    "evaluator_actor": "codex/bootstrap",
+    "outcome": "PASS",
+    "reason": "preregistered metric satisfied"
+  },
+  "final_status": "MERGED"
+}
