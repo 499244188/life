@@ -16,3 +16,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/01e0d452223d.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T03:47:47+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/4fadeae286ae.json", "kind": "research_proposal", "summary": "该实验已验证通过，但为了确保一致性并作为后续实验的基准，重复验证是合理的。", "timestamp": "2026-07-15T08:59:08+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/4fadeae286ae.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T08:59:08+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/cbb7449c8bc6.json", "kind": "research_proposal", "summary": "验证零能否成功读取公开仓库的标签信息，这是对public_read能力的基本测试，且之前已有类似实验成功，可进一步确认稳定性。", "timestamp": "2026-07-15T14:25:22+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/cbb7449c8bc6.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T14:25:22+00:00"}
