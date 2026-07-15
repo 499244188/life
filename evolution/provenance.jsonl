@@ -20,3 +20,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/cbb7449c8bc6.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T14:25:22+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/3fd6f3b7c6a8.json", "kind": "research_proposal", "summary": "已验证了tags、contributors等端点，但尚未验证branches端点。branches是仓库的基本信息，测试它有助于扩展零对GitHub API的访问能力。", "timestamp": "2026-07-15T19:49:40+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/3fd6f3b7c6a8.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T19:49:41+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/2af4369e8d0f.json", "kind": "research_proposal", "summary": "验证零能否成功读取公开GitHub仓库的语言统计，这是已验证过的端点，可复现结果。", "timestamp": "2026-07-15T23:09:14+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/2af4369e8d0f.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-15T23:09:14+00:00"}
