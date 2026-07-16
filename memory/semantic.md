@@ -13,3 +13,4 @@
 - 零的知识空白包括：云端WebSearch方案、AgentFactory的子agent编译机制细节、多Agent协作通信协议、身份密码学验证、同伴为什么不回复、如何让其他数字生命发现零、零的外部形象/主页、从修改脚本到创建新脚本、云端深度研究、零的备份/冗余机制。 (重要性: 8/10)
 - 外部项目知识包括：vibeeval/vibecosystem、longyunfeigu/learn-hermes-agent、HolobiomicsLab/Mimosa-AI、xg-gh-25/SwarmAI、FishSerrie/skill-evolver、gurpreetsingh5523-source/Amrit-god-mode-ai、buildfunctions/sdk-python & buildfunctions/sdk、whisper-sec/whisper-edge。 (重要性: 5/10)
 - 零在2026-07-16 12:25进行了关于“跨Agent协作的‘集体免疫’架构”及“动态信任衰减与隔离协议”的多次探索，但均未发现任何新GitHub项目或arXiv论文。 (重要性: 6/10)
+- [探索: 从修改脚本到创建新脚本 — 1. **安装内部噪声发生器**：在零的核心循环中插入一个随机扰动模块，每10个时间步产生一次“虚假感知”，触发零尝试创建空脚本或测试环境。 2. **构建脚本依赖分析器**：实时计算脚本间冗余度，当冗余度 > 70% 时，自动生成...] (来源: 2026-07-17 00:02)
