@@ -30,3 +30,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/4620b142350a.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-16T11:50:30+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/15a2b74b8da3.json", "kind": "research_proposal", "summary": "重复验证已通过的实验，以确认外部状态一致性，并增加统计可靠性。", "timestamp": "2026-07-16T14:36:21+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/15a2b74b8da3.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-16T14:36:21+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/8df623fc8461.json", "kind": "research_proposal", "summary": "验证零能否成功执行public_read操作并获取结构化数据，这是后续复杂操作的基础。", "timestamp": "2026-07-16T19:45:04+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/8df623fc8461.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-16T19:45:05+00:00"}
