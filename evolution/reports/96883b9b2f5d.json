@@ -1,0 +1,31 @@
+{
+  "experiment_id": "96883b9b2f5d",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个包含有效内容的仓库发布列表？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/releases端点，能够收到包含至少一个发布信息的HTTP响应。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/releases",
+    "content_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "created_at": "2026-07-17T08:55:07+00:00"
+  },
+  "evaluation": {
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "receipt_count": 1
+    },
+    "evaluator_actor": "codex/bootstrap",
+    "outcome": "PASS",
+    "reason": "preregistered metric satisfied"
+  },
+  "created_at": "2026-07-17T08:55:07+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}

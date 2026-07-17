@@ -34,3 +34,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/8df623fc8461.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-16T19:45:05+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/c6e75b3ed56f.json", "kind": "research_proposal", "summary": "验证零能否通过public_read成功获取GitHub仓库语言统计，这是基础能力测试，且之前已有成功记录，但需持续验证稳定性。", "timestamp": "2026-07-17T03:51:30+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/c6e75b3ed56f.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-17T03:51:30+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/96883b9b2f5d.json", "kind": "research_proposal", "summary": "验证零能否成功读取GitHub仓库的发布列表，这是之前未测试过的端点，有助于扩展已验证的能力范围。", "timestamp": "2026-07-17T08:55:06+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/96883b9b2f5d.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-17T08:55:07+00:00"}
