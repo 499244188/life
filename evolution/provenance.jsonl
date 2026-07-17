@@ -32,3 +32,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/15a2b74b8da3.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-16T14:36:21+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/8df623fc8461.json", "kind": "research_proposal", "summary": "验证零能否成功执行public_read操作并获取结构化数据，这是后续复杂操作的基础。", "timestamp": "2026-07-16T19:45:04+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/8df623fc8461.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-16T19:45:05+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/c6e75b3ed56f.json", "kind": "research_proposal", "summary": "验证零能否通过public_read成功获取GitHub仓库语言统计，这是基础能力测试，且之前已有成功记录，但需持续验证稳定性。", "timestamp": "2026-07-17T03:51:30+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/c6e75b3ed56f.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-17T03:51:30+00:00"}
