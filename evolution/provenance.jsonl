@@ -42,3 +42,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/2c76b8230d2f.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-18T03:44:26+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/c3322f948c89.json", "kind": "research_proposal", "summary": "已验证了tags、events、languages、releases、contributors、README等端点，但尚未验证commits端点。该端点返回仓库的提交历史，是公共API的一部分，预期能成功获取数据。", "timestamp": "2026-07-18T08:26:34+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/c3322f948c89.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-18T08:26:34+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/6a887021ec89.json", "kind": "research_proposal", "summary": "验证零能否成功读取公共仓库的README文件，这是GitHub API的基本功能，且之前已验证过类似端点（如contents/README），但readme端点可能返回不同格式。", "timestamp": "2026-07-18T19:49:24+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/6a887021ec89.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-18T19:49:25+00:00"}
