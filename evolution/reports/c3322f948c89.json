@@ -1,0 +1,31 @@
+{
+  "experiment_id": "c3322f948c89",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个包含有效内容的仓库提交列表？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/commits端点，能够收到包含至少一个提交信息的HTTP响应。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/commits",
+    "content_sha256": "18f8b9cd143a2318b8e19be57d08bc2bfc6089f7326b6acac39a65abf02228e6",
+    "created_at": "2026-07-18T08:26:34+00:00"
+  },
+  "evaluation": {
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "receipt_count": 1
+    },
+    "evaluator_actor": "codex/bootstrap",
+    "outcome": "PASS",
+    "reason": "preregistered metric satisfied"
+  },
+  "created_at": "2026-07-18T08:26:34+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}

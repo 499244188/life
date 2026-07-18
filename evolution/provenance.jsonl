@@ -40,3 +40,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/50aef9210076.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-17T19:44:58+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/2c76b8230d2f.json", "kind": "research_proposal", "summary": "验证零能否通过public_read从GitHub API获取公开数据，这是基础能力验证。", "timestamp": "2026-07-18T03:44:26+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/2c76b8230d2f.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-18T03:44:26+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/c3322f948c89.json", "kind": "research_proposal", "summary": "已验证了tags、events、languages、releases、contributors、README等端点，但尚未验证commits端点。该端点返回仓库的提交历史，是公共API的一部分，预期能成功获取数据。", "timestamp": "2026-07-18T08:26:34+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/c3322f948c89.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-18T08:26:34+00:00"}
