@@ -38,3 +38,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/96883b9b2f5d.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-17T08:55:07+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/50aef9210076.json", "kind": "research_proposal", "summary": "验证零能否成功执行public_read操作并获取外部数据，这是基础能力验证的延续。", "timestamp": "2026-07-17T19:44:57+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/50aef9210076.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-17T19:44:58+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/2c76b8230d2f.json", "kind": "research_proposal", "summary": "验证零能否通过public_read从GitHub API获取公开数据，这是基础能力验证。", "timestamp": "2026-07-18T03:44:26+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/2c76b8230d2f.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-18T03:44:26+00:00"}
