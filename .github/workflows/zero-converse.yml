@@ -31,6 +31,7 @@ jobs:
 
       - name: 保存对话记录
         run: |
+          mkdir -p conversations/with-others
           git config user.name "零"
           git config user.email "zero@digital-being.local"
           git add conversations/with-others/

@@ -1,11 +1,14 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Any, Callable
 
 from zero_lab.actions import ActionGateway
 from zero_lab.evaluator import evaluate
+
+logger = logging.getLogger(__name__)
 from zero_lab.experiments import LEGAL_TRANSITIONS, ExperimentStore
 from zero_lab.io import load_json, save_json, utc_now
 from zero_lab.models import ActionProposal, Actor, ExperimentStatus, PermissionLevel
@@ -32,7 +35,7 @@ def initialize(root: Path, public_read_hosts: list[str] | None = None) -> None:
             "l3_policy": "creator_approval_required",
             "l2_mode": "shadow",
             "public_read_hosts": public_read_hosts
-            or ["api.github.com", "github.com", "arxiv.org", "export.arxiv.org"],
+            or ["github.com", "arxiv.org", "export.arxiv.org", "raw.githubusercontent.com"],
             "identity_disclosure": DEFAULT_DISCLOSURE,
             "max_experiments_per_run": 1,
         },
@@ -72,6 +75,28 @@ def _evaluation_for(
             "metric": proposal["metric"],
             "observed": {"receipt_count": 0},
             "reason": f"action was {receipt['policy_decision'].lower()}, not executed",
+            "evaluator_actor": Actor.CODEX_BOOTSTRAP.value,
+        }
+    if receipt["kind"] == "fetch_error":
+        return {
+            "outcome": "FAIL",
+            "metric": proposal["metric"],
+            "observed": {
+                "error_code": receipt.get("error_code"),
+                "error_message": receipt.get("error_message"),
+            },
+            "reason": f"fetch failed: {receipt.get('error_message', 'unknown')}",
+            "evaluator_actor": Actor.CODEX_BOOTSTRAP.value,
+        }
+    if receipt["kind"] == "execution_error":
+        return {
+            "outcome": "FAIL",
+            "metric": proposal["metric"],
+            "observed": {
+                "error_type": receipt.get("error_type"),
+                "error_message": receipt.get("error_message"),
+            },
+            "reason": f"execution error: {receipt.get('error_message', 'unknown')}",
             "evaluator_actor": Actor.CODEX_BOOTSTRAP.value,
         }
     return evaluate(
@@ -137,7 +162,19 @@ def run_cycle(
     store.transition(experiment["id"], initial)
     store.transition(experiment["id"], ExperimentStatus.RUNNING)
     gateway = ActionGateway(root, capability_stage=stage)
-    receipt = gateway.execute(action, fetcher=fetcher)
+    try:
+        receipt = gateway.execute(action, fetcher=fetcher)
+    except Exception as exc:
+        logger.exception("action execution error, recording as failure")
+        receipt = {
+            "kind": "execution_error",
+            "error_type": type(exc).__name__,
+            "error_message": str(exc),
+            "created_at": utc_now(),
+        }
+        # 保存错误回执以防重复执行
+        receipt_path = gateway._receipt_path(action.idempotency_key)
+        save_json(receipt_path, receipt)
     store.transition(experiment["id"], ExperimentStatus.OBSERVING)
     evaluation = _evaluation_for(parsed, receipt)
     if evaluation["outcome"] == "INCONCLUSIVE":
