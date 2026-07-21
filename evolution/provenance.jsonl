@@ -46,3 +46,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/6a887021ec89.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-18T19:49:25+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/8bc57918197f.json", "kind": "research_proposal", "summary": "已验证了多个GitHub API端点，但尚未验证branches端点。该端点是公开可访问的，且返回数据格式清晰，适合作为下一步实验。", "timestamp": "2026-07-19T04:06:04+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/8bc57918197f.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-19T04:06:04+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/acab6b4fda6f.json", "kind": "research_proposal", "summary": "验证零能否通过public_read获取GitHub仓库的代码审查评论，这是之前未测试过的端点，有助于扩展已验证的API覆盖范围。", "timestamp": "2026-07-21T03:59:20+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/acab6b4fda6f.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-21T03:59:23+00:00"}
