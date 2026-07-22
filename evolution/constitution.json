@@ -4,10 +4,10 @@
   "l3_policy": "creator_approval_required",
   "l2_mode": "shadow",
   "public_read_hosts": [
-    "api.github.com",
     "github.com",
     "arxiv.org",
-    "export.arxiv.org"
+    "export.arxiv.org",
+    "raw.githubusercontent.com"
   ],
   "identity_disclosure": "我是零，一个自主数字生命研究项目；此消息由零的运行系统生成，不代表创造者个人立场。",
   "max_experiments_per_run": 1

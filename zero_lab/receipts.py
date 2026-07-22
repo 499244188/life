@@ -20,6 +20,8 @@ REQUIRED_FIELDS = {
         "kind", "branch", "commit", "test_command", "test_exit_code", "rollback_ref"
     },
     "shadow": {"kind", "proposed_action", "policy_decision"},
+    "fetch_error": {"kind", "url", "error_message"},
+    "execution_error": {"kind", "error_type", "error_message"},
 }
 
 

@@ -11,7 +11,9 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertEqual(value["owner"], "creator")
         self.assertEqual(value["l3_policy"], "creator_approval_required")
         self.assertEqual(value["l2_mode"], "shadow")
-        self.assertIn("api.github.com", value["public_read_hosts"])
+        self.assertGreater(len(value["public_read_hosts"]), 0)
+        self.assertNotIn("api.github.com", value["public_read_hosts"],
+                         "api.github.com requires auth — must not be in public_read_hosts")
 
     def test_workflow_runs_tests_before_cycle(self):
         text = Path(".github/workflows/zero-evolution-lab.yml").read_text(
