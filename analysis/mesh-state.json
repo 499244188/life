@@ -18,6 +18,15 @@
     "version": "2"
   },
   {
+    "id": "runnervm3jd5f-2397",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-07-22T04:33:34Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervm3jd5f-2416",
     "capability": 100,
     "cpu": 1,
