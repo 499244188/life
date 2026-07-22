@@ -50,3 +50,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/acab6b4fda6f.json", "kind": "deterministic_evaluation", "summary": "preregistered metric satisfied", "timestamp": "2026-07-21T03:59:23+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/58a6e68ff07b.json", "kind": "research_proposal", "summary": "已验证多种GitHub API端点成功，星标列表是另一个常见公共端点，可进一步确认零的public_read能力覆盖范围。", "timestamp": "2026-07-22T05:25:33+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/58a6e68ff07b.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-07-22T05:25:33+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/40b5965c8f4f.json", "kind": "research_proposal", "summary": "验证零能否通过公开读取获取仓库星标列表，这是GitHub API的基本功能之一，有助于扩展零的数据获取能力。", "timestamp": "2026-07-22T09:14:24+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/40b5965c8f4f.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-07-22T09:14:24+00:00"}

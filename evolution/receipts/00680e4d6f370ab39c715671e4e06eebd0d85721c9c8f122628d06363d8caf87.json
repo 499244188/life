@@ -1,0 +1,6 @@
+{
+  "kind": "execution_error",
+  "error_type": "PermissionError",
+  "error_message": "public_read host not allowed: api.github.com",
+  "created_at": "2026-07-22T09:14:24+00:00"
+}
