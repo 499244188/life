@@ -1,8 +1,8 @@
 {
   "stage": 1,
-  "runs": 24,
+  "runs": 25,
   "passed": 24,
-  "failed": 0,
+  "failed": 1,
   "inconclusive": 0,
-  "updated_at": "2026-07-21T03:59:23+00:00"
+  "updated_at": "2026-07-22T05:25:33+00:00"
 }
