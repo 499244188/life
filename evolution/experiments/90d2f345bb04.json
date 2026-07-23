@@ -1,0 +1,68 @@
+{
+  "id": "90d2f345bb04",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个包含有效内容的仓库星标列表？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/stargazers端点，能够收到包含至少一个星标用户信息的HTTP响应。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "HTTP响应状态码非200，或响应体为空，或内容SHA256与预期不符。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/stargazers"
+  },
+  "status": "REJECTED",
+  "created_at": "2026-07-23T03:58:22+00:00",
+  "updated_at": "2026-07-23T03:58:22+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-07-23T03:58:22+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-07-23T03:58:22+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-07-23T03:58:22+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-07-23T03:58:22+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "REJECTED",
+      "timestamp": "2026-07-23T03:58:22+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-07-23T03:58:22+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "final_status": "REJECTED"
+}
