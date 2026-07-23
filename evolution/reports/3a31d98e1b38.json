@@ -1,0 +1,32 @@
+{
+  "experiment_id": "3a31d98e1b38",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个包含有效内容的仓库分支列表？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/branches端点，能够收到包含至少一个分支信息的HTTP响应。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-07-23T09:13:13+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "created_at": "2026-07-23T09:13:13+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}
