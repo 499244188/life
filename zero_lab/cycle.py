@@ -119,11 +119,24 @@ def run_cycle(
     stage = int(capability["stage"])
     if proposal is None:
         agenda = load_json(root / "agenda.json", {}).get("questions", [])
-        parsed = generate_proposal(
-            agenda=agenda,
-            verified_experience=_verified_experience(root),
-            capability_stage=stage,
-        )
+        try:
+            parsed = generate_proposal(
+                agenda=agenda,
+                verified_experience=_verified_experience(root),
+                capability_stage=stage,
+            )
+        except Exception as exc:
+            logger.exception("proposal generation failed, recording as error report")
+            capability["runs"] += 1
+            capability["failed"] += 1
+            capability["updated_at"] = utc_now()
+            save_json(root / "capability.json", capability)
+            return {
+                "experiment_id": "proposal_failure",
+                "outcome": "FAIL",
+                "error": f"generate_proposal failed: {type(exc).__name__}: {exc}",
+                "created_at": utc_now(),
+            }
     else:
         parsed = parse_proposal(proposal)
 

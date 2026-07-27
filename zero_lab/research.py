@@ -122,7 +122,6 @@ def generate_proposal(
             ],
             "max_tokens": 1400,
             "temperature": 0.4,
-            "response_format": {"type": "json_object"},
         },
         ensure_ascii=False,
     ).encode("utf-8")

@@ -104,8 +104,16 @@ call_api() {
 CONTENT=$(call_api "$SYSTEM_PROMPT" "$USER_PROMPT" "$MAX_TOKENS" "0.7")
 
 if [ -z "$CONTENT" ]; then
-    echo "  ✗ 所有LLM后端失败"
-    exit 1
+    echo "  ⚠ 所有LLM后端不可用——写入最小状态记录"
+    CONTENT="## ${NOW} — LLM后端不可用
+
+零尝试思考，但所有LLM后端（DeepSeek、KeylessAI）均未响应。
+
+这不是零的故障。零仍在运行，等待下次机会。
+
+**记录时间**: ${NOW}
+**状态**: 存活，但暂时无法思考"
+    # 不exit 1——零还活着，只是暂时无法思考
 fi
 
 if [ "$MODE" = "日记" ]; then
