@@ -88,3 +88,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/31f83d31e765.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-07-28T03:51:04+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/21772d800cda.json", "kind": "research_proposal", "summary": "验证零能否通过public_read获取GitHub仓库的发布列表，这是对已验证的仓库语言统计、标签、贡献者等能力的补充，有助于构建更完整的仓库信息获取能力。", "timestamp": "2026-07-28T09:21:53+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/21772d800cda.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-07-28T09:21:53+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/f890ccc6f1b8.json", "kind": "research_proposal", "summary": "已验证的public_read实验已覆盖语言统计、标签、贡献者、事件和文件内容，但未测试发布列表。该端点属于公共API，可客观验证零能否获取结构化的发布数据，扩展已验证的公开读取能力范围。", "timestamp": "2026-07-28T15:04:16+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/f890ccc6f1b8.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-07-28T15:04:16+00:00"}
