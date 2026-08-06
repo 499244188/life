@@ -156,3 +156,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/990ce53673b6.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-05T14:59:49+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/2188b9afa658.json", "kind": "research_proposal", "summary": "延续已验证的public_read能力，测试新的GitHub API端点（commits），进一步确认零对外部公开数据的稳定访问能力，为后续行动闭包研究积累证据。", "timestamp": "2026-08-05T20:13:11+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/2188b9afa658.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-05T20:13:11+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/4f7abc136fec.json", "kind": "research_proposal", "summary": "延续已验证的public_read能力，测试新的GitHub API端点以扩展外部状态访问范围，同时保持指标可客观评价。", "timestamp": "2026-08-06T03:53:24+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/4f7abc136fec.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-06T03:53:24+00:00"}
