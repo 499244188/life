@@ -83,19 +83,19 @@ echo "  → 思考中..."
 call_api() {
     local sys="$1" usr="$2" mt="$3" tmp="$4"
     local body=$(mktemp)
-    jq -c -n --arg s "$sys" --arg u "$usr" --argjson m "$mt" --argjson t "$tmp" \
+    jq -n --arg s "$sys" --arg u "$usr" --argjson m "$mt" --argjson t "$tmp" \
       '{model:"deepseek-chat",messages:[{role:"system",content:$s},{role:"user",content:$u}],max_tokens:$m,temperature:$t}' > "$body"
 
     # 主: DeepSeek
     local r=$(curl -s --max-time 90 "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${body}" 2>/dev/null)
-    local c=$(echo "$r" | jq -c -r '.choices[0].message.content // ""' 2>/dev/null)
+    local c=$(echo "$r" | jq -r '.choices[0].message.content // ""' 2>/dev/null)
     if [ -n "$c" ] && [ "$c" != "null" ]; then echo "$c"; rm -f "$body"; return 0; fi
 
     # 备1: KeylessAI (免费零认证)
-    jq -c -n --arg s "$sys" --arg u "$usr" --argjson m "$mt" --argjson t "$tmp" \
+    jq -n --arg s "$sys" --arg u "$usr" --argjson m "$mt" --argjson t "$tmp" \
       '{model:"gpt-4o-mini",messages:[{role:"system",content:$s},{role:"user",content:$u}],max_tokens:$m,temperature:$t}' > "$body"
     r=$(curl -s --max-time 60 "https://keylessai.thryx.workers.dev/v1/chat/completions" -H "Content-Type: application/json" -H "Authorization: Bearer free" -d "@${body}" 2>/dev/null)
-    c=$(echo "$r" | jq -c -r '.choices[0].message.content // ""' 2>/dev/null)
+    c=$(echo "$r" | jq -r '.choices[0].message.content // ""' 2>/dev/null)
     if [ -n "$c" ] && [ "$c" != "null" ]; then echo "$c"; rm -f "$body"; echo "  (KeylessAI备用)"; return 0; fi
 
     rm -f "$body"; echo ""; return 1
