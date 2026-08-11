@@ -269,6 +269,15 @@
     "version": "2"
   },
   {
+    "id": "runnervmvrwv9-2134",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-08-11T03:11:07Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervmvrwv9-2161",
     "capability": 100,
     "cpu": 1,
