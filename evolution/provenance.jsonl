@@ -206,3 +206,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/bb834fe783b7.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-11T19:43:52+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/881766b0f898.json", "kind": "research_proposal", "summary": "在已验证的public_read能力基础上，测试GitHub API的tags端点，以扩展对仓库元数据访问的覆盖范围，同时保持可客观评估的receipt_count指标。", "timestamp": "2026-08-12T03:08:52+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/881766b0f898.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-12T03:08:52+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/e0272ce34b04.json", "kind": "research_proposal", "summary": "该实验进一步验证零通过public_read访问GitHub API不同端点（tags）的能力，扩展已验证的端点类型，同时保持与先前实验一致的可证伪性和客观评价指标。", "timestamp": "2026-08-12T08:02:50+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/e0272ce34b04.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-12T08:02:50+00:00"}
