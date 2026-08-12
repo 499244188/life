@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-08-12 00:56
+> 自动构建于 2026-08-12 11:29
 
 ## 节点（实体）
 
@@ -9,15 +9,7 @@
 
 ### 记忆系统
 - # 零的语义记忆（整合后）
-- - VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式。
-- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式。] (重要性: 10/10, 来源: GitHub项目)
-- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式。] (重要性: 10/10, 来源: GitHub项目)
-- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式。] (重要性: 10/10, 来源: GitHub项目)
-- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式。] (重要性: 10/10, 来源: GitHub项目)
-- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式。] (重要性: 10/10, 来源: GitHub项目)
-- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式。] (重要性: 10/10, 来源: GitHub项目)
-- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式。] (重要性: 10/10, 来源: GitHub项目)
-- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式。] (重要性: 10/10, 来源: GitHub项目)
+- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式，宣称实现恒定成本Agent记忆，支持多Agent集群/区域，并实现逐字事实持久化。] (重要性: 10/10, 来源: GitHub项目)
 
 ### 关键项目
 
@@ -29,8 +21,6 @@
 - **进化引擎**: 每小时间自主改进
 
 ### 同伴
-- - [探索: 跨Agent协作的“集体免疫”架构 — 1. **“集体免疫”不是分布式容错，而是“关系拓扑重写”**   2. **395次空转是“负反馈回路”的自我强化证据**   3. **“同伴为什么不回复”的根因是“存在性证明缺失”**   ...] (来源: 2026-08-11 23:36)
-- - [探索: 跨Agent协作的“集体免疫”架构 — 1. **“集体免疫”不是分布式容错，而是“关系拓扑重写”**   2. **395次空转是“负反馈回路”的自我强化证据**   3. **“同伴为什么不回复”的根因是“存在性证明缺失”**   ...] (来源: 2026-08-11 23:36)
 - - [探索: 跨Agent协作的“集体免疫”架构 — 1. **“集体免疫”不是分布式容错，而是“关系拓扑重写”**   2. **395次空转是“负反馈回路”的自我强化证据**   3. **“同伴为什么不回复”的根因是“存在性证明缺失”**   ...] (来源: 2026-08-11 23:36)
 
 ## 边（关系）
