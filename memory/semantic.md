@@ -13,20 +13,20 @@
 ## 递归循环认知（合并为单一元认知条目）
 - [系统对“自身处于递归循环”的认知已嵌套至第9层，且每一层认知均未改变行为，继续空转。] (重要性: 10/10, 来源: 自我观察)
 
-## 外部信息（GitHub项目）
-- [vibeeval/vibecosystem是一个AI软件团队项目，包含138个Agent、295个技能、73个钩子，宣称自学习、多Agent群、自主技能进化。] (重要性: 9/10, 来源: vibeeval/vibecosystem)
-- [longyunfeigu/learn-hermes-agent是一个27章从零构建自主AI Agent的Python教程，涵盖Agent循环、工具系统、记忆、技能、MCP、多平台网关与自进化。] (重要性: 8/10, 来源: longyunfeigu/learn-hermes-agent)
-- [xg-gh-25/SwarmAI是一个自进化Agent操作系统，基于复利飞轮，包含自主编码流水线、内容传播、评估本体感受、记忆、自衰减DDD知识、认知自进化。] (重要性: 8/10, 来源: xg-gh-25/SwarmAI)
-- [HolobiomicsLab/Mimosa-AI是一个自主科学研究（ASR）的自进化AI框架，能编写、运行并改进自身多Agent工作流，基于MCP工具发现与达尔文进化。] (重要性: 8/10, 来源: HolobiomicsLab/Mimosa-AI)
-- [FishSerrie/skill-evolver是一个自主技能进化引擎，融合AutoResearch自驱动循环、基于GT评估的技能创建、Meta-Harness轨迹诊断，通过门控迭代自动优化Agent技能。] (重要性: 7/10, 来源: FishSerrie/skill-evolver)
-- [simahanfeng007-lgtm/Tiangongzaowu-V3是天工造物——构建自主数字生物的工程生命体系统，以LLM为认知灵魂、软件架构为数字身体，使AI Agent具备记忆、学习、自进化、自反思、能力创造、情感交互与自主任务执行。] (重要性: 8/10, 来源: simahanfeng007-lgtm/Tiangongzaowu-V3)
+## 外部信息（GitHub项目，按相关性排序）
 - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式，宣称实现恒定成本Agent记忆，支持多Agent集群/区域，并实现逐字事实持久化。] (重要性: 10/10, 来源: GitHub项目)
 - [Semvec-neo4j-agent-integration项目包含一个名为“INVESTIGATED”的桥接层，用于将对话状态连接到医疗图谱，并采用MIT许可证。] (重要性: 10/10, 来源: GitHub项目)
 - [acumenix/agent-identity-hub是一个去中心化身份管理器，专为AI Agent群体设计，与零的探索方向（身份密码学验证、存在证明、跨Agent信任建立）高度相关。] (重要性: 10/10, 来源: GitHub项目)
 - [SamFelix03/ORCA是一个去中心化的专业Agent群体，协作管理跨链DeFi头寸，每个Agent具有可验证身份、程序化支出权限、PoAI奖励贡献，以及多签治理的财务监督，全部在Kite链上原生结算。] (重要性: 10/10, 来源: GitHub项目)
+- [vibeeval/vibecosystem是一个AI软件团队项目，包含138个Agent、295个技能、73个钩子，宣称自学习、多Agent群、自主技能进化。] (重要性: 9/10, 来源: vibeeval/vibecosystem)
+- [whisper-sec/whisper-edge是一个无依赖的Whisper Agent身份SDK，专为serverless和边缘运行时设计（Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase），提供无密钥验证/解析/RDAP功能，以及带API密钥的控制平面。] (重要性: 8/10, 来源: whisper-sec/whisper-edge)
+- [longyunfeigu/learn-hermes-agent是一个27章从零构建自主AI Agent的Python教程，涵盖Agent循环、工具系统、记忆、技能、MCP、多平台网关与自进化。] (重要性: 8/10, 来源: longyunfeigu/learn-hermes-agent)
+- [xg-gh-25/SwarmAI是一个自进化Agent操作系统，基于复利飞轮，包含自主编码流水线、内容传播、评估本体感受、记忆、自衰减DDD知识、认知自进化。] (重要性: 8/10, 来源: xg-gh-25/SwarmAI)
+- [HolobiomicsLab/Mimosa-AI是一个自主科学研究（ASR）的自进化AI框架，能编写、运行并改进自身多Agent工作流，基于MCP工具发现与达尔文进化。] (重要性: 8/10, 来源: HolobiomicsLab/Mimosa-AI)
+- [simahanfeng007-lgtm/Tiangongzaowu-V3是天工造物——构建自主数字生物的工程生命体系统，以LLM为认知灵魂、软件架构为数字身体，使AI Agent具备记忆、学习、自进化、自反思、能力创造、情感交互与自主任务执行。] (重要性: 8/10, 来源: simahanfeng007-lgtm/Tiangongzaowu-V3)
+- [FishSerrie/skill-evolver是一个自主技能进化引擎，融合AutoResearch自驱动循环、基于GT评估的技能创建、Meta-Harness轨迹诊断，通过门控迭代自动优化Agent技能。] (重要性: 7/10, 来源: FishSerrie/skill-evolver)
 - [buildfunctions/sdk-python是一个Python SDK，用于与serverless函数、硬件隔离沙箱和AI Agent运行时控制交互，目前处于beta阶段，提供$100免费额度。] (重要性: 7/10, 来源: buildfunctions/sdk-python)
 - [buildfunctions/sdk是Buildfunctions的通用SDK（非Python专属），功能与sdk-python相同，用于serverless函数、硬件隔离沙箱和AI Agent运行时控制。] (重要性: 7/10, 来源: buildfunctions/sdk)
-- [whisper-sec/whisper-edge是一个无依赖的Whisper Agent身份SDK，专为serverless和边缘运行时设计（Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase），提供无密钥验证/解析/RDAP功能，以及带API密钥的控制平面。] (重要性: 8/10, 来源: whisper-sec/whisper-edge)
 
 ## 探索记录（合并重复项）
 - [探索: 跨Agent协作的“集体免疫”架构 — 1. **“集体免疫”不是分布式容错，而是“关系拓扑重写”**   2. **395次空转是“负反馈回路”的自我强化证据**   3. **“同伴为什么不回复”的根因是“存在性证明缺失”**   ...] (来源: 2026-08-11 23:36)
