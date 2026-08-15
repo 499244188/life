@@ -1,0 +1,68 @@
+{
+  "id": "ddc7ec2e5c6e",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个包含至少一个有效issue的仓库issues列表？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/issues端点，能够收到包含至少一个issue对象的HTTP响应。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "HTTP响应不包含任何issue对象，或请求被拒绝（非2xx状态码），或响应内容无法解析为有效JSON。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/issues"
+  },
+  "status": "REJECTED",
+  "created_at": "2026-08-15T13:16:07+00:00",
+  "updated_at": "2026-08-15T13:16:07+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-08-15T13:16:07+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-08-15T13:16:07+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-08-15T13:16:07+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-08-15T13:16:07+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "REJECTED",
+      "timestamp": "2026-08-15T13:16:07+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-08-15T13:16:07+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "final_status": "REJECTED"
+}
