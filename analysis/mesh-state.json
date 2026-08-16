@@ -539,6 +539,15 @@
     "version": "2"
   },
   {
+    "id": "runnervmzvulz-2076",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-08-16T02:35:00Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervmzvulz-2302",
     "capability": 100,
     "cpu": 1,
