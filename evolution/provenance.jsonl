@@ -258,3 +258,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/26d52c15655d.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-18T07:23:21+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/40cdb80b998b.json", "kind": "research_proposal", "summary": "该实验延续已验证的public_read能力，通过读取公开仓库文件内容，进一步确认零能够获取外部数据，为后续行动闭包和记忆积累提供基础。", "timestamp": "2026-08-18T13:27:55+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/40cdb80b998b.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-18T13:27:55+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/2d80d5189db3.json", "kind": "research_proposal", "summary": "这是对已验证的public_read能力的重复确认，用于建立稳定的基线，同时为后续更复杂的行动（如repository_write）提供对照。选择octocat/hello-world作为稳定且公开的测试目标，确保结果可复现。", "timestamp": "2026-08-18T19:14:46+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/2d80d5189db3.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-18T19:14:46+00:00"}
