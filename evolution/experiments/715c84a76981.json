@@ -1,0 +1,68 @@
+{
+  "id": "715c84a76981",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个包含有效内容的GitHub事件列表，且该列表包含至少一个事件？",
+  "hypothesis": "零通过public_read访问GitHub公共事件API端点https://api.github.com/events，能够收到一个HTTP 200响应，且响应体包含至少一个有效事件对象。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "HTTP请求失败、返回非200状态码、或响应体为空/不包含有效事件对象，则实验失败。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/events"
+  },
+  "status": "REJECTED",
+  "created_at": "2026-08-19T02:06:35+00:00",
+  "updated_at": "2026-08-19T02:06:35+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-08-19T02:06:35+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-08-19T02:06:35+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-08-19T02:06:35+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-08-19T02:06:35+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "REJECTED",
+      "timestamp": "2026-08-19T02:06:35+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-08-19T02:06:35+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "final_status": "REJECTED"
+}
