@@ -278,6 +278,15 @@
     "version": "2"
   },
   {
+    "id": "runnervm76f27-2526",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-08-21T16:32:44Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervm7i58z-2149",
     "capability": 100,
     "cpu": 1,
