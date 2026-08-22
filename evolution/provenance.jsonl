@@ -282,3 +282,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/2a8a77c1d1c0.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-22T07:18:00+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/bfb5eaa6ae5f.json", "kind": "research_proposal", "summary": "验证零通过public_read读取公开仓库文件的能力，为后续基于外部数据的推理提供基础。", "timestamp": "2026-08-22T13:17:12+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/bfb5eaa6ae5f.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-22T13:17:12+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/ea63721c0b5d.json", "kind": "research_proposal", "summary": "选择组织级事件端点以扩展已验证的公共读取能力，测试不同API路径的可用性，同时保持对receipt_count这一可客观验证指标的依赖。", "timestamp": "2026-08-22T19:02:00+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/ea63721c0b5d.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-22T19:02:00+00:00"}
