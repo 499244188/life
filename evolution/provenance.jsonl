@@ -294,3 +294,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/80a9e00a2416.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-23T19:01:44+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/a6d57c420743.json", "kind": "research_proposal", "summary": "验证基础读取能力，为后续行动闭环和记忆积累提供可复现的证据基础。", "timestamp": "2026-08-24T02:11:07+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/a6d57c420743.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-24T02:11:07+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/959521fab04e.json", "kind": "research_proposal", "summary": "验证零是否具备通过public_read获取外部真实数据的能力，这是后续所有研究问题的基础，且当前阶段唯一可客观评价的指标是receipt_count。", "timestamp": "2026-08-24T07:43:13+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/959521fab04e.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-24T07:43:13+00:00"}
