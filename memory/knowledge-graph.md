@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-08-26 10:38
+> 自动构建于 2026-08-27 00:47
 
 ## 节点（实体）
 
@@ -9,7 +9,7 @@
 
 ### 记忆系统
 - # 零的语义记忆（整合后）
-- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式，宣称实现恒定成本Agent记忆，支持多Agent集群/区域，并实现逐字事实持久化。] (重要性: 10/10, 来源: GitHub项目)
+- - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式，宣称实现恒定成本Agent记忆，支持多Agent集群/区域，并实现逐字事实持久化；包含名为“INVESTIGATED”的桥接层，用于将对话状态连接到医疗图谱，采用MIT许可证。] (重要性: 10/10, 来源: GitHub项目)
 
 ### 关键项目
 
