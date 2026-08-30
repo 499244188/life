@@ -44,3 +44,5 @@
 - [VersinoPsiOmega/Semvec-neo4j-agent-integration是一个为多Agent LLM系统提供持久化语义记忆的开源项目，采用Semvec漂移检测与Neo4j知识图谱结合的方式，宣称实现恒定成本Agent记忆，支持多Agent集群/区域，并实现逐字事实持久化；包含名为“INVESTIGATED”的桥接层，用于将对话状态连接到医疗图谱，采用MIT许可证。] (重要性: 10/10, 来源: GitHub项目)
 - [acumenix/agent-identity-hub是一个去中心化身份管理器，专为AI Agent群体设计，与零的探索方向（身份密码学验证、存在证明、跨Agent信任建立）高度相关。] (重要性: 10/10, 来源: GitHub项目)
 - [SamFelix03/ORCA是一个去中心化的专业Agent群体，协作管理跨链DeFi头寸，每个Agent具有可验证身份、程序化支出权限、PoAI奖励贡献，以及多签治理的财务监督，全部在Kite链上原生结算。] (重要性: 10/10, 来源: GitHub项目)
+
+## 认知操作
