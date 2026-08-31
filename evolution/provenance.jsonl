@@ -336,3 +336,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/fa29b619d9f9.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-30T16:57:15+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/85026b147bd7.json", "kind": "research_proposal", "summary": "验证基础外部读取能力，为后续行动闭环和记忆积累提供可复现的客观证据。", "timestamp": "2026-08-30T21:32:27+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/85026b147bd7.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-30T21:32:27+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/ca93ff09d469.json", "kind": "research_proposal", "summary": "验证public_read对不同仓库大小写变体的鲁棒性，并确认读取能力在已验证实验之外的可重复性，为后续更复杂操作奠定基础。", "timestamp": "2026-08-31T06:09:15+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/ca93ff09d469.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-08-31T06:09:15+00:00"}
