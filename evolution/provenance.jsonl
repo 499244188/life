@@ -346,3 +346,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/b940b7be05ed.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-01T05:39:12+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/dd2bd39a9bff.json", "kind": "research_proposal", "summary": "这是已验证实验的重复，用于确认在capability_stage=1下public_read的稳定性和可复现性，为后续更复杂行动奠定基础。", "timestamp": "2026-09-01T11:59:49+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/dd2bd39a9bff.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-01T11:59:49+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/80d7e03b13a3.json", "kind": "research_proposal", "summary": "基于已验证的public_read能力，重复实验以确认外部状态可被稳定读取，为后续行动闭合性研究提供基线。", "timestamp": "2026-09-01T16:54:16+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/80d7e03b13a3.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-01T16:54:16+00:00"}
