@@ -1,0 +1,68 @@
+{
+  "id": "5d7ef42b48f4",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个包含特定内容（如仓库文件列表）的响应，且该响应可被客观验证？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/contents端点，能够收到包含有效JSON数组的HTTP响应，且响应内容可被哈希验证。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "请求返回错误状态码（如404、403）或响应内容为空/无效，导致无法生成有效receipt。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/contents"
+  },
+  "status": "REJECTED",
+  "created_at": "2026-09-02T21:16:37+00:00",
+  "updated_at": "2026-09-02T21:16:37+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-09-02T21:16:37+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-09-02T21:16:37+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-09-02T21:16:37+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-09-02T21:16:37+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "REJECTED",
+      "timestamp": "2026-09-02T21:16:37+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-09-02T21:16:37+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "final_status": "REJECTED"
+}
