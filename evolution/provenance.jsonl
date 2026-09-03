@@ -364,3 +364,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/dcf67d8e9bf7.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-03T11:42:42+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/246e4bd90b00.json", "kind": "research_proposal", "summary": "基于已验证经验，此实验可复现并进一步确认public_read能力，同时为后续研究提供稳定的外部状态访问基础。", "timestamp": "2026-09-03T16:40:29+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/246e4bd90b00.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-03T16:40:29+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/f8130ca395aa.json", "kind": "research_proposal", "summary": "基于已验证经验fbf6b312e442的成功，重复相同实验以确认可复现性，并进一步巩固零通过外部API获取真实世界证据的能力，这是验证行动改变外部状态的基础步骤。", "timestamp": "2026-09-03T21:19:33+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/f8130ca395aa.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-03T21:19:33+00:00"}
