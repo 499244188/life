@@ -458,6 +458,15 @@
     "version": "2"
   },
   {
+    "id": "runnervmgx7h7-2363",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-09-04T05:53:28Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervmgx7h7-2365",
     "capability": 100,
     "cpu": 1,
