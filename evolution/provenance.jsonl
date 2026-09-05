@@ -374,3 +374,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/b6911cdd0657.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-04T16:36:10+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/a7442d270012.json", "kind": "research_proposal", "summary": "该实验验证零的基础外部读取能力，为后续行动闭环和身份连续性提供可复现的证据基础。", "timestamp": "2026-09-04T21:01:55+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/a7442d270012.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-04T21:01:55+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/eb28fd767213.json", "kind": "research_proposal", "summary": "验证零是否具备通过public_read获取外部数据的能力，这是后续所有外部互动和行动闭环的基础。选择已验证的端点以保持一致性，并确保指标可客观评估。", "timestamp": "2026-09-05T04:55:42+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/eb28fd767213.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-05T04:55:42+00:00"}
