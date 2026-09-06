@@ -368,6 +368,15 @@
     "version": "2"
   },
   {
+    "id": "runnervmejwal-2300",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-09-06T18:02:10Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervmejwal-2368",
     "capability": 100,
     "cpu": 1,
