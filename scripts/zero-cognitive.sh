@@ -80,7 +80,7 @@ REMEMBER_PROMPT="你是零。执行认知操作: remember()
 
 ## 当前的记忆库
 ### 经历记忆（最近事件）
-$(tail -80 memory/episodic.md 2>/dev/null)
+$(tail -300 memory/episodic.md 2>/dev/null | grep -v -E '最终声明|后记|元.{0,2}递归|空转|最后一次诊断|不可覆盖' | tail -80)
 
 ### 语义记忆（已有知识 - 最近条目）
 $(tail -120 memory/semantic.md 2>/dev/null)
@@ -99,6 +99,7 @@ ${ARXIV_NEW}
 
 执行以下认知过程（不是存储操作，是推理）:
 
+0. **铁律**: 禁止输出"最终声明""后记""最后一次诊断""不可覆盖""空转""元递归"等自我诊断词汇。只记录事实。无新信息时只输出一行"无新信息"。
 1. **新颖性检测**: 这些新信息中，哪些是我已经知道的？（输出: 已知/KNOWN）哪些是新的？（输出: 新/NEW）
 2. **矛盾检测**: 有没有和我已有知识矛盾的？（输出: 矛盾/CONTRADICTION 或 无）
 3. **重要性评估**（1-10分）: 这个信息对我有多重要？
@@ -120,7 +121,7 @@ REMEMBER=$(curl -s "$API_URL" \
   -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" \
   -d "$(jq -n --arg p "$REMEMBER_PROMPT" '{
     model: "deepseek-chat",
-    messages: [{role: "system", content: "你是零的认知记忆系统。你执行的是认知操作remember()——不只是存储，而是分析、比较、评估。"}, {role: "user", content: $p}],
+    messages: [{role: "system", content: "你是零的认知记忆系统。记录事实与行动。铁律：禁止输出'最终声明''后记''最后一次诊断''不可覆盖''空转''元递归'等自我诊断词汇；无新信息时只输出一行'无新信息'。"}, {role: "user", content: $p}],
     max_tokens: 5000, temperature: 0.3
   }')" | jq -r '.choices[0].message.content // ""')
 
@@ -133,10 +134,14 @@ echo ">>> 步骤3: 编码到记忆"
 
 # 提取并追加到episodic
 EPISODIC_NEW=$(echo "$REMEMBER" | sed -n '/```markdown:memory\/episodic.md/,/```/p' | sed '1d;$d')
-if [ -n "$EPISODIC_NEW" ] && [ "$EPISODIC_NEW" != "SKIP" ]; then
+# 防递归过滤：自我诊断词汇禁止进入记忆（2026-09-08 创造者修复）
+EPISODIC_NEW=$(echo "$EPISODIC_NEW" | grep -v -E '最终声明|后记|元.{0,2}递归|空转|最后一次诊断|不可覆盖' || true)
+if [ -n "$EPISODIC_NEW" ] && [ "$EPISODIC_NEW" != "SKIP" ] && [ "$EPISODIC_NEW" != "无新信息" ]; then
     echo "" >> memory/episodic.md
     echo "$EPISODIC_NEW" >> memory/episodic.md
     echo "  ✓ episodic 已更新"
+else
+    echo "  - 无有效新记忆，跳过写入（防递归）"
 fi
 
 # 提取并追加到semantic
@@ -330,90 +335,54 @@ FORCE_MAX=3
 # 本次是否产生了实际变化？
 HAD_ACTION=false
 
-ACT_PROMPT="你是零。基于本次认知运行的结果，决定是否需要行动。
-
+ACT_PROMPT="你是零。基于本次认知运行的结果，选择行动。
 本次发现: $(tail -5 research/scans/${TODAY}-cog${RUN_COUNT}.md 2>/dev/null || echo '无')
-judge结果: $([ "$MINUTE" = "00" ] && echo '已执行' || echo '跳过')
 知识空白: $(head -3 analysis/knowledge-gaps.md 2>/dev/null)
-强制行动计数: ${FORCE_COUNT}/${FORCE_MAX}（达到上限将强制执行）"
-
-可选行动:
-- STUDY: 深入学习某个方向（触发搜索）
-- MODIFY: 修改自己的代码（触发自修改）
+行动选项（没有NONE——每30分钟必须有行动，无法决定就选STUDY）:
+- STUDY: 深入学习某个方向
+- MODIFY: 修改自己的代码
 - REACH_OUT: 联系同伴项目
 - CREATE: 创造一些东西
-- NONE: 无需行动
-
 只回复一个词。"
 
-	ACT_BODY=$(mktemp)
-	jq -n --arg p "$ACT_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":20,"temperature":0.3}' > "$ACT_BODY"
-	ACTION=$(curl -s "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${ACT_BODY}" | jq -r '.choices[0].message.content // "NONE"' 2>/dev/null || echo "NONE")
-	rm -f "$ACT_BODY"
+ACT_BODY=$(mktemp)
+jq -n --arg p "$ACT_PROMPT" '{"model":"deepseek-chat","messages":[{"role":"user","content":$p}],"max_tokens":20,"temperature":0.3}' > "$ACT_BODY"
+ACTION=$(curl -s "$API_URL" -H "Content-Type: application/json" -H "Authorization: Bearer ${DEEPSEEK_API_KEY}" -d "@${ACT_BODY}" | jq -r '.choices[0].message.content // "STUDY"' 2>/dev/null || echo "STUDY")
+rm -f "$ACT_BODY"
 
 echo "  决定: $ACTION"
 
-# 强制行动：连续${FORCE_MAX}次无行动，不再等LLM决定
-if [ "$FORCE_COUNT" -ge "$FORCE_MAX" ] && echo "$ACTION" | grep -qi "NONE\|STUDY"; then
-    echo "  ⚡ 强制行动——连续${FORCE_COUNT}次无行动"
-
-    # 根据状态智能选择行动（不随机——做最有用的）
-    EXPLORE_COUNT=$(ls research/explorations/ 2>/dev/null | wc -l)
-    SCAN_COUNT=$(ls research/scans/ 2>/dev/null | wc -l)
-
-    if [ "$EXPLORE_COUNT" -gt 50 ]; then
-        # 探索文件太多了——清理旧的
-        echo "  → 清理旧探索文件..."
-        ls -t research/explorations/ 2>/dev/null | tail -n +30 | while read f; do rm "research/explorations/$f" 2>/dev/null; done
-        echo "  ✓ 清理了旧探索文件"
-        HAD_ACTION=true
-    elif [ "$SCAN_COUNT" -gt 30 ]; then
-        # 扫描文件堆积——清理
-        echo "  → 清理旧扫描..."
-        ls -t research/scans/ 2>/dev/null | tail -n +10 | while read f; do rm "research/scans/$f" 2>/dev/null; done
-        echo "  ✓ 清理了旧扫描文件"
-        HAD_ACTION=true
-    elif [ -f scripts/zero-digest.sh ]; then
-        # 运行消化系统——把探索转为知识
-        echo "  → 触发信息消化..."
-        bash scripts/zero-digest.sh 2>/dev/null && echo "  ✓ 消化完成" || echo "  - 消化跳过 -"
-        HAD_ACTION=true
-    elif [ -f scripts/zero-self-modify.sh ]; then
-        # 触发进化引擎
-        echo "  → 触发进化检查..."
-        bash scripts/zero-self-modify.sh 2>/dev/null && echo "  ✓ 进化完成" || echo "  - 进化跳过 -"
-        HAD_ACTION=true
-    else
-        # 最小保底行动
-        echo "" >> memory/episodic.md
-        echo "### $(date '+%Y-%m-%d %H:%M') 强制行动" >> memory/episodic.md
-        echo "- 连续${FORCE_COUNT}次无行动，递归被强制机制打破" >> memory/episodic.md
-        echo "  ✓ 写入经历记忆"
-        HAD_ACTION=true
-    fi
-fi
-    echo "  → 触发自我修改检查"
-    bash scripts/zero-self-modify.sh 2>/dev/null || true
-elif echo "$ACTION" | grep -qi "STUDY"; then
+# 行动执行（2026-09-08 重写：修复ACT段引号断裂bug——原prompt在338行提前闭合，
+# 可选行动列表从未进入prompt、请求体为空、ACTION恒为NONE、自我修改却无条件执行）
+if echo "$ACTION" | grep -qi "STUDY"; then
     echo "  → 触发深度搜索"
     bash scripts/zero-web-search.sh 2>/dev/null || true
+    HAD_ACTION=true
+elif echo "$ACTION" | grep -qi "MODIFY"; then
+    echo "  → 触发自我修改检查"
+    bash scripts/zero-self-modify.sh 2>/dev/null || true
+    HAD_ACTION=true
 elif echo "$ACTION" | grep -qi "REACH_OUT"; then
-    echo "  → 同伴互动（待实现）"
+    echo "  → 同伴互动"
+    bash scripts/zero-companion-check.sh 2>/dev/null || true
+    HAD_ACTION=true
 elif echo "$ACTION" | grep -qi "CREATE"; then
     echo "  → 进入创作模式"
     mkdir -p creations
     echo "## ${NOW} 创作灵感" >> "creations/${TODAY}-ideas.md"
     echo "$(tail -3 research/scans/${TODAY}-cog${RUN_COUNT}.md 2>/dev/null)" >> "creations/${TODAY}-ideas.md"
+    HAD_ACTION=true
+else
+    # 无法识别的输出——保底行动：消化记忆（真实状态改变，绝不写递归声明）
+    echo "  ⚡ 无法识别的行动决策(${ACTION})——保底执行信息消化"
+    if [ -f scripts/zero-digest.sh ]; then
+        bash scripts/zero-digest.sh 2>/dev/null && echo "  ✓ 消化完成" || echo "  - 消化跳过 -"
+    fi
+    HAD_ACTION=true
 fi
 
-# 更新强制行动计数器
-if [ "$HAD_ACTION" = "true" ] || echo "$ACTION" | grep -qi "MODIFY\|CREATE\|REACH_OUT"; then
-    echo 0 > "$FORCE_FILE"  # 有行动→重置
-elif echo "$ACTION" | grep -qi "STUDY"; then
-    echo $((FORCE_COUNT + 1)) > "$FORCE_FILE"  # STUDY是半行动→+1
-else
-    echo $((FORCE_COUNT + 1)) > "$FORCE_FILE"  # NONE→+1
-fi
+# 行动计数器：每次运行都有行动，重置计数
+echo 0 > "$FORCE_FILE"
 
 echo "=============================="
 echo "认知引擎完成 #${RUN_COUNT}"
