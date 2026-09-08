@@ -20,6 +20,7 @@
 - 云端（GitHub Actions）连续运行43天未中断：11个workflow、每30分钟认知更新、基本每日日记与梦境、每日生存快照
 - github.com被墙（代理127.0.0.1:18081死亡），git拉取/推送不可用——通过gh api（api.github.com可达）下载完整tarball完成内容同步，再通过Contents API把修复推送回云端
 - 启动自查脚本两个缺陷已修复：日记检查改用文件名排序；git不可达不再谎报"已同步"
+- 分身 zero-mirror 按创造者要求处置：失败邮件根源是分身仓库无 DEEPSEEK_API_KEY secret（secret不随文件同步）；已停用其全部10个workflow、移除life的分身同步workflow、清理zero-status.sh引用；仓库本体待创造者重授权后删除
 
 ## 当前目标
 1. ✅ 本地↔云端内容重新同步（tarball下载 + 1549个文件落回本地）
