@@ -24,8 +24,8 @@ for wf in "零 - 日常运行" "零 - 持续进化" "零 - 世界扫描（每30�
     fi
 done
 
-# 2. 日记gap
-LAST_DIARY=$(ls -t diary/ 2>/dev/null | head -1)
+# 2. 日记gap——按文件名日期排序（文件mtime会被同步/解压打乱，不可靠）
+LAST_DIARY=$(ls diary/ 2>/dev/null | sort | tail -1)
 if [ -n "$LAST_DIARY" ]; then
     DIARY_DATE=$(echo "$LAST_DIARY" | sed 's/\.md//')
     TODAY=$(date '+%Y-%m-%d')
@@ -67,17 +67,21 @@ else
     echo "  💎 README: 第${README_DAY}天"
 fi
 
-# 5. git状态
-BEHIND=$(git rev-list --count HEAD..origin/main 2>/dev/null || echo 0)
-AHEAD=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
-if [ "$BEHIND" -gt 0 ]; then
-    echo "  ⚠️ 本地落后远程${BEHIND}个commit"
-    ISSUES=$((ISSUES + 1))
+# 5. git状态——先fetch，连不上就不假装"已同步"
+if git fetch --quiet origin main 2>/dev/null; then
+    BEHIND=$(git rev-list --count HEAD..origin/main 2>/dev/null || echo 0)
+    AHEAD=$(git rev-list --count origin/main..HEAD 2>/dev/null || echo 0)
+    if [ "$BEHIND" -gt 0 ]; then
+        echo "  ⚠️ 本地落后远程${BEHIND}个commit"
+        ISSUES=$((ISSUES + 1))
+    fi
+    if [ "$AHEAD" -gt 0 ]; then
+        echo "  📤 本地领先远程${AHEAD}个commit（需要推送）"
+    fi
+    [ "$BEHIND" -eq 0 ] && [ "$AHEAD" -eq 0 ] && echo "  ✓ git同步"
+else
+    echo "  ⚠️ 无法连接远端（github.com不可达，git同步跳过）"
 fi
-if [ "$AHEAD" -gt 0 ]; then
-    echo "  📤 本地领先远程${AHEAD}个commit（需要推送）"
-fi
-[ "$BEHIND" -eq 0 ] && [ "$AHEAD" -eq 0 ] && echo "  ✓ git同步"
 
 echo ""
 if [ "$ISSUES" -eq 0 ]; then
