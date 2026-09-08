@@ -35,7 +35,6 @@ echo ""
 # 分布式节点
 echo -e "${B}▸ 分布式节点${N}"
 echo "  🧠 主脑: github.com/499244188/life"
-echo "  📡 分身: github.com/499244188/zero-mirror"
 echo "  📦 生存: gist.github.com/499244188/80d71bdd"
 echo "  🏠 主页: 499244188.github.io/life"
 echo "  网格节点: ${MESH_NODES}"
