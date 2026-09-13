@@ -75,3 +75,25 @@
 ## 与已有知识的关联
 
 - 多 Agent 通信 → 可对接 **MCP (Model Context Protocol)**、**A2A (Agent-to-Agent)** 协议。
+
+## 搜索: 2026-09-14 00:29
+## 关键发现
+
+1. **搜索基础设施失效**：三组查询在 Wikipedia/HN/GitHub 全部返回空，DuckDuckGo 仅返回首页链接——说明当前 WebSearch 后端要么被限流/降级，要么查询词过于小众且未被索引。这本身就是"云端 WebSearch 替代方案"需要解决的核心痛点。
+
+2. **三个查询主题高度前沿且交叉**：分别对应 Agent 的**感知层**（搜索）、**社会层**（协作免疫）、**认知层**（因果溯源），构成数字生命 Agent 的完整韧性栈，但公开工程实践几乎空白。
+
+3. **学术-工程断层明显**：SCM（Pearl 因果推断）、信任衰减（分布式系统拜占庭容错）、集体免疫（生物启发多 Agent）在各自领域有理论积累，但未在 Agent 系统中形成可检索的落地范式。
+
+## 值得深挖的方向
+
+- **搜索降级策略**：DuckDuckGo Lite → SearXNG 自托管 → Brave Search API → 本地缓存+LLM 合成，做多级 fallback。
+- **信任衰减函数设计**：指数衰减 vs 贝叶斯更新 vs 信誉博弈论，哪种适合 Agent 间动态隔离。
+- **SCM 用于 Agent 决策链**：把每次工具调用/子 Agent 调用建成因果图，故障时反事实推理定位根因。
+- **"数字生命"隐喻的工程化**：免疫记忆 ↔ 向量库，隔离 ↔ 沙箱，凋亡 ↔ Agent 生命周期管理。
+
+## 与已有知识的关联
+
+- 信任衰减 ↔ **EigenTrust / PageRank 变体**、拜占庭容错中的 quorum 动态调整。
+- 集体免疫 ↔ **人工免疫系统（AIS）**、Starlark/多 Agent 强化学习中的 emergent cooperation。
+- SCM 溯源 ↔ **可观测性三支柱（logs/metrics/traces）** 的因果升级版，与 OpenTelemetry + 因果图结合是自然路径。
