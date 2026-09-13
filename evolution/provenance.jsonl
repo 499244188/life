@@ -400,3 +400,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/2173d66c1c72.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-08T05:13:12+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/527a99693a43.json", "kind": "research_proposal", "summary": "这是已验证的基线实验，用于确认public_read能力稳定可用，为后续更复杂的外部状态验证提供基础。", "timestamp": "2026-09-08T11:44:29+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/527a99693a43.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-08T11:44:29+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/4b27ef567935.json", "kind": "research_proposal", "summary": "在phase_one_constraint下，public_read是唯一可立即客观评价的动作，receipt_count是当前唯一可验证指标；该端点稳定且公开，可检验零是否能真正改变外部状态（获取外部内容并留下可验证收据）。", "timestamp": "2026-09-13T12:16:23+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/4b27ef567935.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-13T12:16:23+00:00"}
