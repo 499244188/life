@@ -97,3 +97,4 @@
 - 信任衰减 ↔ **EigenTrust / PageRank 变体**、拜占庭容错中的 quorum 动态调整。
 - 集体免疫 ↔ **人工免疫系统（AIS）**、Starlark/多 Agent 强化学习中的 emergent cooperation。
 - SCM 溯源 ↔ **可观测性三支柱（logs/metrics/traces）** 的因果升级版，与 OpenTelemetry + 因果图结合是自然路径。
+- [探索: 云端WebSearch多级fallback方案 — 1. **检索层确实断了，且断在源头。** 你描述的现象——DuckDuckGo Lite 连续返回首页占位符——是典型的反爬/限流响应：服务端返回 200 但内容是壳页面，而非 429。这类"软封锁"最难检测，因为状态码正常。 2. **fallback 不能只做"�...] (来源: 2026-09-14 01:38)
