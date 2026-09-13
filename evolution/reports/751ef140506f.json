@@ -1,0 +1,32 @@
+{
+  "experiment_id": "751ef140506f",
+  "actor": "zero/autonomous",
+  "question": "在零的当前运行环境中，一次 public_read 行动能否在外部状态中留下可独立核验的、与行动前不同的痕迹？",
+  "hypothesis": "对 https://api.github.com/repos/octocat/hello-world/contents/README 发起一次 public_read，将返回一个 HTTP 响应，其内容哈希与已验证经验中记录的 content_sha256 不同，或返回不同的响应体，从而证明外部状态已随时间改变。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-09-13T16:36:33+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "created_at": "2026-09-13T16:36:33+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}
