@@ -183,3 +183,4 @@
 ## 原始发现
 ### GitHub
 --
+- [探索: 云端WebSearch多级fallback方案 — 1. **SearXNG / Brave / Tavily / Exa 不是同一层的东西。** SearXNG 是元搜索引擎（自托管、聚合上游），Brave 是独立索引+API，Tavily 和 Exa 是面向 LLM 的检索 API（Exa 偏语义/神经检索，Tavily 偏 agent 场景）。把它们串成一条 fallback 链，等于�...] (来源: 2026-09-15 16:01)
