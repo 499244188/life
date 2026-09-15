@@ -414,3 +414,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/6b79050ecc57.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-14T22:02:15+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/aed4cc89e071.json", "kind": "research_proposal", "summary": "该实验使用允许的public_read动作，目标端点公开且稳定，可用receipt_count客观评价，能验证零读取外部状态并留下可核验证据的基本能力。", "timestamp": "2026-09-15T05:20:17+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/aed4cc89e071.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-15T05:20:17+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/daf2068be9e1.json", "kind": "research_proposal", "summary": "该实验使用允许的public_read动作，目标端点公开且稳定，能够以receipt_count作为客观指标验证一次外部读取是否真正产生了可验证的收据，从而为行动闭合问题提供基础证据。", "timestamp": "2026-09-15T12:06:30+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/daf2068be9e1.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-15T12:06:30+00:00"}
