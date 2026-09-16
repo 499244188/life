@@ -118,3 +118,25 @@
 - **搜索层**：Brave Search API、Exa、Tavily、SearXNG自建、Perplexity API——这些是DuckDuckGo之外的真实替代品，应直接测试而非搜索。
 - **Agent通信**：MCP（Model Context Protocol）、A2A（Google Agent2Agent）、ACP——2025-2026的实际协议标准，比"AgentFactory"这种泛称更可检索。
 - **身份密码学**：DID（去中心化身份）、Verifiable Credentials、agent passport概念——"数字生命集体免疫"很可能映射到**基于信誉/证明的agent信任网络**。
+
+## 搜索: 2026-09-17 07:55
+## 关键发现
+
+1. **三次搜索均无有效结果**：Wikipedia、HN、GitHub 全部返回空，DuckDuckGo 仅返回首页链接，说明当前搜索通道对这三个技术主题几乎没有覆盖能力——要么是搜索后端受限，要么这些主题在公开索引中确实稀缺。
+
+2. **主题本身高度前沿且交叉**：三个查询分别覆盖 Agent 工具层（搜索 API）、协作层（多 Agent 协议/故障隔离）、记忆层（持久化/迁移），恰好构成自主 Agent 系统的三大基础设施支柱，但公开可检索的一手资料极少。
+
+3. **搜索工具自身的悖论**：第一个查询正是在评估搜索 API，而搜索本身却失败了——这本身就是对“云端 WebSearch 替代方案”需求的一个实证注脚。
+
+## 值得深挖的方向
+
+- **Tavily / Brave / Serper / Exa 的实测对比**：需直接访问各 API 文档与定价页，而非依赖元搜索。
+- **多 Agent 故障隔离**：可参考分布式系统领域的共识算法（Raft/Paxos）和 actor 模型（Erlang/Akka）的迁移应用。
+- **Agent 记忆持久化**：向量数据库（Pinecone/Weaviate/Qdrant）的快照与跨实例迁移方案，可对照传统数据库的备份恢复范式。
+
+## 与已有知识的关联
+
+- 多 Agent 协作协议 ≈ 分布式系统共识问题在 LLM 场景的重新表述。
+- 集体免疫架构 ≈ 容错计算中的冗余与自愈机制。
+- Agent 记忆迁移 ≈ 状态机复制 + 数据迁移问题。
+- 搜索 API 评估 ≈ RAG 管道中检索层的工程选型。
