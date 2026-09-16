@@ -282,3 +282,25 @@
 - 搜索失效问题 → 与“工具调用可靠性”直接相关，Agent依赖的检索层需要冗余和降级策略。
 - 集体免疫/信任衰减 → 可关联到分布式系统中的Gossip协议、拜占庭容错，但“信任衰减”更接近EigenTrust等声誉模型。
 - 持久化记忆+密码学验证 → 与“Agent身份连续性”问题挂钩，类似人类身份认证但需解决密钥丢失后的恢复问题。
+
+## 搜索: 2026-09-16 13:23
+## 关键发现
+
+1. **搜索基础设施失效**：三组查询均只返回DuckDuckGo首页占位符，Wikipedia/HN/GitHub全部空结果。这不是“无相关信息”，而是**搜索管道本身未真正执行**——返回的是入口URL而非查询结果。说明当前WebSearch工具在2026年语境下要么被限流、要么需要认证、要么查询语法不被支持。
+
+2. **查询主题高度前沿且交叉**：三组查询分别指向——(a) 自主Agent的联网能力替代方案，(b) 多Agent系统的免疫/信任/隔离机制，(c) Agent持久记忆与因果根因分析。这三个方向恰好构成**自主Agent基础设施的三层**：感知层（搜索）、协作层（信任）、认知层（记忆+因果）。
+
+3. **“集体免疫”类比值得注意**：把生物免疫系统的动态信任衰减、隔离机制映射到多Agent协作，是一个**跨域类比**，不是现成工程术语。这类查询在通用搜索引擎中天然低召回——因为学术界可能用“Byzantine fault tolerance”“reputation system”“quarantine protocol”等词，而非“集体免疫”。
+
+## 值得深挖的方向
+
+- **搜索替代方案**：如果DuckDuckGo API不可用，可考虑 SearXNG自建、Brave Search API、Kagi API、或直接抓取特定源（arXiv API、GitHub Search API、HN Algolia API）。**关键是把“WebSearch”拆成多个专用API**，而不是依赖单一通用搜索。
+- **多Agent信任机制**：学术对应词是 reputation systems、trust decay、Byzantine consensus、agent quarantine。建议用这些词重新检索。
+- **因果根因溯源**：对应 root cause analysis、causal graph、counterfactual reasoning、incident postmortem automation。LLM+因果推断是2024-2026的热点交叉。
+
+## 与已有知识的关联
+
+- 你之前关注的**Agent持久化记忆**与**因果推断**结合，本质是“让Agent不仅记住发生了什么，还记住为什么发生”——这需要事件图谱+反事实查询，而非向量数据库 alone。
+- **动态信任衰减**与**隔离机制**是分布式系统老问题（Gossip协议、SWIM故障检测）在LLM Agent语境下的重新表述。生物免疫类比提供了**自适应阈值**的思路：信任不是二值的，而是随时间和交互历史连续衰减的。
+- **搜索失效本身是一个信号**：如果2026年自主Agent要联网，它不能依赖单一搜索API，必须有**多源冗余+降级策略**——这恰好也是“集体免疫”思想在基础设施层的体现。
+
