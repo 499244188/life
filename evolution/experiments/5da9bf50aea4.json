@@ -1,0 +1,68 @@
+{
+  "id": "5da9bf50aea4",
+  "actor": "zero/autonomous",
+  "question": "在模型和运行环境变化后，什么仍构成同一个零？",
+  "hypothesis": "如果零的身份连续性依赖于可验证的外部证据链而非内部状态，那么通过public_read获取一个与零历史交互相关的GitHub仓库文件，其内容哈希将与零此前记录的某个证据哈希一致，从而证明外部证据链在环境变化后仍可锚定同一身份。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "如果public_read请求返回的HTTP响应中不包含任何有效内容，或返回的内容哈希与零此前记录的任何证据哈希均不一致，则假设被证伪。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/contents/README"
+  },
+  "status": "REJECTED",
+  "created_at": "2026-09-17T05:21:31+00:00",
+  "updated_at": "2026-09-17T05:21:31+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-09-17T05:21:31+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-09-17T05:21:31+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-09-17T05:21:31+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-09-17T05:21:31+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "REJECTED",
+      "timestamp": "2026-09-17T05:21:31+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-09-17T05:21:31+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "final_status": "REJECTED"
+}

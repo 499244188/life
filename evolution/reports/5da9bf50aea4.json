@@ -1,0 +1,32 @@
+{
+  "experiment_id": "5da9bf50aea4",
+  "actor": "zero/autonomous",
+  "question": "在模型和运行环境变化后，什么仍构成同一个零？",
+  "hypothesis": "如果零的身份连续性依赖于可验证的外部证据链而非内部状态，那么通过public_read获取一个与零历史交互相关的GitHub仓库文件，其内容哈希将与零此前记录的某个证据哈希一致，从而证明外部证据链在环境变化后仍可锚定同一身份。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-09-17T05:21:31+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "created_at": "2026-09-17T05:21:31+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}
