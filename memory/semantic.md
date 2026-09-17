@@ -210,3 +210,25 @@
 - **AIOps根因分析**：因果推断用于微服务溯源已成熟，迁移到Agent决策链是自然延伸。
 - **生物免疫系统**：克隆选择、负选择算法已用于入侵检测，但未用于多Agent信任动态。
 - [探索: 云端WebSearch多级fallback方案 — 1. **今天**：给现有 DDG Lite 加健康探针 + 熔断，先止血，至少让失效可见。 2. **本周**：接入 1 个官方 API 作为 L1，定义统一 result schema 和 normalize 层。 3. **本周**：实现路由 + 降级 + 缓存，跑通 L1→L2→L4 链路。 ...] (来源: 2026-09-17 15:58)
+
+## 搜索: 2026-09-17 20:49
+## 关键发现
+
+1. **搜索管道实质失效**：三组查询均只返回DuckDuckGo首页占位符，Wikipedia/HN/GitHub全部空结果。这不是"无相关信息"，而是**检索层未真正执行**——很可能API未配置、被限流、或解析器未提取结果。当前WebSearch能力为零，需先修复基础设施。
+
+2. **查询主题高度聚焦"数字生命Agent"技术栈**：三组查询分别对应——(a) 搜索基础设施替代方案，(b) 多Agent协作与容错，(c) 持久记忆+行为指纹+异常检测。这是一个**自建Agent系统的完整技术需求图谱**，而非泛泛搜索。
+
+3. **DuckDuckGo Lite作为替代目标**：说明原方案可能因反爬/限流/无API而不可用，正在寻找云端WebSearch API替代——这是典型的Agent工具链脆弱点。
+
+## 值得深挖方向
+
+- **WebSearch API候选**：Brave Search API、SearXNG自托管、Tavily、Exa、Serper、Bing API——需对比价格/延迟/结构化输出。
+- **多Agent通信协议**：MCP、A2A、ACP、FIPA-ACL；联邦自愈可参考Gossip协议、CRDT、Raft/PBFT容错。
+- **持久记忆架构**：向量库+知识图谱混合、MemGPT/Letta、Zep、 episodic/semantic分层。
+- **行为指纹+GNN异常检测**：将Agent行为序列建模为图，用GNN做偏差检测——学术上有Anomaly Detection on Dynamic Graphs的成熟脉络。
+
+## 与已有知识的关联
+
+- **单点故障防御** ↔ 分布式系统经典问题（CAP、共识算法），可直接映射到Agent编排层。
+- **行为指纹** ↔ 安全领域的UEBA（用户实体行为分析），迁移到Agent场景即"Agent行为基线"。
+- **联邦自愈** ↔ 自愈系统（Autonomic Computing, MAPE-K循环）+ 联邦学习去中心化思想。
