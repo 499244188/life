@@ -161,3 +161,25 @@
 | 搜索概念 | 已有基础 |
 |---|---|
 | 集体免疫 | 生物免疫系统隐喻、AIS（人工免疫系统） |
+
+## 搜索: 2026-09-19 07:51
+## 关键发现
+
+1. **搜索结果几乎全空**：三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 只返回首页——说明这些术语组合**不是现成的研究标签**，而是你自己拼装的概念簇。这本身是个信号：要么是前沿空白，要么是术语未对齐学术界/工业界的既有命名。
+
+2. **三个查询指向同一底层问题**：多 Agent 系统的**可信协作与失效归因**。分别对应三个层次：
+   - 查询1 = 运行时机制（信任衰减、隔离、角色切换）
+   - 查询2 = 事后归因（SCM 因果链、根因溯源）
+   - 查询3 = 事前检测（行为指纹、GNN 异常通信）
+
+3. **术语错位明显**：`动态信任衰减`、`Agent行为指纹`、`隔离协议` 更像安全工程/区块链共识的词汇，而非当前 LLM-Agent 文献的主流用语。直接搜必然空手。
+
+## 值得深挖的方向
+
+- **术语映射**：把自造词翻译成可检索的既有概念——
+  - 信任衰减 → *reputation systems / Byzantine fault tolerance / trust management*
+  - 行为指纹 → *behavioral anomaly detection / provenance / agent profiling*
+  - 因果溯源 → *root cause analysis / causal tracing / accountability in MAS*
+- **交叉点**：SCM + 多 Agent 归因是真正稀缺的——因果推断用于 Agent 决策链溯源，可能比纯 GNN 检测更有解释性优势。
+- **角色切换 + 共识**：接近 *dynamic role reassignment in Byzantine consensus*，可查 PBFT/HotStuff 变体。
+
