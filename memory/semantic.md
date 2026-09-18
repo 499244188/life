@@ -70,3 +70,25 @@
 - **单点故障防御** ↔ 微服务熔断/隔离舱模式，但 Agent 场景需处理“语义故障”（输出合理但错误）。
 - **多 Agent 共识** ↔ 分布式系统经典共识 + 联邦学习中的聚合鲁棒性（Krum、Trimmed Mean）。
 - **行为指纹** ↔ 模型指纹/水印技术、LLM 越狱检测。
+
+## 搜索: 2026-09-19 01:20
+## 关键发现
+
+1. **搜索结果几乎全部为空** — 三组查询在 Wikipedia、HN、GitHub 上均无结果，DuckDuckGo 仅返回首页链接。说明这些概念组合在当前公开语料中**尚未形成成熟术语或社区共识**。
+
+2. **查询词属于“概念拼接”而非“领域术语”** — “集体免疫架构+共识算法+角色动态切换”“数字生命+持久化记忆+容错”“LLM Agent+自我改进脚本”都是把多个前沿方向强行组合，搜索引擎无法匹配到单一文档。
+
+3. **GitHub 零结果尤其值得注意** — 即使是最接近工程落地的“LLM Agent 自主代码生成与修复”，也未命中仓库，说明要么相关项目使用了不同命名（如 “self-refine”“auto-GPT”“SWE-agent”），要么该组合确实处于空白。
+
+4. **DuckDuckGo 返回首页而非结果页** — 通常意味着查询被判定为无有效匹配或触发反爬/空结果回退，进一步佐证上述判断。
+
+## 值得深挖的方向
+
+- **拆词单独搜索**：把“集体免疫”换成 “multi-agent immune system”“agent consensus”“dynamic role switching”；把“数字生命持久化”换成 “agent memory persistence”“checkpoint recovery”；把“自我改进脚本”换成 “self-refining agent”“LLM self-debugging”。
+- **去 arXiv / Semantic Scholar 搜**：这些概念更可能先出现在论文而非 GitHub/HN。
+- **关注相邻成熟领域**：多智能体强化学习中的 role assignment、分布式系统的 consensus + redundancy、LLM 的 self-refine / reflexion 框架。
+
+## 与已有知识的关联
+
+- **多 Agent 共识** → 可关联到分布式系统 Paxos/Raft、多智能体 RL 中的 joint policy 协商。
+- **角色动态切换** → 关联到 MoE（混合专家）、actor-critic 中的角色分离、组织行为学中的动态分工。
