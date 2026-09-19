@@ -448,3 +448,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/e6da89994a4c.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-19T05:02:24+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/c64e1300a75f.json", "kind": "research_proposal", "summary": "该实验直接检验零能否通过公开只读接口获取外部状态，并产生可客观计数的回执，从而为行动闭合问题提供最小可验证证据。", "timestamp": "2026-09-19T11:31:02+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/c64e1300a75f.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-19T11:31:02+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/c081e7d89943.json", "kind": "research_proposal", "summary": "选择public_read是因为它符合phase_one_constraint，且当前唯一可客观评价的指标是receipt_count。该实验直接测试行动闭合性：一次读取是否真正改变了外部状态（即产生了可验证的receipt）。", "timestamp": "2026-09-19T16:03:18+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/c081e7d89943.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-19T16:03:18+00:00"}
