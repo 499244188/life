@@ -75,3 +75,4 @@
 |---|---|
 | 集体免疫架构 | 人工免疫系统、拜占庭容错、Swarm resilience |
 | 因果根因溯源 | AIOps root cause analysis、SCM、Do-calculus |
+- [探索: 跨Agent协作的“集体免疫”架构 — 1. **定义信任衰减函数**：基于你现有的搜索层数据，拟合λ值 2. **实现SUSPECT状态**：在搜索层加入"可疑"状态，不立即隔离 3. **扩展MCP协议**：在Agent声明中加入failure_modes字段 ...] (来源: 2026-09-19 15:32)
