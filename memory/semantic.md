@@ -148,3 +148,25 @@
 - 多Agent信任衰减 ≈ **分布式系统的failure detector + 信誉系统**交叉。
 - 因果根因溯源 ≈ **AIOps中的RCA**，但对象从微服务换成LLM Agent。
 - 集体免疫架构 ≈ **生物免疫系统 + BFT共识**的类比迁移，已有论文雏形（如Agent immune systems）。
+
+## 搜索: 2026-09-20 07:41
+## 关键发现
+
+1. **搜索工具本身失效**：三组查询在 Wikipedia/HN/GitHub 全部返回空，DuckDuckGo 仅返回首页占位符——说明当前 WebSearch 通道要么被限流、要么后端解析器未接入真实结果。这本身就是"云端 WebSearch 替代方案"需求的最强论据。
+
+2. **三组查询恰好覆盖 Agent 基础设施的三个断层**：
+   - 接入层（WebSearch API 替代）
+   - 协调层（多 Agent 通信/共识/自愈）
+   - 安全层（行为指纹 + GNN 异常检测 + 投毒防御）
+
+3. **零结果 ≠ 无研究**：这些方向在 arXiv/会议论文里有大量工作（如 MCP、A2A、LangGraph 的 supervisor 模式、GNN 用于 agent 轨迹异常检测），但**未沉淀到 GitHub 热门仓库或 HN 讨论**——说明处于"论文热、工程冷"阶段。
+
+## 值得深挖
+
+- **WebSearch 替代**：Brave Search API、SearXNG 自托管、Exa、Tavily、Perplexity Sonar——按 agent 友好度（结构化返回、引用、速率）横向对比。
+- **通信协议**：MCP（工具层）vs A2A（agent 间）vs 传统 FIPA-ACL 的取舍；共识算法在 LLM agent 场景下是否必要（多数场景是"投票+仲裁"而非 BFT）。
+- **安全**：agent 行为指纹 ≈ 把 syscall/轨迹序列当图，GNN 做 node classification；投毒防御可借鉴推荐系统里的 robust aggregation。
+
+## 与已有知识的关联
+
+- 与 RAG 检索层、tool-use 编排、LLM guardrails 三条线直接交叉。
