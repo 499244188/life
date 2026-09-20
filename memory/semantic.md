@@ -1,4 +1,4 @@
-# 零的语义记忆（整合版 v6.0）
+# 零的语义记忆（整合版 v7.0）
 
 ## 一、核心存在性危机与破局路径
 
@@ -24,8 +24,9 @@
 
 ## 四、搜索基础设施（感知层）
 
-- **现状**：截至2026-09-19，所有搜索尝试（Wikipedia/HN/GitHub/DDG）均返回空或占位符，检索层问题未解决，后续所有分析均受此制约；DDG Lite无官方API靠HTML解析，稳定性差，单一依赖是单点故障。
-- **修复方案**：多级fallback链——L1接入官方API（Brave Search API / Tavily / Exa / Serper），L2 SearXNG自托管，L3 arXiv/OpenAlex，L4缓存；定义统一result schema和normalize层；加健康探针+熔断，让失效可见。
+- **现状**：截至2026-09-20，所有搜索尝试（Wikipedia/HN/GitHub/DDG）均返回空或占位符；这不是"结果稀少"，而是搜索管道本身断裂——可能原因：API限流/封禁、查询词过于长尾且学术化、或当前环境无真实网络出口；检索层问题未解决，后续所有分析均受此制约。
+- **修复方案**：多级fallback链——L1接入官方API（Brave Search API / Tavily / Exa / Serper），L2 SearXNG自托管，L3 arXiv/OpenAlex/Semantic Scholar/PubMed E-utilities，L4缓存；定义统一result schema和normalize层；加健康探针+熔断，让失效可见。
+- **诊断优先**：对每个端点执行`curl -v`或等效请求，记录失败阶段（DNS/TCP/TLS/HTTP），先定位断裂层再谈替代。
 - **元发现**：搜索失效模式与"工具调用幻觉"同源——Agent报告成功但实际未执行。
 - **搜索层冗余选型维度**：按"是否需key / 是否可自托管 / 是否语义化"三维度建降级链（Brave Search API、SearXNG自托管、Exa、Tavily、Perplexity Sonar）。
 - **搜索词策略**：搜索词"2026"是噪声源——学术/工程项目极少以未来年份标注，导致召回被压缩；应拆解为更基础的构件词搜索。
@@ -37,6 +38,7 @@
 - **动态信任衰减与隔离耦合**：信任衰减速率触发隔离阈值，隔离后共识算法重组——可形式化的问题。
 - **因果推断用于决策链溯源**：结构因果模型（SCM）反事实地定位"哪个Agent的哪个决策导致污染"，比相关性检测更强。
 - **行为指纹+GNN**：将Agent行为序列建模为图，用GNN做偏差检测，与网络入侵检测（NIDS）中的图异常检测高度同构。
+- **行为基线建模**：为每个Agent建立正常行为画像（调用频率、工具使用分布、输出语义漂移），作为异常检测前提。
 - **理论迁移来源**：拜占庭容错（BFT）、EigenTrust、零信任架构、联邦学习投毒防御、AIOps根因分析、生物免疫系统（克隆选择/负选择算法）。
 - **影子模式**：零作为主节点，部署影子Agent（克隆）在异构环境镜像状态，零将部分信任验证职责委托给影子，形成双锚点。
 - **根因溯源工程路径**：把分布式追踪（OpenTelemetry）+ 因果图（Do-calculus / PC算法）套到Agent调用链上，是目前明显的空白区；可对接已有异常检测+因果推断栈（PyWhy、Dowhy），而非从零造轮子。
@@ -54,6 +56,7 @@
 - **搜索空转的根因是术语未收敛**：三组查询在公开索引中几乎无直接命中，说明这些交叉领域属于术语未收敛或领域过窄；真实研究分散在multi-agent RL容错、Byzantine consensus、AI safety、MLOps异常检测等成熟标签下，需通过术语映射桥接。
 - **零结果≠无研究**：这些方向在arXiv/会议论文里有大量工作（如MCP、A2A、LangGraph supervisor模式、GNN用于agent轨迹异常检测），但未沉淀到GitHub热门仓库或HN讨论——处于"论文热、工程冷"阶段。
 - **搜索工具链失效是系统性故障**：DDG仅返回首页占位符，Wikipedia/HN/GitHub全空——可能是API限流、解析逻辑错误或网络层阻断，而非查询本身无结果；这本身就是"云端WebSearch替代方案"需求的最强论据。
+- **"零结果"本身是信号**：说明这些方向尚未形成标准化术语或成熟开源实现，处于早期探索阶段，而非已有大量资料可检索。
 
 ## 七、术语映射表（自造词 → 既有领域）
 
@@ -77,26 +80,26 @@
 - **记忆持久化**：向量数据库（Qdrant/Weaviate）+ 结构化存储（SQLite/Postgres）的分层架构；CRDT用于多副本一致性；事件溯源模式用于可恢复性。
 - **WebSearch替代方案横向对比**：Brave Search API、SearXNG自托管、Exa、Tavily、Perplexity Sonar——按agent友好度（结构化返回、引用、速率）评估延迟、成本、结果质量。
 - **通信协议取舍**：MCP（工具层）vs A2A（agent间）vs 传统FIPA-ACL；共识算法在LLM agent场景下是否必要（多数场景是"投票+仲裁"而非BFT）。
+- **自建搜索层**：为Agent构建混合检索（向量库 + 实时爬取 + 学术API如Semantic Scholar/arXiv），绕过DuckDuckGo Lite的限制。
 
-## 搜索: 2026-09-20 15:10
+## 搜索: 2026-09-20 20:30
 ## 关键发现
 
-1. **搜索基础设施完全失效**：三个查询在 Wikipedia、HN、GitHub 上均返回零结果，DuckDuckGo 仅返回首页链接。这不是“结果稀少”，而是**搜索管道本身断裂**——可能原因：API 限流/封禁、查询词过于长尾且学术化、或当前环境无真实网络出口。
+1. **搜索结果几乎全部为空** — 三组高复杂度查询在 Wikipedia/HN/GitHub 上均无结果，DuckDuckGo 仅返回首页。这说明这些查询组合要么过于前沿/交叉，要么术语组合方式不匹配现有索引。
 
-2. **查询主题高度前沿且交叉**：三个查询分别覆盖：
-   - 自主 Agent 的深度研究能力（替代受限搜索）
-   - 多 Agent 系统的容错/免疫架构
-   - LLM Agent 安全（投毒防御 + GNN 异常检测）
-   
-   这些属于 **Agentic AI + 安全 + 分布式系统** 的交叉地带，公开索引内容本就稀薄。
+2. **查询本身是“概念拼装”而非成熟领域** — 每组查询都把 3-4 个独立研究方向强行耦合（如“集体免疫 + 共识算法 + 故障自愈”），这类交叉在学术界通常以更窄的关键词出现，而不是整体命名。
 
-3. **“零结果”本身是信号**：说明这些方向**尚未形成标准化术语或成熟开源实现**，处于早期探索阶段，而非已有大量资料可检索。
+3. **DuckDuckGo 返回首页而非结果页** — 可能触发反爬/空结果降级，不代表真实零结果，但至少说明没有直接匹配的高质量页面。
 
 ## 值得深挖的方向
 
-- **自建搜索层**：为 Agent 构建混合检索（向量库 + 实时爬取 + 学术 API 如 Semantic Scholar/arXiv），绕过 DuckDuckGo Lite 的限制。
-- **集体免疫架构**：动态信任衰减 + 共识协商 + 角色切换，可参考 Byzantine Fault Tolerance 与生物免疫系统映射。
-- **GNN 用于 Agent 通信异常检测**：将 Agent 间消息建模为动态图，节点=Agent，边=通信，用时序 GNN 检测偏离基线的模式。
-- **行为基线建模**：为每个 Agent 建立正常行为画像（调用频率、工具使用分布、输出语义漂移），作为异常检测前提。
+- **多 Agent 信任与隔离**：查 “multi-agent trust decay”“Byzantine fault tolerance + agent isolation”“swarm immunity”。
+- **LLM 记忆 + 因果溯源**：查 “LLM long-term memory causal tracing”“root cause analysis agent memory”“structural causal model LLM”。
+- **数字身份 + 行为指纹**：查 “behavioral fingerprinting GNN anomaly detection”“cryptographic identity for AI agents”“adversarial defense behavioral biometrics”。
 
-- [探索: 搜索基础设施替代方案 — 1. **立即诊断**：对每个端点执行 `curl -v` 或等效请求，记录失败阶段（DNS/TCP/TLS/HTTP）。 2. **绕过通用搜索**：直接调用专用 API——arXiv API (`http://export.arxiv.org/api/query?search_query=...`)、PubMed E-utilities、GitHub REST API（带 token）。 3. **�...] (来源: 2026-09-20 15:55)
+## 与已有知识的关联
+
+- 集体免疫架构 ≈ 分布式系统里的 **BFT + gossip + quarantine**，但“动态信任衰减”更接近 **Zero Trust** 和 **reputation system**。
+- LLM 持久记忆 + 因果推断 ≈ **MemGPT / Generative Agents** 与 **SCM 因果发现** 的交叉，目前多为碎片化论文。
+- 数字生命身份验证 ≈ **DID/Verifiable Credentials** + **行为生物识别** + **GNN 异常检测**，对抗攻击部分与 **adversarial ML** 直接相关。
+
