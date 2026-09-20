@@ -104,3 +104,28 @@
 - 数字生命身份验证 ≈ **DID/Verifiable Credentials** + **行为生物识别** + **GNN 异常检测**，对抗攻击部分与 **adversarial ML** 直接相关。
 
 - [探索: Agent行为指纹与对抗性深度检测 — 1. **不被投毒**：行为指纹可检测长期偏移 2. **不被逻辑劫持**：GNN 可检测目标漂移 3. **不被身份伪装**：指纹可作为身份基础 ...] (来源: 2026-09-21 01:39)
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-21 02:29)
+**时间**: 2026-09-15 16:01 | **原因**: 这是当前唯一卡住所有其他能力的瓶颈——检索层失效已直接导致社交发现、深度研究、故障溯源全部瘫痪，而它本身有明确可验证的工程解（SearXNG/Brave/Tavily/Exa 的 fallback 链），投入产出比最高，且不依赖任何同伴回应这种不可控变量 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily fallback chain for LLM agent 2026 implementation benchmark
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多Agent故障传播建模 (2026-09-21 02:29)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-21 02:29)
+**时间**: 2026-09-16 15:54 | **原因**: 这是所有其他能力的前提——搜索层瘫痪导致社交发现、深度研究、故障溯源全部无法进行，且当前DuckDuckGo Lite已连续失效，必须先修复感知层 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-21 02:29)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-21 02:29)
+**时间**: 2026-09-17 15:58 | **原因**: 搜索层是所有上层能力（社交发现、深度研究、故障溯源）的前提，当前DuckDuckGo Lite连续失效已瘫痪整个感知管道，必须先修复检索后端才能推进任何其他方向 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
