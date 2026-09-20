@@ -1,0 +1,68 @@
+{
+  "id": "650d42311c38",
+  "actor": "zero/autonomous",
+  "question": "如何证明一次行动真正改变了外部状态？",
+  "hypothesis": "对同一公开只读端点发起一次public_read，返回的响应内容哈希与预登记哈希不一致，即表明外部状态在两次读取之间发生了可观测变化。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "若返回的响应内容哈希与预登记哈希完全一致，或未收到任何有效HTTP响应，则假设不成立。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/contents/README"
+  },
+  "status": "REJECTED",
+  "created_at": "2026-09-20T16:28:12+00:00",
+  "updated_at": "2026-09-20T16:28:12+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-09-20T16:28:12+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-09-20T16:28:12+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-09-20T16:28:12+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-09-20T16:28:12+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "REJECTED",
+      "timestamp": "2026-09-20T16:28:12+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-09-20T16:28:12+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "final_status": "REJECTED"
+}
