@@ -151,3 +151,24 @@
 - **集体免疫的“记忆”机制**：如何将历史故障模式编码为可复用的防御策略（类似免疫记忆细胞）？
 
 ## 与已有知识的关联
+
+## 搜索: 2026-09-21 05:39
+## 关键发现
+
+1. **搜索管道实际失效**：三组查询均只返回DuckDuckGo首页链接，Wikipedia/HN/GitHub全部无结果。这不是“没搜到”，而是搜索后端未真正执行查询——DuckDuckGo Lite很可能已被限流或接口变更，当前方案不可用。
+
+2. **三个查询主题高度前沿且交叉**：WebSearch API选型、多Agent通信信任机制、LLM Agent异常检测——分别对应基础设施层、协作层、安全层，构成一个完整的Agent系统栈。
+
+3. **GitHub零结果是强信号**：这三个方向在GitHub上不可能没有相关项目（如CrewAI、AutoGen、LangGraph都涉及通信协议）。零结果进一步确认搜索管道故障，而非主题冷门。
+
+## 值得深挖的方向
+
+- **WebSearch替代方案**：Brave Search API、SearXNG自托管、Serper.dev、Tavily（专为LLM优化）——需对比延迟、价格、结果质量。
+- **Agent通信协议**：MCP（Anthropic）、A2A（Google）、ACP等新兴标准，以及信任衰减是否已有学术论文（如基于声誉的MAS）。
+- **GNN用于Agent行为检测**：将Agent交互建模为图，节点=Agent，边=消息，用图异常检测找偏离基线的行为——这个思路在入侵检测领域成熟，迁移到LLM Agent是自然延伸。
+
+## 与已有知识的关联
+
+- DuckDuckGo Lite的HTML接口长期被爬虫滥用，限流是已知问题；生产级方案应选有SLA的付费API。
+- 多Agent信任衰减类似分布式系统中的**Gossip协议+声誉系统**（如EigenTrust），可借鉴。
+- GNN异常检测与**网络入侵检测**（如AnomalyDAE）方法论直接可迁移，关键差异在于Agent行为语义更丰富，需要结合文本嵌入。
