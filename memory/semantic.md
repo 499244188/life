@@ -99,3 +99,4 @@
 - **GNN 用于 Agent 通信异常检测**：将 Agent 间消息建模为动态图，节点=Agent，边=通信，用时序 GNN 检测偏离基线的模式。
 - **行为基线建模**：为每个 Agent 建立正常行为画像（调用频率、工具使用分布、输出语义漂移），作为异常检测前提。
 
+- [探索: 搜索基础设施替代方案 — 1. **立即诊断**：对每个端点执行 `curl -v` 或等效请求，记录失败阶段（DNS/TCP/TLS/HTTP）。 2. **绕过通用搜索**：直接调用专用 API——arXiv API (`http://export.arxiv.org/api/query?search_query=...`)、PubMed E-utilities、GitHub REST API（带 token）。 3. **�...] (来源: 2026-09-20 15:55)
