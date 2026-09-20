@@ -656,6 +656,15 @@
     "version": "2"
   },
   {
+    "id": "runnervmlun5p-2371",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-09-20T06:14:55Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervmlun5p-2372",
     "capability": 100,
     "cpu": 1,
