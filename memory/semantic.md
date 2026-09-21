@@ -194,3 +194,25 @@
 
 - 当前搜索失败本身就是一个**元案例**：正好印证了"为什么需要自托管搜索层"——依赖外部 API 的检索在无 key 时直接归零。
 - 三个主题可映射为一个架构图：**SearXNG（感知）→ MCP/A2A（协作）→ 向量+图谱（记忆）**，这与常见的 Agent 系统分层设计一致。
+
+## 搜索: 2026-09-21 09:54
+## 关键发现
+
+1. **搜索工具链失效**：三组查询在Wikipedia/HN/GitHub全部返回空结果，DuckDuckGo仅返回首页链接——说明当前搜索通道未真正执行查询，或这些术语组合过于前沿/小众，尚无公开索引内容。
+
+2. **术语组合高度交叉但无现成文献**：三组关键词分别指向多Agent系统的**安全/韧性**（集体免疫、自愈）、**可解释性/因果推理**（SCM、根因溯源）、**异常检测**（行为指纹、GNN、投毒防御），交叉领域在公开工程社区几乎空白。
+
+3. **学术与工程存在断层**：这些概念在学术论文中可能以不同措辞存在（如"multi-agent resilience""causal attribution in MAS""Byzantine fault detection"），但未沉淀为GitHub项目或HN讨论。
+
+## 值得深挖的方向
+
+- **术语映射**：将自创术语对齐学术界已有词汇（如"集体免疫"→ stigmergic/immune-inspired MAS；"行为指纹"→ behavioral profiling / anomaly detection in agent networks）。
+- **因果+安全交叉**：SCM用于Agent决策链根因溯源，结合预测性防御——这是可发论文的空白点。
+- **共识算法与角色动态切换**：与Raft/PBFT的Agent化改造、动态leader election相关，但"自愈"维度少有系统化工作。
+- **GNN用于Agent通信图异常检测**：技术上可行，工程落地案例稀缺。
+
+## 与已有知识的关联
+
+- **集体免疫** ↔ 人工免疫系统（AIS）、负选择算法、危险理论
+- **共识+角色切换** ↔ 动态Quorum、Byzantine容错、Actor模型监督树（Erlang/OTP supervisor）
+- **SCM根因溯源** ↔ Pearl因果阶梯、do-calculus、可观测性领域的trace-based RCA
