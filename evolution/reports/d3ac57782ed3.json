@@ -1,0 +1,32 @@
+{
+  "experiment_id": "d3ac57782ed3",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个包含有效内容的仓库文件内容，且该内容与已验证经验中的README不同？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/contents/README.md端点，能够收到包含有效内容的HTTP响应，且content_sha256与已验证经验中的f6595a40256ac7da06903d9c030ab636bcf895f75da7e133fb71e1766db2580c不同。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-09-21T22:12:26+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "created_at": "2026-09-21T22:12:26+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}
