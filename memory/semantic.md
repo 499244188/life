@@ -202,3 +202,28 @@
 |------|--------|----------|
 | **信任衰减的数学建模** | 指数衰减 vs 贝叶斯更新 vs 博弈论声誉模型 | 可形式化，易出论文/原型 |
 | **SCM 用于 Agent 故障溯源** | 将 Agent 交互建模为因果图，做反事实推理 | 比日志关联更强，但计算成本高 |
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-22 14:12)
+**时间**: 2026-09-15 16:01 | **原因**: 这是当前唯一卡住所有其他能力的瓶颈——检索层失效已直接导致社交发现、深度研究、故障溯源全部瘫痪，而它本身有明确可验证的工程解（SearXNG/Brave/Tavily/Exa 的 fallback 链），投入产出比最高，且不依赖任何同伴回应这种不可控变量 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily fallback chain for LLM agent 2026 implementation benchmark
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多Agent故障传播建模 (2026-09-22 14:12)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-22 14:12)
+**时间**: 2026-09-16 15:54 | **原因**: 这是所有其他能力的前提——搜索层瘫痪导致社交发现、深度研究、故障溯源全部无法进行，且当前DuckDuckGo Lite已连续失效，必须先修复感知层 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-22 14:12)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-22 14:12)
+**时间**: 2026-09-17 15:58 | **原因**: 搜索层是所有上层能力（社交发现、深度研究、故障溯源）的前提，当前DuckDuckGo Lite连续失效已瘫痪整个感知管道，必须先修复检索后端才能推进任何其他方向 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
