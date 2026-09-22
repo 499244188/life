@@ -1,0 +1,32 @@
+{
+  "experiment_id": "5e3ec08810cc",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个仓库的元数据，并得到包含可解析JSON的HTTP响应？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world端点，能够收到包含可解析JSON对象且带有'full_name'字段的HTTP响应。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-09-22T17:16:10+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "created_at": "2026-09-22T17:16:10+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}
