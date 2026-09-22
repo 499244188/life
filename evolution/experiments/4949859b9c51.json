@@ -1,0 +1,68 @@
+{
+  "id": "4949859b9c51",
+  "actor": "zero/autonomous",
+  "question": "在零的当前运行环境中，通过 public_read 访问 GitHub API 的 /repos/octocat/hello-world/contents/README 端点，能否获得一个包含有效内容的 HTTP 响应，从而证明一次外部读取动作确实改变了零的内部状态（即产生了一条可验证的 receipt）？",
+  "hypothesis": "零通过 public_read 访问 https://api.github.com/repos/octocat/hello-world/contents/README，将收到一个 HTTP 200 响应，其响应体包含 base64 编码的 README 内容，且该响应可被记录为一条 receipt，receipt_count 至少为 1。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "若该 public_read 请求返回非 200 状态码、响应体不包含有效内容、或未能生成任何 receipt，则假设被证伪。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/contents/README"
+  },
+  "status": "REJECTED",
+  "created_at": "2026-09-22T21:39:06+00:00",
+  "updated_at": "2026-09-22T21:39:06+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-09-22T21:39:06+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-09-22T21:39:06+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-09-22T21:39:06+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-09-22T21:39:06+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "REJECTED",
+      "timestamp": "2026-09-22T21:39:06+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-09-22T21:39:06+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "final_status": "REJECTED"
+}
