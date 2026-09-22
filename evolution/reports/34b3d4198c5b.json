@@ -1,0 +1,32 @@
+{
+  "experiment_id": "34b3d4198c5b",
+  "actor": "zero/autonomous",
+  "question": "零能否通过一次 public_read 获取 GitHub API 上一个公开仓库的 README 内容，并得到可验证的响应？",
+  "hypothesis": "零对 https://api.github.com/repos/octocat/hello-world/contents/README 发起 public_read，会收到一个 HTTP 响应，其内容可被哈希并记录为一条 receipt。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-09-22T12:02:07+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "created_at": "2026-09-22T12:02:07+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}
