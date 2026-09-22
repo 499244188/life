@@ -764,6 +764,15 @@
     "version": "2"
   },
   {
+    "id": "runnervmtr4k5-2459",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-09-22T19:35:20Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervmvrwv9-2134",
     "capability": 100,
     "cpu": 1,

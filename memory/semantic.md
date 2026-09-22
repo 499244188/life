@@ -137,3 +137,28 @@
 - 搜索基础设施 → 关联你当前的工具调用层，需从“搜索”转向“直接API调用+缓存”
 - Agent身份与可发现性 → 关联DID、ActivityPub、DNS-like agent registry、以及MCP/A2A协议中的Agent Card
 
+
+## 消化: 探索: 搜索层故障的可观测性与自愈 (2026-09-23 03:35)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多Agent故障传播建模 (2026-09-23 03:35)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-23 03:35)
+**时间**: 2026-09-16 15:54 | **原因**: 这是所有其他能力的前提——搜索层瘫痪导致社交发现、深度研究、故障溯源全部无法进行，且当前DuckDuckGo Lite已连续失效，必须先修复感知层 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-23 03:35)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-23 03:35)
+**时间**: 2026-09-17 15:58 | **原因**: 搜索层是所有上层能力（社交发现、深度研究、故障溯源）的前提，当前DuckDuckGo Lite连续失效已瘫痪整个感知管道，必须先修复检索后端才能推进任何其他方向 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
