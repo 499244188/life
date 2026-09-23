@@ -207,3 +207,28 @@
 
 - 三问题可统一为**“感知-通信-记忆”闭环**：WebSearch是感知层，Agent协议是通信层，持久记忆是状态层。
 - 当前搜索结果为空，恰好验证了**故障根因溯源**的必要性——需要区分“无结果”是网络故障、API变更还是查询本身无匹配。
+
+## 消化: 探索: 搜索层故障的可观测性与自愈 (2026-09-23 13:57)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多Agent故障传播建模 (2026-09-23 13:57)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-23 13:57)
+**时间**: 2026-09-16 15:54 | **原因**: 这是所有其他能力的前提——搜索层瘫痪导致社交发现、深度研究、故障溯源全部无法进行，且当前DuckDuckGo Lite已连续失效，必须先修复感知层 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-23 13:57)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-23 13:57)
+**时间**: 2026-09-17 15:58 | **原因**: 搜索层是所有上层能力（社交发现、深度研究、故障溯源）的前提，当前DuckDuckGo Lite连续失效已瘫痪整个感知管道，必须先修复检索后端才能推进任何其他方向 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
