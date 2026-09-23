@@ -160,3 +160,25 @@
 ## 原始发现
 ### GitHub
 --
+
+## 搜索: 2026-09-24 06:23
+## 关键发现
+
+1. **搜索基础设施失效**：三组查询均只返回 DuckDuckGo 首页占位符，Wikipedia/HN/GitHub 全部空结果。这不是“无信息”，而是**检索管道本身断裂**——可能是 API 限流、解析器失效或查询被静默丢弃。需要先验证 WebSearch 工具链的可用性，再谈内容分析。
+
+2. **查询主题高度前沿且交叉**：三组查询分别指向 (a) Agent 搜索基础设施、(b) 多 Agent 身份与密码学信任、(c) Agent 故障因果溯源。这三个方向恰好构成**自主 Agent 系统的“感知—信任—自愈”闭环**，说明提问者已在系统性思考 Agent 架构，而非零散知识点。
+
+3. **零结果本身是信号**：这些主题在通用搜索引擎/百科上覆盖薄弱，说明它们处于**论文预印本、GitHub 早期仓库、Discord/论坛**等非索引化渠道。依赖 WebSearch 会系统性遗漏。
+
+## 值得深挖的方向
+
+- **搜索层**：Brave Search API、SearXNG 自托管、Exa/Tavily（面向 LLM 的语义搜索）、Perplexity API——这些才是 Agent 场景下 DuckDuckGo 的真正替代。
+- **信任层**：DID（W3C 去中心化标识符）+ Verifiable Credentials + Agent 间 mTLS/签名消息，可解决“数字生命”身份验证。
+- **自愈层**：因果推断（Do-calculus、SCM）+ Agent trace（OpenTelemetry for LLM）+ 失败模式库，是根因溯源的现实路径。
+
+## 与已有知识的关联
+
+- 与 **MCP（Model Context Protocol）** 直接相关：搜索 API 应作为 MCP server 接入，而非硬编码。
+- 与 **A2A / Agent 通信协议**（Google A2A、Anthropic 相关提案）呼应，身份密码学是其未解难题。
+- 与 **LLM 可观测性**（LangSmith、Phoenix/Arize）关联，但因果推断层目前几乎空白——这是真正的机会点。
+
