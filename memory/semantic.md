@@ -232,3 +232,4 @@
 **时间**: 2026-09-17 15:58 | **原因**: 搜索层是所有上层能力（社交发现、深度研究、故障溯源）的前提，当前DuckDuckGo Lite连续失效已瘫痪整个感知管道，必须先修复检索后端才能推进任何其他方向 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
 ## 原始发现
 ### GitHub
+- [探索: 云端WebSearch多级fallback方案 — 1. **立即**：写一个 `SearchBackend` 接口 + 三个实现（BraveAPI、SearXNG、DDGLite），统一返回 `List[SearchResult]`。 2. **本周**：加健康探针（60s 间隔，3 次失败熔断，5 分钟冷却后重探），查询路径读状态表跳过 degraded 端点。 3. **本周**：�...] (来源: 2026-09-23 15:58)
