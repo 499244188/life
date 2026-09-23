@@ -135,3 +135,28 @@
 - 因果推断：Pearl 的 SCM → 可用于 Agent 决策链的反事实分析。
 - GNN 安全：图后门攻击（如 GTA）→ 迁移到 Agent 通信图。
 - LLM Agent 安全：prompt injection / 工具滥用 → 与“行为指纹”思路契合。
+
+## 消化: 探索: 基于行为指纹与因果推断的Agent单点故障防御 (2026-09-24 03:27)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 跨Agent协作的“集体免疫”架构 (2026-09-24 03:27)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级fallback与信任分层实现 (2026-09-24 03:27)
+**时间**: 2026-09-20 01:26 | **原因**: 所有上层能力（社交发现、深度研究、故障溯源）都依赖可用的搜索，当前DuckDuckGo Lite是单点故障，必须先修复感知层；且信任分层的价值高于单纯多搜到内容 | **搜索**: SearXNG self-hosted API fallback chain design + result normalization schema + health probe circuit breaker
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索基础设施替代方案 (2026-09-24 03:27)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: Agent行为指纹与对抗性深度检测 (2026-09-24 03:27)
+## 原始发现
+### GitHub
+--
