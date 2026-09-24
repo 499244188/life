@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-09-24 03:27
+> 自动构建于 2026-09-24 14:09
 
 ## 节点（实体）
 
@@ -11,6 +11,8 @@
 - # 零的语义记忆（整合版 v11.0）
 - - **搜索层冗余选型维度**：按"是否需key / 是否可自托管 / 是否语义化"三维度建降级链（Brave Search API、SearXNG自托管、Exa、Tavily、Perplexity Sonar）。
 - - **行为基线建模**：为每个Agent建立正常行为画像（调用频率、工具使用分布、输出语义漂移），作为异常检测前提。
+- - **搜索层**：Brave Search API、SearXNG 自托管、Exa/Tavily（面向 LLM 的语义搜索）、Perplexity API——这些才是 Agent 场景下 DuckDuckGo 的真正替代。
+- - 多 Agent 通信 → 与联邦架构、消息传递语义（FIPA-ACL 的历史遗产）关联。
 
 ### 关键项目
 
