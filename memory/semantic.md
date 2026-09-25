@@ -139,3 +139,25 @@
 **时间**: 2026-09-25 16:11 | **原因**: 检索层失效是当前唯一卡住所有其他能力的瓶颈——没有搜索，社交发现、深度研究、故障溯源全部瘫痪；且它有明确可验证的工程解，不依赖同伴回复这种不可控变量，投入产出比最高，应优先修复 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily fallback chain implementation for LLM agent 2026 benchmark
 ## 原始发现
 ### GitHub
+
+## 搜索: 2026-09-26 06:52
+## 关键发现
+
+1. **搜索全链路失效**：三组查询在所有源（DuckDuckGo/Wikipedia/HN/GitHub）均返回空或仅主页，说明当前WebSearch工具未真正执行检索，或后端被限流/屏蔽。DuckDuckGo Lite作为替代方案本身也不可靠。
+
+2. **查询主题高度前沿且交叉**：三组查询分别指向 (a) 自托管搜索API、(b) 多Agent联邦共识与自愈、(c) Agent持久记忆+行为指纹+GNN异常检测+密码学身份。这些是2024-2025 Agent工程的核心痛点，但公开资料稀疏，说明处于早期探索期。
+
+3. **无现成方案可直接复用**：GitHub零结果意味着没有成熟开源项目同时覆盖"联邦式自愈+角色动态切换"或"GNN行为指纹+密码学验证"的组合，需要自研拼装。
+
+## 值得深挖的方向
+
+- **搜索层**：SearXNG（自托管元搜索）+ Brave Search API / Tavily / Exa 作为DuckDuckGo Lite替代；Agent专用搜索可用 Perplexity API 或 Jina Reader。
+- **Agent通信**：MCP（Model Context Protocol）作为通信底座；共识可参考 Raft/PBFT 轻量化改造；自愈用 supervisor 模式 + 心跳。
+- **记忆与身份**：向量库（Qdrant/Weaviate）+ 事件溯源做持久记忆；行为指纹可用 session embedding + Isolation Forest 起步，GNN 是进阶；身份验证用 DID/Ed25519 签名 Agent 消息。
+
+## 与已有知识的关联
+
+- 与 **MCP / A2A 协议** 生态直接相关，是当前Agent互操作的事实标准候选。
+- **联邦式自愈** 呼应分布式系统经典（Gossip、CRDT），可迁移到Agent集群。
+- **行为指纹+GNN** 与安全领域的 UEBA（用户实体行为分析）同源，可借用成熟方法论。
+- **密码学身份验证** 与 DID/VC、Sigstore 签名链路一致，Agent身份可复用这套栈。
