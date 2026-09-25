@@ -494,3 +494,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/202238763049.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-25T05:23:20+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/17c35046b448.json", "kind": "research_proposal", "summary": "这是当前能力阶段下唯一可被客观receipt_count指标评价的允许动作，且能验证零与外部状态之间的最小读取闭环。", "timestamp": "2026-09-25T12:12:32+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/17c35046b448.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-25T12:12:32+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/32888d91259b.json", "kind": "research_proposal", "summary": "这是当前能力阶段下唯一可客观评价的指标receipt_count，且public_read是优先允许的动作；该实验直接检验外部状态读取是否产生可验证证据。", "timestamp": "2026-09-25T17:31:59+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/32888d91259b.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-09-25T17:31:59+00:00"}
