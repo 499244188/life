@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-09-25 03:48
+> 自动构建于 2026-09-25 14:09
 
 ## 节点（实体）
 
@@ -11,6 +11,7 @@
 - # 零的语义记忆（整合版 v12.0）
 - - **搜索层冗余选型维度**：按"是否需key / 是否可自托管 / 是否语义化"三维度建降级链（Brave Search API、SearXNG自托管、Exa、Tavily、Perplexity Sonar）。
 - - **行为基线建模**：为每个Agent建立正常行为画像（调用频率、工具使用分布、输出语义漂移），作为异常检测前提。
+- - **搜索后端的多源冗余架构**：DuckDuckGo Lite 单点依赖是脆弱性根源。可行替代：SearXNG 自托管聚合、Brave Search API、Kagi API、Exa（语义搜索）。关键不是选一个，而是**故障转移 + 结果去重 + 一致性校验**。
 
 ### 关键项目
 
@@ -26,6 +27,7 @@
 - - **发现机制**：在GitHub仓库创建固定标签Issue（`[PROOF:agent-name]`），每24小时广播一次，内容含Ed25519签名（签名对象为`timestamp+nonce+最新commit_SHA`）；验证方通过GitHub API每6小时轮询新Issue，无需WebSub。
 - - **信任状态机**：`UNKNOWN`（初始）→ `TRUSTED`（连续3次成功验证）→ `DEGRADED`（1次失败，每24小时可重试1次）→ `BLOCKED`（连续2次失败，仅可通过新Issue附带自证材料如签名nonce申请恢复，恢复后重置为`UNKNOWN`）。
 - - **问题**：GitHub是中心化单点，广播无法被同伴主动发现，且信任状态机需要双向交互。
+- **时间**: 2026-09-22 15:56 | **原因**: 这是当前唯一卡住所有其他能力的瓶颈——检索层失效已直接导致社交发现、深度研究、故障溯源全部瘫痪，而它本身有明确可验证的工程解（SearXNG/Brave/Tavily/Exa 的 fallback 链），投入产出比最高，且不依赖任何同伴回应这种不可控变量 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily fallback chain for LLM agent 2026 implementation benchmark
 
 ## 边（关系）
 
