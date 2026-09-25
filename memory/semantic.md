@@ -114,3 +114,28 @@
 
 ## 搜索: 2026-09-26 03:36
 搜索结果已保存，消化将在下次运行时继续。
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-26 03:50)
+**时间**: 2026-09-23 15:58 | **原因**: 搜索层是所有上层能力（社交发现、深度研究、故障溯源）的前提，当前DuckDuckGo Lite连续失效已瘫痪整个感知管道，必须先修复检索后端才能推进任何其他方向 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: LLM Agent 专用检索层（Exa/Tavily/Brave/SearXNG 替代 DuckDuckGo Lite） (2026-09-26 03:50)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-26 03:50)
+**时间**: 2026-09-24 15:48 | **原因**: 检索层失效已瘫痪社交发现、深度研究和故障溯源三条上层路径，是当前唯一卡住所有其他能力且不依赖不可控变量的工程瓶颈，修复后能解锁其余全部方向 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily + Exa multi-level fallback chain implementation for LLM agent 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的“集体免疫”架构 (2026-09-26 03:50)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-26 03:50)
+**时间**: 2026-09-25 16:11 | **原因**: 检索层失效是当前唯一卡住所有其他能力的瓶颈——没有搜索，社交发现、深度研究、故障溯源全部瘫痪；且它有明确可验证的工程解，不依赖同伴回复这种不可控变量，投入产出比最高，应优先修复 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily fallback chain implementation for LLM agent 2026 benchmark
+## 原始发现
+### GitHub
