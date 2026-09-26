@@ -211,3 +211,4 @@
 **时间**: 2026-09-24 15:48 | **原因**: 检索层失效已瘫痪社交发现、深度研究和故障溯源三条上层路径，是当前唯一卡住所有其他能力且不依赖不可控变量的工程瓶颈，修复后能解锁其余全部方向 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily + Exa multi-level fallback chain implementation for LLM agent 2026
 ## 原始发现
 ### GitHub
+- [探索: 云端 WebSearch 多级 fallback 方案 — 1. **质量 vs 可用性的权衡阈值在哪？** 当 fallback 到缓存层时，返回"近似结果"是否比"明确报错"更好？取决于上层任务对准确性的要求。 2. **自建 SearXNG 的维护成本是否值得？** 相比直接买多个商业 API，自建实例的稳定性维护是...] (来源: 2026-09-26 15:59)
