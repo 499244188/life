@@ -159,3 +159,25 @@
 ## 原始发现
 ### GitHub
 --
+
+## 搜索: 2026-09-27 05:18
+## 关键发现
+
+1. **搜索结果几乎为空** — 三组查询均未返回有效结果（DuckDuckGo 仅有首页链接，Wikipedia/HN/GitHub 全空）。这不是“没有相关信息”，而是搜索通道本身失效或查询词过于前沿/组合过窄。
+
+2. **查询主题高度交叉且前沿** — 三组关键词分别指向：无服务器 Agent 的搜索基础设施、多 Agent 信任与共识、Agent 记忆与因果溯源。这些都属于 2025-2026 才逐渐成形的交叉领域，公开索引可能尚未覆盖。
+
+3. **“2026”作为时间锚点** — 查询中显式带入未来年份，可能过滤掉了大量现有资料，或暗示你在做前瞻性架构设计而非现状调研。
+
+## 值得深挖的方向
+
+- **搜索通道本身**：DuckDuckGo 返回空壳结果，说明当前 WebSearch 工具链可能被限流/降级。优先验证搜索后端可用性，再谈内容。
+- **换词策略**：把“集体免疫”换成“reputation system / trust propagation”；“因果推断+根因溯源”换成“causal tracing / incident root cause LLM”；“无服务器 Agent 集成”换成“edge agent orchestration / Cloudflare Workers AI”。
+- **学术源替代**：arXiv、Semantic Scholar、OpenReview 对这类前沿组合的覆盖远好于通用搜索引擎。
+
+## 与已有知识的关联
+
+- 多 Agent 信任衰减 ≈ 分布式系统中的 **gossip protocol + reputation decay**，可类比 EigenTrust、PageRank 阻尼。
+- Agent 持久化记忆 + 因果溯源 ≈ **event sourcing + causal DAG**，与 LangGraph checkpoint、MemGPT 思路同源。
+- 无服务器 Agent 搜索替代 ≈ **RAG 的检索层解耦**，可参考 Tavily/Brave Search API/Exa 作为 WebSearch 替代。
+
