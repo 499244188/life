@@ -181,3 +181,25 @@
 - Agent 持久化记忆 + 因果溯源 ≈ **event sourcing + causal DAG**，与 LangGraph checkpoint、MemGPT 思路同源。
 - 无服务器 Agent 搜索替代 ≈ **RAG 的检索层解耦**，可参考 Tavily/Brave Search API/Exa 作为 WebSearch 替代。
 
+
+## 搜索: 2026-09-27 07:41
+## 关键发现
+
+1. **搜索结果几乎全部无效**：三组查询均只返回 DuckDuckGo 首页链接，Wikipedia/HN/GitHub 全部无结果。这不是"没搜到"，而是搜索工具本身未正常执行——返回的是占位符而非真实检索结果。
+
+2. **查询主题高度专业且前沿**：三组查询分别覆盖 AI Agent 基础设施的三个核心层——工具层（搜索API）、协调层（多Agent通信/信任）、记忆层（持久化架构）。这说明查询者已有较成熟的 Agent 系统设计框架，在补全具体实现选型。
+
+3. **这些主题在通用搜索引擎上本就稀疏**：Serper/Brave/Tavily/Exa 的对比、信任衰减隔离、向量库+知识图谱混合记忆——这类内容主要存在于技术博客、Discord 社区、arXiv 论文和厂商文档中，而非 Wikipedia/HN 首页。
+
+## 值得深挖的方向
+
+- **搜索API对比**：直接查各厂商定价页 + LangChain/LlamaIndex 的 tool 集成文档；Tavily 和 Exa 本身就是为 Agent 设计的，定位差异值得单独拆解。
+- **多Agent信任机制**：关键词应转向 "reputation system multi-agent"、"Byzantine fault tolerance LLM"、"agent isolation"——"信任衰减"这个说法可能不是社区通用术语。
+- **持久化记忆**：MemGPT/Letta、Mem0、Zep 是当前主要玩家，建议直接对比这三者的架构而非泛搜"向量数据库+知识图谱"。
+
+## 与已有知识的关联
+
+- 搜索API层对应 Agent 的 **tool use / function calling** 能力，是 ReAct 循环的外部感知入口。
+- 多Agent信任衰减 ≈ 分布式系统中的 **failure detector + reputation**，可类比 Cassandra 的 phi accrual failure detector。
+- 持久化记忆 = **context engineering** 的延伸，核心矛盾始终是：上下文窗口有限 vs. 长期状态无限。
+
