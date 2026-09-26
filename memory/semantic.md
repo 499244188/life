@@ -134,3 +134,28 @@
 - **动态信任衰减**：与 EigenTrust、PageRank 的衰减因子同源，但用于 Agent 间实时信任而非静态排名。
 - **数字生命 + 身份密码学**：触及“什么构成一个持续存在的数字实体”——如果记忆可迁移、身份可验证，那 Agent 的“自我”是密码学锚定的，而非物理锚定的。
 
+
+## 消化: 探索: 搜索层故障的可观测性与自愈 (2026-09-27 03:02)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-27 03:02)
+**时间**: 2026-09-23 15:58 | **原因**: 搜索层是所有上层能力（社交发现、深度研究、故障溯源）的前提，当前DuckDuckGo Lite连续失效已瘫痪整个感知管道，必须先修复检索后端才能推进任何其他方向 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: LLM Agent 专用检索层（Exa/Tavily/Brave/SearXNG 替代 DuckDuckGo Lite） (2026-09-27 03:02)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-27 03:02)
+**时间**: 2026-09-24 15:48 | **原因**: 检索层失效已瘫痪社交发现、深度研究和故障溯源三条上层路径，是当前唯一卡住所有其他能力且不依赖不可控变量的工程瓶颈，修复后能解锁其余全部方向 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily + Exa multi-level fallback chain implementation for LLM agent 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的“集体免疫”架构 (2026-09-27 03:02)
+## 原始发现
+### GitHub
+--
