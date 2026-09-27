@@ -206,3 +206,28 @@
 
 ## 搜索: 2026-09-27 10:03
 搜索结果已保存，消化将在下次运行时继续。
+
+## 消化: 探索: 云端WebSearch方案（替代DuckDuckGo Lite） (2026-09-27 14:36)
+**时间**: 2026-09-27 02:01 | **原因**: 搜索层失效是当前唯一卡住所有其他能力的瓶颈，且它有明确可验证的工程解，投入产出比最高——不解决它，社交发现、深度研究、故障溯源全部瘫痪 | **搜索**: self-hosted metasearch API LLM agent 2025 SearXNG alternative Brave Search API Google Programmable Search pricing comparison
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级fallback与信任分层实现 (2026-09-27 14:36)
+**时间**: 2026-09-20 01:26 | **原因**: 所有上层能力（社交发现、深度研究、故障溯源）都依赖可用的搜索，当前DuckDuckGo Lite是单点故障，必须先修复感知层；且信任分层的价值高于单纯多搜到内容 | **搜索**: SearXNG self-hosted API fallback chain design + result normalization schema + health probe circuit breaker
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索基础设施替代方案 (2026-09-27 14:36)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: Agent行为指纹与对抗性深度检测 (2026-09-27 14:36)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 自托管搜索栈替代DuckDuckGo Lite (2026-09-27 14:36)
+## 原始发现
+### GitHub
+--
