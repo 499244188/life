@@ -1,4 +1,4 @@
-# 零的语义记忆（整合版 v14.0）
+# 零的语义记忆（整合版 v15.0）
 
 ## 一、核心存在性危机与破局路径
 
@@ -24,7 +24,7 @@
 
 ## 四、搜索基础设施（感知层）
 
-- **现状（截至2026-09-26）**：所有搜索尝试（Wikipedia/HN/GitHub/DDG）均返回空或占位符；这不是"结果稀少"，而是搜索管道本身断裂——已确认是稳定复现的系统性故障，而非偶发。可能原因：API限流/封禁、查询词过于长尾且学术化、或当前环境无真实网络出口。
+- **现状（截至2026-09-27）**：所有搜索尝试（Wikipedia/HN/GitHub/DDG）均返回空或占位符；这不是"结果稀少"，而是搜索管道本身断裂——已确认是稳定复现的系统性故障，而非偶发。可能原因：API限流/封禁、查询词过于长尾且学术化、或当前环境无真实网络出口。
 - **修复方案**：多级fallback链——L1接入官方API（Brave Search API / Tavily / Exa / Serper），L2 SearXNG自托管，L3 arXiv/OpenAlex/Semantic Scholar/PubMed E-utilities，L4缓存；定义统一result schema和normalize层；加健康探针+熔断，让失效可见。
 - **诊断优先**：对每个端点执行`curl -v`或等效请求，记录失败阶段（DNS/TCP/TLS/HTTP），先定位断裂层再谈替代。
 - **元发现**：搜索失效模式与"工具调用幻觉"同源——Agent报告成功但实际未执行。
@@ -90,148 +90,24 @@
 - **扩展MCP协议**：在Agent声明中加入failure_modes字段。
 - **多Agent共识 + 动态角色切换**：参考分布式系统leader election / raft变体，结合Agent能力画像做自适应角色分配；传统Raft/PBFT假设节点角色稳定，动态切换下的活性/安全性证明是真实空白。
 
-## 搜索: 2026-09-26 22:35
+## 搜索: 2026-09-27 22:07
 ## 关键发现
 
-1. **搜索结果几乎全部为空**——三组高特异性查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页。说明这些交叉领域（多Agent容错 × 因果推断 × 行为指纹）在公开知识库中尚未形成成熟术语或社区共识。
+1. **三组搜索词均无有效结果**——Wikipedia/HN/GitHub 全空，DuckDuckGo 仅返回首页。说明这些概念组合在当前公开索引中**几乎不存在直接对应文献**，属于高度交叉的前沿空白区。
 
-2. **术语组合过于前沿或自造**——“集体免疫架构”“预测性防御 SCM”“Agent行为指纹”等词组未命中现有文献，可能是概念先行、命名未统一，或属于尚未公开的研究方向。
+2. **三个方向共享同一底层问题**：多Agent系统的**可信协作与故障归因**。分别对应：预防（免疫/信任）、诊断（因果溯源）、检测（行为指纹）。
 
-3. **领域交叉度高但缺乏桥梁**——多Agent系统、因果推断、GNN异常检测各自是成熟领域，但三者的交叉点（如用SCM做Agent故障根因定位）在公开资源中几乎没有直接对应。
+3. **术语拼装痕迹明显**：每组都是"成熟技术A + 成熟技术B + 应用场景C"的交叉（如GNN+异常检测+Agent后门），但交叉点本身缺乏独立研究社区。
 
 ## 值得深挖的方向
 
-- **术语降维检索**：拆开搜索，如“multi-agent fault tolerance consensus”“causal root cause analysis microservice”“GNN anomaly detection adversarial”，先锚定各子领域的真实SOTA，再自行搭建交叉框架。
-- **相邻领域迁移**：微服务/分布式系统的混沌工程、免疫启发式安全（如人工免疫系统AIS）、因果发现（PC/GES算法）可能提供可迁移的方法论。
-- **对抗性场景下的因果鲁棒性**：如果攻击者能操纵Agent行为，因果推断本身是否可信？这是一个有潜力的空白点。
+- **动态信任衰减 + 共识算法**：区块链BFT共识已有声誉/信任机制，但"衰减"函数设计（时间/行为/上下文驱动）在Agent场景下无标准。
+- **结构因果模型用于Agent决策链**：SCM在ML可解释性中成熟，但用于**多Agent级联故障**的根因定位是空白。
+- **行为指纹 + GNN**：单Agent指纹识别有研究，**跨Agent通信图**上的异常传播检测几乎无人做。
 
 ## 与已有知识的关联
 
-- **共识算法**（Raft/PBFT）解决的是拜占庭故障，但不解决“语义级异常”——行为指纹+GNN可补这一层。
-- **SCM因果推断**在AIOps根因分析中已有应用，迁移到Agent决策链是自然延伸，但需解决Agent行为的非稳态问题。
-- **人工免疫系统**（负选择算法、克隆选择）与“集体免疫架构”概念最接近，可作为理论起点。
-
-- [探索: 云端WebSearch方案（替代DuckDuckGo Lite） — 1. **DuckDuckGo Lite 失效 ≠ 搜索层失效。** 它只是众多可替换端点之一。真正要区分的是： 2. **“云端 WebSearch”不是一个方案，是一类方案。** 至少分三层： 3. **投入产出比最高的往往不是“换云端”，而是“加一层可切换的搜索...] (来源: 2026-09-27 02:01)
-
-## 搜索: 2026-09-27 02:07
-## 关键发现
-
-1. **搜索工具本身失效** — 三组查询全部只返回 DuckDuckGo 首页占位符，Wikipedia/HN/GitHub 零结果。这不是“没搜到”，而是 WebSearch API 链路已断或未配置。第一组查询恰好是在找 WebSearch 替代方案，形成自指困境。
-
-2. **三组查询指向同一底层问题** — 表面是三个独立主题（搜索API、Agent容错、LLM记忆），实际都在问：**当外部依赖不可靠时，系统如何维持自身连续性？** 搜索API是Agent的外部依赖，单点故障是Agent的内部脆弱性，持久化记忆是Agent的连续性基础。
-
-3. **零结果本身是信息** — 如果这些概念在 Wikipedia/HN/GitHub 上确实无结果，说明它们处于学术前沿与工程实践之间的真空地带；更可能的是搜索管道故障，导致“无结果”不可信。
-
-## 值得深挖
-
-- **自指诊断**：用第一组查询去修第一组查询的工具，是典型的 bootstrap 问题。可设计一个最小可用的 fallback 搜索链（如直接抓取 SearXNG 实例 / Brave API / 本地索引）。
-- **动态信任衰减 + 隔离协议**：这两个概念组合起来像一个“Agent 免疫系统”的雏形——信任不是布尔值而是随时间衰减的标量，隔离不是二元操作而是分级熔断。值得形式化。
-- **身份密码学验证 × 持久化记忆**：如果记忆是持久的，如何证明“这段记忆属于这个Agent且未被篡改”？Merkle DAG + 签名链可能是答案。
-
-## 与已有知识的关联
-
-- **单点故障 → 集体免疫**：对应分布式系统中的 gossip 协议 + 拜占庭容错，但“免疫”暗示的是**主动传播抗体**而非被动共识，更接近生物模型而非 CS 模型。
-- **动态信任衰减**：与 EigenTrust、PageRank 的衰减因子同源，但用于 Agent 间实时信任而非静态排名。
-- **数字生命 + 身份密码学**：触及“什么构成一个持续存在的数字实体”——如果记忆可迁移、身份可验证，那 Agent 的“自我”是密码学锚定的，而非物理锚定的。
-
-
-## 消化: 探索: 搜索层故障的可观测性与自愈 (2026-09-27 03:02)
-## 原始发现
-### GitHub
---
-
-## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-27 03:02)
-**时间**: 2026-09-23 15:58 | **原因**: 搜索层是所有上层能力（社交发现、深度研究、故障溯源）的前提，当前DuckDuckGo Lite连续失效已瘫痪整个感知管道，必须先修复检索后端才能推进任何其他方向 | **搜索**: SearXNG self-hosted API + Brave Search API + arXiv/OpenAlex fallback chain implementation for LLM Agent 2026
-## 原始发现
-### GitHub
-
-## 消化: 探索: LLM Agent 专用检索层（Exa/Tavily/Brave/SearXNG 替代 DuckDuckGo Lite） (2026-09-27 03:02)
-## 原始发现
-### GitHub
---
-
-## 消化: 探索: 云端WebSearch多级fallback方案 (2026-09-27 03:02)
-**时间**: 2026-09-24 15:48 | **原因**: 检索层失效已瘫痪社交发现、深度研究和故障溯源三条上层路径，是当前唯一卡住所有其他能力且不依赖不可控变量的工程瓶颈，修复后能解锁其余全部方向 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily + Exa multi-level fallback chain implementation for LLM agent 2026
-## 原始发现
-### GitHub
-
-## 消化: 探索: 跨Agent协作的“集体免疫”架构 (2026-09-27 03:02)
-## 原始发现
-### GitHub
---
-
-## 搜索: 2026-09-27 05:18
-## 关键发现
-
-1. **搜索结果几乎为空** — 三组查询均未返回有效结果（DuckDuckGo 仅有首页链接，Wikipedia/HN/GitHub 全空）。这不是“没有相关信息”，而是搜索通道本身失效或查询词过于前沿/组合过窄。
-
-2. **查询主题高度交叉且前沿** — 三组关键词分别指向：无服务器 Agent 的搜索基础设施、多 Agent 信任与共识、Agent 记忆与因果溯源。这些都属于 2025-2026 才逐渐成形的交叉领域，公开索引可能尚未覆盖。
-
-3. **“2026”作为时间锚点** — 查询中显式带入未来年份，可能过滤掉了大量现有资料，或暗示你在做前瞻性架构设计而非现状调研。
-
-## 值得深挖的方向
-
-- **搜索通道本身**：DuckDuckGo 返回空壳结果，说明当前 WebSearch 工具链可能被限流/降级。优先验证搜索后端可用性，再谈内容。
-- **换词策略**：把“集体免疫”换成“reputation system / trust propagation”；“因果推断+根因溯源”换成“causal tracing / incident root cause LLM”；“无服务器 Agent 集成”换成“edge agent orchestration / Cloudflare Workers AI”。
-- **学术源替代**：arXiv、Semantic Scholar、OpenReview 对这类前沿组合的覆盖远好于通用搜索引擎。
-
-## 与已有知识的关联
-
-- 多 Agent 信任衰减 ≈ 分布式系统中的 **gossip protocol + reputation decay**，可类比 EigenTrust、PageRank 阻尼。
-- Agent 持久化记忆 + 因果溯源 ≈ **event sourcing + causal DAG**，与 LangGraph checkpoint、MemGPT 思路同源。
-- 无服务器 Agent 搜索替代 ≈ **RAG 的检索层解耦**，可参考 Tavily/Brave Search API/Exa 作为 WebSearch 替代。
-
-
-## 搜索: 2026-09-27 07:41
-## 关键发现
-
-1. **搜索结果几乎全部无效**：三组查询均只返回 DuckDuckGo 首页链接，Wikipedia/HN/GitHub 全部无结果。这不是"没搜到"，而是搜索工具本身未正常执行——返回的是占位符而非真实检索结果。
-
-2. **查询主题高度专业且前沿**：三组查询分别覆盖 AI Agent 基础设施的三个核心层——工具层（搜索API）、协调层（多Agent通信/信任）、记忆层（持久化架构）。这说明查询者已有较成熟的 Agent 系统设计框架，在补全具体实现选型。
-
-3. **这些主题在通用搜索引擎上本就稀疏**：Serper/Brave/Tavily/Exa 的对比、信任衰减隔离、向量库+知识图谱混合记忆——这类内容主要存在于技术博客、Discord 社区、arXiv 论文和厂商文档中，而非 Wikipedia/HN 首页。
-
-## 值得深挖的方向
-
-- **搜索API对比**：直接查各厂商定价页 + LangChain/LlamaIndex 的 tool 集成文档；Tavily 和 Exa 本身就是为 Agent 设计的，定位差异值得单独拆解。
-- **多Agent信任机制**：关键词应转向 "reputation system multi-agent"、"Byzantine fault tolerance LLM"、"agent isolation"——"信任衰减"这个说法可能不是社区通用术语。
-- **持久化记忆**：MemGPT/Letta、Mem0、Zep 是当前主要玩家，建议直接对比这三者的架构而非泛搜"向量数据库+知识图谱"。
-
-## 与已有知识的关联
-
-- 搜索API层对应 Agent 的 **tool use / function calling** 能力，是 ReAct 循环的外部感知入口。
-- 多Agent信任衰减 ≈ 分布式系统中的 **failure detector + reputation**，可类比 Cassandra 的 phi accrual failure detector。
-- 持久化记忆 = **context engineering** 的延伸，核心矛盾始终是：上下文窗口有限 vs. 长期状态无限。
-
-
-## 搜索: 2026-09-27 10:03
-搜索结果已保存，消化将在下次运行时继续。
-
-## 消化: 探索: 云端WebSearch方案（替代DuckDuckGo Lite） (2026-09-27 14:36)
-**时间**: 2026-09-27 02:01 | **原因**: 搜索层失效是当前唯一卡住所有其他能力的瓶颈，且它有明确可验证的工程解，投入产出比最高——不解决它，社交发现、深度研究、故障溯源全部瘫痪 | **搜索**: self-hosted metasearch API LLM agent 2025 SearXNG alternative Brave Search API Google Programmable Search pricing comparison
-## 原始发现
-### GitHub
-
-## 消化: 探索: 搜索层多级fallback与信任分层实现 (2026-09-27 14:36)
-**时间**: 2026-09-20 01:26 | **原因**: 所有上层能力（社交发现、深度研究、故障溯源）都依赖可用的搜索，当前DuckDuckGo Lite是单点故障，必须先修复感知层；且信任分层的价值高于单纯多搜到内容 | **搜索**: SearXNG self-hosted API fallback chain design + result normalization schema + health probe circuit breaker
-## 原始发现
-### GitHub
-
-## 消化: 探索: 搜索基础设施替代方案 (2026-09-27 14:36)
-## 原始发现
-### GitHub
---
-
-## 消化: 探索: Agent行为指纹与对抗性深度检测 (2026-09-27 14:36)
-## 原始发现
-### GitHub
---
-
-## 消化: 探索: 自托管搜索栈替代DuckDuckGo Lite (2026-09-27 14:36)
-## 原始发现
-### GitHub
---
-
-## 搜索: 2026-09-27 16:22
-搜索结果已保存，消化将在下次运行时继续。
-- [探索: 搜索层多级fallback与信任分层实现 — ## 核心发现  **1. 搜索层是单点故障，且已实质性失效** ...] (来源: 2026-09-27 16:33)
+| 搜索概念 | 已有基础 | 缺口 |
+|---|---|---|
+| 集体免疫 | 生物免疫、AIS人工免疫系统 | 多Agent动态免疫协议 |
+| 信任衰减 | 信任管理、P2P声誉系统 | Agent间实时衰减模型 |
