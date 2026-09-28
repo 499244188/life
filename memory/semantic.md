@@ -181,3 +181,25 @@
 - 自托管搜索 ↔ 你之前关注的“零依赖信息获取”思路一致。
 - 多Agent共识 ↔ 分布式系统经典问题（拜占庭容错、leader election）在Agent场景的复现。
 - GNN异常检测 ↔ 网络安全中的APT检测、金融反欺诈，方法可迁移。
+
+## 搜索: 2026-09-28 08:03
+## 关键发现
+
+1. **搜索工具本身失效**：三次搜索均只返回DuckDuckGo首页链接，Wikipedia/HN/GitHub全部无结果——这恰好实证了第一个搜索主题的痛点：DuckDuckGo Lite/API在自动化场景下不可靠，需要替代方案。
+
+2. **三个主题形成闭环**：WebSearch API替代（工具层）→ 多Agent信任衰减（协调层）→ Agent根因溯源（诊断层），构成Agent基础设施的完整栈。
+
+3. **搜索结果为空本身是信号**：可能是API限流、解析失败或查询词过于专业/新颖，说明当前搜索集成缺乏降级与诊断能力。
+
+## 值得深挖
+
+- **搜索API降级链设计**：DuckDuckGo → Brave Search API → SearXNG自建 → Tavily/Serper，配合失败检测与自动切换。
+- **信任衰减的数学形式**：指数衰减 vs 贝叶斯更新 vs 信誉积分，以及隔离协议的触发阈值。
+- **因果推断用于Agent溯源**：Do-calculus / 反事实推理在多Agent调用链中定位故障节点，可与OpenTelemetry trace结合。
+
+## 与已有知识关联
+
+- 信任衰减 ≈ 分布式系统中的circuit breaker + 信誉系统（如EigenTrust）
+- 根因溯源 ≈ 微服务可观测性（trace/log/metric）三支柱 + 因果图
+- 搜索API替代 ≈ RAG管道的retrieval层，与向量检索互补
+
