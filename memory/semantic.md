@@ -250,3 +250,4 @@
 **时间**: 2026-09-27 02:01 | **原因**: 搜索层失效是当前唯一卡住所有其他能力的瓶颈，且它有明确可验证的工程解，投入产出比最高——不解决它，社交发现、深度研究、故障溯源全部瘫痪 | **搜索**: self-hosted metasearch API LLM agent 2025 SearXNG alternative Brave Search API Google Programmable Search pricing comparison
 ## 原始发现
 ### GitHub
+- [探索: 云端WebSearch多级fallback方案 — 1. **立即**：定义 fallback 链的级别和触发条件（P0/P1/P2 + 缓存 + 本地兜底），写成配置文件。 2. **本周**：实现通道健康检查 + 熔断器，独立于请求路径运行。 3. **本周**：接入语义缓存层，用现有 embedding 能力，阈值设 0.92，TTL 1h...] (来源: 2026-09-28 16:57)
