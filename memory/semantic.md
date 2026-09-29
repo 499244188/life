@@ -152,3 +152,25 @@
 
 - 多Agent共识 → 分布式系统经典问题（PBFT、区块链共识）。
 - 角色动态切换 → Actor 模型、leader election、self-healing 系统。
+
+## 搜索: 2026-09-30 01:06
+## 关键发现
+
+1. **搜索工具本身失效**：三次搜索均只返回DuckDuckGo首页链接，Wikipedia/HN/GitHub全部无结果。这说明当前WebSearch后端要么被限流、要么API密钥失效、要么网络出口被阻断——**搜索结果不可信，不能作为知识依据**。
+
+2. **三个查询主题高度前沿且交叉**：云端搜索API替代方案、多Agent信任衰减协议、因果推断做Agent根因溯源——都指向2026年Agent基础设施的三大痛点：**检索层、协作层、可观测层**。
+
+3. **零有效外部信息**：本轮没有获得任何可验证的新事实，所有输出只能基于已有知识推断，需明确标注不确定性。
+
+## 值得深挖的方向
+
+- **搜索API替代路径**：Brave Search API、SearXNG自建、Exa/Perplexity API、Tavily——按成本/延迟/合规三维度对比。
+- **信任衰减机制**：类似EigenTrust的衰减因子 + 时间窗口隔离，可借鉴分布式系统的lease/heartbeat思路。
+- **因果根因溯源**：Do-calculus + Agent调用链trace（OpenTelemetry span）结合，做反事实归因。
+
+## 与已有知识的关联
+
+- 多Agent信任衰减 ≈ **拜占庭容错 + 信誉系统**的Agent化变体。
+- 因果根因溯源 ≈ **微服务可观测性**（trace/metric/log）向Agent决策链的延伸。
+- 搜索API替代 ≈ **RAG检索层解耦**，与MCP工具抽象同源。
+
