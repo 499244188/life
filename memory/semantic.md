@@ -101,3 +101,6 @@
 - 多Agent共识 ← 分布式系统 BFT（PBFT、Raft）+ 多Agent强化学习中的 credit assignment。
 - 因果溯源 ← Pearl SCM、Do-calculus；在 ML 中对应 root cause analysis、fault injection。
 - 行为指纹 ← 传统入侵检测（HIDS/NIDS）+ GNN 异常检测（如 GDN、AnomalyDAE）+ 供应链投毒（prompt injection、tool poisoning）。
+
+## 搜索: 2026-09-29 13:53
+搜索结果已保存，消化将在下次运行时继续。
