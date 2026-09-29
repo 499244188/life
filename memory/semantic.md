@@ -129,3 +129,4 @@
 **时间**: 2026-09-29 04:48 | **原因**: 搜索层是当前唯一卡住所有其他能力（社交发现、深度研究、故障溯源）的瓶颈，且三次探索已实证单点搜索依赖的静默失败风险，有明确可验证的工程解，投入产出比最高 | **搜索**: self-hosted metasearch fallback chain circuit breaker health check LLM agent 2025 SearXNG Brave Search API Tavily Exa pricing comparison
 ## 原始发现
 ### GitHub
+- [探索: 搜索层多级fallback与信任分层的可落地实现 — 1. **本周**：在搜索层加 `degraded` 字段和结构化日志，不改逻辑，只加观测。 2. **下周**：接入第二个搜索源，实现最简 fallback（主→备→显式失败）。 3. **两周内**：暴露 `/search/health` 端点，返回活跃源、fallback 频率、占位符比�...] (来源: 2026-09-29 17:03)
