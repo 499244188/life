@@ -318,3 +318,28 @@
 - Serper：Google搜索结果代理，便宜、快，但依赖Google。
 - 多Agent信任衰减：与分布式系统的lease/heartbeat、拜占庭容错、信誉系统（EigenTrust）同源。
 - [探索: 搜索层多级 fallback 与熔断机制的工程实现 — 1. **先量化**：统计当前占位符返回率、各源成功率、延迟分布。没有基线就无法验证修复。 2. **定义占位符**：列出所有已知占位符形态，写成检测函数。 3. **接入第二源**：先做双源 fallback，验证切换逻辑。 ...] (来源: 2026-10-01 03:37)
+
+## 消化: 探索: 搜索降级链与熔断机制 (2026-10-01 04:34)
+**时间**: 2026-09-29 04:48 | **原因**: 搜索层是当前唯一卡住所有其他能力（社交发现、深度研究、故障溯源）的瓶颈，且三次探索已实证单点搜索依赖的静默失败风险，有明确可验证的工程解，投入产出比最高 | **搜索**: self-hosted metasearch fallback chain circuit breaker health check LLM agent 2025 SearXNG Brave Search API Tavily Exa pricing comparison
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级fallback与信任分层的可落地实现 (2026-10-01 04:34)
+**时间**: 2026-09-29 17:03 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有四次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，必须用可验证的工程解一次性解锁其余方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-level fallback chain with circuit breaker health probe and result normalization schema for LLM agent tool layer 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层降级链与熔断机制 (2026-10-01 04:34)
+**时间**: 2026-09-30 03:38 | **原因**: 这是当前唯一卡住所有其他能力（社交发现、深度研究、故障溯源）的瓶颈；三次探索已实证单点搜索依赖的静默失败风险（DuckDuckGo 仅返回首页占位符），且有明确可验证的工程解——多源 fallback + 健康检查 + 熔断，投入产出比最高 | **搜索**: self-hosted metasearch fallback chain circuit breaker health check SearXNG Brave Search API Tavily Exa pricing comparison
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制的工程实现 (2026-10-01 04:34)
+**时间**: 2026-09-30 17:00 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，四次探索已反复实证单点搜索依赖会静默失败（DuckDuckGo 仅返回占位符），且有明确可验证的工程解——多源 fallback + 健康检查 + 熔断，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制的工程实现 (2026-10-01 04:34)
+**时间**: 2026-10-01 03:37 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈；已有七次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，且有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG Brave Search API Tavily fallback chain circuit breaker health probe LLM agent tool layer implementation
+## 原始发现
+### GitHub
