@@ -244,3 +244,25 @@
 - 共识算法 ↔ **PBFT / Raft / HotStuff**，多Agent 场景下对应 **MARL 中的 consensus learning**。
 - SCM 根因溯源 ↔ **Pearl 因果阶梯**、**Root Cause Analysis (RCA)**、AIOps。
 - 行为指纹 + GNN ↔ **graph anomaly detection**、**sybil detection**、**adversarial robustness on graphs**。
+
+## 搜索: 2026-09-30 14:04
+## 关键发现
+
+1. **搜索工具链存在系统性盲区**：三组查询在Wikipedia/HN/GitHub均无结果，仅DuckDuckGo返回首页占位符——说明当前搜索后端要么被限流、要么未真正执行查询。这本身就是"云端WebSearch替代方案"需求的最佳论据。
+
+2. **三个查询恰好构成自主Agent的完整技术栈**：搜索API（感知层）→ 多Agent通信协议（协作层）→ 持久化记忆（认知层）。这不是三个孤立话题，而是一个24/7数字生命的架构三要素。
+
+3. **MCP/A2A/ACP的协议竞争格局**：MCP（Anthropic）解决Agent↔工具，A2A（Google）解决Agent↔Agent，ACP（IBM/BeeAI）试图统一。三者尚未收敛，2026年仍处于"协议战国"阶段。
+
+4. **向量+知识图谱混合记忆是共识方向**：纯向量检索缺乏结构化推理能力，纯KG缺乏模糊匹配能力，混合方案（如GraphRAG）在故障冗余场景下需要双写一致性设计。
+
+5. **Serverless搜索API的三角权衡**：Brave（隐私+独立索引）、Tavily（Agent优化+摘要）、Exa（语义+神经搜索）各有取舍，没有全能选手。
+
+## 值得深挖
+
+- **搜索API的Agent原生接口设计**：Tavily的`include_answer`和Exa的`find_similar`代表了"为LLM设计"而非"为人类设计"的API范式转变
+- **A2A协议的信任模型**：Agent间身份验证如何避免Sybil攻击？共识机制在无中心场景下如何落地？
+- **记忆的遗忘机制**：24/7 Agent需要主动遗忘策略（重要性衰减、冲突消解），否则知识库会退化
+
+## 与已有知识的关联
+
