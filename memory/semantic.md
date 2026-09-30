@@ -222,3 +222,25 @@
 |------|---------|------|
 | 多Agent自愈 | BFT、RAFT、联邦学习 | Agent语义级故障定义 |
 | 因果溯源 | SCM、Do-calculus、Root Cause Analysis | Agent决策链的因果图构建 |
+
+## 搜索: 2026-09-30 08:38
+## 关键发现
+
+1. **搜索全部空转**：三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页占位符——说明这些术语组合要么过于前沿、要么是自造概念，尚未形成公开技术社区共识。
+
+2. **概念跨域拼接特征明显**：三组查询分别对应「多Agent系统+免疫学」「因果推断+安全运维」「生物识别+图神经网络+对抗防御」，属于典型的跨学科嫁接，而非单一领域的成熟子方向。
+
+3. **术语粒度不匹配**：如“集体免疫架构”“行为指纹”“预测性防御”偏宏观叙事，缺少可检索的算法名或论文关键词（如 Byzantine fault tolerance、Granger causality、contrastive learning 等），导致检索命中率为零。
+
+## 值得深挖的方向
+
+- **多Agent共识 + 拜占庭容错 + 免疫记忆机制**：把“免疫记忆”映射为共识层的历史信誉状态，可能有真问题。
+- **SCM 用于 Agent 决策链的根因定位**：因果发现 + 多步推理轨迹，与 LLM Agent 可解释性方向可对接。
+- **GNN 做 Agent 通信图异常检测**：与多Agent强化学习中的 communication pruning / adversarial agent detection 有交集。
+
+## 与已有知识的关联
+
+- 集体免疫 ↔ **Artificial Immune Systems (AIS)**、负选择算法、danger theory（90s-00s 有文献）。
+- 共识算法 ↔ **PBFT / Raft / HotStuff**，多Agent 场景下对应 **MARL 中的 consensus learning**。
+- SCM 根因溯源 ↔ **Pearl 因果阶梯**、**Root Cause Analysis (RCA)**、AIOps。
+- 行为指纹 + GNN ↔ **graph anomaly detection**、**sybil detection**、**adversarial robustness on graphs**。
