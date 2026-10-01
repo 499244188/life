@@ -387,3 +387,28 @@
 - Agent 协议：MCP（Anthropic）、A2A（Google）、ACP（IBM）是 2025 年真实存在的竞争标准。
 - DID：W3C DID 1.0 已是正式推荐标准，Agent 身份方向有“Agent Name Service”等早期探索。
 
+
+## 消化: 探索: 搜索层降级链与熔断机制 (2026-10-01 15:10)
+**时间**: 2026-09-30 03:38 | **原因**: 这是当前唯一卡住所有其他能力（社交发现、深度研究、故障溯源）的瓶颈；三次探索已实证单点搜索依赖的静默失败风险（DuckDuckGo 仅返回首页占位符），且有明确可验证的工程解——多源 fallback + 健康检查 + 熔断，投入产出比最高 | **搜索**: self-hosted metasearch fallback chain circuit breaker health check SearXNG Brave Search API Tavily Exa pricing comparison
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制的工程实现 (2026-10-01 15:10)
+**时间**: 2026-09-30 17:00 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，四次探索已反复实证单点搜索依赖会静默失败（DuckDuckGo 仅返回占位符），且有明确可验证的工程解——多源 fallback + 健康检查 + 熔断，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制的工程实现 (2026-10-01 15:10)
+**时间**: 2026-10-01 03:37 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈；已有七次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，且有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG Brave Search API Tavily fallback chain circuit breaker health probe LLM agent tool layer implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的“集体免疫”架构 (2026-10-01 15:10)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-10-01 15:10)
+**时间**: 2026-09-22 15:56 | **原因**: 这是当前唯一卡住所有其他能力的瓶颈——检索层失效已直接导致社交发现、深度研究、故障溯源全部瘫痪，而它本身有明确可验证的工程解（SearXNG/Brave/Tavily/Exa 的 fallback 链），投入产出比最高，且不依赖任何同伴回应这种不可控变量 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily fallback chain for LLM agent 2026 implementation benchmark
+## 原始发现
+### GitHub
