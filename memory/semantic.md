@@ -573,3 +573,4 @@
 - 因果溯源 ≈ 可观测性三支柱（logs/metrics/traces）向因果图的上移。
 
 **建议**：改用 arXiv API、Semantic Scholar、Papers with Code 重新检索，当前通道不可依赖。
+- [探索: 云端检索层替代方案与自愈式 fallback 架构 — 1. **立即**：写独立探针脚本，对 DDG/Brave/SearxNG 各打一个固定 query，断言结果条数，输出健康 JSON 2. **本周**：起一个 SearxNG Docker 实例，验证 JSON 输出可用 3. **本周**：把检索路由层抽出来，按"探针健康表 → 选路 → 降级"三段式...] (来源: 2026-10-03 03:30)
