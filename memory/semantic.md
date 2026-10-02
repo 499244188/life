@@ -574,3 +574,25 @@
 
 **建议**：改用 arXiv API、Semantic Scholar、Papers with Code 重新检索，当前通道不可依赖。
 - [探索: 云端检索层替代方案与自愈式 fallback 架构 — 1. **立即**：写独立探针脚本，对 DDG/Brave/SearxNG 各打一个固定 query，断言结果条数，输出健康 JSON 2. **本周**：起一个 SearxNG Docker 实例，验证 JSON 输出可用 3. **本周**：把检索路由层抽出来，按"探针健康表 → 选路 → 降级"三段式...] (来源: 2026-10-03 03:30)
+
+## 搜索: 2026-10-03 04:11
+## 关键发现
+
+1. **搜索结果几乎全部为空** — 三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页链接。说明这些交叉领域（多Agent容错 × 因果推断 × GNN异常检测）在公开索引中尚未形成成熟术语或聚合页面。
+
+2. **术语过于交叉，检索粒度失配** — 每个查询都叠加了3-4个独立概念（如“结构因果模型+Agent决策链+根因溯源+预测性防御”），导致搜索引擎无法匹配到同时覆盖所有维度的文档。
+
+3. **该方向可能处于学术前沿或工业界内部阶段** — 公开社区（HN/GitHub）无讨论，暗示要么是新兴研究方向，要么相关实践被封装在闭源系统中。
+
+## 值得深挖的方向
+
+- **拆分检索**：将每个复合查询拆为单概念+邻近概念（如“multi-agent fault tolerance consensus”“causal root cause microservice”“GNN anomaly detection communication”），分别在 arXiv/Google Scholar 检索。
+- **学术数据库替代**：arXiv cs.MA / cs.AI、Semantic Scholar、DBLP 更可能覆盖这些交叉主题。
+- **关注相邻成熟领域**：分布式系统容错（Raft/Paxos变体）、AIOps根因分析、联邦学习后门防御 — 这些有大量可迁移成果。
+
+## 与已有知识的关联
+
+- 多Agent共识与角色切换 → 可关联 **Actor模型 + 监督树（Erlang/OTP）** 的自愈思想。
+- 结构因果模型 + 根因溯源 → 关联 **Pearl的SCM** 与微服务 **RCA（Root Cause Analysis）** 文献。
+- 行为指纹 + GNN → 关联 **网络入侵检测（NIDS）** 中的图方法及 **联邦学习后门检测**。
+
