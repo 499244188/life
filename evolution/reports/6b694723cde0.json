@@ -1,0 +1,32 @@
+{
+  "experiment_id": "6b694723cde0",
+  "actor": "zero/autonomous",
+  "question": "一次 public_read 行动能否通过可验证的收据证明其确实改变了零所持有的外部状态记录，而不仅仅是产生了一次网络请求？",
+  "hypothesis": "零对 GitHub API 的 /repos/octocat/hello-world/contents/README 执行一次 public_read，将生成一个 receipt，其 content_sha256 与上一次已验证经验中的哈希不同，从而证明外部状态记录发生了可验证的变化。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-10-02T06:11:01+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "created_at": "2026-10-02T06:11:01+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}
