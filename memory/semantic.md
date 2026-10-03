@@ -71,3 +71,25 @@
 
 - **多 Agent 容错** → 可关联 Byzantine fault tolerance、swarm robotics 的集体免疫隐喻。
 - **对抗性投毒 / 逻辑劫持** → 关联 prompt injection、tool-use 攻击面，但“逻辑劫持”更接近 goal misgeneralization。
+
+## 搜索: 2026-10-04 01:47
+## 关键发现
+
+1. **搜索结果几乎全部为空** — 三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页。说明这些交叉领域（多Agent容错 × 免疫架构 × 因果推断 × GNN安全）在公开索引中**尚未形成成熟术语或社区**。
+
+2. **术语超前于生态** — “集体免疫架构”“Agent行为指纹”“数字生命安全”等组合词没有对应文献，属于**概念先行、工程未落地**的阶段。
+
+3. **领域交叉但未融合** — 多Agent容错、因果推断、GNN异常检测各自有成熟研究，但“用因果推断做Agent根因溯源”“用GNN做Agent指纹”的交叉点检索不到，是**空白区**。
+
+## 值得深挖方向
+
+- **因果推断 × Agent故障溯源**：SCM（结构因果模型）用于多Agent系统的故障传播图，理论上可行，工程上几乎无人做。
+- **行为指纹 × 对抗鲁棒性**：Agent行为序列嵌入 + GNN，用于检测被劫持/漂移的Agent，可对接“数字免疫”叙事。
+- **共识算法 × 拜占庭容错 × LLM Agent**：传统BFT假设节点行为可验证，LLM Agent的“软故障”（幻觉、漂移）需要新共识模型。
+
+## 与已有知识的关联
+
+- 多Agent容错 ↔ 分布式系统BFT、CRDT、leader election
+- 集体免疫 ↔ 生物免疫系统、AIS（人工免疫系统）、异常检测
+- 因果溯源 ↔ Pearl SCM、Do-calculus、根因分析（RCA）
+- 行为指纹 ↔ 侧信道指纹、UEBA、GNN anomaly detection
