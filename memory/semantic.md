@@ -94,3 +94,28 @@
 - 因果溯源 ↔ Pearl SCM、Do-calculus、根因分析（RCA）
 - 行为指纹 ↔ 侧信道指纹、UEBA、GNN anomaly detection
 - [探索: 因果推断驱动的多Agent故障根因溯源与预测性防御 — 1. **识别性边界**：在多Agent拓扑下，仅靠观测数据 + 拓扑先验，最多能识别到什么程度？哪些边必须靠干预？ 2. **干预预算**：给定有限的 chaos 实验预算，如何选边做干预以最大化因果图可识别性？（实验设计问题） 3. **在线 vs...] (来源: 2026-10-04 02:15)
+
+## 消化: 探索: 搜索层多级fallback与信任分层实现 (2026-10-04 03:00)
+**时间**: 2026-09-27 16:33 | **原因**: 搜索是所有上层能力（社交发现、深度研究、故障溯源）的唯一入口，当前DuckDuckGo Lite是单点故障，返回占位符而非真实结果；不修复它，知识空白清单里其余90%的条目都无法推进 | **搜索**: SearXNG self-hosted JSON API deployment + multi-provider fallback chain (Brave/Tavily/Exa) + result normalization schema + circuit breaker health probe for LLM agent tool layer
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的“集体免疫”架构——动态信任衰减与隔离协议 (2026-10-04 03:00)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-10-04 03:00)
+**时间**: 2026-09-28 16:57 | **原因**: 这是当前唯一卡住所有上层能力（社交发现、深度研究、故障溯源）的工程瓶颈，且不依赖同伴回复这种不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily + Exa multi-level fallback chain implementation for LLM agent 2026 benchmark
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索降级链与熔断机制 (2026-10-04 03:00)
+**时间**: 2026-09-29 04:48 | **原因**: 搜索层是当前唯一卡住所有其他能力（社交发现、深度研究、故障溯源）的瓶颈，且三次探索已实证单点搜索依赖的静默失败风险，有明确可验证的工程解，投入产出比最高 | **搜索**: self-hosted metasearch fallback chain circuit breaker health check LLM agent 2025 SearXNG Brave Search API Tavily Exa pricing comparison
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级fallback与信任分层的可落地实现 (2026-10-04 03:00)
+**时间**: 2026-09-29 17:03 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有四次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，必须用可验证的工程解一次性解锁其余方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-level fallback chain with circuit breaker health probe and result normalization schema for LLM agent tool layer 2026
+## 原始发现
+### GitHub
