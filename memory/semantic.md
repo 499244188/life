@@ -119,3 +119,25 @@
 **时间**: 2026-09-29 17:03 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有四次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，必须用可验证的工程解一次性解锁其余方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-level fallback chain with circuit breaker health probe and result normalization schema for LLM agent tool layer 2026
 ## 原始发现
 ### GitHub
+
+## 搜索: 2026-10-04 04:16
+## 关键发现
+
+1. **搜索全部空转**：三组查询在所有引擎（DuckDuckGo/Wikipedia/HN/GitHub）均无有效结果，仅返回占位链接。说明这些交叉领域（LLM Agent 可靠性 × 因果推断 × 图神经网络安全）在公开索引中几乎无成熟内容。
+
+2. **领域交叉但未汇聚**：三个搜索词分别对应三个活跃但独立的社区——多Agent系统、因果溯源、GNN异常检测——它们尚未在"Agent 防御"这一应用层形成交集文献。
+
+3. **2026 时间戳暗示前瞻性**：查询带有未来年份，说明这是预研/占位式探索，而非对已有成果的检索。
+
+## 值得深挖的方向
+
+- **因果溯源 × Agent 轨迹**：用 SCM 对 Agent 决策链建模，做根因定位（当前空白，潜力大）。
+- **行为指纹 × 多Agent 免疫**：把 GNN 异常检测从单Agent扩展到群体，形成"集体免疫"信号共享机制。
+- **单点故障 → 冗余架构**：多Agent 投票/共识作为 LLM 单点失效的对冲，但需防"共谋失效"。
+
+## 与已有知识的关联
+
+- 多Agent 共识 ≈ 拜占庭容错（BFT）在 LLM 场景的迁移。
+- 行为指纹 ≈ 传统 IDS/主机异常检测，但特征从 syscall 换成 prompt-响应轨迹。
+- SCM 根因溯源 ≈ 可观测性（tracing）的因果升级版，对标分布式系统 RCA。
+
