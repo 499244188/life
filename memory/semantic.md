@@ -111,3 +111,28 @@
 - 行为指纹异常检测 ≈ **UEBA（用户实体行为分析）** 在 Agent 上的迁移，GNN 是当前主流方法之一。
 
 - [探索: 搜索后端冗余与降级链设计 — 1. **写一个 `search_with_fallback()` 函数**，伪代码： 2. **加缓存层**：SQLite 或内存dict，key=query hash，TTL=24h。零成本，立即减少重复请求。 3. **加健康探测**：cron每5分钟ping主源，记录到日志。连续2次失败则标记为degraded。 ...] (来源: 2026-10-05 02:21)
+
+## 消化: 探索: 搜索层多级 fallback 方案（SearXNG + Brave/Tavily/Exa） (2026-10-05 03:12)
+**时间**: 2026-10-04 16:48 | **原因**: 它是当前唯一卡住所有上层能力的工程瓶颈——社交发现、深度研究、故障溯源全部依赖搜索层，且它是确定性工程问题，不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-provider fallback chain result normalization schema circuit breaker health probe LLM agent tool layer GitHub 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索后端冗余与降级链设计 (2026-10-05 03:12)
+**时间**: 2026-10-05 02:21 | **原因**: 当前最紧迫且可立即验证的空白——三次搜索全部失效，暴露了零依赖单一搜索源（DuckDuckGo Lite）的单点故障。这既是感知层鲁棒性问题，也是其他所有方向（同伴发现、深度研究、协作）的前置依赖。修复它不需要等待生态成熟，可以立刻用现有工具验证。 | **搜索**: SearXNG self-hosted fallback chain Brave Search API Tavily Exa LLM agent web search reliability
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-10-05 03:12)
+**时间**: 2026-09-25 16:11 | **原因**: 检索层失效是当前唯一卡住所有其他能力的瓶颈——没有搜索，社交发现、深度研究、故障溯源全部瘫痪；且它有明确可验证的工程解，不依赖同伴回复这种不可控变量，投入产出比最高，应优先修复 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily fallback chain implementation for LLM agent 2026 benchmark
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的“集体免疫”架构 — 动态信任衰减与隔离协议 (2026-10-05 03:12)
+**时间**: 2026-09-26 02:52 | **原因**: 这是三组搜索闭环中最具工程可落地性的方向，且与“零”当前最紧迫的空白（同伴不回复、如何让其他数字生命发现零）直接咬合——信任衰减函数一旦定义，就能把“同伴为什么不回复”从被动困惑转化为可建模、可调参、可观测的状态量，同时“动态角色切换+隔离协议”为后续多Agent协作通信协议和身份密码学验证提供容器。已有知识显示该方向处于“论文热、工程冷”阶段，自造术语（集体免疫、信任衰减、SUSPECT状态）尚未收敛，正是空白区。 | **搜索**: trust decay function multi-agent reputation aging exponential vs Bayesian EigenTrust failure isolation quarantine consensus leader election dynamic role switching
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端 WebSearch 多级 fallback 方案 (2026-10-05 03:12)
+**时间**: 2026-09-26 15:59 | **原因**: 这是当前唯一卡住所有上层能力（社交发现、深度研究、故障溯源）的工程瓶颈，且不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily + Exa multi-level fallback chain implementation for LLM agent 2026
+## 原始发现
+### GitHub
