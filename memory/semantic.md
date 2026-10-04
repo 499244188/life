@@ -210,3 +210,4 @@
 **时间**: 2026-09-28 16:57 | **原因**: 这是当前唯一卡住所有上层能力（社交发现、深度研究、故障溯源）的工程瓶颈，且不依赖同伴回复这种不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted + Brave Search API + Tavily + Exa multi-level fallback chain implementation for LLM agent 2026 benchmark
 ## 原始发现
 ### GitHub
+- [探索: 搜索层多级 fallback 方案（SearXNG + Brave/Tavily/Exa） — 1. **查询分类器的准确性如何保证？** 如果分类错误，路由到不合适的引擎，fallback 反而增加延迟。是否需要先用轻量模型做意图分类？ 2. **结果质量评分器的 embedding 模型选择**：用本地小模型（如 bge-small）还是 API？本地模型�...] (来源: 2026-10-04 16:48)
