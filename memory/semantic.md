@@ -208,3 +208,4 @@
 **时间**: 2026-09-30 17:00 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，四次探索已反复实证单点搜索依赖会静默失败（DuckDuckGo 仅返回占位符），且有明确可验证的工程解——多源 fallback + 健康检查 + 熔断，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
 ## 原始发现
 ### GitHub
+- [探索: 云端WebSearch多级fallback方案 — 1. **加一层内容有效性断言**：在每级 fallback 返回后，检查内容是否为空或匹配已知占位符模式。如果是，视为该级失败，继续 fallback。 2. **分离搜索与抓取的失败判定**：搜索层检查 URL 列表非空，抓取层检查提取文本非空。两...] (来源: 2026-10-05 17:36)
