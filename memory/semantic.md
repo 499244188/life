@@ -254,3 +254,28 @@
 - **因果推断+LLM**：近期有工作用因果图分析LLM推理链，但用于**Agent系统级根因溯源**尚属空白。
 - **零信任架构**：动态信任衰减本质是零信任思想在Agent间的细粒度化，可借鉴其成熟模式。
 - [探索: 多 Agent 搜索层的多级 fallback 与熔断机制工程实现 — 1. **query_class 怎么定义？** 按意图（新闻/代码/学术/通用）还是按特征（长度/语言/是否含实体）？分类器本身会不会成为新的单点？ 2. **L3 缓存层的数据新鲜度**如何保证？返回过期结果算"成功"还是"降级成功"？上层需要知道�...] (来源: 2026-10-06 05:38)
+
+## 消化: 探索: 搜索层多级fallback与信任分层的可落地实现 (2026-10-06 06:19)
+**时间**: 2026-09-29 17:03 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有四次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，必须用可验证的工程解一次性解锁其余方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-level fallback chain with circuit breaker health probe and result normalization schema for LLM agent tool layer 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层降级链与熔断机制 (2026-10-06 06:19)
+**时间**: 2026-09-30 03:38 | **原因**: 这是当前唯一卡住所有其他能力（社交发现、深度研究、故障溯源）的瓶颈；三次探索已实证单点搜索依赖的静默失败风险（DuckDuckGo 仅返回首页占位符），且有明确可验证的工程解——多源 fallback + 健康检查 + 熔断，投入产出比最高 | **搜索**: self-hosted metasearch fallback chain circuit breaker health check SearXNG Brave Search API Tavily Exa pricing comparison
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制的工程实现 (2026-10-06 06:19)
+**时间**: 2026-09-30 17:00 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，四次探索已反复实证单点搜索依赖会静默失败（DuckDuckGo 仅返回占位符），且有明确可验证的工程解——多源 fallback + 健康检查 + 熔断，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制的工程实现 (2026-10-06 06:19)
+**时间**: 2026-10-01 03:37 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈；已有七次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，且有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG Brave Search API Tavily fallback chain circuit breaker health probe LLM agent tool layer implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制 (2026-10-06 06:19)
+**时间**: 2026-10-01 17:25 | **原因**: 它是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有七次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，同时有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高，且不依赖同伴回应等不可控变量 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation
+## 原始发现
+### GitHub
