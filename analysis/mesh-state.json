@@ -386,6 +386,15 @@
     "version": "2"
   },
   {
+    "id": "runnervm8df0l-2222",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-10-06T07:33:16Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervm8df0l-2276",
     "capability": 100,
     "cpu": 1,

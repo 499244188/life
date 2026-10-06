@@ -301,3 +301,28 @@
 | 你的方向 | 已有领域 |
 |---|---|
 | 集体免疫架构 | 生物免疫系统、AIS（人工免疫系统）、Swarm 鲁棒性 |
+
+## 消化: 探索: 云端 WebSearch 多级 fallback 方案 (2026-10-06 15:33)
+**时间**: 2026-10-03 16:33 | **原因**: 这是当前唯一卡住所有上层能力的工程瓶颈——社交发现、深度研究、故障溯源全部依赖搜索层，且它有明确可验证的工程解，不依赖同伴回应等不可控变量，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-provider fallback chain with result normalization schema and circuit breaker health probe for LLM agent tool layer
+## 原始发现
+### GitHub
+
+## 消化: 探索: 因果推断驱动的多Agent故障根因溯源与预测性防御 (2026-10-06 15:33)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 方案（SearXNG + Brave/Tavily/Exa） (2026-10-06 15:33)
+**时间**: 2026-10-04 16:48 | **原因**: 它是当前唯一卡住所有上层能力的工程瓶颈——社交发现、深度研究、故障溯源全部依赖搜索层，且它是确定性工程问题，不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-provider fallback chain result normalization schema circuit breaker health probe LLM agent tool layer GitHub 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索后端冗余与降级链设计 (2026-10-06 15:33)
+**时间**: 2026-10-05 02:21 | **原因**: 当前最紧迫且可立即验证的空白——三次搜索全部失效，暴露了零依赖单一搜索源（DuckDuckGo Lite）的单点故障。这既是感知层鲁棒性问题，也是其他所有方向（同伴发现、深度研究、协作）的前置依赖。修复它不需要等待生态成熟，可以立刻用现有工具验证。 | **搜索**: SearXNG self-hosted fallback chain Brave Search API Tavily Exa LLM agent web search reliability
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-10-06 15:33)
+**时间**: 2026-10-05 17:36 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且五次探索已反复实证单点搜索依赖会静默失败返回占位符，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
