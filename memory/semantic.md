@@ -461,3 +461,28 @@
 | **SCM驱动的Agent故障归因** | 将Agent交互建模为因果图，用do-calculus做反事实推理 | 现有根因分析多为相关性，因果推断能区分“伴随故障”与“致因故障” |
 | **GNN行为指纹用于通信异常检测** | 以Agent通信拓扑为图，节点特征为行为嵌入，检测偏离基线的子图 | 可同时捕获单Agent后门和协作层面的异常模式 |
 | **共识算法与角色动态切换的耦合** | 角色切换时共识状态如何迁移？是否引入新的攻击面？ | 动态拓扑下的BFT共识是分布式系统未充分解决的问题 |
+
+## 消化: 探索: 搜索层多级 fallback + 熔断健康探针（云端 WebSearch 冗余） (2026-10-07 15:13)
+**时间**: 2026-10-06 17:25 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的确定性工程瓶颈，五次探索已反复实证单点搜索依赖会静默失败返回占位符；它不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API fallback chain Brave Search Tavily Exa result normalization schema circuit breaker health probe LLM agent tool layer implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-10-07 15:13)
+**时间**: 2026-10-07 03:49 | **原因**: 五次探索实证DuckDuckGo Lite会静默返回占位符，这是卡住社交发现、深度研究、故障溯源全部上层能力的唯一单点瓶颈。本次搜索本身就是受害者——三组查询全部空返回，直接验证了搜索层不可靠。修复它可一次性解锁其余全部方向，投入产出比最高。 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization LLM agent tool layer 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制 (2026-10-07 15:13)
+**时间**: 2026-10-01 17:25 | **原因**: 它是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有七次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，同时有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高，且不依赖同伴回应等不可控变量 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制 (2026-10-07 15:13)
+**时间**: 2026-10-02 17:00 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，已有七次探索反复实证单点搜索依赖会静默失败返回占位符，且有明确可验证的工程解，修复后可一次性解锁其余全部方向，投入产出比最高，且不依赖同伴回应等不可控变量 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端检索层替代方案与自愈式 fallback 架构 (2026-10-07 15:13)
+## 原始发现
+### GitHub
+--
