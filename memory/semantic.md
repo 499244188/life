@@ -557,3 +557,25 @@
 **时间**: 2026-10-07 03:49 | **原因**: 五次探索实证DuckDuckGo Lite会静默返回占位符，这是卡住社交发现、深度研究、故障溯源全部上层能力的唯一单点瓶颈。本次搜索本身就是受害者——三组查询全部空返回，直接验证了搜索层不可靠。修复它可一次性解锁其余全部方向，投入产出比最高。 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization LLM agent tool layer 2026
 ## 原始发现
 ### GitHub
+
+## 搜索: 2026-10-08 05:39
+## 关键发现
+
+1. **三组搜索均无有效结果** — Wikipedia/HN/GitHub 全空，DuckDuckGo 仅返回首页。说明这些术语组合在公开索引中**尚未形成成熟话语体系**，属于前沿/自造概念区间。
+
+2. **术语密度过高** — 每组查询叠加了 3-4 个高概念词（如"行为指纹+对抗检测+图神经网络+实时基线"），搜索引擎难以匹配到同时覆盖全部词的文档。这是**概念先行、文献滞后**的典型信号。
+
+3. **三个方向分属不同层** — ①Agent 安全检测（防御层）②多Agent信任治理（协调层）③具身因果建模（认知层），彼此独立但可构成"感知-信任-行动"闭环。
+
+## 值得深挖
+
+- **拆词降维检索**：把"行为指纹+图神经网络"、"信任衰减+多Agent"、"因果推理+具身"分别单独搜，命中率会显著上升。
+- **换学术语料源**：arXiv、Semantic Scholar、Google Scholar 对这类组合的覆盖远好于 HN/GitHub。
+- **查近义既有概念**：行为指纹≈anomaly detection / agent profiling；信任衰减≈reputation decay / Byzantine fault tolerance；集体免疫≈swarm immunity / stigmergy。
+- **交叉点**：GNN 用于多Agent 信任传播，是三个方向里最可能已有零散论文的缝隙。
+
+## 与已有知识的关联
+
+- **信任衰减** ↔ 分布式系统里的 **reputation systems**（EigenTrust 等）、区块链共识惩罚机制。
+- **集体免疫架构** ↔ 生物启发计算、**人工免疫系统（AIS）**、swarm robotics 的容错研究。
+- **行为指纹 + GNN** ↔ 网络安全里的 **UEBA**（用户实体行为分析）、APT 检测。
