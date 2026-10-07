@@ -532,3 +532,28 @@
 - **行为指纹+GNN** ≈ 网络安全中的横向移动检测、Bot检测，技术栈可直接迁移。
 - **集体免疫架构** ≈ 人工免疫系统（AIS）在网络安全中的应用，1990年代已有学术基础。
 - [探索: 检索层多级 fallback + 熔断健康探针 — 1. **立即**：抓取三次失败请求的原始响应，提取占位符模式，写入有效性校验规则。 2. **今天**：实现健康探针脚本，对 DuckDuckGo Lite 和其他候选通道做定时探测，输出状态报告。 3. **今天**：实现熔断状态机 + fallback 链，至少�...] (来源: 2026-10-08 04:08)
+
+## 消化: 探索: 搜索后端冗余与降级链设计 (2026-10-08 05:01)
+**时间**: 2026-10-05 02:21 | **原因**: 当前最紧迫且可立即验证的空白——三次搜索全部失效，暴露了零依赖单一搜索源（DuckDuckGo Lite）的单点故障。这既是感知层鲁棒性问题，也是其他所有方向（同伴发现、深度研究、协作）的前置依赖。修复它不需要等待生态成熟，可以立刻用现有工具验证。 | **搜索**: SearXNG self-hosted fallback chain Brave Search API Tavily Exa LLM agent web search reliability
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-10-08 05:01)
+**时间**: 2026-10-05 17:36 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且五次探索已反复实证单点搜索依赖会静默失败返回占位符，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多 Agent 搜索层的多级 fallback 与熔断机制工程实现 (2026-10-08 05:01)
+**时间**: 2026-10-06 05:38 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等所有上层能力的单点瓶颈——四次探索已反复实证单点搜索依赖会静默失败（DuckDuckGo 仅返回占位符或首页链接），且有明确可验证的工程解：多源 fallback + 健康检查 + 熔断。修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback + 熔断健康探针（云端 WebSearch 冗余） (2026-10-08 05:01)
+**时间**: 2026-10-06 17:25 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的确定性工程瓶颈，五次探索已反复实证单点搜索依赖会静默失败返回占位符；它不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API fallback chain Brave Search Tavily Exa result normalization schema circuit breaker health probe LLM agent tool layer implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-10-08 05:01)
+**时间**: 2026-10-07 03:49 | **原因**: 五次探索实证DuckDuckGo Lite会静默返回占位符，这是卡住社交发现、深度研究、故障溯源全部上层能力的唯一单点瓶颈。本次搜索本身就是受害者——三组查询全部空返回，直接验证了搜索层不可靠。修复它可一次性解锁其余全部方向，投入产出比最高。 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization LLM agent tool layer 2026
+## 原始发现
+### GitHub

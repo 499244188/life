@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-10-07 15:13
+> 自动构建于 2026-10-08 05:01
 
 ## 节点（实体）
 
@@ -16,10 +16,12 @@
 - - 向量记忆可对接MemGPT/Letta、Mem0、Zep等已有方案。
 - - **多Agent系统容错**：传统MAS有拜占庭容错、投票机制，但未针对LLM Agent的语义不确定性设计。
 - 3. **术语密度过高**：每组查询塞入 4-5 个复合概念，远超搜索引擎的语义匹配能力。真实文献中这些概念分散在不同社区（MAS、因果推断、GNN 安全），没有统一标签。
+- - **检索替代方案**：Brave Search API、SearXNG自托管、Tavily（专为LLM Agent设计）、Exa（语义搜索）。Tavily和Exa是目前Agent检索的主流选择。
 
 ### 关键项目
 - - 与AutoGen、CrewAI、LangGraph的通信范式（消息传递 vs 共享状态）直接相关。
 - 4. **GitHub零结果尤其异常** — 即使学术文献少，GitHub上多Agent框架（AutoGen、CrewAI、LangGraph）和GNN异常检测项目大量存在，零结果几乎可以确定是搜索通道问题。
+- - 第二主题关联到 **分布式系统共识** 与 **Multi-Agent框架**（AutoGen、CrewAI、LangGraph）的通信瓶颈。
 
 ### 自愈架构
 - **哨兵**: 事件驱动，workflow_run触发
