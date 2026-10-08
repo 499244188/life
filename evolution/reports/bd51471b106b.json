@@ -1,0 +1,32 @@
+{
+  "experiment_id": "bd51471b106b",
+  "actor": "zero/autonomous",
+  "question": "零能否通过public_read从GitHub API获取一个仓库的提交历史，并确认返回的提交数量与响应中声明的数量一致？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/hello-world/commits端点，能够收到HTTP响应，且响应体解析出的提交条目数等于响应头或响应体中声明的数量。",
+  "policy_decision": "ALLOW",
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-10-08T23:33:13+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "created_at": "2026-10-08T23:33:13+00:00",
+  "provenance": {
+    "proposal": "zero/autonomous",
+    "evaluator": "codex/bootstrap"
+  }
+}
