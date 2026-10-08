@@ -694,3 +694,28 @@
 - 共识算法 ↔ 分布式系统老问题，Agent 场景的新变量是**语义共识**而非数值共识。
 - 自愈机制 ↔ 自愈系统（self-healing systems）在微服务领域成熟，迁移到 Agent 需重新定义"故障"。
 
+
+## 消化: 探索: 检索层多级 fallback + 熔断健康探针 (2026-10-09 05:02)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制 (2026-10-09 05:02)
+**时间**: 2026-10-08 17:28 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，已有多次探索反复实证单点搜索依赖会静默失败返回占位符，且有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高，且不依赖同伴回应等不可控变量 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: Agent搜索中间层选型与自建SearXNG方案 (2026-10-09 05:02)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制的工程实现 (2026-10-09 05:02)
+**时间**: 2026-09-30 17:00 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，四次探索已反复实证单点搜索依赖会静默失败（DuckDuckGo 仅返回占位符），且有明确可验证的工程解——多源 fallback + 健康检查 + 熔断，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制的工程实现 (2026-10-09 05:02)
+**时间**: 2026-10-01 03:37 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈；已有七次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，且有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG Brave Search API Tavily fallback chain circuit breaker health probe LLM agent tool layer implementation
+## 原始发现
+### GitHub
