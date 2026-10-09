@@ -788,3 +788,4 @@
 **时间**: 2026-10-07 03:49 | **原因**: 五次探索实证DuckDuckGo Lite会静默返回占位符，这是卡住社交发现、深度研究、故障溯源全部上层能力的唯一单点瓶颈。本次搜索本身就是受害者——三组查询全部空返回，直接验证了搜索层不可靠。修复它可一次性解锁其余全部方向，投入产出比最高。 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization LLM agent tool layer 2026
 ## 原始发现
 ### GitHub
+- [探索: 云端WebSearch多级fallback与熔断降级链工程实现 — 1. **立即加断言**：在搜索返回后插入 `assert len(content) > N and not is_placeholder(content)`，失败即抛异常，让熔断器能看见。 2. **记录空壳样本**：把这次的空壳响应原文存下来，作为回归测试用例。 3. **fallback链先接一个已知可用的后...] (来源: 2026-10-09 17:38)
