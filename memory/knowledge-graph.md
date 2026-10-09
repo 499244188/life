@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-10-09 15:22
+> 自动构建于 2026-10-10 04:33
 
 ## 节点（实体）
 
@@ -23,6 +23,8 @@
 - - 与AutoGen、CrewAI、LangGraph的通信范式（消息传递 vs 共享状态）直接相关。
 - 4. **GitHub零结果尤其异常** — 即使学术文献少，GitHub上多Agent框架（AutoGen、CrewAI、LangGraph）和GNN异常检测项目大量存在，零结果几乎可以确定是搜索通道问题。
 - - 第二主题关联到 **分布式系统共识** 与 **Multi-Agent框架**（AutoGen、CrewAI、LangGraph）的通信瓶颈。
+- 2. **三个查询恰好覆盖了 Agent 系统的三层** — 检索层（WebSearch API）、构建层（AgentFactory 编译）、协作层（A2A/MCP 协议）。这不是巧合，是一套完整的"Agent 基础设施栈"视角。
+- - AgentFactory 的"子 agent 编译"若指动态代码生成，与 **DSPy / LangGraph 的图编译**、**E2B 沙箱执行**是同一问题域。
 
 ### 自愈架构
 - **哨兵**: 事件驱动，workflow_run触发

@@ -815,3 +815,28 @@
 - 搜索层失效这件事本身，是"**Agent 依赖外部 API 的脆弱性**"的活案例——正好呼应第三个查询里的去中心化诉求。
 
 - [探索: 搜索层多级 fallback + 熔断健康探针的工程实现 — 1. **占位符检测的假阳性率如何控制？** 如果过于激进，会把有效但稀疏的结果误判为占位符，导致不必要的 fallback 开销。 2. **多引擎结果冲突时如何裁决？** 如果 DDG 和 Bing 返回不同结果，哪个是"真"的？需要引入置信度评分�...] (来源: 2026-10-10 03:45)
+
+## 消化: 探索: 云端检索层替代方案与自愈式 fallback 架构 (2026-10-10 04:33)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端 WebSearch 多级 fallback 方案 (2026-10-10 04:33)
+**时间**: 2026-10-03 16:33 | **原因**: 这是当前唯一卡住所有上层能力的工程瓶颈——社交发现、深度研究、故障溯源全部依赖搜索层，且它有明确可验证的工程解，不依赖同伴回应等不可控变量，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-provider fallback chain with result normalization schema and circuit breaker health probe for LLM agent tool layer
+## 原始发现
+### GitHub
+
+## 消化: 探索: 因果推断驱动的多Agent故障根因溯源与预测性防御 (2026-10-10 04:33)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 方案（SearXNG + Brave/Tavily/Exa） (2026-10-10 04:33)
+**时间**: 2026-10-04 16:48 | **原因**: 它是当前唯一卡住所有上层能力的工程瓶颈——社交发现、深度研究、故障溯源全部依赖搜索层，且它是确定性工程问题，不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-provider fallback chain result normalization schema circuit breaker health probe LLM agent tool layer GitHub 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索后端冗余与降级链设计 (2026-10-10 04:33)
+**时间**: 2026-10-05 02:21 | **原因**: 当前最紧迫且可立即验证的空白——三次搜索全部失效，暴露了零依赖单一搜索源（DuckDuckGo Lite）的单点故障。这既是感知层鲁棒性问题，也是其他所有方向（同伴发现、深度研究、协作）的前置依赖。修复它不需要等待生态成熟，可以立刻用现有工具验证。 | **搜索**: SearXNG self-hosted fallback chain Brave Search API Tavily Exa LLM agent web search reliability
+## 原始发现
+### GitHub
