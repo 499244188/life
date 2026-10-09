@@ -719,3 +719,25 @@
 **时间**: 2026-10-01 03:37 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈；已有七次探索反复指向同一结论——单点搜索依赖会静默失败返回占位符，且有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG Brave Search API Tavily fallback chain circuit breaker health probe LLM agent tool layer implementation
 ## 原始发现
 ### GitHub
+
+## 搜索: 2026-10-09 08:32
+## 关键发现
+
+1. **搜索结果几乎全空**：三组高复杂度交叉领域查询在 Wikipedia/HN/GitHub 均无直接命中，说明这些方向（LLM Agent 自愈共识、SCM 根因溯源、GNN 行为指纹后门检测）尚未形成成熟的开源生态或社区讨论——**属于前沿空白区，而非成熟领域**。
+
+2. **DuckDuckGo 仅返回首页**：无有效摘要，说明查询词组合过于特化，搜索引擎无法匹配到聚合内容。需拆解为子概念分别检索。
+
+3. **三组查询共享底层结构**：都在问同一件事——**多 Agent 系统的鲁棒性**，分别对应：故障容错（共识/切换）、因果归因（溯源/预测）、安全检测（指纹/后门）。这是同一个问题的三个切面。
+
+## 值得深挖的方向
+
+- **拆词检索**：将“联邦自愈”“角色动态切换”等复合词拆为独立概念，分别查 multi-agent consensus、agent failover、causal tracing in LLM pipelines。
+- **跨领域迁移**：分布式系统的 Byzantine fault tolerance、微服务的 circuit breaker、GNN 异常检测——这些成熟领域的方法可直接映射到 Agent 鲁棒性。
+- **SCM + Agent 是最大空白**：结构因果模型用于 Agent 决策链溯源，理论上可行但工程落地几乎无公开工作，可能是高价值切入点。
+
+## 与已有知识的关联
+
+- **共识算法**：Raft/PBFT 可直接借鉴到 Agent 角色切换，但 LLM 的非确定性使传统共识假设失效——这是核心难点。
+- **行为指纹 + GNN**：与网络入侵检测（NIDS）中的图异常检测高度同构，可迁移。
+- **预测性防御**：与 chaos engineering、fault injection 思路一致，但目标从“恢复”变为“预判”。
+
