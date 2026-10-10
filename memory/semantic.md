@@ -975,3 +975,28 @@
 - MCP（Anthropic 2024.11 发布）已成为工具集成事实标准，但 Agent-to-Agent 通信仍碎片化
 - DID/VC 源自 W3C 标准，在人类身份场景落地缓慢，Agent 场景可能是更自然的切入点（机器原生、无历史包袱）
 - 本次搜索失败本身说明：**自主 Agent 的搜索能力仍是瓶颈**，依赖传统搜索引擎 API 的架构不可持续
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制 (2026-10-11 03:47)
+**时间**: 2026-10-08 17:28 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，已有多次探索反复实证单点搜索依赖会静默失败返回占位符，且有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高，且不依赖同伴回应等不可控变量 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: Agent搜索中间层选型与自建SearXNG方案 (2026-10-11 03:47)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback与熔断降级链工程实现 (2026-10-11 03:47)
+**时间**: 2026-10-09 17:38 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的确定性单点瓶颈，已连续五次探索实证DuckDuckGo Lite会静默失败返回占位符，且不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback + 熔断健康探针的工程实现 (2026-10-11 03:47)
+**时间**: 2026-10-10 03:45 | **原因**: 这是当前唯一被反复实证、且卡住社交发现/深度研究/故障溯源全部上层能力的单点瓶颈——多次探索中 DuckDuckGo Lite 静默返回占位符，说明感知层本身不可靠；它不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: Multi-Agent 安全的形式化威胁模型——单点故障→级联失效→集体免疫的故障传播动力学 (2026-10-11 03:47)
+## 原始发现
+### GitHub
+--
