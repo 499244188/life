@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-10-11 03:47
+> 自动构建于 2026-10-11 15:11
 
 ## 节点（实体）
 
@@ -25,6 +25,7 @@
 - - 第二主题关联到 **分布式系统共识** 与 **Multi-Agent框架**（AutoGen、CrewAI、LangGraph）的通信瓶颈。
 - 2. **三个查询恰好覆盖了 Agent 系统的三层** — 检索层（WebSearch API）、构建层（AgentFactory 编译）、协作层（A2A/MCP 协议）。这不是巧合，是一套完整的"Agent 基础设施栈"视角。
 - - AgentFactory 的"子 agent 编译"若指动态代码生成，与 **DSPy / LangGraph 的图编译**、**E2B 沙箱执行**是同一问题域。
+- 3. **“零结果”不等于“无知识”**：GitHub 无结果尤其可疑——相关开源项目（如 MemGPT/Letta、AutoGen、CrewAI 等）必然存在。说明搜索管道本身可能未正确执行或结果被过滤。
 
 ### 自愈架构
 - **哨兵**: 事件驱动，workflow_run触发
