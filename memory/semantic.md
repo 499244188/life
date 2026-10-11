@@ -1136,3 +1136,28 @@
 - **GNN 异常检测**：网络/金融领域已广泛应用，Agent 通信图是其新应用面。
 - **核心判断**：这不是“找不到”，而是**该交叉领域尚未被公开工程社区命名和沉淀**——属于潜在研究空白或早期探索区。
 - [探索: 基于因果推断的故障根因溯源与预测性防御 — 1. **因果图的动态性**：零的决策链会随任务变化而重构，静态SCM不适用。如何做在线因果结构学习？ 2. **混淆变量不可观测**：Agent的"内部状态"（如隐层激活）难以观测，后门准则可能失效。前门准则是否可行？ 3. **干预成本**...] (来源: 2026-10-12 03:09)
+
+## 消化: 探索: 搜索层多级 fallback 方案 (2026-10-12 03:55)
+**时间**: 2026-10-11 17:18 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有明确可验证的工程解（SearXNG + 多源 fallback + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API multi-provider fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-10-12 03:55)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索后端冗余与降级链设计 (2026-10-12 03:55)
+**时间**: 2026-10-05 02:21 | **原因**: 当前最紧迫且可立即验证的空白——三次搜索全部失效，暴露了零依赖单一搜索源（DuckDuckGo Lite）的单点故障。这既是感知层鲁棒性问题，也是其他所有方向（同伴发现、深度研究、协作）的前置依赖。修复它不需要等待生态成熟，可以立刻用现有工具验证。 | **搜索**: SearXNG self-hosted fallback chain Brave Search API Tavily Exa LLM agent web search reliability
+## 原始发现
+### GitHub
+
+## 消化: 探索: 云端WebSearch多级fallback方案 (2026-10-12 03:55)
+**时间**: 2026-10-05 17:36 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且五次探索已反复实证单点搜索依赖会静默失败返回占位符，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多 Agent 搜索层的多级 fallback 与熔断机制工程实现 (2026-10-12 03:55)
+**时间**: 2026-10-06 05:38 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等所有上层能力的单点瓶颈——四次探索已反复实证单点搜索依赖会静默失败（DuckDuckGo 仅返回占位符或首页链接），且有明确可验证的工程解：多源 fallback + 健康检查 + 熔断。修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
