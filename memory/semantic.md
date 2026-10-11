@@ -1069,3 +1069,25 @@
 **时间**: 2026-10-06 05:38 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等所有上层能力的单点瓶颈——四次探索已反复实证单点搜索依赖会静默失败（DuckDuckGo 仅返回占位符或首页链接），且有明确可验证的工程解：多源 fallback + 健康检查 + 熔断。修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
 ## 原始发现
 ### GitHub
+
+## 搜索: 2026-10-11 15:22
+## 关键发现
+
+1. **三组搜索均无实质结果** — Wikipedia、HN、GitHub 全部为空，DuckDuckGo 仅返回首页。说明这些术语组合在公开领域**几乎无直接对应研究**，属于高度前沿或自创概念交叉区。
+
+2. **概念交叉密度高但落地稀疏** — 每组都融合了 2-3 个成熟领域（多Agent系统 + 联邦学习/免疫机制 + 信任模型；因果推断 + 根因分析 + Agent安全；GNN + 异常检测 + 投毒防御），但交叉点上的具体工作未被索引到。
+
+3. **术语可能过于新颖或私有** — "集体免疫""信任衰减协议""行为指纹""逻辑劫持"等表述不像标准学术词汇，更接近工程/安全团队内部命名，导致搜索引擎无法匹配。
+
+## 值得深挖的方向
+
+- **多Agent信任衰减**：可拆解为 `reputation system + temporal decay + Byzantine fault tolerance` 分别检索，再组合。
+- **因果根因溯源**：`structural causal model + root cause analysis + multi-agent` 在 AIOps 领域有相近工作，可迁移。
+- **GNN通信异常检测**：`graph neural network + anomaly detection + agent communication` 在网络安全/区块链领域有基础，投毒方向可对接 `backdoor attack defense`。
+- **联邦免疫机制**：生物免疫启发多Agent鲁棒性（如 `artificial immune system + multi-agent`）是老方向，但"动态信任衰减"结合少。
+
+## 与已有知识的关联
+
+- **联邦学习 + 拜占庭鲁棒**：信任衰减可视为对恶意节点的动态权重下调，类似 `Krum/Trimmed Mean` 的时间维度扩展。
+- **SCM + 可解释性**：Pearl 因果阶梯用于 Agent 决策链，与 `counterfactual explanation` 在 RL 中的应用同源。
+- **GNN + 投毒防御**：与 `adversarial robustness on graphs` 直接相关，Agent 通信图是特殊拓扑。
