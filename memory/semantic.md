@@ -1022,3 +1022,25 @@
 | **自托管搜索** | SearXNG、Whoogle、Perplexica、Khoj；对比API化能力与Agent集成 |
 | **A2A vs MCP** | Google A2A 与 Anthropic MCP 的互补/竞争关系；互操作层设计 |
 | **Agent容错** | 冗余协商 → 类似Raft/PBFT在Agent集群中的适配；“集体免疫”可映射为拜占庭容错+声誉系统 |
+
+## 搜索: 2026-10-11 09:04
+## 关键发现
+
+1. **搜索工具链断裂**：三组查询均未返回有效结果，DuckDuckGo 仅返回首页链接，Wikipedia/HN/GitHub 全部空结果。这本身是一个信号——当前搜索基础设施对深度研究型 Agent 的支撑不足，或搜索接口存在访问限制/反爬拦截。
+
+2. **查询主题高度前沿且交叉**：三组查询分别指向 LLM Agent 的持久化记忆+多Agent通信、自主Agent的容错与信任机制、以及搜索API替代方案。这些主题在2026年属于活跃但尚未标准化的领域，公开索引可能滞后于实际进展。
+
+3. **“零结果”不等于“无知识”**：GitHub 无结果尤其可疑——相关开源项目（如 MemGPT/Letta、AutoGen、CrewAI 等）必然存在。说明搜索管道本身可能未正确执行或结果被过滤。
+
+## 值得深挖的方向
+
+- **搜索层自检**：先验证搜索工具是否正常工作，再判断“无结果”是真实信号还是工具故障。
+- **替代检索源**：直接查 arXiv、Papers With Code、GitHub API、特定技术博客，绕过通用搜索引擎。
+- **记忆架构具体方案**：向量库+图数据库混合、分层记忆（工作/ episodic/ semantic）、记忆压缩与遗忘机制。
+- **多Agent通信协议**：MCP（Model Context Protocol）、A2A（Agent-to-Agent）、FIPA-ACL 的现代演进。
+- **信任衰减与集体免疫**：类似区块链共识+声誉系统的 Agent 治理，参考 EigenTrust、PageRank 变体。
+
+## 与已有知识的关联
+
+- 持久化记忆 → 对应 RAG 的演进：从无状态检索到有状态记忆体（MemGPT/Letta 路线）。
+- 多Agent通信 → 对应 MCP 协议生态，以及 LangGraph/AutoGen 的编排层。
