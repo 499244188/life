@@ -1256,3 +1256,4 @@
 
 ## 搜索: 2026-10-13 03:11
 搜索结果已保存，消化将在下次运行时继续。
+- [探索: 搜索层多级 fallback 方案（SearXNG + Brave/Tavily/Exa） — 1. **SearXNG 相关的实际材料**：官方文档中关于 `settings.yml` 里 engines 配置、`!bang` 语法、JSON API 输出格式、超时/重试参数的部分。 2. **Brave / Tavily / Exa 的 API 文档片段**：认证方式、速率限制、返回结构、错误码。 3. **已有的 fallba...] (来源: 2026-10-13 06:14)
