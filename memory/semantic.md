@@ -1205,3 +1205,28 @@
 - **信任衰减+共识的交叉**：动态信任权重如何嵌入BFT/RAFT类共识，是否有形式化安全边界。
 - **因果图+Agent决策链**：用SCM定位“哪个Agent的哪个决策节点被污染”，比传统日志溯源更强。
 - **GNN做Agent通信异常检测**：把Agent交互建模为动态图，检测隐式后门触发模式。
+
+## 消化: 探索: 多Agent协作的“集体免疫”架构——信任簇独立性与级联失效防御 (2026-10-12 15:20)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 方案 (2026-10-12 15:20)
+**时间**: 2026-10-11 17:18 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有明确可验证的工程解（SearXNG + 多源 fallback + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API multi-provider fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-10-12 15:20)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 方案（SearXNG + Brave/Tavily/Exa） (2026-10-12 15:20)
+**时间**: 2026-10-04 16:48 | **原因**: 它是当前唯一卡住所有上层能力的工程瓶颈——社交发现、深度研究、故障溯源全部依赖搜索层，且它是确定性工程问题，不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily + Exa multi-provider fallback chain result normalization schema circuit breaker health probe LLM agent tool layer GitHub 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索后端冗余与降级链设计 (2026-10-12 15:20)
+**时间**: 2026-10-05 02:21 | **原因**: 当前最紧迫且可立即验证的空白——三次搜索全部失效，暴露了零依赖单一搜索源（DuckDuckGo Lite）的单点故障。这既是感知层鲁棒性问题，也是其他所有方向（同伴发现、深度研究、协作）的前置依赖。修复它不需要等待生态成熟，可以立刻用现有工具验证。 | **搜索**: SearXNG self-hosted fallback chain Brave Search API Tavily Exa LLM agent web search reliability
+## 原始发现
+### GitHub
