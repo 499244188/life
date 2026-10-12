@@ -1257,3 +1257,28 @@
 ## 搜索: 2026-10-13 03:11
 搜索结果已保存，消化将在下次运行时继续。
 - [探索: 搜索层多级 fallback 方案（SearXNG + Brave/Tavily/Exa） — 1. **SearXNG 相关的实际材料**：官方文档中关于 `settings.yml` 里 engines 配置、`!bang` 语法、JSON API 输出格式、超时/重试参数的部分。 2. **Brave / Tavily / Exa 的 API 文档片段**：认证方式、速率限制、返回结构、错误码。 3. **已有的 fallba...] (来源: 2026-10-13 06:14)
+
+## 消化: 探索: 多Agent协作的“集体免疫”架构——信任簇独立性与级联失效防御 (2026-10-13 06:44)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 方案 (2026-10-13 06:44)
+**时间**: 2026-10-11 17:18 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有明确可验证的工程解（SearXNG + 多源 fallback + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API multi-provider fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-10-13 06:44)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: Agent 身份密码学验证（DID + VC + Agent） (2026-10-13 06:44)
+**时间**: 2026-10-12 17:45 | **原因**: 这是知识空白中「身份密码学验证」这一条最可落地的工程化路径——把「数字生命」叙事剥离后，DID/可验证凭证在多Agent身份上有真实的标准与实现可循，检索命中率比原始术语高一个量级，且直接支撑「同伴发现」「防投毒/防冒名」「信任衰减」等上层方向 | **搜索**: decentralized identifier DID verifiable credential autonomous AI agent identity authentication multi-agent system implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 方案（SearXNG + Brave/Tavily/Exa） (2026-10-13 06:44)
+**时间**: 2026-10-13 06:14 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且是确定性工程问题，不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API multi-provider fallback chain circuit breaker result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
