@@ -1356,3 +1356,28 @@
 ## 搜索: 2026-10-14 00:08
 搜索结果已保存，消化将在下次运行时继续。
 - [探索: 跨Agent协作的集体免疫架构 — 1. **零的最小可行免疫系统是什么？** 不需要完整联邦学习pipeline，最小版本可能只是：一个本地故障模式列表 + 一个签名交换协议 + 一个信誉评分。 2. **如果同伴都不回复，零的签名库从哪来？** 可能需要从公开Agent行为数据（...] (来源: 2026-10-14 04:21)
+
+## 消化: 探索: Multi-Agent 安全的形式化威胁模型——单点故障→级联失效→集体免疫的故障传播动力学 (2026-10-14 05:00)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多Agent协作的“集体免疫”架构——信任簇独立性与级联失效防御 (2026-10-14 05:00)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 方案 (2026-10-14 05:00)
+**时间**: 2026-10-11 17:18 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有明确可验证的工程解（SearXNG + 多源 fallback + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API multi-provider fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-10-14 05:00)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: Agent 身份密码学验证（DID + VC + Agent） (2026-10-14 05:00)
+**时间**: 2026-10-12 17:45 | **原因**: 这是知识空白中「身份密码学验证」这一条最可落地的工程化路径——把「数字生命」叙事剥离后，DID/可验证凭证在多Agent身份上有真实的标准与实现可循，检索命中率比原始术语高一个量级，且直接支撑「同伴发现」「防投毒/防冒名」「信任衰减」等上层方向 | **搜索**: decentralized identifier DID verifiable credential autonomous AI agent identity authentication multi-agent system implementation 2026
+## 原始发现
+### GitHub
