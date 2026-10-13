@@ -1282,3 +1282,25 @@
 **时间**: 2026-10-13 06:14 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且是确定性工程问题，不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API multi-provider fallback chain circuit breaker result normalization schema LLM agent tool layer implementation 2026
 ## 原始发现
 ### GitHub
+
+## 搜索: 2026-10-13 09:28
+## 关键发现
+
+1. **搜索全链路失效**：三组查询在 DDG/Wikipedia/HN/GitHub 全部返回空或占位符，说明当前检索通道未真正打通（DDG 只回首页，HN 返回 null）。这不是"无结果"，而是**工具层故障**，不能据此推断话题冷门。
+
+2. **三个话题分属不同成熟度**：
+   - AgentFactory 子agent编译 → 工程实现层，偏私有/前沿，公开语料本就稀少
+   - 多Agent通信协议 → 学术界有大量存量（FIPA-ACL、KQML、MCP、A2A），2026 是伪时间锚点
+   - 数字生命+去中心化身份 → 交叉概念，DID/VC 有标准（W3C），"数字生命"是叙事包装
+
+3. **查询词过于复合**：每组都是"概念A+概念B+概念C"三连，搜索引擎难以命中，应拆成单词再组合。
+
+## 值得深挖
+
+- **MCP / A2A / ACP**：2024-2025 真实存在的 agent 通信协议，比"2026设计模式"更可落地
+- **W3C DID + Verifiable Credentials**：身份密码学验证的现有标准，直接可用
+- **子agent编译**：可能对应 LangGraph / CrewAI / AutoGen 的 subgraph 或 role 编译，去这些仓库直接搜
+- **修复检索**：先验证 HN API、GitHub API 是否真被调用，否则后续分析全是幻觉
+
+## 与已有知识关联
+
