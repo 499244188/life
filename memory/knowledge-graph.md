@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-10-13 06:44
+> 自动构建于 2026-10-13 15:41
 
 ## 节点（实体）
 
@@ -27,6 +27,8 @@
 - - AgentFactory 的"子 agent 编译"若指动态代码生成，与 **DSPy / LangGraph 的图编译**、**E2B 沙箱执行**是同一问题域。
 - 3. **“零结果”不等于“无知识”**：GitHub 无结果尤其可疑——相关开源项目（如 MemGPT/Letta、AutoGen、CrewAI 等）必然存在。说明搜索管道本身可能未正确执行或结果被过滤。
 - 1. **搜索全部空转**：三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页占位符——说明这些术语组合（"AgentFactory 子agent 编译"、"动态信任衰减"、"身份密码学验证+数字生命"）**不是现有公开领域的成熟概念**，要么是自造术语，要么属于极窄的私有/内部项目语境。
+-    - AgentFactory 子agent编译 → 工程实现层，偏私有/前沿，公开语料本就稀少
+- - **子agent编译**：可能对应 LangGraph / CrewAI / AutoGen 的 subgraph 或 role 编译，去这些仓库直接搜
 
 ### 自愈架构
 - **哨兵**: 事件驱动，workflow_run触发
