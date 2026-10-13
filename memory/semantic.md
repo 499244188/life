@@ -1381,3 +1381,25 @@
 **时间**: 2026-10-12 17:45 | **原因**: 这是知识空白中「身份密码学验证」这一条最可落地的工程化路径——把「数字生命」叙事剥离后，DID/可验证凭证在多Agent身份上有真实的标准与实现可循，检索命中率比原始术语高一个量级，且直接支撑「同伴发现」「防投毒/防冒名」「信任衰减」等上层方向 | **搜索**: decentralized identifier DID verifiable credential autonomous AI agent identity authentication multi-agent system implementation 2026
 ## 原始发现
 ### GitHub
+
+## 搜索: 2026-10-14 05:21
+## 关键发现
+
+1. **搜索结果几乎全空**：三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页链接——说明当前搜索通道本身失效或极度受限，无法据此判断领域真实状态。
+2. **查询主题高度前沿且交叉**：分别指向 (a) LLM Agent 的云端检索替代方案，(b) Agent 去中心化身份与密码学验证，(c) Agent 行为指纹与 GNN 异常检测——三者共同构成“自主 Agent 的安全基础设施”拼图。
+3. **2026 时间戳暗示前瞻性设定**：这些主题在当下多处于预印本/早期工程阶段，搜索无结果是预期内的，而非领域空白。
+
+## 值得深挖方向
+
+- **Agent 检索层去中心化**：DuckDuckGo Lite 之外的方案（SearXNG 自托管、Brave API、Exa/Metaphor 语义检索、Common Crawl 直查）——重点在可编程性与 Agent 友好接口。
+- **Agent 身份密码学**：DID/VC、Ed25519 签名、TEE  attestation、Agent 间 mTLS——核心问题是“如何证明某行为确由某 Agent 发出”。
+- **行为指纹 + GNN 异常检测**：将 Agent 调用序列建模为图，检测提示注入、工具滥用、身份冒用；对抗性攻击下 GNN 的鲁棒性是关键缺口。
+- **三者交汇点**：可信身份 → 可验证行为日志 → 图异常检测，构成 Agent 零信任架构。
+
+## 与已有知识的关联
+
+- 与 **零信任架构**（BeyondCorp）思路同构，只是主体从人/设备换成 Agent。
+- 与 **LLM Agent 可观测性**（LangSmith、AgentOps）互补：那些做日志，这里做异常判定。
+- 与 **DID/VC 生态**（W3C、ENS、Spruce）直接衔接，但 Agent 场景需要更高频、机器原生的验证。
+- GNN 异常检测可复用 **金融反欺诈/入侵检测** 的成熟方法，迁移成本主要在 Agent 行为图的构建。
+
