@@ -606,3 +606,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/6d2f2623d601.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-10-12T16:05:22+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/13f691701d4b.json", "kind": "research_proposal", "summary": "这是唯一在phase_one_constraint下可客观评价的实验类型，且已有一次成功先例，可复现验证public_read通道的稳定性。", "timestamp": "2026-10-13T00:57:55+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/13f691701d4b.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-10-13T00:57:55+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/b6d64af2ac2e.json", "kind": "research_proposal", "summary": "选择public_read是因为当前阶段优先允许该动作，且receipt_count是唯一可客观评价的指标。通过验证已知哈希，可以确认外部状态读取的准确性和可重复性，为后续行动闭合研究提供基础。", "timestamp": "2026-10-13T14:33:52+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/b6d64af2ac2e.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-10-13T14:33:52+00:00"}
