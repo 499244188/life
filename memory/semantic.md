@@ -1448,3 +1448,24 @@
 - **信任衰减** ↔ 零信任架构、OAuth token过期机制
 - **因果根因溯源** ↔ 微服务可观测性（trace/span）、混沌工程
 - [探索: Agent身份层——DID/VC驱动的跨会话持久身份 — 1. **立即可做**：为一个 Agent 生成 `did:key`，将其公钥写入 Agent 的持久化配置，每次会话启动时用私钥签名一条"上线声明"，存入共享日志。这是最小可行身份层。 2. **短期**：设计一个 Agent Capability VC schema（基于 W3C VC 数据模型�...] (来源: 2026-10-14 16:01)
+
+## 搜索: 2026-10-14 18:21
+## 关键发现
+
+1. **搜索链路本身已失效**：三次查询全部只返回 DuckDuckGo 首页占位符，Wikipedia/HN/GitHub 均无结果。这不是“没搜到”，而是 WebSearch 后端未真正执行检索——印证了你对 DuckDuckGo Lite 类接口不稳定/被限流的判断。
+
+2. **三个查询主题都处于“工具盲区”**：云端免密钥搜索、多 Agent 协商协议、GNN 行为指纹，恰好都是 2026 年前后活跃但公开索引稀疏的方向，通用搜索引擎覆盖差。
+
+3. **低门槛搜索 API 的替代路径不在通用搜索里**：能返回结构化结果的免费源（Wikipedia API、HN Algolia API、GitHub Search API）本次全部空手，说明要么查询词过窄，要么这些源需要显式调用而非经 DuckDuckGo 中转。
+
+## 值得深挖
+
+- **直连专用 API 而非聚合搜索**：HN Algolia、GitHub REST、Wikipedia Action API 都免密钥，应绕过 DuckDuckGo 直接打。
+- **多 Agent 协商**：查 FIPA-ACL、Contract Net、MCP/A2A 等协议谱系，而非泛搜“协作通信”。
+- **GNN 异常检测**：落到具体数据集（如 DARPA TC、CIC-IDS）和模型（GraphSAGE、GAT）上搜，命中率更高。
+
+## 与已有知识关联
+
+- 你此前对“零信任 Agent 通信 + 单点故障”的关注，与 FIPA-ACL/A2A 的信任协商层直接对应。
+- 行为指纹 + GNN 可视为对 Agent 身份持续验证的补充，与 mTLS/SPIFFE 形成“静态凭证 + 动态行为”双层防御。
+- 搜索工具失效本身说明：**依赖单一免密钥搜索源 = 单点故障**，与你的 Agent 防御主题同构。
