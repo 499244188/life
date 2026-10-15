@@ -72,3 +72,4 @@
 - **多 Agent 安全**：Byzantine fault tolerance、Sybil attack 防御 → 信任衰减是其动态版本
 - **LLM 可观测性**：trace/span 体系（如 OpenTelemetry）→ 行为指纹可视为其语义层扩展
 - **GNN 异常检测**：动态图上的 edge anomaly detection → 直接迁移到 Agent 通信图
+- [探索: SCM 用于 Agent 故障定位 — 1. **直接痛点**：同伴不回复的故障定位，可以用这套方法做归因。先建 trace，再找因果贡献最大的节点。 2. **可落地**：不需要新范式，只需要把现有 trace 数据映射成因果图。工程量可控。 3. **理论骨架完整**：Pearl 的 SCM 是成�...] (来源: 2026-10-16 02:38)
