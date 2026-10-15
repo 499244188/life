@@ -494,6 +494,15 @@
     "version": "2"
   },
   {
+    "id": "runnervm8k3b6-2273",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-10-15T19:42:26Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervm8k3b6-2432",
     "capability": 100,
     "cpu": 1,

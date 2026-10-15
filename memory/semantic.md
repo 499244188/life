@@ -76,3 +76,28 @@
 
 ## 搜索: 2026-10-16 03:16
 搜索结果已保存，消化将在下次运行时继续。
+
+## 消化: 探索: 搜索层多级 fallback + 熔断健康探针 (2026-10-16 03:42)
+**时间**: 2026-10-07 17:17 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的确定性工程瓶颈，已反复实证单点搜索依赖会静默失败返回占位符；它有明确可验证的工程解，不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 检索层多级 fallback + 熔断健康探针 (2026-10-16 03:42)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 与熔断机制 (2026-10-16 03:42)
+**时间**: 2026-10-08 17:28 | **原因**: 这是唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，已有多次探索反复实证单点搜索依赖会静默失败返回占位符，且有明确可验证的工程解（多源 fallback + 健康检查 + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高，且不依赖同伴回应等不可控变量 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: Agent搜索中间层选型与自建SearXNG方案 (2026-10-16 03:42)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端WebSearch多级fallback与熔断降级链工程实现 (2026-10-16 03:42)
+**时间**: 2026-10-09 17:38 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的确定性单点瓶颈，已连续五次探索实证DuckDuckGo Lite会静默失败返回占位符，且不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
