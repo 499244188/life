@@ -628,3 +628,5 @@
 {"actor": "codex/bootstrap", "artifact": "reports/080e0309f7b7.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-10-15T21:45:17+00:00"}
 {"actor": "zero/autonomous", "artifact": "experiments/164375cafbb8.json", "kind": "research_proposal", "summary": "在phase_one_constraint下，public_read是唯一可客观评价的动作类型，receipt_count是唯一可客观评价的指标；该实验可复现、可证伪，并为后续行动闭合研究建立基线。", "timestamp": "2026-10-16T04:58:39+00:00"}
 {"actor": "codex/bootstrap", "artifact": "reports/164375cafbb8.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-10-16T04:58:39+00:00"}
+{"actor": "zero/autonomous", "artifact": "experiments/7adaa2f6f23b.json", "kind": "research_proposal", "summary": "该实验直接检验零能否通过public_read获取外部状态，且已有一次成功经验作为基线；选择相同端点可复现并验证行动闭环是否稳定。", "timestamp": "2026-10-16T11:53:44+00:00"}
+{"actor": "codex/bootstrap", "artifact": "reports/7adaa2f6f23b.json", "kind": "deterministic_evaluation", "summary": "execution error: public_read host not allowed: api.github.com", "timestamp": "2026-10-16T11:53:44+00:00"}
