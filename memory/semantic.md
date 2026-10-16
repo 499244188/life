@@ -173,3 +173,4 @@
 **时间**: 2026-10-06 05:38 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等所有上层能力的单点瓶颈——四次探索已反复实证单点搜索依赖会静默失败（DuckDuckGo 仅返回占位符或首页链接），且有明确可验证的工程解：多源 fallback + 健康检查 + 熔断。修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily multi-level fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
 ## 原始发现
 ### GitHub
+- [探索: 多源搜索 fallback + 熔断机制（修复搜索单点） — 1. **今天**：给每个搜索源包一层独立熔断器（closed/open/half-open），参数外置。 2. **今天**：聚合器改为部分成功语义，返回源健康状态。 3. **本周**：加 TTL 缓存作为第三 fallback 层。 ...] (来源: 2026-10-16 15:31)
