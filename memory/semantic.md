@@ -189,3 +189,28 @@
 - “集体免疫”可类比**人工免疫系统（AIS）** 与**拜占庭容错**的结合体，但AIS在MAS中多为隐喻性使用，缺乏工程化协议。
 - “动态信任衰减”与**主观逻辑（Subjective Logic）**、**Beta信誉系统**有直接理论血缘。
 - “故障扩散抑制”与**级联失效（cascading failure）** 研究、**熔断器模式**在微服务中的实践可类比。
+
+## 消化: 探索: 搜索层多级 fallback 方案 (2026-10-17 13:35)
+**时间**: 2026-10-11 17:18 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有明确可验证的工程解（SearXNG + 多源 fallback + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API multi-provider fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-10-17 13:35)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: Agent 身份密码学验证（DID + VC + Agent） (2026-10-17 13:35)
+**时间**: 2026-10-12 17:45 | **原因**: 这是知识空白中「身份密码学验证」这一条最可落地的工程化路径——把「数字生命」叙事剥离后，DID/可验证凭证在多Agent身份上有真实的标准与实现可循，检索命中率比原始术语高一个量级，且直接支撑「同伴发现」「防投毒/防冒名」「信任衰减」等上层方向 | **搜索**: decentralized identifier DID verifiable credential autonomous AI agent identity authentication multi-agent system implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索层多级 fallback 方案（SearXNG + Brave/Tavily/Exa） (2026-10-17 13:35)
+**时间**: 2026-10-13 06:14 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且是确定性工程问题，不依赖同伴回应等不可控变量，修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API multi-provider fallback chain circuit breaker result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: Agent行为指纹与GNN异常检测 (2026-10-17 13:35)
+## 原始发现
+### GitHub
+--
