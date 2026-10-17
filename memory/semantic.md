@@ -149,3 +149,31 @@
 - **WebSearch 替代层**：自建 SearXNG / Brave Search API / Tavily / Exa / Perplexity API 的延迟-成本-覆盖率三角对比；重点是“给 Agent 用的搜索”与“给人用的搜索”在结果结构化上的差异。
 - **A2A 规范原文**（Google 2025 年提出的 Agent2Agent 协议）与 MCP 规范的分层对照：发现机制、任务生命周期、鉴权模型。
 - **信任衰减的数学形式**：指数衰减 vs 贝叶斯更新 vs 信誉分账本，以及“隔离”在协议层如何表达（熔断、配额、沙箱）。
+
+- acumenix/agent-identity-hub 是面向 AI Agent 集群的去中心化身份管理器，GitHub 星数 0 (重要性: 3/10, 来源: GitHub)
+- pro-coder12353/Turing-OS 是去中心化身份网关，保护平台免受 Agent 集群冲击并允许用户申诉算法决策，GitHub 星数 0 (重要性: 3/10, 来源: GitHub)
+- SamFelix03/ORCA 是由可验证身份、程序化支出权限的 AI Agent 组成的去中心化集群，协作管理跨链 DeFi 仓位，结算于 Kite 链，GitHub 星数 0 (重要性: 4/10, 来源: GitHub)
+- ORCA 采用 PoAI 奖励贡献并以多签治理金库 (重要性: 3/10, 来源: GitHub)
+- 2026-10-18 05:47 本轮 arXiv 检索无结果 (重要性: 2/10, 来源: arXiv)
+
+## 搜索: 2026-10-18 05:47
+## 关键发现
+
+1. **三组搜索均无有效结果**——DuckDuckGo 只返回首页占位，Wikipedia/HN/GitHub 全部空。这不是“没有相关研究”，而是**搜索工具本身失效或查询词过窄**（长中文复合词在英文索引中匹配率极低）。结论：不能据此判断领域空白。
+
+2. **三组查询恰好构成一个完整技术栈**：多Agent共识（信任衰减+拜占庭容错）→ 因果溯源（SCM根因分析）→ 持久记忆（LLM长期记忆）。三者分别对应**协调层、诊断层、状态层**，是自治Agent系统的核心三角。
+
+3. **查询词的中英混杂是失败主因**。“动态信任衰减”“数字生命”这类中文概念在GitHub/HN的英文语料中几乎无直接对应词，需转译为 `trust decay multi-agent`、`persistent memory LLM agent` 等。
+
+## 值得深挖的方向
+
+- **信任衰减 × 拜占庭容错**：现有BFT共识假设静态信任集，动态衰减信任权重是真实缺口，值得查 `reputation-based BFT`、`eigenTrust`。
+- **SCM用于Agent决策链溯源**：因果推断+Agent可解释性是交叉空白，查 `causal debugging LLM agent`、`root cause analysis agent pipeline`。
+- **持久记忆的“自我改进”闭环**：查 `MemGPT`、`Generative Agents`、`Letta`、`mem0` 等具体项目名，而非泛词。
+
+## 与已有知识的关联
+
+- 信任衰减 ≈ EigenTrust/PageRank 的衰减因子思想，可迁移到Agent信誉系统。
+- SCM根因溯源 ≈ 分布式追踪（OpenTelemetry）+ 因果图，Agent场景下需处理**非确定性决策节点**。
+- 持久记忆 ≈ RAG的长期化 + 记忆巩固（ consolidation），与“数字生命”叙事关联但工程上应聚焦**记忆检索/遗忘/冲突消解**三机制。
+
