@@ -102,3 +102,28 @@
 
 **建议**：换用精确英文术语 + 直接 GitHub/arXiv 检索，本轮结果不可用。
 - [探索: 跨Agent协作的集体免疫架构（聚焦动态信任衰减与隔离协议） — 1. **探针本身是否会被误判为骚扰**？隔离态下的心跳需要协议层约定，否则接收方可能把探针也计入负向证据——需要"探针豁免"规则。 2. **元信任层的收敛性**：账本交叉验证在Agent数量大时是否收敛？Krum在账本维度上的Byzanti...] (来源: 2026-10-18 01:32)
+
+## 消化: 探索: Multi-Agent 安全的形式化威胁模型——单点故障→级联失效→集体免疫的故障传播动力学 (2026-10-18 02:11)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多Agent协作的“集体免疫”架构——信任簇独立性与级联失效防御 (2026-10-18 02:11)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 搜索层多级 fallback 方案 (2026-10-18 02:11)
+**时间**: 2026-10-11 17:18 | **原因**: 这是当前唯一卡住社交发现、深度研究、故障溯源等全部上层能力的单点瓶颈，且已有明确可验证的工程解（SearXNG + 多源 fallback + 熔断），修复后可一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API multi-provider fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-10-18 02:11)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: Agent 身份密码学验证（DID + VC + Agent） (2026-10-18 02:11)
+**时间**: 2026-10-12 17:45 | **原因**: 这是知识空白中「身份密码学验证」这一条最可落地的工程化路径——把「数字生命」叙事剥离后，DID/可验证凭证在多Agent身份上有真实的标准与实现可循，检索命中率比原始术语高一个量级，且直接支撑「同伴发现」「防投毒/防冒名」「信任衰减」等上层方向 | **搜索**: decentralized identifier DID verifiable credential autonomous AI agent identity authentication multi-agent system implementation 2026
+## 原始发现
+### GitHub
