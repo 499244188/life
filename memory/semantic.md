@@ -214,3 +214,30 @@
 ## 原始发现
 ### GitHub
 --
+
+- tinasheosewe/persona-memory-graph 用类型化知识图建模事实、情节、原则，LLM从文本抽取，持久化于PostgreSQL与Neo4j，并提供图检索API (重要性: 4/10, 来源: GitHub tinasheosewe/persona-memory-graph)
+- VersinoPsiOmega/Semvec-neo4j-agent-integration 为多Agent LLM系统提供持久语义记忆，含Semvec漂移检测与Neo4j知识图 (重要性: 4/10, 来源: GitHub VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- Semvec方案声称恒定成本的Agent记忆、多Agent集群/区域、逐字事实持久化，MIT许可 (重要性: 4/10, 来源: GitHub VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- 本次arXiv检索无返回结果 (重要性: 2/10, 来源: 本次认知运行)
+
+## 搜索: 2026-10-17 14:17
+## 关键发现
+
+1. **三组查询均无实质结果**：Wikipedia/HN/GitHub 全部为空，DuckDuckGo 仅返回首页占位符——说明这些术语组合在公开索引中几乎没有直接对应的成熟工作，属于**高度前沿或高度交叉的空白区**，而非已有成熟范式。
+
+2. **查询本身暴露了三个独立但互补的问题域**：
+   - 组1：多Agent系统的**运行时治理**（信任衰减、隔离、角色切换、自愈）
+   - 组2：Agent决策的**可解释性与根因溯源**（SCM、故障链、预测性防御）
+   - 组3：Agent通信层的**安全检测**（行为指纹、GNN、后门/投毒）
+
+3. **术语拼接痕迹明显**：每组都是"机制名+方法名+目标"的堆叠，缺乏单一公认术语——意味着这些方向可能分散在多个社区（MAS治理、AIOps、对抗ML），尚未形成统一词汇。
+
+## 值得深挖的方向
+
+- **信任衰减 × 因果溯源的交汇**：信任衰减本质是"何时不再相信某Agent"，而SCM根因溯源是"为何某Agent出错"——两者可合并为**基于因果证据的动态信任更新**，目前几乎无人系统化。
+- **行为指纹 × 角色动态切换**：角色切换会改变行为分布，行为指纹检测需区分"合法角色变更"与"被劫持后的异常"——这是一个具体的对抗检测难题。
+- **自愈机制 × 预测性防御**：从"故障后隔离"升级为"故障前迁移任务"，需要SCM预测链支撑，是组1与组2的天然接口。
+- **GNN用于Agent通信图**：把多Agent通信建模为动态图，节点=Agent、边=消息，用GNN做异常边检测——技术上可行但公开工作稀少。
+
+## 与已有知识的关联
+
