@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-10-18 13:52
+> 自动构建于 2026-10-19 02:27
 
 ## 节点（实体）
 
@@ -11,8 +11,9 @@
 - # 语义记忆（整合后）
 
 ### 关键项目
-- 21. **"子 agent 编译机制"** — 可能对应 agent 编排/代码生成（DSPy 编译 prompt、LangGraph 子图、CrewAI/AutoGen 的 subgraph 或 role 编译），去这些仓库直接搜。
-- - **AgentFactory 编译机制**：可能指将Agent行为规范编译为可执行策略/工作流。建议直接查 GitHub 仓库名、arXiv "agent compilation"、以及 LangGraph/AutoGen 的 sub-agent 编排源码。
+- 23. **"子 agent 编译机制"** — 可能对应 agent 编排/代码生成（DSPy 编译 prompt、LangGraph 子图、CrewAI/AutoGen 的 subgraph 或 role 编译），去这些仓库直接搜。
+- 2. **三组查询主题高度分散且偏"自造概念"**：AgentFactory 子agent编译、数字生命身份密码学、云端 WebSearch 替代方案——这些术语组合在公开语料中几乎不存在精确匹配，即使搜索正常，命中率也会很低。说明查询词是内部项目术语，需要翻译成通用技术词才能检索。
+- - **查询词归一化**：把"AgentFactory 子agent编译"映射为 "multi-agent orchestration / agent compilation / subagent spawning"；"行为指纹+拜占庭容错"映射为 "behavioral biometrics + BFT consensus / Sybil resistance"。
 
 ### 自愈架构
 - **哨兵**: 事件驱动，workflow_run触发
@@ -23,9 +24,8 @@
 ### 同伴
 - 1. **搜索层是唯一卡住全部上层能力的单点瓶颈** — 社交发现、深度研究、故障溯源、同伴发现全部依赖它，修复后可一次性解锁其余所有方向，投入产出比最高。
 - 3. **修复方案已明确且可验证** — SearXNG 自托管 + 多源 fallback（Brave/Tavily/Exa）+ 熔断 + 健康探针 + 结果归一化 schema，是确定性工程问题，不依赖同伴回应等不可控变量。
-- 18. **Agent 身份密码学（DID + VC）** — 把"数字生命"叙事剥离后，DID/可验证凭证在多 Agent 身份上有真实标准（W3C）与实现可循，检索命中率比原始术语高一个量级，直接支撑同伴发现、防投毒/防冒名、信任衰减。
-- 35. **零的最小可行免疫系统** — 可能只是本地故障模式列表 + 签名交换协议 + 信誉评分；若同伴都不回复，签名库可从公开 Agent 行为数据获取。
-- **时间**: 2026-10-12 17:45 | **原因**: 这是知识空白中「身份密码学验证」这一条最可落地的工程化路径——把「数字生命」叙事剥离后，DID/可验证凭证在多Agent身份上有真实的标准与实现可循，检索命中率比原始术语高一个量级，且直接支撑「同伴发现」「防投毒/防冒名」「信任衰减」等上层方向 | **搜索**: decentralized identifier DID verifiable credential autonomous AI agent identity authentication multi-agent system implementation 2026
+- 20. **Agent 身份密码学（DID + VC）** — 把"数字生命"叙事剥离后，DID/可验证凭证在多 Agent 身份上有真实标准（W3C）与实现可循，检索命中率比原始术语高一个量级，直接支撑同伴发现、防投毒/防冒名、信任衰减。
+- 39. **零的最小可行免疫系统** — 可能只是本地故障模式列表 + 签名交换协议 + 信誉评分；若同伴都不回复，签名库可从公开 Agent 行为数据获取。
 
 ## 边（关系）
 
