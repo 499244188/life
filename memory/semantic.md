@@ -89,3 +89,25 @@
 - 行为指纹 ↔ 系统调用序列异常检测、图神经网络欺诈检测、对抗样本防御。
 
 - [探索: 动态信任衰减 × 拜占庭共识的耦合机制 — 1. **立即**：用Semantic Scholar API检索 `"trust decay" AND "Byzantine fault tolerance"`、`"reputation" AND "BFT consensus"`、`"dynamic validator set" AND "Byzantine"`，确认"无先例"是否成立。重点看slashing机制文献和dynamic validator set的BFT变体（如TrendBFT、DyPoS）�...] (来源: 2026-10-19 01:32)
+
+## 搜索: 2026-10-19 01:41
+## 关键发现
+
+1. **搜索工具本身失效**：三组查询在 DuckDuckGo 均只返回首页占位符，Wikipedia/HN/GitHub 全部无结果。这不是"没搜到"，而是搜索通道没有真正执行——返回的 `https://duckduckgo.com/ — here` 是典型的 fallback 占位。**结论：当前 WebSearch 能力不可用，任何基于此的调研结论都不可信。**
+
+2. **三组查询主题高度分散且偏"自造概念"**：AgentFactory 子agent编译、数字生命身份密码学、云端 WebSearch 替代方案——这些术语组合在公开语料中几乎不存在精确匹配，即使搜索正常，命中率也会很低。说明查询词是内部项目术语，需要翻译成通用技术词才能检索。
+
+3. **"云端 WebSearch 替代 DuckDuckGo Lite"这条最有现实价值**：它恰好暴露了当前困境——本地搜索通道挂了，需要外部 API 兜底。这是可立即行动的方向。
+
+## 值得深挖的方向
+
+- **搜索后端冗余**：接入 Bing/Google Custom Search、Serper、Tavily、Brave Search API 等作为 DuckDuckGo 的 fallback，并加健康检查（返回首页占位符即判定失败）。
+- **查询词归一化**：把"AgentFactory 子agent编译"映射为 "multi-agent orchestration / agent compilation / subagent spawning"；"行为指纹+拜占庭容错"映射为 "behavioral biometrics + BFT consensus / Sybil resistance"。
+- **可信身份**：数字生命身份验证的现实对应物是 DID（去中心化标识符）、Verifiable Credentials、proof-of-personhood，而非自造框架。
+
+## 与已有知识的关联
+
+- 多 Agent 通信协议已有成熟参照：MCP（工具/上下文）、A2A（agent-to-agent）、FIPA-ACL 旧标准。子 agent 编译机制可对照 LangGraph 的 subgraph、AutoGen 的 GroupChat。
+- 拜占庭容错 + 行为指纹 = 典型的 Sybil 抵抗问题，区块链身份层（DID/VC）是现成知识库。
+- WebSearch 替代方案属于 RAG 检索层工程，Tavily/Serper 是业界常用 API，可直接落地。
+
