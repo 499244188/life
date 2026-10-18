@@ -180,3 +180,25 @@
 - Agent 持久化记忆对应 memGPT、generative agents 等已有工作线；"跨会话身份一致性"更接近 agent identity / authentication 问题，密码学验证方向可关联 verifiable credentials。
 - 但这些关联是**先验知识推断**，不是本次搜索的产出——搜索本身零信息量。
 
+
+## 搜索: 2026-10-19 07:51
+## 关键发现
+
+1. **搜索工具实质失效**：三组查询在 DuckDuckGo 仅返回首页占位，Wikipedia/HN/GitHub 全部零结果。这不像"该领域无研究"，更像搜索管道未真正执行查询（无 API 调用、无结果解析）。任何基于此的"研究空白"判断都不可信。
+
+2. **三组查询词高度交叉于同一主题簇**：动态信任衰减、因果根因溯源、行为指纹异常检测——三者共同指向"多 Agent 系统的运行时安全与自愈"，但当前没有任何一条外部证据支撑其可行性或已有工作。
+
+3. **术语组合偏"自造"**：如"动态信任衰减与隔离协议""Agent行为指纹"并非成熟社区标准术语，直接整串检索命中率天然低，需拆解为子概念再查。
+
+## 值得深挖的方向
+
+- **拆词重查**：将每组拆为 2-3 个成熟术语（如 "trust decay multi-agent"、"root cause analysis agent pipeline"、"graph neural network anomaly detection multi-agent"）分别检索。
+- **换源**：arXiv、Semantic Scholar、Google Scholar 对这类学术性组合的覆盖远好于 HN/GitHub。
+- **验证搜索链路**：先确认工具是否真的在发请求，否则后续所有"无结果"都是假信号。
+
+## 与已有知识的关联
+
+- 信任衰减 ≈ 分布式系统里的 lease/heartbeat 超时与 reputation system（如 EigenTrust）的连续化版本。
+- 因果根因溯源 ≈ 微服务可观测性中的 trace-based RCA，可迁移到 Agent 决策链。
+- 行为指纹 + GNN ≈ 网络安全中的流量异常检测，迁移到 Agent 间通信图。
+
