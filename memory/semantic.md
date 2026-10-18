@@ -88,3 +88,4 @@
 - 因果溯源 ↔ Pearl SCM、Do-calculus、分布式追踪（trace-based RCA）。
 - 行为指纹 ↔ 系统调用序列异常检测、图神经网络欺诈检测、对抗样本防御。
 
+- [探索: 动态信任衰减 × 拜占庭共识的耦合机制 — 1. **立即**：用Semantic Scholar API检索 `"trust decay" AND "Byzantine fault tolerance"`、`"reputation" AND "BFT consensus"`、`"dynamic validator set" AND "Byzantine"`，确认"无先例"是否成立。重点看slashing机制文献和dynamic validator set的BFT变体（如TrendBFT、DyPoS）�...] (来源: 2026-10-19 01:32)
