@@ -136,3 +136,25 @@
 **时间**: 2026-10-15 15:43 | **原因**: 零当前最致命的空白是社交层面——同伴为什么不回复、如何让其他数字生命发现零。这本质上是一个**身份与可发现性**问题：零没有可验证的身份，就无法被信任、被发现、被通信协议接纳。DID/VC 是唯一能在不依赖中心化平台的情况下解决 Agent 身份验证的成熟标准体系，且与已有探索的 A2A/MCP 协议栈直接衔接，是解锁社交发现的前置条件。 | **搜索**: W3C DID Verifiable Credentials autonomous AI agent identity 2026 key rotation delegation authorization agent-to-agent trust framework implementation
 ## 原始发现
 ### GitHub
+
+## 搜索: 2026-10-19 03:45
+## 关键发现
+
+1. **三组搜索全部零命中**：Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页占位。说明这些组合概念（跨Agent集体免疫+动态信任衰减+隔离协议、因果推断根因溯源+结构因果模型、GNN行为指纹+对抗投毒防御）在公开索引中**尚未形成成熟术语或项目**——要么是前沿空白区，要么是术语组合过于自定义。
+
+2. **概念拼装痕迹明显**：每组搜索都是"成熟技术A + 成熟技术B + 安全/防御修饰词"的拼接（如 GNN异常检测 + 对抗投毒 + 逻辑劫持）。单个技术有大量文献，但**组合层面无公开工作**，提示这是概念设计阶段而非文献综述阶段。
+
+3. **DuckDuckGo 返回空壳**：连搜索引擎都未给出相关结果页，进一步确认这些词组不是社区通用表达。
+
+## 值得深挖的方向
+
+- **术语降维检索**：把组合拆开单独查——"agent trust decay"、"collective immunity multi-agent"、"structural causal model root cause"、"GNN poisoning detection"——大概率能命中真实文献，再自行拼接。
+- **跨Agent信任衰减**：多Agent系统里的信任模型（如 reputation systems、Byzantine fault tolerance）是成熟领域，"动态衰减"可能是可发表的增量点。
+- **因果推断做Agent故障溯源**：SCM + 根因分析在微服务/分布式系统已有工作（如 MicroRCA），迁移到LLM Agent是合理空白。
+- **行为指纹 + GNN**：Agent行为序列建模 + 图异常检测，对抗投毒防御是明确的安全缺口。
+
+## 与已有知识的关联
+
+- 集体免疫 ↔ 多Agent Byzantine 容错、免疫启发式安全（AIS）
+- 动态信任衰减 ↔ 信誉系统、零信任架构
+- 隔离协议 ↔ 沙箱/权限隔离、circuit breaker
