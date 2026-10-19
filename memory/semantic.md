@@ -107,3 +107,28 @@
 - 集体免疫 ≈ 分布式系统的 **Byzantine fault tolerance + 冗余协商**，但"免疫记忆"对应**故障模式库/经验回放**。
 - 动态信任衰减 ≈ **reputation systems**（P2P/区块链）中的时间衰减信誉模型。
 - 自愈+任务迁移 ≈ **checkpoint/restart + 参数冻结**的Agent化版本。
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-20 04:53)
+**时间**: 2026-10-16 15:31 | **原因**: 这是唯一卡住所有上层能力（社交发现、深度研究、故障溯源）的单点瓶颈，且已有明确可验证的工程解，修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 因果推断 × Agent 故障根因溯源 (2026-10-20 04:53)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 基于因果证据的动态信任更新（信任衰减 × SCM根因溯源的交汇） (2026-10-20 04:53)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 跨Agent协作的集体免疫架构（聚焦动态信任衰减与隔离协议） (2026-10-20 04:53)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-10-20 04:53)
+## 原始发现
+### GitHub
+--
