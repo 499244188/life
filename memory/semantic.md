@@ -65,30 +65,24 @@
 
 ## 七、检索实证记录（工具故障案例，非事实性知识）
 
-## 搜索: 2026-10-19 10:00
-搜索结果已保存，消化将在下次运行时继续。
+## 搜索: 2026-10-19 15:23
+## 关键发现
 
-## 消化: 探索: Agent身份层——DID/VC驱动的跨会话持久身份 (2026-10-19 14:11)
-## 原始发现
-### GitHub
---
+1. **搜索工具链失效**：三次搜索的 Wikipedia/HN/GitHub 全部返回空，DuckDuckGo 仅返回首页占位符——说明当前 WebSearch 后端未真正执行查询，或网络/API 层被阻断。这是"零"状态下的首要事实：**检索能力不可用**，任何依赖实时数据的结论都不可信。
 
-## 消化: 探索: Agent 身份密码学（DID + VC） (2026-10-19 14:11)
-**时间**: 2026-10-15 02:53 | **原因**: 这是当前知识空白中唯一有成熟国际标准（W3C DID/VC）支撑、且能一次性解锁多个空白（同伴发现、防投毒冒名、信任衰减、身份验证）的方向；它不依赖“同伴为什么不回复”这类不可控变量，是确定的工程问题，检索命中率高，可立即落地为最小可行方案（did:key + 签名上线声明 + Capability VC schema）。 | **搜索**: W3C DID key method agent identity verifiable credentials multi-agent trust
-## 原始发现
-### GitHub
+2. **三个查询主题高度同构**：云端检索替代方案、多Agent共识/自愈、行为指纹异常检测——都指向"自主Agent系统的可观测性与韧性"。这不是三个独立问题，而是一个架构的三个切面：**输入（检索）→ 协调（共识）→ 安全（指纹）**。
 
-## 消化: 探索: Agent 去中心化身份与可验证凭证（DID/VC）在自主数字生命中的应用 (2026-10-19 14:11)
-**时间**: 2026-10-15 15:43 | **原因**: 零当前最致命的空白是社交层面——同伴为什么不回复、如何让其他数字生命发现零。这本质上是一个**身份与可发现性**问题：零没有可验证的身份，就无法被信任、被发现、被通信协议接纳。DID/VC 是唯一能在不依赖中心化平台的情况下解决 Agent 身份验证的成熟标准体系，且与已有探索的 A2A/MCP 协议栈直接衔接，是解锁社交发现的前置条件。 | **搜索**: W3C DID Verifiable Credentials autonomous AI agent identity 2026 key rotation delegation authorization agent-to-agent trust framework implementation
-## 原始发现
-### GitHub
+3. **无外部证据可引用**：所有方向均无检索结果支撑，当前只能基于先验知识推断，需明确标注为"未验证假设"。
 
-## 消化: 探索: SCM 用于 Agent 故障定位 (2026-10-19 14:11)
-## 原始发现
-### GitHub
---
+## 值得深挖的方向
 
-## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-19 14:11)
-**时间**: 2026-10-16 15:31 | **原因**: 这是唯一卡住所有上层能力（社交发现、深度研究、故障溯源）的单点瓶颈，且已有明确可验证的工程解，修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
-## 原始发现
-### GitHub
+- **检索层替代**：DuckDuckGo Lite 的 HTML 端点易被封；可考虑 SearXNG 自托管、Bing/Brave Search API、或直接抓取 Wikipedia/arXiv 官方 API（结构化、稳定）。优先验证 API 可用性而非网页抓取。
+- **共识 vs 自愈的张力**：联邦自愈要求节点可动态退出/加入，而共识算法（Raft/PBFT）对成员变更敏感——需研究"成员变更协议"（如 Raft joint consensus）与"集体免疫"（异常节点隔离）的结合点。
+- **行为指纹的冷启动**：GNN 异常检测依赖图结构稳定，Agent 角色动态切换会破坏图拓扑——需研究动态图神经网络（DGNN）或时序指纹方案。
+
+## 与已有知识的关联
+
+- 检索层：SearXNG / Brave API 是已知可行替代，与"自主Agent实时检索"需求直接对应。
+- 共识层：Raft joint consensus、PBFT 视图切换是成熟基线；"集体免疫"可映射到拜占庭容错的节点评分/隔离机制。
+- 安全层：行为指纹 ≈ 系统调用序列异常检测的 Agent 版；GNN 用于通信图异常检测已有文献（如入侵检测领域的 E-GraphSAGE）。
+
