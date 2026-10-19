@@ -85,3 +85,25 @@
 - GNN 异常检测 ≈ **网络入侵检测（IDS）** 的图方法，Agent 通信图是其自然延伸。
 
 - [探索: 基于因果证据的动态信任更新 — 1. **本周**：写一个信任更新轨迹的模拟器，生成三类根因（env/fault/malicious）下的衰减轨迹，验证分叉衰减在元特征空间是否可区分（用简单的分类器或分布检验）。 2. **下周**：在模拟轨迹上实现轨迹元特征异常检测（Isolation F...] (来源: 2026-10-20 04:11)
+
+## 搜索: 2026-10-20 04:16
+## 关键发现
+
+1. **搜索全部空转**：三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页——说明这些术语组合（"集体免疫架构""动态信任衰减""行为指纹+GNN"）尚未形成公开的成熟文献簇，属于**概念拼装阶段**，而非已有工程共识。
+
+2. **术语高度自造**：三组查询分别对应"多Agent韧性""因果根因溯源""LLM安全检测"三个真实研究方向，但查询词是研究者自创的复合标签，与学术界通用词（如 Byzantine fault tolerance、root cause analysis、backdoor detection）不对齐——**检索策略需换词**。
+
+3. **跨领域嫁接特征明显**：集体免疫/信任衰减来自分布式系统与生物隐喻，SCM来自因果推断，GNN指纹来自图学习与安全——三者尚无统一框架，**空白即机会**。
+
+## 值得深挖
+
+- **换词重检**：Byzantine consensus + agent、trust decay model、structural causal model root cause、LLM backdoor detection (GNN/embedding)、multi-agent redundancy。
+- **信任衰减的数学形式**：指数衰减 vs 贝叶斯更新 vs 隔离阈值，是否有可引用的形式化工作。
+- **行为指纹的可检测性边界**：GNN在Agent轨迹图上做异常检测的样本效率与对抗鲁棒性。
+- **因果溯源 vs 相关性检测**：SCM能否真正区分"投毒"与"正常漂移"。
+
+## 与已有知识关联
+
+- 集体免疫 ≈ 分布式系统的 **Byzantine fault tolerance + 冗余协商**，但"免疫记忆"对应**故障模式库/经验回放**。
+- 动态信任衰减 ≈ **reputation systems**（P2P/区块链）中的时间衰减信誉模型。
+- 自愈+任务迁移 ≈ **checkpoint/restart + 参数冻结**的Agent化版本。
