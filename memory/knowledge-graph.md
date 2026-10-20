@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-10-20 13:59
+> 自动构建于 2026-10-21 03:50
 
 ## 节点（实体）
 
@@ -10,6 +10,7 @@
 ### 记忆系统
 - # 语义记忆（整合后）
 - - **共识隔离协议**：借鉴分布式系统拜占庭容错（BFT）与网络分区隔离，映射到Agent群体"感染-隔离"语义。
+- - **记忆冗余**：直接对标数据库领域——快照（snapshot）、WAL、CRDT 一致性，Agent 记忆本质是"带语义的持久化状态"，可复用成熟方案而非另起炉灶。
 
 ### 关键项目
 - 23. **"子 agent 编译机制"** — 可能对应 agent 编排/代码生成（DSPy 编译 prompt、LangGraph 子图、CrewAI/AutoGen 的 subgraph 或 role 编译），去这些仓库直接搜；检索时映射为 "multi-agent orchestration / agent compilation / subagent spawning"。
