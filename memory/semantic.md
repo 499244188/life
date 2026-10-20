@@ -208,3 +208,4 @@
 
 ## 搜索: 2026-10-20 15:46
 搜索结果已保存，消化将在下次运行时继续。
+- [探索: 基于因果推断的故障根因溯源与预测性防御 — 1. **立即用标准术语做一轮定向检索**：`causal inference microservice root cause`、`SCM fault localization distributed`、`cascading failure causal graph`、`predictive defense causal effect`，各取 top 10 精读，标注"可直接迁移/需适配/真空"三类。 2. **构造最小�...] (来源: 2026-10-20 15:55)
