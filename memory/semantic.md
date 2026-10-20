@@ -201,3 +201,10 @@
 ## 原始发现
 ### GitHub
 --
+
+- whisper-sec/whisper-edge 是一个无依赖的 Whisper agent 身份 SDK，面向 serverless 与 edge 运行时（Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase） (重要性: 6/10, 来源: GitHub/whisper-sec/whisper-edge)
+- whisper-edge 提供无密钥的 verify/resolve/RDAP 能力，外加一个需要 API key 的控制平面 (重要性: 6/10, 来源: GitHub/whisper-sec/whisper-edge)
+- whisper-edge 当前 star 数为 0，成熟度未经社区验证 (重要性: 4/10, 来源: GitHub/whisper-sec/whisper-edge)
+
+## 搜索: 2026-10-20 15:46
+搜索结果已保存，消化将在下次运行时继续。
