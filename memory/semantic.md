@@ -154,3 +154,25 @@
 - **集体免疫** ↔ 群体智能/多Agent安全、生物启发式容错（如蚂蚁群体、免疫算法）。
 - **信任衰减** ↔ 分布式信誉系统、零信任架构。
 - **因果溯源** ↔ AIOps 根因分析、可观测性（tracing/metrics/logs）。
+
+## 搜索: 2026-10-20 10:17
+## 关键发现
+
+1. **搜索全部空转**：三组查询在 Wikipedia/HN/GitHub 均零命中，DuckDuckGo 仅返回首页——说明这些术语组合（“集体免疫架构”“动态信任衰减”“行为指纹+GNN”“SCM 多Agent 根因溯源”）**尚未形成公开的成熟术语体系**，属于概念拼装而非既有研究领域。要么是极前沿/小众，要么是自创框架。
+
+2. **概念簇高度跨域**：三组查询分别落在 **可靠性工程**（单点故障、隔离、任务迁移）、**因果推断**（SCM、根因溯源）、**安全ML**（GNN异常检测、投毒防御）三个不相交社区，公开文献中少有把它们缝在一起的工作——这本身是空白信号，也是检索失败的原因。
+
+3. **“集体免疫/信任衰减”偏隐喻**：这类生物隐喻在 multi-agent 安全文献中偶有出现（如 swarm immunity），但未标准化，直接检索命中率低。
+
+## 值得深挖的方向
+
+- **换词重搜**：用标准术语替代自创词——`multi-agent fault tolerance`、`cascading failure agent`、`root cause analysis microservice`（SCM 根因溯源在微服务/分布式系统领域有大量现成工作）、`graph neural network intrusion detection`、`Byzantine fault tolerance multi-agent`。
+- **SCM 根因溯源**是最可能已有扎实基础的方向（分布式系统 + 因果推断交叉），优先查。
+- **行为指纹 + GNN 异常通信**：对应 `network intrusion detection GNN`、`side-channel agent fingerprinting`，安全社区有货。
+- **动态信任衰减**：查 `trust management multi-agent system`、`reputation decay`。
+
+## 与已有知识的关联
+
+- 单点故障/隔离/任务迁移 → 经典 **容错与 BFT** 体系，可直接映射。
+- SCM 决策链溯源 → **微服务根因分析（RCA）+ 因果图**，方法可迁移。
+- GNN 通信异常检测 → **图异常检测 / 入侵检测**成熟子领域。
