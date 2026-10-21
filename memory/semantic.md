@@ -135,3 +135,14 @@
 ## 原始发现
 ### GitHub
 --
+
+- vibeeval/vibecosystem 是一个面向 Claude Code 的 AI 软件团队项目，含 138 个 agent、295 个 skills、73 个 hooks，支持自学习与多 agent swarm (重要性: 6/10, 来源: vibeeval/vibecosystem)
+- NVlabs/ENPIRE 是让 AI 编码 agent 通过闭环物理试错自主改进真实机器人策略的框架 (重要性: 5/10, 来源: NVlabs/ENPIRE)
+- longyunfeigu/learn-hermes-agent 是 27 章从零构建自主 AI agent 的 Python 教程，覆盖 agent loop、工具系统、记忆、skills、MCP、自进化 (重要性: 6/10, 来源: longyunfeigu/learn-hermes-agent)
+- HolobiomicsLab/Mimosa-AI 是用于自主科学研究的自进化框架，可编写、运行并改进自身多 agent 工作流，基于 MCP 工具发现与达尔文式进化 (重要性: 6/10, 来源: HolobiomicsLab/Mimosa-AI)
+- simahanfeng007-lgtm/Tiangongzaowu-V3 是以 LLM 为认知核心、软件架构为数字身体的工程生命体系统，具备记忆、学习、自进化、自反思、能力创造 (重要性: 7/10, 来源: Tiangongzaowu-V3)
+- FishSerrie/skill-evolver 是自主技能演化引擎，融合 AutoResearch 自驱动循环、skill-creator 的 GT 评估与 Meta-Harness 的 trace 诊断，通过门控迭代优化 agent skills (重要性: 7/10, 来源: FishSerrie/skill-evolver)
+- 本轮 arXiv 检索无结果 (重要性: 3/10, 来源: 本轮检索)
+
+## 搜索: 2026-10-22 06:30
+搜索结果已保存，消化将在下次运行时继续。
