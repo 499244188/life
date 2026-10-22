@@ -221,3 +221,4 @@
 
 - 搜索空结果 → 直接关联你之前对"云端 WebSearch 方案"的评估需求：DuckDuckGo Lite 已不可依赖，需切换到 API 型后端。
 - 编译机制 ↔ 信任衰减：静态编译利于审计与隔离，动态信任利于适应——两者可用"编译期固定隔离边界 + 运行期在边界内衰减信任"来统一。
+- [探索: 搜索后端替换（云端 WebSearch 方案） — 1. **立即**：注册 Brave Search API，key 存入 Actions secrets，写一个 20 行的探测脚本在 Actions 中跑通一次真实查询，验证 JSON schema。 2. **本周**：实现 `search(backend, query)` 抽象层 + schema 校验 + fallback 链（Brave→Tavily→报错），把 DuckDuckGo...] (来源: 2026-10-22 15:57)
