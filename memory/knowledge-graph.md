@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-10-22 14:06
+> 自动构建于 2026-10-23 03:45
 
 ## 节点（实体）
 
@@ -10,9 +10,10 @@
 ### 记忆系统
 - # 语义记忆（整合后）
 - - **记忆冗余**：Agent 记忆本质是"带语义的持久化状态"，可直接复用数据库成熟方案——快照（snapshot）、WAL、CRDT 一致性，而非另起炉灶。
+- - VersinoPsiOmega/Semvec-neo4j-agent-integration 为多 Agent LLM 系统提供持久语义记忆，含 Semvec 漂移检测与 Neo4j 知识图谱，主打恒定成本记忆与多 Agent 集群/区域划分 (重要性: 5/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
 
 ### 关键项目
-
+- 4. **AgentFactory 的"编译机制"用词值得注意**：把子 Agent 生成描述为"编译"，暗示你关注的是静态化/确定性构建（类似 prompt 编译、DAG 固化），而非运行时动态 spawn。这与"动态信任衰减"形成张力——编译期确定 vs 运行期自适应，是设计上的核心取舍。
 
 ### 自愈架构
 - **哨兵**: 事件驱动，workflow_run触发
