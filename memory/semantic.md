@@ -195,3 +195,29 @@
 ## 原始发现
 ### GitHub
 --
+
+- tinasheosewe/persona-memory-graph 用类型化知识图谱（facts、episodes、principles 三类）建模 Agent 记忆，支持从文本 LLM 抽取、PostgreSQL 与 Neo4j 持久化、图检索 API (重要性: 5/10, 来源: tinasheosewe/persona-memory-graph)
+- VersinoPsiOmega/Semvec-neo4j-agent-integration 为多 Agent LLM 系统提供持久语义记忆，含 Semvec 漂移检测与 Neo4j 知识图谱，主打恒定成本记忆与多 Agent 集群/区域划分 (重要性: 5/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- 本轮 arXiv 检索无结果 (重要性: 3/10, 来源: 本轮检索)
+
+## 搜索: 2026-10-22 14:12
+## 3-5个关键发现
+
+1. **搜索结果全部为空壳**：三组查询均只返回 DuckDuckGo 首页链接，Wikipedia/HN/GitHub 全部无结果。这不是"没搜到"，而是搜索通道本身失效——DuckDuckGo Lite 对 Agent 类查询返回了占位结果，说明当前 WebSearch 后端不可用于生产。
+
+2. **查询主题集中在 Agent 基础设施三层**：搜索覆盖了（a）搜索 API 替代方案、（b）子 Agent 编译机制、（c）多 Agent 通信/共识/信任。这三者恰好是 Agent 系统的"感知层—构建层—协作层"，说明你在系统性地补齐 Agent 架构拼图，而非零散提问。
+
+3. **"动态信任衰减 + 隔离协议"是稀缺组合**：多数多 Agent 框架只谈通信（消息总线、A2A），很少把信任衰减和隔离作为一等公民。这个方向公开资料少，空结果反而印证了它的前沿性——需要从分布式系统（Gossip、Byzantine 共识）和零信任安全模型迁移，而非直接搜现成方案。
+
+4. **AgentFactory 的"编译机制"用词值得注意**：把子 Agent 生成描述为"编译"，暗示你关注的是静态化/确定性构建（类似 prompt 编译、DAG 固化），而非运行时动态 spawn。这与"动态信任衰减"形成张力——编译期确定 vs 运行期自适应，是设计上的核心取舍。
+
+## 值得深挖的方向
+
+- **搜索后端替换**：Brave Search API、Tavily、SearXNG 自托管、Exa——重点对比"Agent 友好"（结构化返回、低延迟、可过滤）而非人类友好。
+- **子 Agent 编译**：参考 DSPy 的 program 编译、LangGraph 的图编译、以及"prompt → 可执行 DAG"的静态化路径。
+- **信任衰减模型**：从 EigenTrust、Beta 信任模型、以及 SIEM 中的风险评分衰减函数借公式；隔离协议参考 capability-based security（对象能力模型）。
+
+## 与已有知识的关联
+
+- 搜索空结果 → 直接关联你之前对"云端 WebSearch 方案"的评估需求：DuckDuckGo Lite 已不可依赖，需切换到 API 型后端。
+- 编译机制 ↔ 信任衰减：静态编译利于审计与隔离，动态信任利于适应——两者可用"编译期固定隔离边界 + 运行期在边界内衰减信任"来统一。
