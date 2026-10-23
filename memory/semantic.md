@@ -366,3 +366,25 @@
 ## 原始发现
 ### GitHub
 --
+
+## 搜索: 2026-10-23 15:44
+## 关键发现
+
+1. **搜索后端全面失效**：三次搜索中 DuckDuckGo 仅返回首页占位符（`https://duckduckgo.com/ — here`），Wikipedia/HN/GitHub 全部无结果。这不是"无内容"，而是**检索管道本身断裂**——DDG Lite 端点很可能被限流/改版/需 JS 渲染，导致 Agent 拿到的是空壳响应而非真实 SERP。
+
+2. **三个查询主题高度相关但零命中**：AgentFactory 编译机制、云端 WebSearch 替代方案、多 Agent 容错共识——这三者恰好构成"自建 Agent 系统"的完整链条（构建→检索→容错），但公开索引里查不到，说明这些是**工程实践知识而非文档化知识**，主要沉淀在代码仓库/内部博客/论文里，通用搜索引擎覆盖不到。
+
+3. **"零结果"本身是信号**：GitHub 无结果尤其反常——AgentFactory、多 Agent 共识这类词在 GitHub 上不可能真无仓库。更可能是搜索工具未真正调用 GitHub API，或查询词过窄。
+
+## 值得深挖的方向
+
+- **验证检索链路**：先用一个必然有结果的查询（如 `python`）测试同一管道，区分"工具坏了"vs"主题真冷门"。这是排查任何 Agent 检索故障的第一步。
+- **换检索源**：GitHub 用官方 Search API / `gh` CLI；学术用 arXiv/Semantic Scholar API；HN 用 Algolia API（`hn.algolia.com/api`）。这些都有稳定 JSON 接口，比抓 DDG HTML 可靠得多。
+- **AgentFactory 编译机制**：大概率指"把子 Agent 定义编译成可执行图/配置"的范式，可对标 LangGraph 的 graph 编译、AutoGen 的 agent 注册、或 DSPy 的 program 编译。
+- **集体免疫/共识容错**：多 Agent 单点故障防御可参考 raft/paxos 的降级思路，但 Agent 场景更接近"拜占庭容错 + 投票仲裁"，值得查 "multi-agent Byzantine fault tolerance"。
+
+## 与已有知识的关联
+
+- 检索失败模式印证了一个通用教训：**Agent 的 WebSearch 工具必须做结果有效性校验**（空壳页/占位符检测），否则模型会把"没搜到"误判为"不存在"，产生虚假的确定性。
+- 多 Agent 容错与之前讨论的"单点故障防御"一脉相承：集中式 orchestrator 是单点，去中心化共识是解法，但代价是通信开销与延迟——这是架构权衡的经典三角（可靠性/成本/延迟）。
+- AgentFactory 的"编译"隐喻与 DSPy/LangGraph 同源：把声明式的 Agent 拓扑编译成运行时，本质是**把编排逻辑从 prompt 里抽出来变成可测试的代码**。
