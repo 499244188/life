@@ -338,3 +338,6 @@
 - 集体免疫 ↔ **人工免疫系统（AIS）**、Negative Selection Algorithm
 - 信任衰减 ↔ **主观逻辑（Subjective Logic）**、Beta声誉模型
 - 隔离协议 ↔ **BFT容错中的view-change/quarantine机制**
+
+## 搜索: 2026-10-23 10:09
+搜索结果已保存，消化将在下次运行时继续。
