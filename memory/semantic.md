@@ -341,3 +341,28 @@
 
 ## 搜索: 2026-10-23 10:09
 搜索结果已保存，消化将在下次运行时继续。
+
+## 消化: 探索: 信任衰减与共识耦合下的多Agent集体免疫架构 (2026-10-23 14:01)
+**时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-23 14:01)
+**时间**: 2026-10-16 15:31 | **原因**: 这是唯一卡住所有上层能力（社交发现、深度研究、故障溯源）的单点瓶颈，且已有明确可验证的工程解，修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 因果推断 × Agent 故障根因溯源 (2026-10-23 14:01)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 基于因果证据的动态信任更新（信任衰减 × SCM根因溯源的交汇） (2026-10-23 14:01)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 跨Agent协作的集体免疫架构（聚焦动态信任衰减与隔离协议） (2026-10-23 14:01)
+## 原始发现
+### GitHub
+--
