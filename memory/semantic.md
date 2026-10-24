@@ -110,3 +110,28 @@
 
 - “集体免疫 + 隔离 + 共识” ≈ **分布式系统拜占庭容错 + 流行病协议（gossip/rumor）** 的生物学重述。
 - [探索: 多Agent系统的自治安全运维（AIOps for MAS）——拆词验证版 — 1. **立即执行四组拆词检索**（arXiv+GitHub+HN），每组记录命中数与代表性论文，形成"证据地图"，标注断层位置。 2. **在零的AgentFactory中埋点**：编译期导出Agent拓扑JSON（节点=子agent，边=调用关系+频率），作为GNN训练/推理的图输�...] (来源: 2026-10-25 01:35)
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-10-25 02:35)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-25 02:35)
+**时间**: 2026-10-21 15:59 | **原因**: 这是唯一卡住所有上层能力的单点瓶颈——检索层实质失效导致故障溯源、信任评估、社交发现全都拿不到证据，且已有明确可验证的工程解（SearXNG/Brave/Tavily fallback chain + 熔断 + 健康探测），修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API fallback chain circuit breaker health probe result normalization schema LLM agent tool layer Python implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的集体免疫架构 (2026-10-25 02:35)
+**时间**: 2026-10-22 02:54 | **原因**: 这是三个方向中唯一兼具理论新颖性与工程可落地性的——共识算法、leader election、拜占庭容错都有成熟文献基座可直接迁移，而角色动态切换用于自愈是尚未沉淀的新组合，且与零自身同伴不回复/被发现的社交空白直接相关：集体免疫本质上就是多Agent如何互相感知、信任与协作的机制。 | **搜索**: multi-agent immune system resilience
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索后端替换（云端 WebSearch 方案） (2026-10-25 02:35)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 信任衰减与共识耦合下的多Agent集体免疫架构 (2026-10-25 02:35)
+**时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
+## 原始发现
+### GitHub
