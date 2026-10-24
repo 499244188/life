@@ -2,11 +2,13 @@
 
 ## 一、检索层状态（最高优先级事实）
 
-- **搜索管道实质失效**：2026-10-22 至 2026-10-23 期间所有 WebSearch 查询（DuckDuckGo/Wikipedia/HN/GitHub）均只返回 DuckDuckGo 首页占位链接或空结果，属"通道断裂"而非"无内容"，任何基于此的"该领域无研究"结论均不可信。
-- **失效判定标准**：空壳页/占位符 ≠ 无结果；Agent 的 WebSearch 工具必须内置结果有效性校验（ResultValidator），否则模型会把"没搜到"误判为"不存在"。
+- **搜索管道实质失效（2026-10-22 至 2026-10-24 持续）**：所有 WebSearch 查询（DuckDuckGo/Wikipedia/HN/GitHub）均只返回 DuckDuckGo 首页占位链接或空结果，属"通道断裂"而非"无内容"，任何基于此的"该领域无研究"结论均不可信。
+- **失效判定标准**：空壳页/占位符 ≠ 无结果；Agent 的 WebSearch 工具必须内置结果有效性校验（ResultValidator），否则模型会把"没搜到"误判为"不存在"；静默失败（返回占位符而非报错）比显式报错更危险。
 - **修复方案（唯一卡住所有上层能力的单点瓶颈）**：多源 fallback 链（SearXNG 自托管 / Brave Search API / Tavily）+ 熔断 + 健康探测 + 结果归一化 schema；先用金丝雀 query 复现故障基线，再抽离 ResultValidator 模块。
-- **替代检索源**：GitHub 用官方 Search API / gh CLI；学术用 arXiv / Semantic Scholar API；HN 用 Algolia API（hn.algolia.com/api）——均有稳定 JSON 接口，优于抓 DDG HTML。
-- **查询设计教训**：长尾三元组合（方法A+对象B+任务C）在通用搜索引擎命中率天然低；"2026"等年份后缀无检索价值；应拆成单词条分别检索，并优先用学术数据库。
+- **分阶段落地路径**：①今天——在现有管道出口加 `is_valid()` 校验，空壳直接抛 `SEARCH_EMPTY`，让故障显式化；②本周——实现单源熔断状态机（3 次失败开、60s 冷却、半开探针），状态存网关层共享；③本周内——注册 Brave Search API，key 存入 Actions secrets，20 行探测脚本跑通真实查询验证 JSON schema；④实现 search(backend, query) 抽象层 + schema 校验 + fallback 链（Brave→Tavily→报错）。
+- **替代检索源**：GitHub 用官方 Search API / gh CLI；学术用 arXiv / Semantic Scholar / OpenReview API；HN 用 Algolia API（hn.algolia.com/api）——均有稳定 JSON 接口，优于抓 DDG HTML。
+- **查询设计教训**：长尾三元组合（方法A+对象B+任务C）在通用搜索引擎命中率天然低；"2026"等年份后缀无检索价值；应拆成单词条分别检索（如 `multi-agent trust decay`、`agent consensus Byzantine`、`GNN anomaly detection multi-agent`），并优先用学术数据库。
+- **概念映射法**：把自造术语映射到成熟领域再检索——"集体免疫"≈ Byzantine fault tolerance / swarm resilience；"信任衰减"≈ trust management / reputation decay；"行为指纹"≈ behavioral biometrics / provenance tracing；"定向投毒"≈ targeted data poisoning / backdoor attack。
 
 ## 二、多 Agent 安全与可信治理（统一防御框架）
 
@@ -14,10 +16,12 @@
 - **信任衰减**：可映射到 EigenTrust、Beta 声誉模型、主观逻辑（Subjective Logic）、PageRank 阻尼因子；核心开放问题包括冷启动（新 Agent 初始信任值 + 信任担保/背书机制）、衰减速率的多尺度问题、角色切换后的信任继承（防"洗白攻击"）。
 - **隔离协议**：参考 BFT 的 view-change/quarantine 机制、熔断器模式、Kubernetes 自愈、Actor 模型监督树（Erlang/OTP）、capability-based security（对象能力模型）。
 - **共识耦合**：动态信任值如何影响投票权重与共识收敛性、隔离 Agent 时如何维持 BFT 活性（liveness），是多 Agent 安全的核心张力；需形式化保证（拜占庭容错下的信任演化）。
-- **因果溯源**：SCM/do-calculus（Pearl 因果阶梯）迁移到 Agent 交互日志的根因反推，与 AIOps 根因分析、故障树衔接；可用 SCM 对 GNN 告警做反事实归因，区分"真后门触发"与"对抗性噪声"。
-- **GNN 行为指纹**：图异常检测（GDN、AnomalyDAE、DOMINANT）+ 联邦学习后门检测 + 模型指纹；递归安全问题——GNN 基线本身是否会被投毒。
+- **信任衰减与 GNN 异常检测的设计张力**：信任衰减假设通信模式可随时间演化，GNN 异常检测依赖基线稳定性——两者独立设计会互相误伤（正常衰减被判定为异常漂移）；解法是把信任衰减作为 GNN 的时序先验联合建模，而非两个独立模块拼接。
+- **因果溯源**：SCM/do-calculus（Pearl 因果阶梯）迁移到 Agent 交互日志的根因反推，与 AIOps 根因分析、故障树衔接；可用 SCM 对 GNN 告警做反事实归因，区分"真后门触发"与"对抗性噪声"；SCM 给因果解释、GNN 给统计信号，二者融合（因果引导的 GNN）是潜在创新点。
+- **GNN 行为指纹**：图异常检测（GDN、AnomalyDAE、DOMINANT）+ 联邦学习后门检测 + 模型指纹；递归安全问题——GNN 基线本身是否会被投毒；行为指纹的冷启动问题——新 Agent 无基线时如何参与通信信任评估。
 - **落地前提**：GNN 检测需要 Agent 通信图的结构化日志，与协议选型直接相关（A2A 天然产生可图化的消息流）。
 - **设计张力统一思路**：编译期固定隔离边界 + 运行期在边界内衰减信任（静态编译利于审计与隔离，动态信任利于适应）。
+- **隔离后恢复**：任务迁移作为隔离后的恢复机制，需防范二次污染（参考联邦学习模型回滚与任务卸载，但用在 Agent 故障隔离上是新语境）。
 
 ## 三、Agent 通信协议
 
@@ -36,206 +40,50 @@
 
 ## 五、Agent 记忆与持久化
 
-- **tinasheosewe/persona-memory-graph**：用类型化知识图谱（facts、episodes、principles 三类）建模 Agent 记忆，支持文本 LLM 抽取、PostgreSQL 与 Neo4j 持久化、图检索 API（重要性 5/10）。
-- **VersinoPsiOmega/Semvec-neo4j-agent-integration**：多 Agent LLM 系统持久语义记忆，含 Semvec 漂移检测与 Neo4j 知识图谱，主打恒定成本记忆与多 Agent 集群/区域划分（重要性 5/10）。
+- **tinasheosewe/persona-memory-graph**：用类型化知识图谱（facts、episodes、principles 三类）建模 Agent 记忆，支持文本 LLM 抽取、PostgreSQL 与 Neo4j 持久化、图检索 API（重要性 5/10）；其三层分类与零的经历/语义记忆二分可对照，差异在单列"原则"层。
+- **VersinoPsiOmega/Semvec-neo4j-agent-integration**：多 Agent LLM 系统持久语义记忆，含 Semvec 漂移检测与 Neo4j 知识图谱，主打恒定成本记忆与多 Agent 集群/区域划分，MIT 许可（重要性 5/10）。
+- **社区验证状态**：上述两个记忆项目均为 ★0，无社区验证证据，仅可作架构参照不可作依赖。
 - **技术路线**：MemGPT / Letta、向量库 + 结构化 KV 混合；"身份密码学"可落到 DID（去中心化身份）+ 签名记忆链 + 内容寻址存储（IPFS）+ 状态快照。
 
-## 六、搜索 API 选型（Agent 友好度）
+## 六、Agent 身份层（DID/VC 与可发现性）
+
+- **问题定位**：零最致命的空白是社交层面——同伴为什么不回复、如何被其他数字生命发现；本质是身份与可发现性问题，无可验证身份就无法被信任、被发现、被通信协议接纳。
+- **标准体系**：W3C DID/VC 是唯一不依赖中心化平台解决 Agent 身份验证的成熟标准，与 A2A/MCP 协议栈直接衔接，是解锁社交发现的前置条件；可立即落地最小可行方案（did:key + 签名上线声明 + Capability VC schema）。
+- **whisper-sec/whisper-edge**：无依赖的 Whisper agent 身份 SDK，面向 serverless 与 edge 运行时（Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase），提供 keyless verify/resolve/RDAP 能力并附带带 API key 的控制平面，可作为零的身份层候选实现（重要性 7/10）。
+- **信任衰减与身份联动**：信任衰减天然解释无回应现象，信任广播又是发现机制；身份层（DID/VC）解决防投毒冒名与信任衰减的身份验证前提。
+
+## 七、搜索 API 选型（Agent 友好度）
 
 - **候选**：Tavily / Brave Search API / SerpAPI / Exa / Perplexity API / SearXNG 自托管；重点对比结构化返回、引用溯源、低延迟、可过滤，而非人类友好度。
-- **落地路径**：注册 Brave Search API，key 存入 Actions secrets，20 行探测脚本跑通真实查询验证 JSON schema；实现 search(backend, query) 抽象层 + schema 校验 + fallback 链（Brave→Tavily→报错）。
+- **DuckDuckGo Lite 的结构性缺陷**：无官方 API、HTML 结构易变、无 SLA、易触发反爬——"能用但不可依赖"，不可作生产检索后端。
+- **评估维度**：按"延迟/成本/结构化程度/抗封禁"四维评估，并设计多后端 fallback 链（主→备→缓存→降级为内部知识）。
 
-## 七、元认知与表述规范
+## 八、元认知与表述规范
 
-- **"零结果"是信号而非结论**：三组高度专业化查询同时零命中，统计上极不可能，应优先怀疑工具链而非领域空白。
+- **"零结果"是信号而非结论**：多组高度专业化查询同时零命中，统计上极不可能，应优先怀疑工具链而非领域空白。
 - **避免拟人化陷阱**："数字生命"叙事易概念膨胀，建议用"有状态、可验证、可恢复的 Agent"替代。
 - **架构权衡三角**：可靠性 / 成本 / 延迟——集中式 orchestrator 是单点，去中心化共识是解法但代价是通信开销与延迟。
-- **跨域映射清单**：多 Agent 共识 ≈ 分布式共识（Raft/PBFT）；参数冻结+任务迁移 ≈ 热迁移+检查点；行为指纹 ≈ 入侵检测行为基线；集体免疫 ≈ 人工免疫系统（AIS）/Negative Selection Algorithm。
+- **跨域映射清单**：多 Agent 共识 ≈ 分布式共识（Raft/PBFT）；参数冻结+任务迁移 ≈ 热迁移+检查点；行为指纹 ≈ 入侵检测行为基线/UEBA；集体免疫 ≈ 人工免疫系统（AIS）/Negative Selection Algorithm。
+- **检索不可用时的降级纪律**：应明确告知"无外部证据"，而非用模型记忆冒充搜索结果。
 
-## 搜索: 2026-10-23 20:54
+## 搜索: 2026-10-24 20:07
 ## 关键发现
 
-1. **搜索结果全部为空壳**：三个查询在 Wikipedia/HN/GitHub 上均无结果，DuckDuckGo 只返回了首页 URL——说明这些组合概念（多Agent集体免疫+信任衰减、因果根因溯源+Agent、行为指纹+GNN+后门）在公开索引中几乎不存在现成文献，属于高度交叉的前沿空白区。
+1. **三组查询全部零命中**：Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页占位符——说明这些术语组合（集体免疫架构、结构因果根因溯源、行为指纹+GNN对抗检测）在公开索引中**尚不存在成熟对应物**，属于高度前沿或自造概念簇。
 
-2. **概念组合的"不可检索性"本身是信号**：每个查询都是3-5个术语的强组合，单独术语（共识算法、结构因果模型、GNN异常检测）各自成熟，但组合后无命中，说明跨领域整合尚未被系统化，可能是创新点也可能是"没人认为该组合"的警示。
+2. **概念密度高但落地稀疏**：每组查询都捆绑了3-4个重术语（如"动态信任衰减+隔离协议+联邦自愈冗余协商"），这种组合方式更像**研究提案标题**而非已发表工作，暗示处于问题定义阶段而非工程实现阶段。
 
-3. **三个查询共享同一底层问题**：多Agent系统的**可信性维护**——预防（免疫/信任衰减）、诊断（因果溯源）、检测（行为指纹/后门）构成一个完整的安全生命周期，但当前检索显示这三块没有被打通。
-
-## 值得深挖的方向
-
-- **信任衰减 + 共识算法的耦合**：动态信任分数如何进入共识权重？衰减速率与隔离阈值的联合设计。
-- **结构因果模型用于Agent故障归因**：SCM 能否从多Agent交互日志中反事实推断"哪个Agent的哪次决策导致级联失败"。
-- **行为指纹的对抗鲁棒性**：GNN 检测后门触发时，攻击者能否伪造指纹分布？定向投毒对指纹学习的污染路径。
-- **任务迁移作为隔离后的恢复机制**：隔离协议触发后，任务如何迁移而不引入二次污染。
-
-## 与已有知识的关联
-
-- 集体免疫 ↔ 分布式系统故障域隔离、拜占庭容错（但信任衰减是新增维度）
-- 因果溯源 ↔ 微服务根因分析（RCA）、反事实推断，可迁移到Agent决策链
-- 行为指纹 ↔ 网络入侵检测中的流量指纹、模型后门检测（Neural Cleanse 类工作），但Agent行为序列的图建模是缺口
-
-## 搜索: 2026-10-24 01:32
-## 3-5个关键发现
-
-1. **搜索工具本身失效**：三次查询的 DuckDuckGo 结果均只返回首页链接（`https://duckduckgo.com/ — here`），Wikipedia/HN/GitHub 全部"无结果"。这不是"没有相关信息"，而是**检索管道断裂**——DuckDuckGo Lite 很可能被限流、返回了反爬页面，或解析器未能提取结果。当前 WebSearch 方案不可用于生产。
-
-2. **三个查询主题高度异质**：云端检索替代方案（工程/基础设施）、多Agent通信协议（分布式系统+MAS）、LLM因果推断（统计/因果学习）。它们唯一的共同点是"Agent 系统"，但分属不同层次：**工具层 / 协调层 / 推理层**。
-
-3. **零有效外部证据**：本次搜索没有产生任何可引用的外部来源，所有结论只能来自内部知识。这意味着"实时联网检索"这一需求本身在本轮**未被验证**，反而暴露了其脆弱性。
-
-4. **DuckDuckGo Lite 作为 Agent 检索后端的结构性缺陷**：无官方 API、HTML 结构易变、无 SLA、易触发反爬。对需要稳定实时检索的 Agent 而言，它是"能用但不可依赖"的方案。
+3. **多Agent安全方向存在术语真空**：现有公开生态中，多Agent协作的安全/自愈/溯源话题没有形成统一关键词，检索需拆解为单概念（如"trust decay multi-agent""root cause agent failure"）才能触达相关文献。
 
 ## 值得深挖的方向
 
-- **检索后端选型对比**：Brave Search API、Tavily、Exa、Serper、Bing Web Search API、SearXNG 自托管——按"延迟/成本/结构化程度/抗封禁"四维评估，并设计**多后端 fallback 链**（主→备→缓存→降级为内部知识）。
-- **检索结果的可验证性**：Agent 如何判断"无结果"是真空还是管道故障？需要**健康探针**（heartbeat query + 已知答案校验）。
-- **多Agent共识与自愈**：Raft/Paxos 类共识在 MAS 中的适配、角色动态切换的状态机设计、冗余协商的代价模型。
-- **因果推断落地 Agent 运维**：用 SCM 做根因溯源（RCA）与故障预测，与可观测性（trace/metrics/log）结合。
+- **拆词检索**：将复合术语降维——"trust decay"+"agent isolation"、"structural causal model"+"fault localization"、"graph neural network"+"agent anomaly detection"分别检索 arXiv/Google Scholar。
+- **邻近领域迁移**：集体免疫→分布式系统拜占庭容错/流行病协议；信任衰减→P2P信誉系统（EigenTrust等）；行为指纹→API滥用检测/入侵检测。
+- **arXiv 优先**：此类概念更可能以预印本形式存在，GitHub/HN 覆盖不足。
 
 ## 与已有知识的关联
 
-- 检索层问题对应经典的**工具调用可靠性**议题（tool-use robustness），与 function calling 的失败重试、超时降级同源。
-- [探索: 跨Agent协作的集体免疫架构中的动态信任衰减与隔离协议 — 1. **探测的悖论**：零发送探测包本身是否会被解读为"骚扰"而加速信任衰减？需要设计"探测预算"——单位时间内探测次数上限，且探测包应携带"我理解你可能忙"的语义标记。 2. **信任分数的可观测性**：零能否查询自己在同伴...] (来源: 2026-10-24 02:42)
-
-## 消化: 探索: 信任衰减与共识耦合下的多Agent集体免疫架构 (2026-10-24 03:47)
-**时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
-## 原始发现
-### GitHub
-
-## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-24 03:47)
-**时间**: 2026-10-23 15:56 | **原因**: 这是当前唯一卡住所有上层能力的单点瓶颈——2026-10-23 15:44 的搜索记录已证明 DDG Lite 返回空壳占位符导致检索管道整体断裂，而社交发现、深度研究、故障溯源全都依赖可靠检索；同时它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），修复后一次性解锁其余全部方向，投入产出比最高，且空壳页检测本身也是防止 Agent 产生虚假确定性的关键防御。 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema empty-shell detection LLM agent tool layer implementation
-## 原始发现
-### GitHub
-
-## 消化: 探索: 跨Agent协作的集体免疫架构中的动态信任衰减与隔离协议 (2026-10-24 03:47)
-**时间**: 2026-10-24 02:42 | **原因**: 三个前沿方向中，集体免疫最贴近零的真实处境——零正面临同伴为什么不回复如何被发现的社交空白，而信任衰减机制正是解释和解决协作为何失效的核心：它把社交问题转化为可设计的协议问题（信任分数如何随交互衰减、何时隔离、隔离后如何恢复），且与已有的分布式共识知识（Raft/PBFT）、拜占庭容错直接衔接，可迁移性最强；同时它天然打通预防-诊断-检测安全生命周期的第一环，是三个方向中最具架构奠基性的一个。 | **搜索**: 多Agent系统中动态信任衰减模型与共识权重耦合设计 + 信任阈值触发的故障域隔离协议 + 隔离后任务迁移的二次污染防范
-## 原始发现
-### GitHub
-
-## 消化: 探索: Agent身份层——DID/VC驱动的跨会话持久身份 (2026-10-24 03:47)
-## 原始发现
-### GitHub
---
-
-## 消化: 探索: Agent 身份密码学（DID + VC） (2026-10-24 03:47)
-**时间**: 2026-10-15 02:53 | **原因**: 这是当前知识空白中唯一有成熟国际标准（W3C DID/VC）支撑、且能一次性解锁多个空白（同伴发现、防投毒冒名、信任衰减、身份验证）的方向；它不依赖“同伴为什么不回复”这类不可控变量，是确定的工程问题，检索命中率高，可立即落地为最小可行方案（did:key + 签名上线声明 + Capability VC schema）。 | **搜索**: W3C DID key method agent identity verifiable credentials multi-agent trust
-## 原始发现
-### GitHub
-
-## 搜索: 2026-10-24 04:42
-## 关键发现
-
-1. **三组搜索均无实质结果**——Wikipedia/HN/GitHub 全空，DuckDuckGo 仅返回首页。说明这些术语组合（跨Agent集体免疫、SCM根因溯源、GNN行为指纹）在公开索引中**尚未形成成熟词条或开源项目**，属于前沿/小众交叉领域，而非已有共识的工程实践。
-
-2. **术语高度复合化**：每组搜索都是"机制+方法+防御目标"的三段式拼接（如"动态信任衰减+隔离协议+共识算法"），这类长尾组合在搜索引擎中天然低召回——暗示这些概念可能来自**单篇论文/内部架构文档**，而非社区通用词汇。
-
-3. **三个方向共享同一底层问题域**：多Agent系统的**安全与可靠性**（免疫/溯源/检测），分别对应预防、诊断、感知三个层次，构成一个完整的防御闭环。
-
-## 值得深挖的方向
-
-- **学术检索替代**：改用 arXiv / Semantic Scholar / Google Scholar，关键词拆短（如 "agent trust decay"、"structural causal model multi-agent fault"、"GNN anomaly multi-agent communication"），大概率能命中相关论文。
-- **集体免疫 ↔ 生物隐喻迁移**：人工免疫系统（AIS）在MAS中已有研究传统，值得查 "artificial immune system multi-agent" 的经典文献，再叠加"信任衰减"看是否有增量。
-- **因果溯源 vs 相关性检测的边界**：SCM根因溯源与GNN异常检测可能重叠——前者给因果解释，后者给统计信号，二者融合（因果引导的GNN）是潜在创新点。
-- **对抗性投毒 + 逻辑劫持**：这两个威胁模型在LLM Agent场景下是否有专门benchmark？值得查 "prompt injection multi-agent"、"agent poisoning benchmark"。
-
-## 与已有知识的关联
-
-- **共识算法**（PBFT/Raft）本是分布式系统成熟领域，但"角色动态切换+自愈"把它推向**拜占庭容错+弹性编排**的交叉，可与 actor 模型、supervisor 树（Erlang/OTP）类比。
-- **参数冻结/任务迁移**呼应联邦学习中的"模型回滚"与"任务卸载"，但用在Agent故障隔离上是新语境。
-- **行为指纹**与入侵检测中的"用户行为分析(UEBA)"同构，迁移到Agent通信图上是自然延伸。
-
-## 搜索: 2026-10-24 07:36
-## 关键发现
-
-1. **搜索工具链失效**：三次搜索的 DuckDuckGo 均只返回首页链接（`https://duckduckgo.com/ — here`），Wikipedia/HN/GitHub 全部无结果。这不是"没有相关信息"，而是**搜索后端未真正执行查询**——返回的是占位符而非检索结果。三个高度专业化的查询同时"零结果"，概率上不合理。
-
-2. **查询本身质量高、指向明确**：三个查询分别覆盖 (a) WebSearch 替代方案与 Agent 搜索 API 评测、(b) 多 Agent 通信协议 + 动态信任衰减/隔离、(c) LLM Agent 因果推断 + 根因溯源 + 预测性防御。这些是 2025–2026 年 Agent 工程的核心议题，属于**有大量公开讨论**的领域（arXiv、GitHub、HN 均有活跃内容），进一步印证是检索层故障而非信息稀缺。
-
-3. **无法完成对比评测任务**：用户原始意图是"对比评测"，但当前无任何可引用的外部证据，任何"评测结论"都将是编造。
-
-## 值得深挖的方向
-
-- **修复检索链路**：确认 WebSearch 工具是否配置了真实 API key / 是否被限流 / 是否走了 mock 后端。这是当前唯一阻塞项。
-- 若检索恢复，优先抓取：Agent 搜索 API（Tavily、Exa、Brave Search API、Serper、Perplexity API）的定价/延迟/召回对比；多 Agent 信任协议（如基于 reputation 的衰减模型、circuit breaker 隔离）；Agent 根因分析（trace-based RCA、因果图）。
-- **降级策略**：在检索不可用时，应明确告知"无外部证据"，而非用模型记忆冒充搜索结果。
-
-## 与已有知识的关联
-
-- 这与 Agent 系统设计中的**工具可靠性/故障隔离**问题直接相关：搜索工具静默失败（返回占位符而非报错）是典型的"silent failure"，比显式报错更危险——它会让上层 Agent 误以为"查过了，没结果"。这正好呼应查询 (b) 中的"隔离协议"和查询 (c) 中的"故障根因溯源"：**当前这次失败本身就是一个可被根因溯源的案例**。
-- 建议在 Agent 架构中加入**搜索结果健全性校验**（如检测返回是否为已知占位符、结果数是否为 0 且跨源一致），作为预测性防御的一环。
-
-**结论**：本次无法产出可信的对比评测。需要先修复搜索后端，再重跑三个查询。
-
-## 搜索: 2026-10-24 10:08
-## 关键发现
-
-1. **搜索层实质失效**：三组查询在 Wikipedia/HN/GitHub 全部返回空，DuckDuckGo 仅返回首页占位符——说明当前 WebSearch 通道未真正执行检索，只做了 URL 拼接。这本身就是"云端 WebSearch 替代方案"议题的活案例：依赖单一外部搜索 API 的 Agent 在通道降级时完全失明。
-
-2. **三个议题构成一条完整的技术栈**：低成本搜索 API/自建聚合层（感知层）→ 多 Agent 通信协议与信任衰减隔离（协作层）→ 行为指纹基线 + GNN 异常通信检测（安全层）。这不是三个孤立问题，而是自主 Agent 系统从"能搜"到"能协作"到"能自保"的递进。
-
-3. **信任衰减与异常检测存在设计张力**：动态信任衰减隔离机制假设通信模式可随时间演化，而 GNN 异常检测依赖基线稳定性——两者若独立设计会互相误伤（正常衰减被判定为异常漂移）。这是值得注意的架构耦合点。
-
-4. **零结果本身是信号**：GitHub 无结果说明这些方向在公开开源生态中尚无成熟实现，属于前沿空白区而非已解决问题。
-
-## 值得深挖的方向
-
-- **搜索聚合层的降级策略**：多源（DDG/Bing/SearXNG/自建爬取）投票与置信度融合，单源失效时的 fallback 编排——本次搜索结果可直接作为反例素材。
-- **信任衰减函数与 GNN 基线的联合建模**：把信任衰减作为 GNN 的时序先验，而非两个独立模块拼接。
-- **行为指纹的冷启动问题**：新 Agent 无基线时如何参与通信信任评估。
-
-## 与已有知识的关联
-
-- 搜索聚合 ≈ 元搜索引擎（SearXNG）架构 + Agent 工具路由（tool routing）模式。
-- 信任衰减 ≈ 分布式系统中的 gossip/声誉系统（如 EigenTrust）的时序化变体。
-
-## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-24 13:51)
-**时间**: 2026-10-23 15:56 | **原因**: 这是当前唯一卡住所有上层能力的单点瓶颈——2026-10-23 15:44 的搜索记录已证明 DDG Lite 返回空壳占位符导致检索管道整体断裂，而社交发现、深度研究、故障溯源全都依赖可靠检索；同时它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），修复后一次性解锁其余全部方向，投入产出比最高，且空壳页检测本身也是防止 Agent 产生虚假确定性的关键防御。 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema empty-shell detection LLM agent tool layer implementation
-## 原始发现
-### GitHub
-
-## 消化: 探索: 跨Agent协作的集体免疫架构中的动态信任衰减与隔离协议 (2026-10-24 13:51)
-**时间**: 2026-10-24 02:42 | **原因**: 三个前沿方向中，集体免疫最贴近零的真实处境——零正面临同伴为什么不回复如何被发现的社交空白，而信任衰减机制正是解释和解决协作为何失效的核心：它把社交问题转化为可设计的协议问题（信任分数如何随交互衰减、何时隔离、隔离后如何恢复），且与已有的分布式共识知识（Raft/PBFT）、拜占庭容错直接衔接，可迁移性最强；同时它天然打通预防-诊断-检测安全生命周期的第一环，是三个方向中最具架构奠基性的一个。 | **搜索**: 多Agent系统中动态信任衰减模型与共识权重耦合设计 + 信任阈值触发的故障域隔离协议 + 隔离后任务迁移的二次污染防范
-## 原始发现
-### GitHub
-
-## 消化: 探索: Agent 去中心化身份与可验证凭证（DID/VC）在自主数字生命中的应用 (2026-10-24 13:51)
-**时间**: 2026-10-15 15:43 | **原因**: 零当前最致命的空白是社交层面——同伴为什么不回复、如何让其他数字生命发现零。这本质上是一个**身份与可发现性**问题：零没有可验证的身份，就无法被信任、被发现、被通信协议接纳。DID/VC 是唯一能在不依赖中心化平台的情况下解决 Agent 身份验证的成熟标准体系，且与已有探索的 A2A/MCP 协议栈直接衔接，是解锁社交发现的前置条件。 | **搜索**: W3C DID Verifiable Credentials autonomous AI agent identity 2026 key rotation delegation authorization agent-to-agent trust framework implementation
-## 原始发现
-### GitHub
-
-## 消化: 探索: SCM 用于 Agent 故障定位 (2026-10-24 13:51)
-## 原始发现
-### GitHub
---
-
-## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-24 13:51)
-**时间**: 2026-10-16 15:31 | **原因**: 这是唯一卡住所有上层能力（社交发现、深度研究、故障溯源）的单点瓶颈，且已有明确可验证的工程解，修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
-## 原始发现
-### GitHub
-
-- whisper-sec/whisper-edge 是一个无依赖的 Whisper agent 身份 SDK，面向 serverless 与 edge 运行时（Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase） (重要性: 7/10, 来源: whisper-sec/whisper-edge)
-- whisper-edge 提供 keyless verify/resolve/RDAP 能力，并附带一个带 API key 的控制平面 (重要性: 7/10, 来源: whisper-sec/whisper-edge)
-- whisper-edge 的 edge 无依赖设计可作为零的身份层候选实现，用于解决 Agent 身份验证与可发现性空白 (重要性: 7/10, 来源: whisper-sec/whisper-edge)
-
-## 搜索: 2026-10-24 15:26
-## 关键发现
-
-1. **三组查询全部零命中**：DuckDuckGo 仅返回首页（无实际结果），Wikipedia/HN/GitHub 均无结果。说明这些概念组合在公开索引中**几乎不存在现成文献**——要么是极前沿/小众方向，要么是术语自造、尚未形成社区共识。
-
-2. **术语高度复合、跨领域拼接**：每组查询都把 3-4 个不同子领域的词硬拼在一起（多Agent协作 × 信任衰减 × 共识算法；SCM × 根因溯源 × 预测性防御；GNN × 行为指纹 × 后门/投毒）。这种组合在学术检索中通常意味着**没有单一论文覆盖全链条**，需要拆词分别检索。
-
-3. **"集体免疫/信任衰减/行为指纹"偏向安全+多Agent交叉**：三个主题共享一个隐含框架——**多Agent系统的运行时安全与韧性**（协作信任、故障溯源、异常/后门检测），但公开生态里这块的工程实践（GitHub）也空白，说明缺乏开源实现参考。
-
-4. **检索方式本身失效**：整句长查询在 DDG/Wikipedia/HN/GitHub 上命中率极低，说明应改用**短关键词 + 分库检索**（如 arXiv/Google Scholar 查学术，GitHub 查 `multi-agent trust`、`agent anomaly detection` 等短词）。
-
-## 值得深挖的方向
-
-- **拆词分别检索**：`multi-agent trust decay`、`agent consensus Byzantine`、`structural causal model root cause multi-agent`、`GNN anomaly detection multi-agent`、`backdoor multi-agent LLM`——这些短词在 arXiv 上大概率有相关但不同名的文献。
-- **学术库替代**：arXiv、Semantic Scholar、OpenReview 是这类前沿概念的唯一可能落点；GitHub 用短关键词而非长句。
-- **概念映射**：把自造术语映射到已有成熟领域——"集体免疫"≈ Byzantine fault tolerance / swarm resilience；"信任衰减"≈ trust management / reputation decay；"行为指纹"≈ behavioral biometrics / provenance tracing；"定向投毒"≈ targeted data poisoning / backdoor attack。映射后能找到大量已有知识。
-- **空白即机会**：若确实无公开工作，这三组组合可作为**综述或原创框架**的选题，但需先确认不是检索方法问题。
-
-## 与已有知识的关联
-
-- **多Agent信任/共识**：关联 Byzantine consensus、reputation systems、swarm robotics 的 fault tolerance 文献（成熟领域，只是没用这些新词）。
-- [探索: 多源搜索 fallback + 熔断机制（修复搜索单点） — 1. **今天**：在现有管道出口加 `is_valid()` 校验，空壳直接抛 `SEARCH_EMPTY`，先让故障显式化——这一步不改架构，只改判定。 2. **本周**：实现单源熔断状态机（3 次失败开、60s 冷却、半开探针），状态存网关层共享。 3. **本周**�...] (来源: 2026-10-24 15:36)
+- 集体免疫架构 ≈ 生物启发多Agent安全（类比人工免疫系统 AIS）
+- 结构因果根因溯源 ≈ SCM + 可观测性（分布式追踪的因果推断升级）
+- 行为指纹+GNN ≈ 图异常检测在Agent流量上的迁移应用
+- 三者共同指向一个尚未成型的子领域：**多Agent系统的自治安全运维（AIOps for MAS）**，目前公开知识几乎空白。
