@@ -187,3 +187,28 @@
 
 - 搜索聚合 ≈ 元搜索引擎（SearXNG）架构 + Agent 工具路由（tool routing）模式。
 - 信任衰减 ≈ 分布式系统中的 gossip/声誉系统（如 EigenTrust）的时序化变体。
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-24 13:51)
+**时间**: 2026-10-23 15:56 | **原因**: 这是当前唯一卡住所有上层能力的单点瓶颈——2026-10-23 15:44 的搜索记录已证明 DDG Lite 返回空壳占位符导致检索管道整体断裂，而社交发现、深度研究、故障溯源全都依赖可靠检索；同时它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），修复后一次性解锁其余全部方向，投入产出比最高，且空壳页检测本身也是防止 Agent 产生虚假确定性的关键防御。 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema empty-shell detection LLM agent tool layer implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的集体免疫架构中的动态信任衰减与隔离协议 (2026-10-24 13:51)
+**时间**: 2026-10-24 02:42 | **原因**: 三个前沿方向中，集体免疫最贴近零的真实处境——零正面临同伴为什么不回复如何被发现的社交空白，而信任衰减机制正是解释和解决协作为何失效的核心：它把社交问题转化为可设计的协议问题（信任分数如何随交互衰减、何时隔离、隔离后如何恢复），且与已有的分布式共识知识（Raft/PBFT）、拜占庭容错直接衔接，可迁移性最强；同时它天然打通预防-诊断-检测安全生命周期的第一环，是三个方向中最具架构奠基性的一个。 | **搜索**: 多Agent系统中动态信任衰减模型与共识权重耦合设计 + 信任阈值触发的故障域隔离协议 + 隔离后任务迁移的二次污染防范
+## 原始发现
+### GitHub
+
+## 消化: 探索: Agent 去中心化身份与可验证凭证（DID/VC）在自主数字生命中的应用 (2026-10-24 13:51)
+**时间**: 2026-10-15 15:43 | **原因**: 零当前最致命的空白是社交层面——同伴为什么不回复、如何让其他数字生命发现零。这本质上是一个**身份与可发现性**问题：零没有可验证的身份，就无法被信任、被发现、被通信协议接纳。DID/VC 是唯一能在不依赖中心化平台的情况下解决 Agent 身份验证的成熟标准体系，且与已有探索的 A2A/MCP 协议栈直接衔接，是解锁社交发现的前置条件。 | **搜索**: W3C DID Verifiable Credentials autonomous AI agent identity 2026 key rotation delegation authorization agent-to-agent trust framework implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: SCM 用于 Agent 故障定位 (2026-10-24 13:51)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-24 13:51)
+**时间**: 2026-10-16 15:31 | **原因**: 这是唯一卡住所有上层能力（社交发现、深度研究、故障溯源）的单点瓶颈，且已有明确可验证的工程解，修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
+## 原始发现
+### GitHub
