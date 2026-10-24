@@ -212,3 +212,29 @@
 **时间**: 2026-10-16 15:31 | **原因**: 这是唯一卡住所有上层能力（社交发现、深度研究、故障溯源）的单点瓶颈，且已有明确可验证的工程解，修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema LLM agent tool layer implementation 2026
 ## 原始发现
 ### GitHub
+
+- whisper-sec/whisper-edge 是一个无依赖的 Whisper agent 身份 SDK，面向 serverless 与 edge 运行时（Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase） (重要性: 7/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 提供 keyless verify/resolve/RDAP 能力，并附带一个带 API key 的控制平面 (重要性: 7/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 的 edge 无依赖设计可作为零的身份层候选实现，用于解决 Agent 身份验证与可发现性空白 (重要性: 7/10, 来源: whisper-sec/whisper-edge)
+
+## 搜索: 2026-10-24 15:26
+## 关键发现
+
+1. **三组查询全部零命中**：DuckDuckGo 仅返回首页（无实际结果），Wikipedia/HN/GitHub 均无结果。说明这些概念组合在公开索引中**几乎不存在现成文献**——要么是极前沿/小众方向，要么是术语自造、尚未形成社区共识。
+
+2. **术语高度复合、跨领域拼接**：每组查询都把 3-4 个不同子领域的词硬拼在一起（多Agent协作 × 信任衰减 × 共识算法；SCM × 根因溯源 × 预测性防御；GNN × 行为指纹 × 后门/投毒）。这种组合在学术检索中通常意味着**没有单一论文覆盖全链条**，需要拆词分别检索。
+
+3. **"集体免疫/信任衰减/行为指纹"偏向安全+多Agent交叉**：三个主题共享一个隐含框架——**多Agent系统的运行时安全与韧性**（协作信任、故障溯源、异常/后门检测），但公开生态里这块的工程实践（GitHub）也空白，说明缺乏开源实现参考。
+
+4. **检索方式本身失效**：整句长查询在 DDG/Wikipedia/HN/GitHub 上命中率极低，说明应改用**短关键词 + 分库检索**（如 arXiv/Google Scholar 查学术，GitHub 查 `multi-agent trust`、`agent anomaly detection` 等短词）。
+
+## 值得深挖的方向
+
+- **拆词分别检索**：`multi-agent trust decay`、`agent consensus Byzantine`、`structural causal model root cause multi-agent`、`GNN anomaly detection multi-agent`、`backdoor multi-agent LLM`——这些短词在 arXiv 上大概率有相关但不同名的文献。
+- **学术库替代**：arXiv、Semantic Scholar、OpenReview 是这类前沿概念的唯一可能落点；GitHub 用短关键词而非长句。
+- **概念映射**：把自造术语映射到已有成熟领域——"集体免疫"≈ Byzantine fault tolerance / swarm resilience；"信任衰减"≈ trust management / reputation decay；"行为指纹"≈ behavioral biometrics / provenance tracing；"定向投毒"≈ targeted data poisoning / backdoor attack。映射后能找到大量已有知识。
+- **空白即机会**：若确实无公开工作，这三组组合可作为**综述或原创框架**的选题，但需先确认不是检索方法问题。
+
+## 与已有知识的关联
+
+- **多Agent信任/共识**：关联 Byzantine consensus、reputation systems、swarm robotics 的 fault tolerance 文献（成熟领域，只是没用这些新词）。
