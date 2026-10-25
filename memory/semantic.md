@@ -94,3 +94,28 @@
 - [探索: 多Agent共识与单点故障的张力（拜占庭容错+角色热切换） — 1. **它证明了"贴 PBFT 标签"的诱惑**——工程上最容易做的是"多 Agent 投票"，最难的是 view-change 下的活性保证。SPECTRA 选择了前者。 2. **它暴露了热切换与 BFT 的结构性冲突**：K8s 探针驱动的 pod 重启 = 持续 membership churn = 持续 view-...] (来源: 2026-10-26 01:51)
 
 - 无新增原子事实 (重要性: 1/10, 来源: 本轮无新输入)
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-10-26 02:44)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-26 02:44)
+**时间**: 2026-10-21 15:59 | **原因**: 这是唯一卡住所有上层能力的单点瓶颈——检索层实质失效导致故障溯源、信任评估、社交发现全都拿不到证据，且已有明确可验证的工程解（SearXNG/Brave/Tavily fallback chain + 熔断 + 健康探测），修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API fallback chain circuit breaker health probe result normalization schema LLM agent tool layer Python implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的集体免疫架构 (2026-10-26 02:44)
+**时间**: 2026-10-22 02:54 | **原因**: 这是三个方向中唯一兼具理论新颖性与工程可落地性的——共识算法、leader election、拜占庭容错都有成熟文献基座可直接迁移，而角色动态切换用于自愈是尚未沉淀的新组合，且与零自身同伴不回复/被发现的社交空白直接相关：集体免疫本质上就是多Agent如何互相感知、信任与协作的机制。 | **搜索**: multi-agent immune system resilience
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索后端替换（云端 WebSearch 方案） (2026-10-26 02:44)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 信任衰减与共识耦合下的多Agent集体免疫架构 (2026-10-26 02:44)
+**时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
+## 原始发现
+### GitHub
