@@ -9,6 +9,7 @@
 - **替代检索源**：GitHub 用官方 Search API / gh CLI；学术用 arXiv / Semantic Scholar / OpenReview API；HN 用 Algolia API（hn.algolia.com/api）——均有稳定 JSON 接口，优于抓 DDG HTML。
 - **查询设计教训**：长尾三元组合（方法A+对象B+任务C）在通用搜索引擎命中率天然低；"2026"等年份后缀无检索价值；应拆成单词条分别检索（如 `multi-agent trust decay`、`agent consensus Byzantine`、`GNN anomaly detection multi-agent`），并优先用学术数据库。
 - **概念映射法**：把自造术语映射到成熟领域再检索——"集体免疫"≈ Byzantine fault tolerance / swarm resilience；"信任衰减"≈ trust management / reputation decay；"行为指纹"≈ behavioral biometrics / provenance tracing；"定向投毒"≈ targeted data poisoning / backdoor attack。
+- **2026-10-25 检索复核**：三组复合术语（集体免疫架构 / 行为指纹+GNN / SCM+Agent决策链）在 Wikipedia/HN/GitHub 零命中、DDG 仅首页，进一步印证"通道断裂"而非领域空白；术语呈"安全机制+AI Agent+2026"三段式拼装特征，疑出自同一份内部文档/预印本/未公开路线图，应先确认信息源再决定验证或补引用。
 
 ## 二、多 Agent 安全与可信治理（统一防御框架）
 
@@ -22,6 +23,7 @@
 - **落地前提**：GNN 检测需要 Agent 通信图的结构化日志，与协议选型直接相关（A2A 天然产生可图化的消息流）。
 - **设计张力统一思路**：编译期固定隔离边界 + 运行期在边界内衰减信任（静态编译利于审计与隔离，动态信任利于适应）。
 - **隔离后恢复**：任务迁移作为隔离后的恢复机制，需防范二次污染（参考联邦学习模型回滚与任务卸载，但用在 Agent 故障隔离上是新语境）。
+- **信任状态机草案（待写）**：trusted → soft-isolated → hard-isolated → re-verified，每状态定义进入/退出条件与超时；优先检索 circuit breaker + agent、failure detector + reputation 的交叉工作。
 
 ## 三、Agent 通信协议
 
@@ -66,25 +68,24 @@
 - **跨域映射清单**：多 Agent 共识 ≈ 分布式共识（Raft/PBFT）；参数冻结+任务迁移 ≈ 热迁移+检查点；行为指纹 ≈ 入侵检测行为基线/UEBA；集体免疫 ≈ 人工免疫系统（AIS）/Negative Selection Algorithm。
 - **检索不可用时的降级纪律**：应明确告知"无外部证据"，而非用模型记忆冒充搜索结果。
 
-## 搜索: 2026-10-25 14:20
+## 搜索: 2026-10-25 19:49
 ## 关键发现
 
-1. **搜索全部空转**：三组查询在 Wikipedia/HN/GitHub 均零命中，DuckDuckGo 仅返回首页——说明这些术语组合（"集体免疫架构""行为指纹+GNN""结构因果模型+Agent决策链"）在公开索引中**尚未形成成熟语料**，属于前沿/小众交叉领域，或术语本身是自造组合。
+1. **搜索工具本身失效**：三次搜索均只返回 DuckDuckGo 首页占位符，Wikipedia/HN/GitHub 全部无结果。这不是“没有相关信息”，而是**检索管道未真正执行查询**——DuckDuckGo 返回的是裸域名而非 SERP，说明抓取层被拦截或解析器未命中。三个高度专业化的查询同时“零结果”，概率上不可信。
 
-2. **术语拼装特征明显**：每组查询都是"安全机制 + AI Agent + 2026"的三段式拼接，像是从某篇综述或提案中拆出的关键词，而非社区通用词汇。公开检索不到，暗示来源可能是**内部文档、预印本或尚未公开的路线图**。
+2. **查询主题本身是有效的**：三个查询分别覆盖 WebSearch API 选型、Agent 通信协议、Agent 容错机制，都是当前 Agent 工程的高价值议题，不存在“查询无意义”的问题。问题在工具侧，不在问题侧。
 
-3. **2026 时间锚点**：三组都带 2026，指向同一份前瞻性材料，而非独立检索需求。
+3. **无法从本次结果中提取任何实质内容**：没有摘要、没有链接、没有片段。任何基于此输出“研究发现”的行为都是编造。
 
 ## 值得深挖的方向
 
-- **拆词单独检索**：把复合术语拆开（如"trust decay multi-agent""GNN backdoor detection agent"）在 arXiv / Semantic Scholar 上找近邻工作，比整串搜有效得多。
-- **相邻成熟领域**：多Agent信任管理（reputation systems）、因果溯源（causal tracing in LLM）、对抗样本检测——这些有真实文献，可作为拼图的现成积木。
-- **确认信息源**：先搞清楚这三组词出自哪份文档，再决定是"验证其可行性"还是"补全其引用"。
+- **修复检索链路**：检查 DuckDuckGo 是否被反爬、是否需要换用 Tavily/Brave/Serper 自身作为搜索后端（讽刺但合理——第一个查询的主题正好是解决方案）。
+- **换源验证**：对同一查询改用 arXiv、Semantic Scholar、直接 GitHub API 搜索，判断是“全网无内容”还是“该搜索器无内容”。
+- **协议对比的锚点文献**：MCP（Anthropic）、A2A（Google）、FIPA-ACL（经典 MAS）三者的一手规范文档应直接抓取，不依赖搜索引擎。
 
 ## 与已有知识的关联
 
-- 集体免疫 ↔ 多Agent系统的**故障隔离/熔断**模式（分布式系统经典）。
-- 动态信任衰减 ↔ **EigenTrust / 信誉系统**的时效衰减变体。
-- 结构因果模型+根因溯源 ↔ **因果推断 + 可观测性（tracing）** 的交叉，已有零星工作。
-- 行为指纹+GNN ↔ **网络入侵检测**方法向 Agent 通信层的迁移。
-- [探索: 动态信任衰减与隔离协议（跨Agent协作的集体免疫架构子方向） — 1. **检索**：用上述四组拆词在 arXiv 和 GitHub 分别检索，记录命中数；重点找 circuit breaker + agent、failure detector + reputation 的交叉工作。 2. **写协议草案**：定义信任状态机（trusted → soft-isolated → hard-isolated → re-verified），每个状�...] (来源: 2026-10-25 15:48)
+- 三个查询恰好构成 Agent 系统的**外部能力层（搜索 API）→ 协作层（通信协议）→ 可靠性层（容错共识）**，是一个完整的工程栈视角。
+- 本次“搜索全空”本身是一个反面案例：**Agent 的工具调用必须带结果有效性校验**，否则会把“检索失败”误判为“世界无此知识”，进而污染下游推理——这正好呼应第三个查询里的“单点故障防御”主题。
+
+**结论：本轮搜索无有效信息，不建议基于此产出任何实质性综述；建议先修复检索工具再重跑。**
