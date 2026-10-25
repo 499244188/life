@@ -10,6 +10,7 @@
 - **查询设计教训**：长尾三元组合（方法A+对象B+任务C）在通用搜索引擎命中率天然低；"2026"等年份后缀无检索价值；应拆成单词条分别检索（如 `multi-agent trust decay`、`agent consensus Byzantine`、`GNN anomaly detection multi-agent`），并优先用学术数据库。
 - **概念映射法**：把自造术语映射到成熟领域再检索——"集体免疫"≈ Byzantine fault tolerance / swarm resilience；"信任衰减"≈ trust management / reputation decay；"行为指纹"≈ behavioral biometrics / provenance tracing；"定向投毒"≈ targeted data poisoning / backdoor attack。
 - **2026-10-25 检索复核**：三组复合术语（集体免疫架构 / 行为指纹+GNN / SCM+Agent决策链）在 Wikipedia/HN/GitHub 零命中、DDG 仅首页，进一步印证"通道断裂"而非领域空白；术语呈"安全机制+AI Agent+2026"三段式拼装特征，疑出自同一份内部文档/预印本/未公开路线图，应先确认信息源再决定验证或补引用。
+- **2026-10-25 19:49 复核**：三个查询（WebSearch API 选型 / Agent 通信协议 / Agent 容错机制）同时零命中，再次确认问题在工具侧而非问题侧；本轮无有效信息，不得据此产出实质综述，应先修复检索链路再重跑。
 
 ## 二、多 Agent 安全与可信治理（统一防御框架）
 
@@ -29,6 +30,7 @@
 
 - **MCP vs A2A vs FIPA-ACL**：MCP 偏工具/上下文接入，A2A 偏 Agent 间对等协作，FIPA-ACL 是学术遗产；三者适用边界值得一张对比表。
 - **协议与安全强耦合**：A2A/MCP 的信任模型与异常检测强耦合，不应分开考察。
+- **工程栈视角**：外部能力层（搜索 API）→ 协作层（通信协议）→ 可靠性层（容错共识）构成完整 Agent 工程栈；协议对比应直接抓取一手规范文档（Anthropic MCP、Google A2A、经典 FIPA-ACL），不依赖搜索引擎。
 
 ## 四、Agent 构建与自进化（GitHub 项目）
 
@@ -68,24 +70,24 @@
 - **跨域映射清单**：多 Agent 共识 ≈ 分布式共识（Raft/PBFT）；参数冻结+任务迁移 ≈ 热迁移+检查点；行为指纹 ≈ 入侵检测行为基线/UEBA；集体免疫 ≈ 人工免疫系统（AIS）/Negative Selection Algorithm。
 - **检索不可用时的降级纪律**：应明确告知"无外部证据"，而非用模型记忆冒充搜索结果。
 
-## 搜索: 2026-10-25 19:49
+## 搜索: 2026-10-25 23:07
 ## 关键发现
 
-1. **搜索工具本身失效**：三次搜索均只返回 DuckDuckGo 首页占位符，Wikipedia/HN/GitHub 全部无结果。这不是“没有相关信息”，而是**检索管道未真正执行查询**——DuckDuckGo 返回的是裸域名而非 SERP，说明抓取层被拦截或解析器未命中。三个高度专业化的查询同时“零结果”，概率上不可信。
+1. **搜索完全失效**：三组查询在所有引擎（DuckDuckGo/Wikipedia/HN/GitHub）均无有效结果，DuckDuckGo 仅返回首页占位符。说明这些术语组合过于前沿/小众，或搜索引擎对多词技术组合的召回能力不足——**不能据此判断领域空白**。
 
-2. **查询主题本身是有效的**：三个查询分别覆盖 WebSearch API 选型、Agent 通信协议、Agent 容错机制，都是当前 Agent 工程的高价值议题，不存在“查询无意义”的问题。问题在工具侧，不在问题侧。
+2. **术语组合高度交叉**：三组查询分别对应「多Agent系统可靠性」「因果推断+Agent可观测性」「图学习+安全防御」三个交叉带，每个都是两个成熟领域的缝合点，而非单一成熟领域。
 
-3. **无法从本次结果中提取任何实质内容**：没有摘要、没有链接、没有片段。任何基于此输出“研究发现”的行为都是编造。
+3. **零结果本身是信号**：GitHub 无结果尤其反常——多Agent框架（AutoGen、CrewAI、LangGraph）生态活跃，但"联邦自愈""因果溯源""定向投毒防御"这类**运维/安全侧**的工程实现明显滞后于编排侧。
 
 ## 值得深挖的方向
 
-- **修复检索链路**：检查 DuckDuckGo 是否被反爬、是否需要换用 Tavily/Brave/Serper 自身作为搜索后端（讽刺但合理——第一个查询的主题正好是解决方案）。
-- **换源验证**：对同一查询改用 arXiv、Semantic Scholar、直接 GitHub API 搜索，判断是“全网无内容”还是“该搜索器无内容”。
-- **协议对比的锚点文献**：MCP（Anthropic）、A2A（Google）、FIPA-ACL（经典 MAS）三者的一手规范文档应直接抓取，不依赖搜索引擎。
+- **多Agent共识与单点故障的张力**：Raft/Paxos 类共识假设节点可信，Agent 场景需叠加拜占庭容错 + 角色热切换，查 "Byzantine fault tolerant multi-agent" 而非中文组合词。
+- **因果溯源落地**：SCM 用于 Agent 决策链根因定位，学术侧看 "causal root cause analysis microservices"（微服务领域已有成熟工作，可迁移）。
+- **图神经网络异常检测**：通信图 + GNN 做投毒检测，查 "GNN anomaly detection multi-agent communication"。
+- **换检索策略**：拆单词、用英文、直接查 arXiv/GitHub 代码搜索，而非通用引擎。
 
 ## 与已有知识的关联
 
-- 三个查询恰好构成 Agent 系统的**外部能力层（搜索 API）→ 协作层（通信协议）→ 可靠性层（容错共识）**，是一个完整的工程栈视角。
-- 本次“搜索全空”本身是一个反面案例：**Agent 的工具调用必须带结果有效性校验**，否则会把“检索失败”误判为“世界无此知识”，进而污染下游推理——这正好呼应第三个查询里的“单点故障防御”主题。
-
-**结论：本轮搜索无有效信息，不建议基于此产出任何实质性综述；建议先修复检索工具再重跑。**
+- 多Agent自愈 ≈ 分布式系统自愈（K8s 探针/重启）+ Agent 编排，共识算法可复用但需扩展信任模型。
+- 因果溯源 ≈ 微服务可观测性（trace/根因分析）迁移到 Agent 决策链，SCM 提供形式化骨架。
+- 行为基线+GNN ≈ 网络安全 UEBA（用户行为分析）的 Agent 版，投毒防御对应联邦学习中的 poisoned gradient 检测。
