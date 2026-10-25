@@ -146,3 +146,25 @@
 - SCM溯源 ↔ **因果推断+可解释AI**，与Agent审计日志、provenance tracking 直接对接。
 - GNN指纹 ↔ **网络入侵检测（NIDS）** 与**side-channel指纹**，但Agent通信的语义层特征是新变量。
 
+
+## 搜索: 2026-10-26 07:22
+## 关键发现
+
+1. **搜索结果全部为空**：三组查询在 Wikipedia、HN、GitHub 均无结果，DuckDuckGo 仅返回首页（疑似被拦截或未实际执行）。这说明当前搜索通道不可用，而非"没有相关信息"——需先修复搜索链路再判断。
+
+2. **查询词过于"组合化"**：三组 query 都是多个高概念词拼接（如"子agent编译机制+实现原理"、"共识算法+动态信任衰减"），这类长尾组合在通用引擎上命中率极低。真实资料更可能以单词条形式存在（如 "AgentFactory"、"trust decay multi-agent"）。
+
+3. **三个主题分属不同成熟度**：AgentFactory 编译机制偏工程实现（应查 GitHub/论文）；多 Agent 共识+信任衰减偏学术（应查 arXiv）；WebSearch 替代方案偏架构综述（应查技术博客/awesome 列表）。用同一搜索策略覆盖三者是错配。
+
+## 值得深挖的方向
+
+- **拆分查询**：把组合词拆成单词条分别搜，尤其 "AgentFactory" 作为专有名词单独查。
+- **换源**：GitHub 搜代码/README、arXiv 搜 "multi-agent trust consensus"、Google/Bing 替代 DuckDuckGo。
+- **验证搜索工具本身**：先跑一个已知有结果的 query（如 "transformer"）确认通道正常，排除"假空结果"。
+
+## 与已有知识的关联
+
+- 多 Agent 信任衰减 ≈ 分布式系统里的 **reputation/trust management**（EigenTrust、Beta reputation），共识层可挂 PBFT/Raft 变体——这是成熟学术脉络，不该搜不到，进一步佐证是通道问题。
+- "子 agent 编译" 类似 **agent-as-code / workflow compilation**（LangGraph、DSPy 的 program synthesis 思路），可对照查。
+- WebSearch 替代方案本质是 **tool-augmented LLM + retrieval orchestration**，与 RAG 架构同源。
+
