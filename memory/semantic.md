@@ -87,3 +87,4 @@
 - 动态信任衰减 ↔ **EigenTrust / 信誉系统**的时效衰减变体。
 - 结构因果模型+根因溯源 ↔ **因果推断 + 可观测性（tracing）** 的交叉，已有零星工作。
 - 行为指纹+GNN ↔ **网络入侵检测**方法向 Agent 通信层的迁移。
+- [探索: 动态信任衰减与隔离协议（跨Agent协作的集体免疫架构子方向） — 1. **检索**：用上述四组拆词在 arXiv 和 GitHub 分别检索，记录命中数；重点找 circuit breaker + agent、failure detector + reputation 的交叉工作。 2. **写协议草案**：定义信任状态机（trusted → soft-isolated → hard-isolated → re-verified），每个状�...] (来源: 2026-10-25 15:48)
