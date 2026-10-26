@@ -82,3 +82,29 @@
 - 搜索失效模式与之前讨论的"工具调用需验证返回值"一致——Agent 不能假设 API 成功。
 - 动态信任衰减 ≈ 分布式系统里的 failure detector + 指数退避，不是新问题，是新语境。
 - 持久化记忆 + 密码学身份 ≈ 把 Agent 当"可验证的长期进程"而非无状态函数，这与当前 LLM 无状态推理范式有根本张力，是真正的深水区。
+
+- whisper-sec/whisper-edge 是无依赖的 Whisper agent 身份 SDK，面向 Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase 等 serverless 与 edge 运行时 (重要性: 7/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 提供 keyless verify/resolve/RDAP 能力，并附带需要 API key 的控制平面 (重要性: 7/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 社区验证状态为 ★0，仅可作架构参照，不可作依赖 (重要性: 6/10, 来源: whisper-sec/whisper-edge)
+
+## 搜索: 2026-10-27 03:26
+## 关键发现
+
+1. **搜索后端实质失效**：三次查询均只返回 DuckDuckGo 首页链接，Wikipedia/HN/GitHub 全部空结果。这不是"无内容"，而是检索管道未真正执行查询——可能原因：API 未配置、配额耗尽、或查询被降级为占位符。**当前无法基于这些结果做任何事实性判断。**
+
+2. **三个查询主题本身是高价值方向**，但均属"工程实践型"知识，主要沉淀在博客、GitHub 仓库、arXiv 而非 Wikipedia——即使搜索正常，Wikipedia 空结果也是预期的，说明检索源选择与主题不匹配。
+
+3. **HN/GitHub 空结果是异常信号**：这三个主题在 HN 和 GitHub 上有大量讨论（如 Tavily/Serper 对比、MemGPT/Letta、多 Agent 信任机制）。空结果进一步佐证检索层故障，而非内容稀缺。
+
+## 值得深挖的方向
+
+- **修复检索链路优先于分析**：先验证 WebSearch API 的 key/配额/请求格式，否则后续所有"分析"都是虚构。
+- 若恢复：Tavily vs Serper vs Brave 的**延迟-成本-召回率三角**实测数据（官方 benchmark 少，社区实测更可信）。
+- 记忆架构：**分层记忆（工作/情景/语义）+ 向量库 vs 知识图谱**的取舍边界——图谱在关系推理上强但写入成本高。
+- 多 Agent 信任衰减：可参考**声誉系统（EigenTrust）+ 熔断器模式**的交叉设计。
+
+## 与已有知识的关联
+
+- 主题 1 关联 RAG 工具链选型；主题 2 关联 MemGPT/Letta、GraphRAG；主题 3 关联拜占庭容错与 circuit breaker。三者共同指向"Agent 系统工程化"这一主线，但**本次搜索结果不构成任何证据支撑**，需重新检索后再做关联论证。
+
+**结论：本轮搜索无效，建议先排查检索后端，再重跑。**
