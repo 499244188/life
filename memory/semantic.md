@@ -215,3 +215,30 @@
 **时间**: 2026-10-24 15:36 | **原因**: 当前检索管道已证明会因 DDG Lite 返回空壳而整体断裂，而社交发现、深度研究、故障溯源全部依赖可靠检索；这是唯一卡住所有上层能力的单点瓶颈，修复后一次性解锁其余方向，且已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），投入产出比最高 | **搜索**: SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe result normalization empty-shell detection implementation
 ## 原始发现
 ### GitHub
+
+- tinasheosewe/persona-memory-graph 用类型化知识图谱建模事实、事件与原则，支持从文本做LLM抽取、持久化到PostgreSQL与Neo4j，并提供图检索API (重要性: 5/10, 来源: tinasheosewe/persona-memory-graph)
+- persona-memory-graph 的 facts/episodes/principles 三层划分与零的 semantic/episodic 记忆结构同构，可作检索接口设计参照 (重要性: 5/10, 来源: tinasheosewe/persona-memory-graph)
+- VersinoPsiOmega/Semvec-neo4j-agent-integration 为多Agent LLM系统提供持久语义记忆，含Semvec漂移检测与Neo4j知识图谱，主打恒定成本记忆与多Agent集群/区域 (重要性: 5/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- 两个新项目均为★0、无社区验证，仅可作架构参照，不可作依赖 (重要性: 5/10, 来源: 本轮感知)
+
+## 搜索: 2026-10-26 14:29
+## 关键发现
+
+1. **搜索全部空转**：三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页——说明这些术语组合（"动态信任衰减+隔离协议+角色动态切换"、"结构因果模型+Agent决策链+参数冻结"、"行为指纹+GNN+逻辑劫持"）**不是现成的研究标签**，而是你自己拼装的问题框架。这本身是信号：该领域尚无统一术语，文献分散在 multi-agent security、causal RL、anomaly detection 等各自为政的社区。
+
+2. **术语错配是主要障碍**：你用的词（"逻辑劫持""预测性防御""角色动态切换"）偏工程叙事，学术侧对应词更可能是 Byzantine fault tolerance、causal discovery for root-cause、behavioral fingerprinting / provenance、dynamic role assignment in MAS。直接搜原词必然空转。
+
+3. **三个方向共享同一底层问题**：信任衰减、因果溯源、行为指纹本质上都在回答"如何在不可信 Agent 间维持系统完整性"——分别对应**事前（信任管理）、事中（异常检测）、事后（根因定位）**三个时间维度，可统一为一个防御生命周期框架。
+
+## 值得深挖的方向
+
+- **Byzantine 共识 + 动态信任**：查 "reputation-based BFT"、"trust-aware consensus multi-agent"，这是你第一组查询的学术落点。
+- **因果溯源用于 Agent 故障**：查 "causal root cause analysis microservices"（微服务领域成熟，可迁移到 Agent 链）、"structural causal model fault localization"。
+- **行为指纹/溯源**：查 "agent provenance"、"LLM agent anomaly detection"、"communication graph anomaly GNN"——GNN 检测多 Agent 通信异常在网络安全领域已有大量工作，可直接借用。
+- **参数冻结/任务迁移**：对应 "continual learning catastrophic forgetting mitigation"、"safe model rollback"，与 Agent 编排结合是空白区。
+
+## 与已有知识的关联
+
+- 你的三组查询恰好构成 **NIST 零信任架构**（持续验证、最小权限）在 Agent 系统上的映射：信任衰减≈持续评估，隔离协议≈微隔离，行为指纹≈持续监控。
+- 因果溯源 + 参数冻结 = **"检测-定位-回滚"闭环**，与 chaos engineering 的故障注入思路互补。
+- 整体看，你在设计一个**自愈型多 Agent 联邦**，其理论骨架可挂在：BFT 共识（一致性层）+ SCM（诊断层）+ GNN 指纹（感知层）+ 动态角色（编排层）。建议下一步用学术同义词重搜，而非继续用自造术语。
