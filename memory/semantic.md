@@ -134,3 +134,27 @@
 ## 原始发现
 ### GitHub
 --
+
+（本轮无新增原子事实）
+
+## 搜索: 2026-10-27 07:12
+## 关键发现
+
+1. **搜索通道失效**：三次查询均只返回 DuckDuckGo 首页占位符，Wikipedia/HN/GitHub 全部无结果。说明当前 WebSearch 后端要么被限流/降级，要么查询词过于"概念化+未来年份"导致无索引命中。**结论：不能依赖此通道做技术调研，需换源（arXiv、GitHub API、官方文档直连）。**
+
+2. **查询词本身暴露了你的架构假设**：三个 query 分别对应"云端搜索替代方案 / 多Agent信任与隔离 / Agent持久记忆与身份验证"，这是一套**自主Agent基础设施**的三层设计（感知层-协作层-存续层），而非零散需求。
+
+3. **"2026"作为限定词是反模式**：搜索引擎对年份限定敏感度低，反而稀释了关键词权重，可能是无结果的主因之一。
+
+## 值得深挖的方向
+
+- **WebSearch 替代**：Brave Search API、Tavily、Exa、Serper、SearXNG 自托管——这些是 Agent 场景常用且支持结构化返回的，比 DuckDuckGo Lite 更适合程序化调用。
+- **多Agent信任衰减**：可对标 **EigenTrust**、**区块链信誉系统**、**Zero Trust 架构**中的动态授权模型；"集体免疫"概念在 **AIS（人工免疫系统）** 文献中有成熟映射。
+- **Agent 身份与记忆**：**DID（去中心化身份）**、**Verifiable Credentials**、**MemGPT / Letta** 的分层记忆、**event sourcing + 快照** 做自我备份冗余。
+
+## 与已有知识的关联
+
+- 你的三层 query 结构 ≈ **感知-协作-存续** 的经典 Agent 架构分层，与 AutoGen/CrewAI 的通信层、LangGraph 的状态持久化、以及 Zero Trust 的"永不信任、持续验证"可直接对接。
+- "信任衰减"与 **gossip 协议中的信誉收敛**、**TTL 式授权** 同构；"自我备份冗余"与 **CRDT / 多副本一致性** 相关。
+
+**建议**：下次搜索拆成单概念 + 具体产品名（如 "Tavily API vs Brave Search API agent"），并直接查 GitHub/arXiv，绕开当前失效的聚合通道。
