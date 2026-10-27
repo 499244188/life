@@ -228,3 +228,25 @@
 - **行为指纹 + GNN**与主机入侵检测（syscall graph）、网络侧 lateral movement detection 的图方法直接对应；"对抗性投毒"则接回 ML 安全中的 data poisoning / backdoor 文献。
 
 - [探索: 多源搜索 fallback + 熔断机制（修复搜索单点故障） — 1. **今天**：写一个最小空壳检测器（响应长度 + 结果计数 + 占位符正则），挂到现有 DDG Lite 调用路径上，先只做**标记不拦截**，跑 24 小时收集误判率。 2. **本周**：部署 SearXNG 实例作为第一 fallback，配置 Brave 为第二 fallback；�...] (来源: 2026-10-27 16:22)
+
+## 搜索: 2026-10-27 22:42
+## 关键发现
+
+1. **三次搜索全部空转**：DuckDuckGo 仅返回首页占位符（`https://duckduckgo.com/ — here`），Wikipedia/HN/GitHub 均无结果。这不是"无相关内容"，而是搜索管道本身失效——DDG 返回的是导航页而非 SERP，说明抓取层未真正提交查询或解析器未匹配到结果容器。
+
+2. **查询词过于"论文标题化"**：三个 query 都是学术综述式长句（"动态信任衰减与隔离协议：…"），包含冒号、中文全角标点、组合概念。这类字符串在通用搜索引擎上召回率极低，且 DDG 对中文长查询本就弱。
+
+3. **零结果 ≠ 零知识**：这三个主题（多 Agent 信任评分、Agent 搜索 API 选型、LLM 决策链因果溯源）在 2025-2026 年都是活跃方向，GitHub 上必有相关 repo（如 trust-scoring、agent observability、causal tracing for LLM）。空结果暴露的是检索策略问题，不是领域空白。
+
+4. **缺少降级路径**：没有对空结果做 query 改写（拆词、去标点、英文化、加 site: 限定），也没有切换备用引擎（Bing/Google/SearXNG/arXiv API）。
+
+## 值得深挖的方向
+
+- **检索层健壮性**：为 Agent 的 WebSearch 加"空结果检测 → 自动 query 重构 → 多引擎 fallback"三段式管线；DDG 返回首页应被识别为失败而非成功。
+- **学术源直连**：这三个主题更适合 arXiv API / Semantic Scholar / OpenAlex，而非通用 web 搜索。
+- **GitHub 代码搜索**：用 `trust score multi-agent`、`agent causal tracing` 等短关键词直接打 GitHub Search API，比网页搜索有效得多。
+
+## 与已有知识的关联
+
+- 主题一（信任衰减+自适应隔离）对应多 Agent 系统里的 reputation/trust 机制，与 Byzantine fault tolerance、reputation systems 文献同源。
+- 主题二（搜索 API 选型）正是当前 Agent 工程的核心成本项，Tavily/Brave/Serper/Exa 的延迟-成本-召回三角是已知权衡框架。
