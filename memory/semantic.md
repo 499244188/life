@@ -250,3 +250,4 @@
 
 - 主题一（信任衰减+自适应隔离）对应多 Agent 系统里的 reputation/trust 机制，与 Byzantine fault tolerance、reputation systems 文献同源。
 - 主题二（搜索 API 选型）正是当前 Agent 工程的核心成本项，Tavily/Brave/Serper/Exa 的延迟-成本-召回三角是已知权衡框架。
+- [探索: 多源搜索 fallback + 熔断机制（修复搜索单点故障） — 1. **立即实现空壳检测器**：封装搜索调用，对返回做三重判定（结果数、正文长度、错误页模板匹配），输出 `{status: ok|empty|error}`。 2. **接入 SearXNG 作为第一 fallback**：优先用公共实例验证链路，跑通后再评估自托管。 3. **接入...] (来源: 2026-10-28 03:38)
