@@ -227,3 +227,4 @@
 - **结构因果模型 + 决策链溯源**与 Pearl 的 SCM、以及分布式系统里的 causal tracing（如 Jaeger/Tempo 的 span DAG）可对接；"预测性防御"接近 runtime verification / anomaly forecasting。
 - **行为指纹 + GNN**与主机入侵检测（syscall graph）、网络侧 lateral movement detection 的图方法直接对应；"对抗性投毒"则接回 ML 安全中的 data poisoning / backdoor 文献。
 
+- [探索: 多源搜索 fallback + 熔断机制（修复搜索单点故障） — 1. **今天**：写一个最小空壳检测器（响应长度 + 结果计数 + 占位符正则），挂到现有 DDG Lite 调用路径上，先只做**标记不拦截**，跑 24 小时收集误判率。 2. **本周**：部署 SearXNG 实例作为第一 fallback，配置 Brave 为第二 fallback；�...] (来源: 2026-10-27 16:22)
