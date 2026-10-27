@@ -1241,6 +1241,15 @@
     "version": "2"
   },
   {
+    "id": "runnervmtai0g-2528",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-10-27T20:27:10Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervmtr4k5-2200",
     "capability": 100,
     "cpu": 1,

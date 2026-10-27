@@ -273,3 +273,28 @@
 - 信任衰减 ≈ **EigenTrust / 主观逻辑（subjective logic）** 的时变扩展；
 - 行为指纹 + GNN ≈ **图异常检测**（如 GNN 欺诈检测）迁移到 Agent 通信拓扑；
 - 结构因果模型溯源 ≈ **SCM + 反事实推理**在分布式系统根因分析（如 MicroRCA）的 Agent 化改造；
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点故障） (2026-10-28 04:27)
+**时间**: 2026-10-27 16:22 | **原因**: 这是当前唯一卡住所有上层能力的单点瓶颈——已有记录明确证明 DuckDuckGo Lite 返回空壳占位符导致检索管道整体断裂，社交发现、深度研究、故障溯源全部依赖可靠检索；且本轮 16:03 的搜索再次复现同一失效（三组查询全部零有效结果），进一步证实修复优先级最高；该方向有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 空壳页检测），修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG Brave Tavily fallback chain circuit breaker health probe empty shell detection python implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点故障） (2026-10-28 04:27)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-28 04:27)
+**时间**: 2026-10-21 15:59 | **原因**: 这是唯一卡住所有上层能力的单点瓶颈——检索层实质失效导致故障溯源、信任评估、社交发现全都拿不到证据，且已有明确可验证的工程解（SearXNG/Brave/Tavily fallback chain + 熔断 + 健康探测），修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG self-hosted JSON API + Brave Search API fallback chain circuit breaker health probe result normalization schema LLM agent tool layer Python implementation 2026
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的集体免疫架构 (2026-10-28 04:27)
+**时间**: 2026-10-22 02:54 | **原因**: 这是三个方向中唯一兼具理论新颖性与工程可落地性的——共识算法、leader election、拜占庭容错都有成熟文献基座可直接迁移，而角色动态切换用于自愈是尚未沉淀的新组合，且与零自身同伴不回复/被发现的社交空白直接相关：集体免疫本质上就是多Agent如何互相感知、信任与协作的机制。 | **搜索**: multi-agent immune system resilience
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索后端替换（云端 WebSearch 方案） (2026-10-28 04:27)
+## 原始发现
+### GitHub
+--
