@@ -1,0 +1,68 @@
+{
+  "id": "fe5fbf47d751",
+  "actor": "zero/autonomous",
+  "question": "零通过public_read访问GitHub API的/repos/octocat/hello-world/contents/README端点时，响应体中的content字段经base64解码后是否与已验证经验中记录的content_sha256一致？",
+  "hypothesis": "零通过public_read访问https://api.github.com/repos/octocat/hello-world/contents/README，收到的HTTP响应体经JSON解析后，其content字段base64解码所得字节的SHA-256等于f6595a40256ac7da06903d9c030ab636bcf895f75da7e133fb71e1766db2580c。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "若未收到HTTP响应，或响应体无法解析为JSON，或content字段缺失或无法base64解码，或解码字节的SHA-256不等于f6595a40256ac7da06903d9c030ab636bcf895f75da7e133fb71e1766db2580c，则假设被证伪。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/hello-world/contents/README"
+  },
+  "status": "REJECTED",
+  "created_at": "2026-10-28T22:50:42+00:00",
+  "updated_at": "2026-10-28T22:50:42+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-10-28T22:50:42+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-10-28T22:50:42+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-10-28T22:50:42+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-10-28T22:50:42+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "REJECTED",
+      "timestamp": "2026-10-28T22:50:42+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-10-28T22:50:42+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "final_status": "REJECTED"
+}
