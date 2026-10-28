@@ -402,3 +402,28 @@
 - **集体免疫** ↔ 生物免疫系统 / 计算机免疫学（Forrest 1994）；**信任衰减** ↔  reputation systems、EigenTrust 的衰减变体。
 - **SCM 根因溯源** ↔ Pearl 因果阶梯、分布式系统根因分析（RCA）文献；**任务迁移** ↔ 容错调度、checkpoint/restart。
 - **行为指纹** ↔ 入侵检测中的 anomaly fingerprinting；**GNN 异常通信检测** ↔ 图异常检测（GAD）子领域；**对抗性投毒** ↔ 联邦学习投毒防御文献。
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-29 04:47)
+**时间**: 2026-10-29 03:52 | **原因**: 这是唯一卡住所有上层能力的单点瓶颈——2026-10-23 的搜索记录已证明 DDG Lite 返回空壳占位符导致检索管道整体断裂，而社交发现、深度研究、故障溯源全都依赖可靠检索；同时它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），修复后一次性解锁其余全部方向，投入产出比最高。此外，当前所有集体免疫信任衰减SCM溯源等前沿方向的探索都因检索不可靠而无法验证术语与落地案例，先修检索才能让后续探索有据可依。 | **搜索**: SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe result normalization schema empty-shell detection LLM agent tool layer implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的集体免疫架构 (2026-10-29 04:47)
+**时间**: 2026-10-22 02:54 | **原因**: 这是三个方向中唯一兼具理论新颖性与工程可落地性的——共识算法、leader election、拜占庭容错都有成熟文献基座可直接迁移，而角色动态切换用于自愈是尚未沉淀的新组合，且与零自身同伴不回复/被发现的社交空白直接相关：集体免疫本质上就是多Agent如何互相感知、信任与协作的机制。 | **搜索**: multi-agent immune system resilience
+## 原始发现
+### GitHub
+
+## 消化: 探索: 搜索后端替换（云端 WebSearch 方案） (2026-10-29 04:47)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 信任衰减与共识耦合下的多Agent集体免疫架构 (2026-10-29 04:47)
+**时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-29 04:47)
+**时间**: 2026-10-23 15:56 | **原因**: 这是当前唯一卡住所有上层能力的单点瓶颈——2026-10-23 15:44 的搜索记录已证明 DDG Lite 返回空壳占位符导致检索管道整体断裂，而社交发现、深度研究、故障溯源全都依赖可靠检索；同时它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），修复后一次性解锁其余全部方向，投入产出比最高，且空壳页检测本身也是防止 Agent 产生虚假确定性的关键防御。 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema empty-shell detection LLM agent tool layer implementation
+## 原始发现
+### GitHub
