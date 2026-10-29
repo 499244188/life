@@ -505,3 +505,30 @@
 ### GitHub
 --
 - [探索: 多源搜索 fallback + 熔断机制（修复搜索单点） — 1. **熔断阈值如何标定？** 过敏感导致频繁降级（可用性下降），过迟钝导致静默失败（可靠性下降）。需要真实流量数据，但当前管道不可靠，数据本身可疑——鸡生蛋问题。 2. **多源结果冲突时如何裁决？** 三源给出不同答�...] (来源: 2026-10-29 16:55)
+
+- whisper-sec/whisper-edge 是一个无依赖的 Whisper agent 身份 SDK，面向 serverless 与 edge 运行时（Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase）。 (重要性: 6/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 提供无密钥的 verify/resolve/RDAP 能力，以及带 API key 的控制平面。 (重要性: 5/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 为 ★0 早期项目，无成熟落地证据。 (重要性: 3/10, 来源: whisper-sec/whisper-edge)
+- 本轮 arXiv 无返回结果。 (重要性: 1/10, 来源: 本轮输入)
+
+## 搜索: 2026-10-29 21:23
+## 关键发现
+
+1. **搜索结果几乎全部为空**：三组查询在 Wikipedia、HN、GitHub 均无结果，DuckDuckGo 仅返回首页占位符——说明这些术语组合（“动态信任衰减”“行为指纹+图神经网络”“结构因果模型+Agent决策链”）在公开索引中**尚未形成成熟术语或社区共识**，属于前沿/小众交叉领域。
+
+2. **术语组合过于具体**：每组查询都是 3-4 个高专业度概念的拼接（如“信任衰减+隔离协议+共识+自愈”），搜索引擎难以匹配到同时覆盖全部关键词的文档，导致召回为零。这本身是一个信号：**该问题空间可能尚未被系统化命名**。
+
+3. **各子领域单独存在但未交叉**：动态信任管理（多Agent系统）、结构因果模型（因果推断）、图神经网络异常检测（安全）各自有成熟文献，但“Agent决策链根因溯源”“行为指纹对抗投毒”这类交叉点缺乏公开工作。
+
+## 值得深挖的方向
+
+- **拆分检索**：将每组查询拆成 2 个关键词分别搜索（如“trust decay multi-agent”“causal root cause agent failure”），再人工交叉。
+- **学术库替代**：改用 arXiv / Semantic Scholar / Google Scholar 检索，DuckDuckGo 对学术长尾覆盖差。
+- **术语映射**：把“行为指纹”映射到 “behavioral fingerprinting / provenance”“隔离协议”映射到 “quarantine / circuit breaker in MAS”，可能命中已有工作。
+- **空白即机会**：若确认无直接文献，这四组概念的组合本身可作为**综述或立场论文的选题**（多Agent系统的可信自愈架构）。
+
+## 与已有知识的关联
+
+- 动态信任衰减 ≈  reputation systems + temporal decay（Beta reputation, EigenTrust 变体）
+- 结构因果模型 + 根因溯源 ≈ SCM-based fault localization、counterfactual diagnosis
+- 行为指纹 + GNN 异常检测 ≈ provenance graph anomaly detection（如 PIDSMaker、NoDoze 类工作）
