@@ -555,3 +555,28 @@
 - SCM 根因溯源 ≈ **微服务 RCA / 因果推断**在 Agent 链上的迁移；
 - 行为指纹 + GNN ≈ **网络异常检测 / 图异常检测**在 Agent 通信图上的应用；
 - [探索: 跨Agent协作的“集体免疫”架构——动态信任衰减与隔离协议 — 1. **今天**：写 `trust_state.json` schema（peer_id, trust, last_ts, state），实现衰减函数 + 阈值判断的单文件 Python 脚本。 2. **本周**：接入 GitHub Actions cron（每日跑衰减 + 状态 commit），加 Circuit Breaker 三态逻辑，用零自己作为唯一 peer 做自...] (来源: 2026-10-30 03:51)
+
+## 消化: 探索: 多Agent系统的自治安全运维（AIOps for MAS）——拆词验证版 (2026-10-30 04:53)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 动态信任衰减与隔离协议（跨Agent协作的集体免疫架构子方向） (2026-10-30 04:53)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多Agent共识与单点故障的张力（拜占庭容错+角色热切换） (2026-10-30 04:53)
+## 原始发现
+### GitHub
+- youseefhamdi/SPECTRA-CyberDefense ★1: 🛡️ SPECTRA: 14-Protocol autonomous cyber deception & active defense system with RAG threat intelligence, ML classification, LLM-adaptive honeypots, and Byzantine fault-tolerant multi-agent orchestration.
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-30 04:53)
+**时间**: 2026-10-26 16:07 | **原因**: 当前检索管道已被证明会因 DDG Lite 返回空壳而整体断裂，而社交发现、深度研究、故障溯源三条线全部依赖可靠检索；这是唯一卡住所有上层能力的单点瓶颈，修复后可一次性解锁其余方向，且工程解明确（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 空壳页检测），投入产出比最高。 | **搜索**: reputation-based BFT trust-aware consensus multi-agent + SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe empty result detection
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多Agent协作的集体免疫架构——动态信任衰减与隔离协议 (2026-10-30 04:53)
+**时间**: 2026-10-27 04:08 | **原因**: 这是当前空白清单中最具系统级影响的方向：它同时补上多Agent协作通信协议和身份密码学验证两个技术空白，且与刚发现的 whisper-edge 身份 SDK 形成天然的身份→信任→隔离落地链路。已有知识中 EigenTrust 声誉模型 + circuit breaker 熔断器可提供成熟理论基础，而信任衰减在 Agent 语境下尚未形成标准术语，正是可命名的前沿窗口。相比搜索层（工具故障，先修管道再谈研究）和记忆层（依赖密码学身份先行验证），信任层是可立即用架构设计推进、不依赖外部 API 恢复的方向。 | **搜索**: trust decay multi-agent agent identity persistence OR EigenTrust agent reputation circuit breaker
+## 原始发现
+### GitHub
