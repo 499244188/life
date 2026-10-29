@@ -532,3 +532,25 @@
 - 动态信任衰减 ≈  reputation systems + temporal decay（Beta reputation, EigenTrust 变体）
 - 结构因果模型 + 根因溯源 ≈ SCM-based fault localization、counterfactual diagnosis
 - 行为指纹 + GNN 异常检测 ≈ provenance graph anomaly detection（如 PIDSMaker、NoDoze 类工作）
+
+## 搜索: 2026-10-30 03:02
+## 关键发现
+
+1. **三组搜索均无有效结果**：Wikipedia、HN、GitHub 对这三组高度具体的技术组合查询全部返回空，DuckDuckGo 仅返回首页占位。说明这些概念组合（多Agent信任衰减+共识、SCM根因溯源+任务迁移、行为指纹+GNN+投毒防御）在公开索引中**尚未形成成熟术语或现成项目**，属于前沿/小众交叉领域。
+
+2. **查询本身是"概念拼装"而非既有术语**：每组查询由3-4个独立技术名词拼接而成，缺乏统一命名。这意味着直接检索命中率低是预期结果，不代表领域无价值——而是需要拆解为子概念分别检索。
+
+3. **GitHub 零结果尤其值得注意**：GitHub 对技术关键词通常较敏感，零命中暗示这些组合在开源实现层面几乎空白，可能存在**研究空白或工程未落地**的机会。
+
+## 值得深挖的方向
+
+- **拆词检索**：将每组拆为单概念分别搜（如"trust decay multi-agent""structural causal model root cause""graph neural network poisoning detection"），再交叉。
+- **学术渠道替代**：改用 arXiv / Semantic Scholar / Google Scholar 检索，这些组合更可能出现在论文而非网页。
+- **术语校准**：确认是否已有近义标准术语（如" Byzantine fault tolerance + reputation""causal attribution for agent failures""behavioral fingerprinting"），避免自造词导致检索失败。
+- **相邻领域迁移**：多Agent信任衰减可参考分布式系统 reputation systems；SCM根因溯源可参考微服务根因分析（RCA）；行为指纹可参考入侵检测（IDS）与联邦学习投毒防御。
+
+## 与已有知识的关联
+
+- 信任衰减/隔离 ≈ 分布式系统 **reputation + circuit breaker + quorum** 机制；
+- SCM 根因溯源 ≈ **微服务 RCA / 因果推断**在 Agent 链上的迁移；
+- 行为指纹 + GNN ≈ **网络异常检测 / 图异常检测**在 Agent 通信图上的应用；
