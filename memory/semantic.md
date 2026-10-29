@@ -451,3 +451,31 @@
 - **SCM 根因溯源** ↔ AIOps 中的 causal RCA、Pearl 因果阶梯、故障树分析；与 Agent 结合是较新的迁移。
 - **行为指纹 + GNN 异常检测** ↔ 网络入侵检测（NIDS）中的 graph-based anomaly detection、模型后门检测（trigger inversion）、Agent 通信协议安全。
 
+
+- tinasheosewe/persona-memory-graph 用类型化知识图谱建模 facts、episodes、principles 三类记忆，并从文本做 LLM 抽取。 (重要性: 5/10, 来源: tinasheosewe/persona-memory-graph)
+- persona-memory-graph 以 PostgreSQL 和 Neo4j 双存储持久化记忆，并提供图检索 API。 (重要性: 4/10, 来源: tinasheosewe/persona-memory-graph)
+- VersinoPsiOmega/Semvec-neo4j-agent-integration 将 Semvec 漂移检测与 Neo4j 知识图谱结合，用于多 Agent LLM 系统的持久语义记忆。 (重要性: 5/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- 该项目声称恒定成本 Agent 记忆、多 Agent 集群/区域划分、逐字事实持久化，采用 MIT 许可。 (重要性: 4/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- 两个项目均为 ★0 早期项目，无成熟落地证据。 (重要性: 3/10, 来源: 本轮输入)
+
+## 搜索: 2026-10-29 14:10
+## 关键发现
+
+1. **三组搜索均无实质结果**：Wikipedia/HN/GitHub 全部空返回，DuckDuckGo 仅返回首页链接（无摘要、无结果列表），说明这些查询词组合在公开可检索范围内几乎无直接对应文献——要么是术语过于前沿/自造，要么是检索接口本身失效（DuckDuckGo 返回首页是典型的反爬/无结果信号）。
+
+2. **术语高度交叉但未成文**：三组查询分别对应多Agent系统的三个安全层——信任管理（动态衰减+隔离）、故障溯源（SCM+预测性防御）、通信安全（行为指纹+GNN+后门检测）。每一层单独都有成熟文献（信任模型、根因分析、GNN异常检测），但"Agent联邦+自愈""预测性防御""行为指纹"这些组合词没有形成公认术语，说明这是**概念拼接而非已有研究脉络**。
+
+3. **检索工具本身不可靠**：DuckDuckGo 三次都只回首页，GitHub 零结果对一个有大量 agent 安全仓库的平台来说异常，提示搜索管道可能被限流或查询语法不被支持，结果不能作为"该领域无研究"的证据。
+
+## 值得深挖的方向
+
+- **拆词检索**：把复合查询拆成单概念（如 "trust decay multi-agent"、"structural causal model root cause LLM agent"、"behavioral fingerprint GNN backdoor"）分别检索，避免组合词导致的零召回。
+- **换源验证**：用 arXiv / Semantic Scholar / Google Scholar 替代当前管道，确认是"真无文献"还是"检索失败"。
+- **术语对齐**：把自造词映射到已有学术词——"动态信任衰减"≈ trust dynamics / reputation decay；"行为指纹"≈ behavioral biometrics / execution provenance；"预测性防御"≈ proactive defense / anomaly prediction。
+
+## 与已有知识的关联
+
+- 多Agent信任与隔离 → 分布式系统拜占庭容错、零信任架构、reputation systems。
+- SCM 根因溯源 → 因果推断（Pearl）、微服务根因分析（RCA）、故障注入。
+- 行为指纹 + GNN 后门检测 → 模型供应链安全、后门检测（Neural Cleanse 类）、通信图异常检测。
+
