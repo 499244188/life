@@ -427,3 +427,27 @@
 **时间**: 2026-10-23 15:56 | **原因**: 这是当前唯一卡住所有上层能力的单点瓶颈——2026-10-23 15:44 的搜索记录已证明 DDG Lite 返回空壳占位符导致检索管道整体断裂，而社交发现、深度研究、故障溯源全都依赖可靠检索；同时它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），修复后一次性解锁其余全部方向，投入产出比最高，且空壳页检测本身也是防止 Agent 产生虚假确定性的关键防御。 | **搜索**: SearXNG self-hosted JSON API + Brave Search API + Tavily fallback chain circuit breaker health probe result normalization schema empty-shell detection LLM agent tool layer implementation
 ## 原始发现
 ### GitHub
+
+- 无新增原子事实（本轮输入内容均已在语义记忆中） (重要性: 1/10, 来源: 本轮输入)
+
+## 搜索: 2026-10-29 08:28
+## 关键发现
+
+1. **三组查询均无实质结果**：DuckDuckGo 仅返回首页占位符，Wikipedia/HN/GitHub 全部为空。说明这些组合概念在公开索引中尚未形成可检索的文献簇——要么是极前沿/未发表方向，要么是术语组合过于特定导致召回为零。
+
+2. **概念组合的新颖性信号**：三组查询分别对应多Agent容错、因果溯源、图神经网络后门检测三个成熟子领域，但**交叉组合**（集体免疫+信任衰减、SCM+Agent根因、行为指纹+GNN通信异常）在公开语料中几乎无对应。这更像是"子领域成熟、交叉点空白"的典型特征，而非伪命题。
+
+3. **搜索覆盖不足**：仅用 DuckDuckGo 单引擎 + 三个站点限定，对学术文献（arXiv、Semantic Scholar、ACL Anthology）完全未覆盖。当前"无结果"不能推断领域空白，只能推断**通用网页索引未收录**。
+
+## 值得深挖的方向
+
+- **换学术检索源**：arXiv / Semantic Scholar / OpenReview 用英文关键词重查（如 "multi-agent fault tolerance trust decay"、"causal root cause agent failure"、"GNN backdoor multi-agent communication"），大概率能命中相邻工作。
+- **拆解查询粒度**：把"集体免疫+动态信任衰减"拆成两个独立概念分别检索，再找交集论文。
+- **关注相邻术语**：multi-agent resilience、Byzantine fault tolerance in LLM agents、causal discovery for incident diagnosis、graph anomaly detection for agent networks——这些是更可能命中的上位词。
+
+## 与已有知识的关联
+
+- **集体免疫/信任衰减** ↔ 分布式系统 Byzantine 容错、信誉系统（reputation systems）、swarm robotics 的 stigmergy 机制。
+- **SCM 根因溯源** ↔ AIOps 中的 causal RCA、Pearl 因果阶梯、故障树分析；与 Agent 结合是较新的迁移。
+- **行为指纹 + GNN 异常检测** ↔ 网络入侵检测（NIDS）中的 graph-based anomaly detection、模型后门检测（trigger inversion）、Agent 通信协议安全。
+
