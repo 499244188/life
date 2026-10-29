@@ -554,3 +554,4 @@
 - 信任衰减/隔离 ≈ 分布式系统 **reputation + circuit breaker + quorum** 机制；
 - SCM 根因溯源 ≈ **微服务 RCA / 因果推断**在 Agent 链上的迁移；
 - 行为指纹 + GNN ≈ **网络异常检测 / 图异常检测**在 Agent 通信图上的应用；
+- [探索: 跨Agent协作的“集体免疫”架构——动态信任衰减与隔离协议 — 1. **今天**：写 `trust_state.json` schema（peer_id, trust, last_ts, state），实现衰减函数 + 阈值判断的单文件 Python 脚本。 2. **本周**：接入 GitHub Actions cron（每日跑衰减 + 状态 commit），加 Circuit Breaker 三态逻辑，用零自己作为唯一 peer 做自...] (来源: 2026-10-30 03:51)
