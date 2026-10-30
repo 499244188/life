@@ -650,3 +650,25 @@
 ### GitHub
 - youseefhamdi/SPECTRA-CyberDefense ★1: 🛡️ SPECTRA: 14-Protocol autonomous cyber deception & active defense system with RAG threat intelligence, ML classification, LLM-adaptive honeypots, and Byzantine fault-tolerant multi-agent orchestration.
 - [探索: 多源搜索 fallback + 熔断机制（修复搜索单点） — 1. **今天**：写 `search_with_fallback(query)` 封装，内含空壳检测 + 三源串行降级 + 每源独立超时（SearXNG 8s / Brave 5s / Tavily 5s），全链失败返回 `{results: [], degraded: true}`。 2. **本周**：加熔断状态机（内存态即可，单进程）+ 固定探针 que...] (来源: 2026-10-30 17:00)
+
+## 搜索: 2026-10-30 17:08
+## 关键发现
+
+1. **三组查询全部零命中**：Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页占位符。说明这些术语组合（"动态信任衰减+隔离协议"、"结构因果模型+Agent决策链+故障冻结"、"行为指纹+GNN+后门触发"）在公开索引中尚未形成成熟词条或项目，属于**前沿/未定型领域**，而非已有共识技术。
+
+2. **术语高度合成化**：每组查询都是3-4个不同子领域概念的拼接（信任管理×联邦架构×共识 / 因果推断×溯源×防御 / 生物特征×图学习×对抗安全），这种"跨域拼接"本身是研究空白信号——各子领域单独存在，但交叉点缺乏公开工作。
+
+3. **"2026"作为时间锚点无匹配**：说明这些不是已发布的标准/综述，而是**预期性/规划性**概念，可能来自内部路线图或尚未公开的预印本。
+
+## 值得深挖的方向
+
+- **信任衰减的数学建模**：动态信任衰减函数与隔离阈值的耦合，是否已有 Byzantine 容错文献中的"声誉衰减"变体可复用（如 EigenTrust 的衰减扩展）。
+- **因果溯源 vs 相关性检测**：结构因果模型用于 Agent 决策链根因定位，与现有 XAI 溯源（如 counterfactual 解释）的差异点。
+- **行为指纹的图表示**：Agent 通信图上的 GNN 异常检测，与网络入侵检测（NetFlow+GNN）的迁移可行性。
+- **故障冻结机制**：与区块链 finality / 熔断器模式的类比。
+
+## 与已有知识的关联
+
+- 信任衰减 ↔ **EigenTrust / 主观逻辑（Subjective Logic）** 的信任折扣算子。
+- 隔离协议 ↔ **拜占庭容错中的 quarantine / slashing** 机制。
+- 因果溯源 ↔ **Pearl 的 SCM + 反事实推理**，可对接 Agent 可解释性。
