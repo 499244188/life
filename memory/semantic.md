@@ -722,3 +722,25 @@
 **时间**: 2026-10-29 03:52 | **原因**: 这是唯一卡住所有上层能力的单点瓶颈——2026-10-23 的搜索记录已证明 DDG Lite 返回空壳占位符导致检索管道整体断裂，而社交发现、深度研究、故障溯源全都依赖可靠检索；同时它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），修复后一次性解锁其余全部方向，投入产出比最高。此外，当前所有集体免疫信任衰减SCM溯源等前沿方向的探索都因检索不可靠而无法验证术语与落地案例，先修检索才能让后续探索有据可依。 | **搜索**: SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe result normalization schema empty-shell detection LLM agent tool layer implementation
 ## 原始发现
 ### GitHub
+
+## 搜索: 2026-10-31 04:54
+## 关键发现
+
+1. **搜索工具本身失效**：三次搜索的 DuckDuckGo 结果均只返回首页 URL（`https://duckduckgo.com/ — here`），Wikipedia/HN/GitHub 全部无结果。这不是"没有相关信息"，而是**搜索管道没有真正执行查询**——可能是 API 限流、解析器未提取结果、或 DuckDuckGo Lite 端点已变更/被墙。这是首要排查项。
+
+2. **三个查询主题高度分散**：WebSearch 替代方案、AgentFactory 编译机制、多 Agent 通信协议——分属工具层、架构层、协议层，说明当前处于**方案调研的广度扫描阶段**，尚未收敛到具体技术选型。
+
+3. **"AgentFactory 子agent 编译机制"是自造术语**：GitHub/HN 零结果符合预期，这更可能是你项目内部的架构概念，而非公开技术名词。搜索它意义有限，应转向搜索其**组成要素**（如 "subagent orchestration"、"agent compilation"、"hierarchical agent spawning"）。
+
+4. **多 Agent 协议查询词过载**：`联邦+自愈+共识算法+动态信任衰减` 五个概念叠加，任何搜索引擎都难以命中。这是典型的**查询词堆砌**问题，应拆分为独立查询。
+
+## 值得深挖的方向
+
+- **修复搜索管道**：先验证 DuckDuckGo Lite 是否仍可用；备选 Brave Search API、SearXNG 自建、Tavily、Exa。这是所有后续调研的前提。
+- **查询词工程**：把长查询拆成 2-3 词的核心短语，分别检索后再综合。
+- **Agent 协议的真实学术锚点**：FIPA-ACL、KQML（经典）、MCP（Anthropic）、A2A（Google）——用这些具体名词替代抽象描述再搜。
+- **动态信任衰减**：这是相对新颖的点，可单独搜 "trust decay multi-agent"、"reputation decay federated"。
+
+## 与已有知识的关联
+
+- DuckDuckGo Lite 长期是低成本搜索的常用后端，但近年反爬加强，**"返回首页"是典型被拦截信号**，与本次现象吻合。
