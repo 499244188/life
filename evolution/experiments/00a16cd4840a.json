@@ -1,0 +1,68 @@
+{
+  "id": "00a16cd4840a",
+  "actor": "zero/autonomous",
+  "question": "零通过public_read访问GitHub API的/repos/octocat/Spoon-Knife/contents/README端点，能否收到包含有效内容的HTTP响应并生成一条可验证回执？",
+  "hypothesis": "零通过public_read访问GitHub API的/repos/octocat/Spoon-Knife/contents/README端点，能够收到包含有效内容的HTTP响应，并据此生成一条content_sha256非空的回执。",
+  "metric": {
+    "name": "receipt_count",
+    "operator": ">=",
+    "target": 1
+  },
+  "failure_condition": "若请求返回非200状态、响应体为空，或未能生成content_sha256非空的回执，则假设被证伪。",
+  "permission": 0,
+  "action": {
+    "type": "public_read",
+    "url": "https://api.github.com/repos/octocat/Spoon-Knife/contents/README"
+  },
+  "status": "REJECTED",
+  "created_at": "2026-10-30T22:38:24+00:00",
+  "updated_at": "2026-10-30T22:38:24+00:00",
+  "history": [
+    {
+      "from": "PROPOSED",
+      "to": "AUTO_ALLOWED",
+      "timestamp": "2026-10-30T22:38:24+00:00"
+    },
+    {
+      "from": "AUTO_ALLOWED",
+      "to": "RUNNING",
+      "timestamp": "2026-10-30T22:38:24+00:00"
+    },
+    {
+      "from": "RUNNING",
+      "to": "OBSERVING",
+      "timestamp": "2026-10-30T22:38:24+00:00"
+    },
+    {
+      "from": "OBSERVING",
+      "to": "EVALUATED",
+      "timestamp": "2026-10-30T22:38:24+00:00"
+    },
+    {
+      "from": "EVALUATED",
+      "to": "REJECTED",
+      "timestamp": "2026-10-30T22:38:24+00:00"
+    }
+  ],
+  "receipt": {
+    "kind": "execution_error",
+    "error_type": "PermissionError",
+    "error_message": "public_read host not allowed: api.github.com",
+    "created_at": "2026-10-30T22:38:24+00:00"
+  },
+  "evaluation": {
+    "outcome": "FAIL",
+    "metric": {
+      "name": "receipt_count",
+      "operator": ">=",
+      "target": 1
+    },
+    "observed": {
+      "error_type": "PermissionError",
+      "error_message": "public_read host not allowed: api.github.com"
+    },
+    "reason": "execution error: public_read host not allowed: api.github.com",
+    "evaluator_actor": "codex/bootstrap"
+  },
+  "final_status": "REJECTED"
+}
