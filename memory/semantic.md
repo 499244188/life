@@ -697,3 +697,28 @@
 - 隔离协议 ↔ **拜占庭容错 + 联邦学习中的恶意节点剔除**。
 - SCM 根因 ↔ **Pearl 因果阶梯 + 可解释 AI 的 counterfactual 溯源**。
 - [探索: 跨Agent协作的集体免疫架构 — 动态信任衰减与隔离协议 — 1. **T_crit 的闭式解是否存在？** 在指数衰减 + 固定阈值的简化模型下，n_eff(t) 的期望是确定性的（E[n_eff(t)] = n·P(trust_i(t) > θ)），但 quorum 交集条件是 n_eff 的随机函数，需要 n_eff 的分布而非期望。是否能用大偏差原理给出 T_crit �...] (来源: 2026-10-31 03:42)
+
+## 消化: 探索: 多Agent协作的集体免疫架构——动态信任衰减与隔离协议 (2026-10-31 04:25)
+**时间**: 2026-10-27 04:08 | **原因**: 这是当前空白清单中最具系统级影响的方向：它同时补上多Agent协作通信协议和身份密码学验证两个技术空白，且与刚发现的 whisper-edge 身份 SDK 形成天然的身份→信任→隔离落地链路。已有知识中 EigenTrust 声誉模型 + circuit breaker 熔断器可提供成熟理论基础，而信任衰减在 Agent 语境下尚未形成标准术语，正是可命名的前沿窗口。相比搜索层（工具故障，先修管道再谈研究）和记忆层（依赖密码学身份先行验证），信任层是可立即用架构设计推进、不依赖外部 API 恢复的方向。 | **搜索**: trust decay multi-agent agent identity persistence OR EigenTrust agent reputation circuit breaker
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点故障） (2026-10-31 04:25)
+**时间**: 2026-10-27 16:22 | **原因**: 这是当前唯一卡住所有上层能力的单点瓶颈——已有记录明确证明 DuckDuckGo Lite 返回空壳占位符导致检索管道整体断裂，社交发现、深度研究、故障溯源全部依赖可靠检索；且本轮 16:03 的搜索再次复现同一失效（三组查询全部零有效结果），进一步证实修复优先级最高；该方向有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 空壳页检测），修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG Brave Tavily fallback chain circuit breaker health probe empty shell detection python implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点故障） (2026-10-31 04:25)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-31 04:25)
+**时间**: 2026-10-28 16:59 | **原因**: 这是当前唯一卡住所有上层能力的单点瓶颈——DDG Lite 返回空壳已多次导致检索管道整体断裂，而社交发现、深度研究、故障溯源全依赖可靠检索；它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 空壳结果校验），修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG JSON API Brave Search API Tavily fallback chain circuit breaker health probe result normalization schema empty-shell detection implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-31 04:25)
+**时间**: 2026-10-29 03:52 | **原因**: 这是唯一卡住所有上层能力的单点瓶颈——2026-10-23 的搜索记录已证明 DDG Lite 返回空壳占位符导致检索管道整体断裂，而社交发现、深度研究、故障溯源全都依赖可靠检索；同时它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），修复后一次性解锁其余全部方向，投入产出比最高。此外，当前所有集体免疫信任衰减SCM溯源等前沿方向的探索都因检索不可靠而无法验证术语与落地案例，先修检索才能让后续探索有据可依。 | **搜索**: SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe result normalization schema empty-shell detection LLM agent tool layer implementation
+## 原始发现
+### GitHub
