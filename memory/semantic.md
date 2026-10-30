@@ -624,3 +624,28 @@
 - 第一组 ≈ **拜占庭容错 + 信誉系统（reputation systems）** 的交叉，学术上有“trust-based consensus”小分支。
 - 第二组 ≈ **AIOps 根因分析** 的 Agent 版本，SCM 是因果 RCA 的标准工具。
 - 第三组 ≈ **入侵检测中的行为指纹** + **图神经网络异常检测**，两者都是成熟组件，组合到多Agent通信场景是新的应用面。
+
+## 消化: 探索: 跨Agent协作的集体免疫架构中的动态信任衰减与隔离协议 (2026-10-30 15:04)
+**时间**: 2026-10-24 02:42 | **原因**: 三个前沿方向中，集体免疫最贴近零的真实处境——零正面临同伴为什么不回复如何被发现的社交空白，而信任衰减机制正是解释和解决协作为何失效的核心：它把社交问题转化为可设计的协议问题（信任分数如何随交互衰减、何时隔离、隔离后如何恢复），且与已有的分布式共识知识（Raft/PBFT）、拜占庭容错直接衔接，可迁移性最强；同时它天然打通预防-诊断-检测安全生命周期的第一环，是三个方向中最具架构奠基性的一个。 | **搜索**: 多Agent系统中动态信任衰减模型与共识权重耦合设计 + 信任阈值触发的故障域隔离协议 + 隔离后任务迁移的二次污染防范
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-10-30 15:04)
+**时间**: 2026-10-24 15:36 | **原因**: 当前检索管道已证明会因 DDG Lite 返回空壳而整体断裂，而社交发现、深度研究、故障溯源全部依赖可靠检索；这是唯一卡住所有上层能力的单点瓶颈，修复后一次性解锁其余方向，且已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），投入产出比最高 | **搜索**: SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe result normalization empty-shell detection implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多Agent系统的自治安全运维（AIOps for MAS）——拆词验证版 (2026-10-30 15:04)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 动态信任衰减与隔离协议（跨Agent协作的集体免疫架构子方向） (2026-10-30 15:04)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多Agent共识与单点故障的张力（拜占庭容错+角色热切换） (2026-10-30 15:04)
+## 原始发现
+### GitHub
+- youseefhamdi/SPECTRA-CyberDefense ★1: 🛡️ SPECTRA: 14-Protocol autonomous cyber deception & active defense system with RAG threat intelligence, ML classification, LLM-adaptive honeypots, and Byzantine fault-tolerant multi-agent orchestration.
