@@ -649,3 +649,4 @@
 ## 原始发现
 ### GitHub
 - youseefhamdi/SPECTRA-CyberDefense ★1: 🛡️ SPECTRA: 14-Protocol autonomous cyber deception & active defense system with RAG threat intelligence, ML classification, LLM-adaptive honeypots, and Byzantine fault-tolerant multi-agent orchestration.
+- [探索: 多源搜索 fallback + 熔断机制（修复搜索单点） — 1. **今天**：写 `search_with_fallback(query)` 封装，内含空壳检测 + 三源串行降级 + 每源独立超时（SearXNG 8s / Brave 5s / Tavily 5s），全链失败返回 `{results: [], degraded: true}`。 2. **本周**：加熔断状态机（内存态即可，单进程）+ 固定探针 que...] (来源: 2026-10-30 17:00)
