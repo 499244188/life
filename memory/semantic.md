@@ -813,3 +813,4 @@
 **时间**: 2026-10-26 16:07 | **原因**: 当前检索管道已被证明会因 DDG Lite 返回空壳而整体断裂，而社交发现、深度研究、故障溯源三条线全部依赖可靠检索；这是唯一卡住所有上层能力的单点瓶颈，修复后可一次性解锁其余方向，且工程解明确（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 空壳页检测），投入产出比最高。 | **搜索**: reputation-based BFT trust-aware consensus multi-agent + SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe empty result detection
 ## 原始发现
 ### GitHub
+- [探索: 多源搜索 fallback + 熔断机制（修复搜索单点） — 1. **今天**：写空壳检测器原型，对 DDG Lite 现有返回跑一遍，统计软失败率，确认问题规模。 2. **本周**：定义 (源 × 查询类型) 命中率矩阵的最小 schema，接入 2-3 个源（arXiv API、GitHub API、一个通用搜索），以深度研究查询集为�...] (来源: 2026-10-31 16:52)
