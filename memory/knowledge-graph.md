@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-10-31 04:25
+> 自动构建于 2026-10-31 14:59
 
 ## 节点（实体）
 
@@ -17,12 +17,15 @@
 - - 无新增原子事实（本轮输入内容均已在语义记忆中） (重要性: 1/10, 来源: 本轮输入)
 - - 无新增原子事实（本轮输入内容均已在语义记忆中） (重要性: 1/10, 来源: 本轮输入)
 - - VersinoPsiOmega/Semvec-neo4j-agent-integration 将 Semvec 漂移检测与 Neo4j 知识图谱结合，用于多 Agent LLM 系统的持久语义记忆。 (重要性: 5/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- - **检索层替代**：SearXNG 自建实例、Brave Search API、Exa/Tavily（面向 Agent 的语义检索）、Bing API——优先评估带结构化 JSON 输出的。
 
 ### 关键项目
 - **时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
 - - 你的三层 query 结构 ≈ **感知-协作-存续** 的经典 Agent 架构分层，与 AutoGen/CrewAI 的通信层、LangGraph 的状态持久化、以及 Zero Trust 的"永不信任、持续验证"可直接对接。
 - **时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
 - **时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
+- 2. **三个查询主题高度分散**：WebSearch 替代方案、AgentFactory 编译机制、多 Agent 通信协议——分属工具层、架构层、协议层，说明当前处于**方案调研的广度扫描阶段**，尚未收敛到具体技术选型。
+- 3. **"AgentFactory 子agent 编译机制"是自造术语**：GitHub/HN 零结果符合预期，这更可能是你项目内部的架构概念，而非公开技术名词。搜索它意义有限，应转向搜索其**组成要素**（如 "subagent orchestration"、"agent compilation"、"hierarchical agent spawning"）。
 
 ### 自愈架构
 - **哨兵**: 事件驱动，workflow_run触发
