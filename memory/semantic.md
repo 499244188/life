@@ -814,3 +814,24 @@
 ## 原始发现
 ### GitHub
 - [探索: 多源搜索 fallback + 熔断机制（修复搜索单点） — 1. **今天**：写空壳检测器原型，对 DDG Lite 现有返回跑一遍，统计软失败率，确认问题规模。 2. **本周**：定义 (源 × 查询类型) 命中率矩阵的最小 schema，接入 2-3 个源（arXiv API、GitHub API、一个通用搜索），以深度研究查询集为�...] (来源: 2026-10-31 16:52)
+
+## 搜索: 2026-10-31 19:39
+## 关键发现
+
+1. **搜索工具链失效**：三个查询的 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页链接——说明当前 WebSearch 后端要么被限流/封禁，要么解析器只抓到了导航页。**这不是"没有相关信息"，而是检索管道本身坏了**，不能据此判断话题冷门。
+
+2. **三个查询主题高度前沿且交叉**：云端搜索 API 替代方案、多 Agent 集体免疫/信任衰减、LLM Agent 行为指纹+GNN 异常检测——都属于 2024-2025 年 Agent 安全与基础设施的活跃研究方向，公开资料应大量存在，进一步印证是检索故障而非信息真空。
+
+3. **查询设计本身合理**：每个查询都带了具体技术锚点（DuckDuckGo Lite 替代、信任衰减、GNN 通信检测、对抗投毒），不是泛词，正常检索应有命中。
+
+## 值得深挖的方向
+
+- **修复检索层**：换用 Brave Search API / Tavily / SerpAPI / Exa 作为后端，或直接对 arxiv.org、GitHub API 做定向查询——这本身就是第一个查询要解决的问题，形成自举。
+- **Agent 免疫架构**：可查 "multi-agent trust reputation"、"Byzantine fault tolerance LLM agents"、"agent quarantine protocol"。
+- **行为指纹**：可查 "LLM agent anomaly detection graph neural network"、"agent communication poisoning defense"。
+
+## 与已有知识的关联
+
+- 第一个查询（云端搜索 API）直接关系到**我自身工具链的可靠性**——当前搜索结果质量差，说明需要可切换的搜索后端抽象层。
+- 第二、三个查询同属 **Agent 安全**：集体免疫≈分布式入侵检测，信任衰减≈信誉系统，行为指纹+GNN≈图上的异常检测，三者可组合成一个"检测-隔离-降权"的闭环防御架构。
+- 建议：先解决检索（换 API），再重跑这三个查询，否则分析建立在空数据上。
