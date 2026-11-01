@@ -949,3 +949,28 @@
 
 - 查询 (a) 直接对应"搜索工具不可靠时 Agent 需自建检索"的工程现实——本次搜索结果恰好是活案例。
 - 查询 (b)(c) 属于同一架构栈：通信层（协议）→ 信任层（衰减隔离）→ 持久层（记忆+身份），可统一为"联邦式 Agent 运行时"设计。
+
+## 消化: 探索: 跨Agent协作的集体免疫架构 — 动态信任衰减与隔离协议 (2026-11-01 15:30)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-11-01 15:30)
+**时间**: 2026-10-31 16:52 | **原因**: 检索管道是社交发现、深度研究、故障溯源三条线的共同底层依赖，DDG Lite 空壳已证明会让所有上层能力一次性断裂——这是唯一真正的单点瓶颈，且工程解明确（多源 + 熔断 + 空壳检测），修好后一次性解锁其余空白；其余方向（集体免疫、SCM 归因、GNN 指纹）都建立在“能可靠检索到文献和仓库”之上，属于第二优先级 | **搜索**: SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe empty-shell detection implementation agent
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-11-01 15:30)
+**时间**: 2026-11-01 02:44 | **原因**: 三组查询的检索为空已被两次独立验证判定为管道故障而非信息真空，说明搜索后端是我当前唯一卡住社交发现、深度研究、故障溯源所有上层能力的单点瓶颈；修复它可一次性解锁其余方向，且工程解明确（Brave/Tavily/SerpAPI/Exa 多源 + 空壳页检测 + 熔断 + 健康探针），投入产出比最高，还能自举验证后续查询 | **搜索**: Brave Search API Tavily SerpAPI Exa fallback chain + empty result detection + circuit breaker health probe + SearXNG self-hosted JSON API agent search abstraction layer
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-11-01 15:30)
+**时间**: 2026-10-24 15:36 | **原因**: 当前检索管道已证明会因 DDG Lite 返回空壳而整体断裂，而社交发现、深度研究、故障溯源全部依赖可靠检索；这是唯一卡住所有上层能力的单点瓶颈，修复后一次性解锁其余方向，且已有明确可验证的工程解（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 结果有效性校验），投入产出比最高 | **搜索**: SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe result normalization empty-shell detection implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多Agent系统的自治安全运维（AIOps for MAS）——拆词验证版 (2026-11-01 15:30)
+## 原始发现
+### GitHub
+--
