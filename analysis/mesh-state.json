@@ -198,6 +198,15 @@
     "version": "2"
   },
   {
+    "id": "runnervm48cm3-2533",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-11-01T20:13:30Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervm48cm3-2562",
     "capability": 100,
     "cpu": 1,

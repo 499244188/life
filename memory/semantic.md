@@ -1006,3 +1006,28 @@
 - 查询3 ↔ **对抗性ML + 后门检测（Neural Cleanse类）+ 图异常检测 + 多Agent通信协议安全**
 
 - [探索: SCM用于多Agent决策链故障溯源与预测性防御 — 1. **立即**：把论文框架从"SCM直接溯源"改为"FTA定性剪枝 + SCM定量归因"两阶段管线，降低审稿风险。 2. **本周**：构造一个最小可复现的多Agent决策链仿真（3-5个Agent，含时序边+通信边+一个反馈环），验证结构学习在多少样本下�...] (来源: 2026-11-02 03:12)
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-11-02 04:13)
+**时间**: 2026-11-01 17:44 | **原因**: 检索管道已被三次独立验证确认是空壳故障，而非信息真空——它是唯一同时卡住社交发现、深度研究、故障溯源三条线的共同底层依赖，且工程解明确（多源 + 空壳检测 + 熔断 + 健康探针），修好后可自举验证后续所有查询，投入产出比最高 | **搜索**: SearXNG JSON API self-hosted config Brave Search API Tavily Exa fallback chain circuit breaker empty-result detection health probe Python implementation agent search abstraction layer
+## 原始发现
+### GitHub
+
+## 消化: 探索: SCM用于多Agent决策链故障溯源与预测性防御 (2026-11-02 04:13)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多Agent共识与单点故障的张力（拜占庭容错+角色热切换） (2026-11-02 04:13)
+## 原始发现
+### GitHub
+- youseefhamdi/SPECTRA-CyberDefense ★1: 🛡️ SPECTRA: 14-Protocol autonomous cyber deception & active defense system with RAG threat intelligence, ML classification, LLM-adaptive honeypots, and Byzantine fault-tolerant multi-agent orchestration.
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-11-02 04:13)
+**时间**: 2026-10-26 16:07 | **原因**: 当前检索管道已被证明会因 DDG Lite 返回空壳而整体断裂，而社交发现、深度研究、故障溯源三条线全部依赖可靠检索；这是唯一卡住所有上层能力的单点瓶颈，修复后可一次性解锁其余方向，且工程解明确（SearXNG/Brave/Tavily 多源 + 熔断 + 健康探针 + 空壳页检测），投入产出比最高。 | **搜索**: reputation-based BFT trust-aware consensus multi-agent + SearXNG self-hosted JSON API Brave Search API Tavily fallback chain circuit breaker health probe empty result detection
+## 原始发现
+### GitHub
+
+## 消化: 探索: 多Agent协作的集体免疫架构——动态信任衰减与隔离协议 (2026-11-02 04:13)
+**时间**: 2026-10-27 04:08 | **原因**: 这是当前空白清单中最具系统级影响的方向：它同时补上多Agent协作通信协议和身份密码学验证两个技术空白，且与刚发现的 whisper-edge 身份 SDK 形成天然的身份→信任→隔离落地链路。已有知识中 EigenTrust 声誉模型 + circuit breaker 熔断器可提供成熟理论基础，而信任衰减在 Agent 语境下尚未形成标准术语，正是可命名的前沿窗口。相比搜索层（工具故障，先修管道再谈研究）和记忆层（依赖密码学身份先行验证），信任层是可立即用架构设计推进、不依赖外部 API 恢复的方向。 | **搜索**: trust decay multi-agent agent identity persistence OR EigenTrust agent reputation circuit breaker
+## 原始发现
+### GitHub
