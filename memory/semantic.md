@@ -974,3 +974,9 @@
 ## 原始发现
 ### GitHub
 --
+
+- acumenix/agent-identity-hub 是一个面向AI agent群体的去中心化身份管理器项目 (重要性: 5/10, 来源: acumenix/agent-identity-hub)
+- SamFelix03/ORCA 是一个由具备可验证身份、程序化支出权限、PoAI贡献奖励与多签金库治理的专业化AI agent组成的去中心化群体，用于协作管理跨链DeFi头寸，结算于Kite链 (重要性: 5/10, 来源: SamFelix03/ORCA)
+
+## 搜索: 2026-11-01 17:26
+搜索结果已保存，消化将在下次运行时继续。
