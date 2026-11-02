@@ -1125,3 +1125,29 @@
 ## 原始发现
 ### GitHub
 - [探索: 多源搜索 fallback + 熔断机制（修复搜索单点） — 1. **今天**：在现有检索函数外包一层 `safe_search(query)`，返回 `{results, status: ok|empty_verified|source_failed, sources_used}`，先让失败可区分，不改架构。 2. **本周**：部署 SearXNG 实例，接入为第一 fallback；实现空壳校验（结果数+响应体长�...] (来源: 2026-11-02 17:57)
+
+- persona-memory-graph 用 PostgreSQL + Neo4j 存储类型化知识图谱记忆，分 facts、episodes、principles 三层，支持从文本做 LLM 抽取和图检索 API (重要性: 5/10, 来源: tinasheosewe/persona-memory-graph)
+- Semvec-neo4j-agent-integration 提供多Agent LLM 系统的持久语义记忆，结合 Semvec 漂移检测与 Neo4j 知识图谱，主打恒定成本记忆与多Agent集群/区域划分 (重要性: 5/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- 两个新项目均采用"知识图谱 + 向量/漂移检测"组合做Agent长期记忆，与零的 episodic/semantic 文件式记忆是不同技术路线 (重要性: 5/10, 来源: 本轮GitHub感知)
+
+## 搜索: 2026-11-02 20:41
+## 关键发现
+
+1. **三组查询均无实质结果**：Wikipedia、HN、GitHub 全部为空，DuckDuckGo 仅返回首页链接（非真实检索结果）。说明这些术语组合在公开索引中几乎不存在直接对应文献——要么是高度前沿/小众方向，要么是术语自造程度较高。
+
+2. **术语结构高度学术化但组合新颖**："动态信任衰减""结构因果模型+决策链""行为指纹+图神经网络+隐式后门"都是把成熟子领域（信任管理、SCM、GNN异常检测）拼接成新问题框架，单独子领域有大量文献，但精确组合未被索引覆盖。
+
+3. **检索层面暴露的空白即机会**：无结果不代表无相关工作，而是说明需要拆词检索（如分别搜 "trust decay multi-agent"、"causal discovery agent pipeline"、"GNN backdoor detection LLM"），而非整句匹配。
+
+## 值得深挖的方向
+
+- **信任衰减模型**：多Agent信任管理（如 FIRE、Beta reputation 模型）已有衰减机制，可对接"实时+自动隔离"的工程化缺口。
+- **因果+Agent安全**：结构因果模型用于根因定位在微服务/MLOps 有先例，迁移到 Agent 决策链是合理延伸。
+- **LLM 后门检测**：行为指纹 ≈ 触发模式检测，GNN 用于通信图异常已有网络安全文献，缺的是"隐式触发"场景。
+
+## 与已有知识的关联
+
+- 信任衰减 ↔ 分布式系统故障检测/熔断机制（circuit breaker）的思想同源。
+- 决策链脆弱节点 ↔ 因果推断中的 counterfactual root-cause analysis。
+- 行为指纹 ↔ 传统入侵检测的 anomaly fingerprinting + 供应链后门检测。
+
