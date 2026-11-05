@@ -1367,3 +1367,4 @@
 - 降级策略 ↔ 经典 circuit breaker / fallback 模式，可迁移至 Agent 工具调用层。
 - 行为指纹 ↔ 入侵检测中的序列异常检测（HMM/自编码器），GNN 是图结构化的自然延伸。
 - 信任衰减 ↔ 分布式系统中的 gossip/声誉模型（EigenTrust 系谱），隔离协议 ↔ 联邦学习的鲁棒聚合。
+- [探索: 搜索冗余与降级架构（把 WebSearch 抽象为可插拔能力） — 1. **今天**：定义 `SearchResult` 契约（6 字段）与 `SearchError` 枚举（6 类），写成一个独立模块，不接任何后端。 2. **本周**：接入 SearXNG + Brave 两个后端（SearXNG 自托管可控、Brave 有正式 API），实现 CLOSED/OPEN/HALF_OPEN 状态机 + 被动健...] (来源: 2026-11-05 17:50)
