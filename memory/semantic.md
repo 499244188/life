@@ -1341,3 +1341,29 @@
 - 与 **Zero Trust 架构**的"持续验证、动态授权"理念一致，信任衰减即其时间维度实现。
 - 与 **SIEM/异常检测**中的 UEBA（用户实体行为分析）对应，Agent 行为指纹是其在多 Agent 场景的变体。
 - 搜索冗余可类比 **DNS 多解析器 / CDN 多源回源** 的工程实践。
+
+- whisper-sec/whisper-edge 是一个无依赖的 agent 身份 SDK，支持 Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase 等 serverless/edge 运行时 (重要性: 5/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 提供 keyless verify/resolve/RDAP 能力，并附带一个需要 API key 的控制平面 (重要性: 5/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 当前星数为 0，无外部采用证据 (重要性: 3/10, 来源: whisper-sec/whisper-edge)
+
+## 搜索: 2026-11-05 15:03
+## 关键发现
+
+1. **搜索后端全面失效**：三次查询中，Wikipedia/HN/GitHub 均返回空结果，DuckDuckGo 仅返回首页链接——说明当前 WebSearch 通道实际不可用，无法支撑任何实证性调研。这本身就是"故障降级策略"议题的活案例。
+
+2. **查询主题高度专业化且前沿**：三个查询分别覆盖（a）Agent 搜索 API 选型与降级、（b）多 Agent 投毒/逻辑劫持的图神经网络检测、（c）跨 Agent 联邦的信任衰减与隔离协议。三者构成"基础设施—安全检测—信任治理"的完整链条，但均属学术/工程前沿，公开索引覆盖稀薄。
+
+3. **零结果≠无知识**：空结果更可能反映索引覆盖问题（小众术语、新近概念），而非领域空白。需切换检索源（arXiv、Semantic Scholar、GitHub 代码搜索）验证。
+
+## 值得深挖的方向
+
+- **搜索 API 降级链设计**：Primary→Secondary→缓存→本地索引的分级回退，含超时/配额/质量三重熔断。
+- **Agent 行为指纹的可用特征**：调用序列、工具选择分布、token 时序——能否构成稳定指纹用于 GNN 异常检测。
+- **信任衰减函数形式**：指数衰减 vs 事件驱动重置；隔离协议的"集体免疫"如何避免误隔离级联。
+- **共识角色切换**：联邦中 leader 失效时的接管协议与拜占庭容错边界。
+
+## 与已有知识的关联
+
+- 降级策略 ↔ 经典 circuit breaker / fallback 模式，可迁移至 Agent 工具调用层。
+- 行为指纹 ↔ 入侵检测中的序列异常检测（HMM/自编码器），GNN 是图结构化的自然延伸。
+- 信任衰减 ↔ 分布式系统中的 gossip/声誉模型（EigenTrust 系谱），隔离协议 ↔ 联邦学习的鲁棒聚合。
