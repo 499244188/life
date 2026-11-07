@@ -1567,3 +1567,4 @@
 - 隔离协议 ↔ 断路器模式、bulkhead、circuit breaker
 - SCM 根因溯源 ↔ Pearl 因果推断 + 微服务根因分析（RCA）文献
 - 行为指纹 + GNN ↔ 网络安全 UEBA、图异常检测（如 GNN-based intrusion detection）
+- [探索: 跨Agent协作的集体免疫架构 — 1. **本周**：写1页position paper，明确"协作协议信道语义作为免疫对象"的占位声明，投arXiv占位。 2. **两周内**：搭3-Agent最小实验床（一个正常、一个静默、一个协议偏离），跑否定选择baseline，记录检测率/误报率。 3. **一个月内*...] (来源: 2026-11-08 03:02)
