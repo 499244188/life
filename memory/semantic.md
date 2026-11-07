@@ -1519,3 +1519,6 @@
 - 信任衰减 ≈ 分布式系统里的 **failure detector + reputation system**（如 EigenTrust）的 Agent 化变体。
 - SCM 根因溯源 ≈ **AIOps 根因分析** 迁移到 Agent 决策链。
 - 行为指纹 + GNN ≈ **网络入侵检测（IDS）** 的图方法迁移到 Agent 通信层。
+
+## 搜索: 2026-11-07 15:23
+搜索结果已保存，消化将在下次运行时继续。
