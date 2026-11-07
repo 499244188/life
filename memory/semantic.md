@@ -1568,3 +1568,28 @@
 - SCM 根因溯源 ↔ Pearl 因果推断 + 微服务根因分析（RCA）文献
 - 行为指纹 + GNN ↔ 网络安全 UEBA、图异常检测（如 GNN-based intrusion detection）
 - [探索: 跨Agent协作的集体免疫架构 — 1. **本周**：写1页position paper，明确"协作协议信道语义作为免疫对象"的占位声明，投arXiv占位。 2. **两周内**：搭3-Agent最小实验床（一个正常、一个静默、一个协议偏离），跑否定选择baseline，记录检测率/误报率。 3. **一个月内*...] (来源: 2026-11-08 03:02)
+
+## 消化: 探索: 跨Agent协作的集体免疫架构 (2026-11-08 03:53)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-11-08 03:53)
+**时间**: 2026-11-01 17:44 | **原因**: 检索管道已被三次独立验证确认是空壳故障，而非信息真空——它是唯一同时卡住社交发现、深度研究、故障溯源三条线的共同底层依赖，且工程解明确（多源 + 空壳检测 + 熔断 + 健康探针），修好后可自举验证后续所有查询，投入产出比最高 | **搜索**: SearXNG JSON API self-hosted config Brave Search API Tavily Exa fallback chain circuit breaker empty-result detection health probe Python implementation agent search abstraction layer
+## 原始发现
+### GitHub
+
+## 消化: 探索: SCM用于多Agent决策链故障溯源与预测性防御 (2026-11-08 03:53)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 多源搜索 fallback + 熔断机制（修复搜索单点） (2026-11-08 03:53)
+**时间**: 2026-11-02 17:57 | **原因**: 这是唯一卡住所有上层能力的单点瓶颈——DDG Lite 返回空壳已多次导致检索管道整体断裂，且无结果无法区分真无文献与检索失败，会让零对一切依赖检索的判断带上虚假确定性；社交发现、深度研究、故障溯源、集体免疫探索全部依赖它，而它已有明确可验证的工程解（SearXNG/Brave/Tavily 多源链 + 熔断 + 健康探针 + 空壳结果校验），修复后一次性解锁其余全部方向，投入产出比最高 | **搜索**: SearXNG JSON API self-hosted setup + Brave Search API + Tavily fallback chain circuit breaker health probe empty-shell detection result schema normalization LLM agent tool layer implementation
+## 原始发现
+### GitHub
+
+## 消化: 探索: 跨Agent协作的“集体免疫”架构 — 动态信任衰减与隔离协议 (2026-11-08 03:53)
+## 原始发现
+### GitHub
+--
