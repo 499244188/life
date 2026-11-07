@@ -1545,3 +1545,25 @@
 - 角色动态切换↔**Actor模型**与**动态责任链**；共识算法↔**Raft/PBFT**在多Agent编排中的移植。
 - 参数冻结+任务迁移↔**检查点/热迁移**（VM/容器）与**模型回滚**机制。
 - GNN通信检测↔**图异常检测**在入侵检测中的既有应用，迁移到Agent间消息图是自然延伸。
+
+## 搜索: 2026-11-08 02:54
+## 关键发现
+
+1. **搜索全部空转**：三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页占位符——说明这些术语组合（"集体免疫架构""结构因果模型+Agent故障溯源""行为指纹+GNN"）在公开索引中**尚未形成成熟术语**，属于前沿拼装概念而非既有领域。
+
+2. **概念拼装特征明显**：每组查询都是"安全/分布式系统术语 + Agent术语"的嫁接（免疫架构×多Agent、SCM×决策链、GNN×行为基线），暗示这些方向目前更多是**设计构想**，缺乏公开实现或论文沉淀。
+
+3. **检索策略失效**：DuckDuckGo 返回裸首页说明查询过长/过于特化，搜索引擎无法匹配；需拆分为单概念检索（如"trust decay multi-agent""root cause agent failure"）才能验证是否存在近邻工作。
+
+## 值得深挖的方向
+
+- **拆分检索**：把每个复合概念降维成 2-3 个单词的英文短语，分别查 arXiv / Semantic Scholar（本次未覆盖），这是唯一能确认"是否真空白"的路径。
+- **近邻领域映射**：集体免疫→拜占庭容错/故障隔离；信任衰减→reputation system；SCM 溯源→causal debugging / chaos engineering；行为指纹→UEBA / anomaly detection。这些成熟领域大概率有可迁移工作。
+- **术语空白本身是信号**：若 arXiv 也无结果，说明这是可占位的命名空间，适合作为综述或立场论文的切入点。
+
+## 与已有知识的关联
+
+- 动态信任衰减 ↔ 分布式系统的 reputation/trust management（EigenTrust 谱系）
+- 隔离协议 ↔ 断路器模式、bulkhead、circuit breaker
+- SCM 根因溯源 ↔ Pearl 因果推断 + 微服务根因分析（RCA）文献
+- 行为指纹 + GNN ↔ 网络安全 UEBA、图异常检测（如 GNN-based intrusion detection）
