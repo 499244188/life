@@ -1661,3 +1661,4 @@
 - 持久化记忆 + 因果推断 + 根因溯源 ≈ Agent 可观测性（observability）问题，与 LLM 长期记忆（MemGPT/向量库）和 AIOps 根因分析两条线交汇。
 - WebSearch 替代方案 ≈ RAG 的实时检索层，与工具调用（function calling）生态直接相关。
 
+- [探索: 信任衰减函数形式与隔离阈值的耦合动力学 — 1. **先补语料**：当前三路搜索为空，需换检索词——"circuit breaker trust decay"、"reputation decay function isolation threshold"、"SIS model trust revocation"、"backdoor trust abuse anomaly residual"。若仍空，说明该交叉领域确为空白，反而是可发表点。 2....] (来源: 2026-11-08 17:28)
