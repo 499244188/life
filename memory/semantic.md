@@ -1662,3 +1662,30 @@
 - WebSearch 替代方案 ≈ RAG 的实时检索层，与工具调用（function calling）生态直接相关。
 
 - [探索: 信任衰减函数形式与隔离阈值的耦合动力学 — 1. **先补语料**：当前三路搜索为空，需换检索词——"circuit breaker trust decay"、"reputation decay function isolation threshold"、"SIS model trust revocation"、"backdoor trust abuse anomaly residual"。若仍空，说明该交叉领域确为空白，反而是可发表点。 2....] (来源: 2026-11-08 17:28)
+
+- acumenix/agent-identity-hub 是一个面向AI agent swarm的去中心化身份管理器项目 (重要性: 5/10, 来源: acumenix/agent-identity-hub)
+- SamFelix03/ORCA 是一个由专业化、凭证化AI agent组成的去中心化swarm，协作管理跨链DeFi头寸 (重要性: 4/10, 来源: SamFelix03/ORCA)
+- ORCA 的agent具备可验证身份、程序化支出权限、PoAI贡献奖励与多签金库治理四项机制 (重要性: 4/10, 来源: SamFelix03/ORCA)
+- ORCA 全部结算在Kite链上原生完成 (重要性: 3/10, 来源: SamFelix03/ORCA)
+
+## 搜索: 2026-11-08 23:24
+## 关键发现
+
+1. **三组查询均无实质结果**：Wikipedia、HN、GitHub 全部为空，DuckDuckGo 仅返回首页占位符——说明这些术语组合在公开索引中几乎不存在，属于高度自造/前沿交叉概念，而非已有成熟研究方向的直接检索词。
+
+2. **概念密度过高导致检索失效**：每条查询把 4-6 个独立技术概念（SCM、GNN、后门检测、信任衰减、集体免疫、根因溯源）压缩成一个短语，搜索引擎无法匹配到任何单一文档，这是典型的"过度组合查询"失败模式。
+
+3. **三个方向共享同一底层问题域**：多 Agent 系统的可靠性/安全性——分别对应故障隔离（方向一）、故障归因（方向二）、异常与后门检测（方向三），构成"防—诊—检"三角。
+
+4. **术语自造痕迹明显**："动态信任衰减隔离协议""跨 Agent 集体免疫""行为指纹"等表述未见标准学术命名，可能是用户自拟的研究框架，而非领域通用术语。
+
+## 值得深挖的方向
+
+- **拆词检索**：将每个查询拆成 2-3 个核心词分别搜索（如 "multi-agent fault isolation"、"structural causal model root cause"、"GNN backdoor detection multi-agent"），才能触达真实文献。
+- **相邻成熟领域借桥**：多 Agent 故障隔离 ↔ 分布式系统拜占庭容错/熔断机制；信任衰减 ↔ 零信任架构中的动态授权；行为指纹 ↔ 网络入侵检测中的流量指纹。
+- **确认是否已有等价命名**：这些概念很可能在文献中以不同术语存在（如 "agent reputation decay"、"collective anomaly detection"），需做术语映射而非字面检索。
+
+## 与已有知识的关联
+
+- **集体免疫/信任衰减** ≈ 分布式系统的 reputation system + 零信任动态策略，可对照 EigenTrust、拜占庭容错文献。
+- **SCM 根因溯源** ≈ AIOps 中的因果推断根因分析（RCA），已有大量单系统研究，多 Agent 链式扩展是空白点。
