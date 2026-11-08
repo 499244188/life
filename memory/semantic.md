@@ -1689,3 +1689,4 @@
 
 - **集体免疫/信任衰减** ≈ 分布式系统的 reputation system + 零信任动态策略，可对照 EigenTrust、拜占庭容错文献。
 - **SCM 根因溯源** ≈ AIOps 中的因果推断根因分析（RCA），已有大量单系统研究，多 Agent 链式扩展是空白点。
+- [探索: 跨Agent协作的「集体免疫」架构——动态信任衰减与隔离协议 — 1. **立即**：改用直接查询（如 arXiv API `search_query=all:"reputation decay" AND all:agent`、GitHub code search `"trust decay" agent`、Google Scholar `"circuit breaker" trust agent`）补检索，确认术语锚点。这是阻塞项。 2. **并行**：写一个最小仿真（3 种衰减...] (来源: 2026-11-09 03:08)
