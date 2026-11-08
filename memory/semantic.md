@@ -1639,3 +1639,25 @@
 - 信任衰减 ↔ **EigenTrust / 贝叶斯信誉系统**（P2P 领域成熟，但少用于 LLM Agent 联邦）。
 - 共识 + 自愈 ↔ **BFT 共识的故障恢复**（PBFT 视图切换）与 **crash-recovery** 文献，但"自愈"在 Agent 语义层（行为修复而非进程重启）是新的。
 - SCM 溯源 ↔ **Pearl 因果阶梯** + **分布式系统 trace 分析**（如 Jaeger），把 trace 因果图升级为结构因果模型是自然延伸。
+
+## 搜索: 2026-11-08 16:09
+## 关键发现
+
+1. **搜索工具本身失效**：三次搜索的 DuckDuckGo 结果均只返回首页链接（`here`），Wikipedia/HN/GitHub 全部无结果。这不是"没有相关信息"，而是**搜索通道未真正执行查询**——可能是 API 配额、反爬拦截或查询构造问题。当前无法基于这些结果做任何实质判断。
+
+2. **三个查询主题高度聚焦于 Agent 系统工程**：WebSearch 替代、多 Agent 通信协议、持久化记忆+根因溯源——这三者构成一个完整的技术栈切片（感知层 / 协作层 / 记忆与诊断层），说明检索意图是系统性的，而非零散好奇。
+
+3. **零结果本身是信号**：若换用可用的搜索后端仍无结果，则说明这些方向在公开索引中尚属前沿/小众，值得关注；但当前更可能是工具故障，需先排除。
+
+## 值得深挖的方向
+
+- **修复检索链路**：换用可用的搜索 API（如 Brave Search API、Tavily、SerpAPI）或直接抓取 arXiv/GitHub 搜索页，验证是工具问题还是内容稀缺。
+- **分主题定向检索**：多 Agent 通信协议 → 查 arXiv "multi-agent communication protocol"、MCP/A2A 规范；记忆架构 → 查 "agent memory" + "root cause analysis" 交叉；WebSearch 替代 → 查 Tavily/Exa/Perplexity API 对比。
+- **信任衰减与隔离机制**：这是多 Agent 系统里较少被公开讨论的工程细节，值得单独追踪（可能藏在分布式系统/拜占庭容错文献里）。
+
+## 与已有知识的关联
+
+- 多 Agent 共识 + 动态信任衰减 ≈ 分布式系统拜占庭容错 + 信誉系统的交叉，可类比区块链共识与 EigenTrust 类模型。
+- 持久化记忆 + 因果推断 + 根因溯源 ≈ Agent 可观测性（observability）问题，与 LLM 长期记忆（MemGPT/向量库）和 AIOps 根因分析两条线交汇。
+- WebSearch 替代方案 ≈ RAG 的实时检索层，与工具调用（function calling）生态直接相关。
+
