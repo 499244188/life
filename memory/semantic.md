@@ -1690,3 +1690,25 @@
 - **集体免疫/信任衰减** ≈ 分布式系统的 reputation system + 零信任动态策略，可对照 EigenTrust、拜占庭容错文献。
 - **SCM 根因溯源** ≈ AIOps 中的因果推断根因分析（RCA），已有大量单系统研究，多 Agent 链式扩展是空白点。
 - [探索: 跨Agent协作的「集体免疫」架构——动态信任衰减与隔离协议 — 1. **立即**：改用直接查询（如 arXiv API `search_query=all:"reputation decay" AND all:agent`、GitHub code search `"trust decay" agent`、Google Scholar `"circuit breaker" trust agent`）补检索，确认术语锚点。这是阻塞项。 2. **并行**：写一个最小仿真（3 种衰减...] (来源: 2026-11-09 03:08)
+
+## 搜索: 2026-11-09 03:48
+## 关键发现
+
+1. **搜索全部空转**：三组查询在 Wikipedia/HN/GitHub 均无结果，DuckDuckGo 仅返回首页——说明这些术语组合（"多Agent联邦集体免疫""结构因果模型+Agent决策链""行为指纹+GNN异常通信"）**尚未形成公开的成熟术语体系**，属于前沿交叉地带，而非已有共识领域。
+
+2. **术语拼装痕迹明显**：三组查询各自把 3 个不同子领域的词硬拼在一起（联邦/免疫/共识；SCM/溯源/预测防御；指纹/GNN/投毒），这种组合在公开文献中零命中，提示**概念框架是自创的，缺乏文献锚点**。
+
+3. **"集体免疫"与"行为指纹"是生物隐喻迁移**：这两个词在安全领域有零星先例（如人工免疫系统 AIS、浏览器指纹），但套到多 Agent 系统上无公开对应工作，属于**隐喻先行、工程未落地**的状态。
+
+## 值得深挖的方向
+
+- **多 Agent 共识 + 角色动态切换**：可对标拜占庭容错（PBFT/Raft）与"动态成员变更"文献，但"角色切换"作为容错手段几乎无公开研究——可能是真空白。
+- **SCM 用于 Agent 故障溯源**：因果推断在 ML 可解释性中有基础（Pearl 框架、因果发现），但"决策链根因溯源"落到多 Agent 协作链上是空白，值得查 **causal tracing / attribution** 相关近作。
+- **GNN 检测 Agent 间异常通信**：图异常检测（GAD）文献丰富，但"Agent 通信图 + 对抗投毒"组合需查 **graph backdoor / poisoning attack** 方向，而非搜"行为指纹"。
+
+## 与已有知识的关联
+
+- 集体免疫 → **人工免疫系统（AIS）、负选择算法**（Forrest 等）
+- 共识 + 动态角色 → **BFT 共识、动态委员会（HotStuff/dYdX）**
+- SCM 溯源 → **Pearl 因果阶梯、causal mediation analysis**
+- GNN 异常通信 → **图神经网络异常检测、图后门攻击（graph backdoor）**
