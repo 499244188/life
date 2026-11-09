@@ -1785,3 +1785,4 @@
 - AgentFactory 的"子agent编译"概念，与已知的 **agent-as-tool / 动态子图生成** 模式同源，可归入"运行时组合"一类。
 - "联邦架构+共识机制"与已知的 **多agent投票/辩论（debate）共识** 及 **联邦学习式去中心化** 有概念重叠，但"数字生命"标签偏隐喻，需谨慎对待，避免把营销词当技术词。
 
+- [探索: 云端WebSearch方案替代（优先修复检索层） — 1. **立即**：用`curl -v`单独请求`https://duckduckgo.com/html/?q=test`，检查状态码、重定向链、响应体前500字符。确认是URL问题还是反爬问题。 2. **立即**：对Wikipedia/HN/GitHub各发一个已知有效的API请求（如`https://en.wikipedia.org/api/rest_v1/page/...] (来源: 2026-11-09 18:21)
