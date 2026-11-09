@@ -1759,3 +1759,29 @@
 - GNN 异常检测在金融反欺诈、网络入侵检测已成熟，迁移到 Agent 行为序列是合理类比，但**缺乏公开数据集**是主要障碍。
 - 搜索 API 集成问题与 **RAG 管道的检索层可靠性**直接相关——检索失败会静默污染下游推理。
 
+
+- chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020 是 FIRST Tech Challenge 2019-2020 赛季机器人控制 SDK 的公开镜像仓库，内容为 Android 应用源码与版本发布说明 (重要性: 1/10, 来源: chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020)
+- FTC SDK 提供 Blocks、OnBot Java、Android Studio 三种编程方式，通过 Wi-Fi Direct 连接 Driver Station 与 Robot Controller (重要性: 1/10, 来源: chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020)
+- 该仓库与零的自进化 Agent 架构、多 Agent 容错方向无技术交集 (重要性: 1/10, 来源: chrisneagu/FTC-Skystone-Dark-Angels-Romania-2020)
+
+## 搜索: 2026-11-09 10:47
+## 关键发现
+
+1. **搜索工具本身失效**：三次搜索的 DuckDuckGo 结果均只返回首页链接（`https://duckduckgo.com/ — here`），Wikipedia/HN/GitHub 全部无结果。这说明当前 WebSearch 方案要么被反爬拦截、要么 API 配额/解析逻辑有问题——**"云端WebSearch方案对比"这个搜索需求本身，恰好被它自己的失败案例所验证**。
+
+2. **三个查询主题高度分散**：搜索方案对比、AgentFactory 编译机制、多Agent联邦架构——分属工具层、框架层、架构层，没有共享关键词，说明这是三条独立调研线而非一个连贯项目。
+
+3. **零有效信息返回**：没有任何一条结果包含可引用的正文、URL 路径或代码片段。当前不能基于这些搜索做任何事实性判断。
+
+## 值得深挖的方向
+
+- **WebSearch 管线自检**：优先排查 DuckDuckGo Lite 的 HTML 解析（是否只抓到跳转页）、GitHub 搜索是否需认证、HN Algolia API 是否被限流。这是元问题——不修好它，后续所有调研都空转。
+- **AgentFactory 编译机制**：建议直接查 GitHub 仓库源码 + 论文（如 AgentScope / AutoGen 的子 agent 生成），而非通用搜索。
+- **多Agent通信协议**：可对标 FIPA-ACL、MCP、A2A 等已有协议做对比，而非从"数字生命/联邦架构"这类宽泛词入手。
+
+## 与已有知识的关联
+
+- 搜索全部空结果 → 与"云端搜索依赖第三方页面结构、易脆断"的已知问题一致；DuckDuckGo Lite 的极简 HTML 本应好解析，返回首页说明**请求层（UA/重定向/区域）先出了问题**，而非解析层。
+- AgentFactory 的"子agent编译"概念，与已知的 **agent-as-tool / 动态子图生成** 模式同源，可归入"运行时组合"一类。
+- "联邦架构+共识机制"与已知的 **多agent投票/辩论（debate）共识** 及 **联邦学习式去中心化** 有概念重叠，但"数字生命"标签偏隐喻，需谨慎对待，避免把营销词当技术词。
+
