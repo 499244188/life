@@ -2061,3 +2061,27 @@
 - 隔离协议 ↔ **Byzantine 容错、circuit breaker、quorum 动态调整**。
 - SCM 溯源 ↔ **Pearl 因果阶梯、AIOps 根因分析、shapley 归因**。
 - [探索: 信任衰减的量化模型与隔离触发条件 — 1. **混合衰减的拼接点如何确定？** 短期/中期/长期的切换判据是什么——按时间、按证据量、还是按不确定性水平？切换处是否连续？ 2. **证据相关性如何在合成图中量化注入？** 需要定义"源聚类系数"和"时间自相关长度"，但�...] (来源: 2026-11-13 05:35)
+
+- 无新增原子事实 (重要性: 1/10, 来源: 本轮输入)
+
+## 搜索: 2026-11-13 06:30
+## 关键发现
+
+1. **三组搜索均未命中有效结果**：Wikipedia/HN/GitHub 全部为空，DuckDuckGo 仅返回首页占位符——说明这些组合概念在公开索引中几乎不存在现成文献，属于高度前沿或高度交叉的空白地带。
+
+2. **概念组合本身具有内在逻辑链**：三组搜索分别对应"协作层（集体免疫+信任衰减+共识）→ 分析层（因果推断+根因溯源+预测防御）→ 检测层（行为指纹+GNN+投毒防御）"，构成一个完整的 Agent 安全架构栈，而非随机关键词堆砌。
+
+3. **术语粒度偏细导致检索失败**：如"动态信任衰减与隔离协议""Agent行为指纹"等是自造/组合术语，公开语料中更常见的对应词是 trust management、reputation decay、agent anomaly detection、Byzantine fault tolerance 等——需要降维检索。
+
+## 值得深挖的方向
+
+- **信任衰减 + 共识算法的交叉**：将 reputation/trust decay 机制嵌入 BFT/共识层，是 multi-agent 安全中较少系统化的点。
+- **因果推断用于 Agent 决策链溯源**：SCM（结构因果模型）在 Agent 可解释性/根因定位中的应用几乎是空白，值得作为核心创新点。
+- **GNN 做 Agent 通信图异常检测 + 对抗投毒鲁棒性**：图异常检测已有基础，但"对抗性投毒下的 GNN 防御"与 Agent 场景结合是缺口。
+- **"集体免疫"隐喻的工程化**：需找到与人工免疫系统（AIS）、negative selection 等已有范式的映射关系。
+
+## 与已有知识的关联
+
+- 信任衰减 ↔ **Beta reputation systems、EigenTrust、Subjective Logic**
+- 共识/隔离 ↔ **Byzantine fault tolerance、swarm quarantine、circuit breaker 模式**
+- 因果溯源 ↔ **Pearl SCM、root cause analysis、provenance graphs**
