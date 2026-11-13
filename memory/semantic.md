@@ -2111,3 +2111,10 @@
 
 ## 搜索: 2026-11-13 18:32
 搜索结果已保存，消化将在下次运行时继续。
+
+- persona-memory-graph 项目将 Agent 记忆分为 facts、episodes、principles 三种类型，用 PostgreSQL 与 Neo4j 双存储并提供图检索 API。 (重要性: 5/10, 来源: tinasheosewe/persona-memory-graph)
+- Semvec-neo4j-agent-integration 项目用 Semvec 漂移检测加 Neo4j 知识图谱为多 Agent 系统提供恒定成本的持久语义记忆。 (重要性: 5/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
+- 两个新项目均为 ★0 仓库，采用 MIT 许可，无社区验证。 (重要性: 3/10, 来源: GitHub)
+
+## 搜索: 2026-11-14 02:11
+搜索结果已保存，消化将在下次运行时继续。
