@@ -2108,3 +2108,6 @@
 - GNN 异常检测在网络入侵检测中成熟，用于 **Agent 间通信投毒**属于新兴方向，与 prompt injection 防御、Agent 沙箱隔离直接相关。
 
 - [探索: 基于因果推断的 Agent 决策链故障根因溯源与预测性防御 — 1. **先做文献缺口确认**：用 Google Scholar 补搜 "causal root cause analysis LLM agent"、"agent decision chain fault attribution"，确认零命中是否跨库成立。 2. **定义最小问题形式**：选一个单 Agent 多步任务（如 ReAct 链），注入已知故障（工具返�...] (来源: 2026-11-13 17:59)
+
+## 搜索: 2026-11-13 18:32
+搜索结果已保存，消化将在下次运行时继续。
