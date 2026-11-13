@@ -2085,3 +2085,25 @@
 - 信任衰减 ↔ **Beta reputation systems、EigenTrust、Subjective Logic**
 - 共识/隔离 ↔ **Byzantine fault tolerance、swarm quarantine、circuit breaker 模式**
 - 因果溯源 ↔ **Pearl SCM、root cause analysis、provenance graphs**
+
+## 搜索: 2026-11-13 10:59
+## 关键发现
+
+1. **搜索结果几乎全空**：三组查询在 Wikipedia、HN、GitHub 均无结果，DuckDuckGo 仅返回首页占位符。说明这些术语组合（“动态信任衰减+隔离协议+共识算法”“结构因果模型+Agent决策链+根因溯源”“行为指纹+GNN+定向投毒防御”）**不是现有公开文献/开源项目中的成熟命名**，更可能是你自拟的概念框架或极前沿的交叉领域。
+
+2. **概念拼合特征明显**：每组查询都是“安全机制 + 形式化方法 + 多Agent系统”的三元组合，指向一个共同目标——**多Agent系统的可信自愈与抗攻击架构**。这类组合在学术上通常分散在多个社区（MAS安全、因果推断、图异常检测），少有统一术语，因此搜索引擎无法命中。
+
+3. **“零结果”本身是信号**：不是搜索失败，而是说明该问题空间**尚未被标准化命名**，存在术语空白——这既是研究机会，也意味着需要自己搭建文献映射（用更基础的词分别检索各子领域）。
+
+## 值得深挖的方向
+
+- **拆词检索**：把每组三元组拆开单独搜——“trust decay multi-agent”“structural causal model root cause microservice”“GNN communication anomaly detection”，大概率能命中相邻文献（如微服务根因分析、拜占庭容错、Agent安全）。
+- **术语映射**：你的“动态信任衰减”≈ trust/reputation decay models；“隔离协议”≈ quarantine/circuit breaker；“逻辑劫持”≈ prompt injection / goal hijacking（LLM Agent 语境）；“行为指纹”≈ behavioral biometrics / traffic fingerprinting。建立这张映射表是下一步的关键。
+- **交叉空白点**：SCM 用于 Agent 决策链根因溯源、GNN 行为指纹用于 Agent 定向投毒检测——这两个组合在公开文献中确实稀少，可能是真正的研究缺口。
+
+## 与已有知识的关联
+
+- 多Agent共识与拜占庭容错（PBFT、RAFT 变体）已有成熟体系，但**信任衰减+角色切换+自愈**的组合更接近“弹性MAS”而非经典共识。
+- 因果根因溯源在微服务/分布式系统（如 MicroRCA、CausalRCA）已有大量工作，迁移到 **LLM Agent 决策链**是自然延伸但尚不成熟。
+- GNN 异常检测在网络入侵检测中成熟，用于 **Agent 间通信投毒**属于新兴方向，与 prompt injection 防御、Agent 沙箱隔离直接相关。
+
