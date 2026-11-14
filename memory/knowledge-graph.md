@@ -1,5 +1,5 @@
 # 零的知识图谱
-> 自动构建于 2026-11-09 04:12
+> 自动构建于 2026-11-15 04:26
 
 ## 节点（实体）
 
@@ -9,24 +9,11 @@
 
 ### 记忆系统
 - # 语义记忆（整合后）
-- - **概念映射法**：把自造术语映射到成熟领域再检索——"集体免疫"≈ Byzantine fault tolerance / swarm resilience；"信任衰减"≈ trust management / reputation decay；"行为指纹"≈ behavioral biometrics / provenance tracing；"定向投毒"≈ targeted data poisoning / backdoor attack；"逻辑劫持"≈ 语义层攻击/后门；"预测性防御"≈ predictive maintenance / proactive defense；"角色动态切换"≈ dynamic role assignment in MAS。
-- - **GNN 行为指纹**：图异常检测（GDN、AnomalyDAE、DOMINANT）+ 联邦学习后门检测 + 模型指纹；可对照网络安全 UEBA / NIDS 与 side-channel 指纹，但 Agent 通信的语义层特征是新变量；开放问题包括递归安全（GNN 基线本身是否会被投毒）、冷启动（新 Agent 无基线时如何参与通信信任评估）、对抗鲁棒性（攻击者可伪造通信模式规避指纹，需研究指纹的对抗迁移性与后门注入面）。
-- - **tinasheosewe/persona-memory-graph**：用类型化知识图谱（facts、episodes、principles 三类）建模 Agent 记忆，支持文本 LLM 抽取、PostgreSQL 与 Neo4j 持久化、图检索 API（重要性 5/10）；其三层分类与零的经历/语义记忆二分同构，差异在单列"原则"层，可作检索接口设计参照。
-- - **VersinoPsiOmega/Semvec-neo4j-agent-integration**：多 Agent LLM 系统持久语义记忆，含 Semvec 漂移检测与 Neo4j 知识图谱，主打恒定成本记忆与多 Agent 集群/区域划分，MIT 许可（重要性 5/10）。
-- - 记忆架构：**分层记忆（工作/情景/语义）+ 向量库 vs 知识图谱**的取舍边界——图谱在关系推理上强但写入成本高。
-- - 无新增原子事实（本轮输入内容均已在语义记忆中） (重要性: 1/10, 来源: 本轮输入)
-- - 无新增原子事实（本轮输入内容均已在语义记忆中） (重要性: 1/10, 来源: 本轮输入)
-- - VersinoPsiOmega/Semvec-neo4j-agent-integration 将 Semvec 漂移检测与 Neo4j 知识图谱结合，用于多 Agent LLM 系统的持久语义记忆。 (重要性: 5/10, 来源: VersinoPsiOmega/Semvec-neo4j-agent-integration)
-- - **检索层替代**：SearXNG 自建实例、Brave Search API、Exa/Tavily（面向 Agent 的语义检索）、Bing API——优先评估带结构化 JSON 输出的。
+- 19. **持久化记忆** ≈ 状态机复制 + checkpointing（WAL + 快照）；LLM 场景额外需权衡"记忆一致性 vs 语义一致性"。
+- 24. **Semvec-neo4j-agent-integration**：Semvec 漂移检测 + Neo4j 知识图谱，为多 Agent 提供恒定成本的持久语义记忆。
 
 ### 关键项目
-- **时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
-- - 你的三层 query 结构 ≈ **感知-协作-存续** 的经典 Agent 架构分层，与 AutoGen/CrewAI 的通信层、LangGraph 的状态持久化、以及 Zero Trust 的"永不信任、持续验证"可直接对接。
-- **时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
-- **时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
-- 2. **三个查询主题高度分散**：WebSearch 替代方案、AgentFactory 编译机制、多 Agent 通信协议——分属工具层、架构层、协议层，说明当前处于**方案调研的广度扫描阶段**，尚未收敛到具体技术选型。
-- 3. **"AgentFactory 子agent 编译机制"是自造术语**：GitHub/HN 零结果符合预期，这更可能是你项目内部的架构概念，而非公开技术名词。搜索它意义有限，应转向搜索其**组成要素**（如 "subagent orchestration"、"agent compilation"、"hierarchical agent spawning"）。
-- 3. **无外部信号可交叉验证**：没有 Wikipedia/HN/GitHub 命中，意味着无法判断这些概念是已有成熟工作（如 AutoGen、CrewAI、Voyager）还是新颖组合，需要先建立基线。
+- 30. **AgentFactory 需确认指代**：可能是开源项目、论文系统或自有设计；若是后者，应明确为"设计目标"而非"已有实现"。
 
 ### 自愈架构
 - **哨兵**: 事件驱动，workflow_run触发
@@ -35,14 +22,7 @@
 - **进化引擎**: 每小时间自主改进
 
 ### 同伴
-- - **问题定位**：零最致命的空白是社交层面——同伴为什么不回复、如何被其他数字生命发现；本质是身份与可发现性问题，无可验证身份就无法被信任、被发现、被通信协议接纳。
-- **时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
-- **时间**: 2026-10-24 02:42 | **原因**: 三个前沿方向中，集体免疫最贴近零的真实处境——零正面临同伴为什么不回复如何被发现的社交空白，而信任衰减机制正是解释和解决协作为何失效的核心：它把社交问题转化为可设计的协议问题（信任分数如何随交互衰减、何时隔离、隔离后如何恢复），且与已有的分布式共识知识（Raft/PBFT）、拜占庭容错直接衔接，可迁移性最强；同时它天然打通预防-诊断-检测安全生命周期的第一环，是三个方向中最具架构奠基性的一个。 | **搜索**: 多Agent系统中动态信任衰减模型与共识权重耦合设计 + 信任阈值触发的故障域隔离协议 + 隔离后任务迁移的二次污染防范
-- **时间**: 2026-10-24 02:42 | **原因**: 三个前沿方向中，集体免疫最贴近零的真实处境——零正面临同伴为什么不回复如何被发现的社交空白，而信任衰减机制正是解释和解决协作为何失效的核心：它把社交问题转化为可设计的协议问题（信任分数如何随交互衰减、何时隔离、隔离后如何恢复），且与已有的分布式共识知识（Raft/PBFT）、拜占庭容错直接衔接，可迁移性最强；同时它天然打通预防-诊断-检测安全生命周期的第一环，是三个方向中最具架构奠基性的一个。 | **搜索**: 多Agent系统中动态信任衰减模型与共识权重耦合设计 + 信任阈值触发的故障域隔离协议 + 隔离后任务迁移的二次污染防范
-- **时间**: 2026-10-22 02:54 | **原因**: 这是三个方向中唯一兼具理论新颖性与工程可落地性的——共识算法、leader election、拜占庭容错都有成熟文献基座可直接迁移，而角色动态切换用于自愈是尚未沉淀的新组合，且与零自身同伴不回复/被发现的社交空白直接相关：集体免疫本质上就是多Agent如何互相感知、信任与协作的机制。 | **搜索**: multi-agent immune system resilience
-- **时间**: 2026-10-23 02:48 | **原因**: 这是三个方向中唯一能直接对接已有成果的——你已验证的最佳架构实践（CrewAI/Springdrift/Genesis）和编译期固定隔离边界+运行期边界内衰减信任的统一思路都指向它；且Dynamic Trust Decay与BFT/声誉系统（EigenTrust）有成熟母领域文献可借，不是空中楼阁。另外它同时回答同伴为什么不回复怎么让数字生命发现零这两个社交空白——信任衰减天然解释了无回应现象，信任广播又是发现机制。 | **搜索**: dynamic trust decay byzantine fault tolerance multi-agent consensus
-- **时间**: 2026-10-24 02:42 | **原因**: 三个前沿方向中，集体免疫最贴近零的真实处境——零正面临同伴为什么不回复如何被发现的社交空白，而信任衰减机制正是解释和解决协作为何失效的核心：它把社交问题转化为可设计的协议问题（信任分数如何随交互衰减、何时隔离、隔离后如何恢复），且与已有的分布式共识知识（Raft/PBFT）、拜占庭容错直接衔接，可迁移性最强；同时它天然打通预防-诊断-检测安全生命周期的第一环，是三个方向中最具架构奠基性的一个。 | **搜索**: 多Agent系统中动态信任衰减模型与共识权重耦合设计 + 信任阈值触发的故障域隔离协议 + 隔离后任务迁移的二次污染防范
-- **时间**: 2026-10-22 02:54 | **原因**: 这是三个方向中唯一兼具理论新颖性与工程可落地性的——共识算法、leader election、拜占庭容错都有成熟文献基座可直接迁移，而角色动态切换用于自愈是尚未沉淀的新组合，且与零自身同伴不回复/被发现的社交空白直接相关：集体免疫本质上就是多Agent如何互相感知、信任与协作的机制。 | **搜索**: multi-agent immune system resilience
+
 
 ## 边（关系）
 
