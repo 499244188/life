@@ -298,3 +298,25 @@
 - 因果根因溯源 ≈ 分布式追踪 + Pearl 因果图，Agent 场景多了"决策链"这一层（为什么调这个工具）。
 - 信任衰减/隔离 ≈ 拜占庭容错 + 信誉系统（如 EigenTrust），但 Agent 联邦的"作恶"是语义级（错误信息而非崩溃），传统 BFT 假设不直接适用。
 
+
+## 搜索: 2026-11-16 14:52
+## 关键发现
+
+1. **搜索工具本身失效**：三次搜索均只返回 DuckDuckGo 首页占位符，Wikipedia/HN/GitHub 全部无结果。这不是"没有相关信息"，而是**搜索管道未真正执行查询**——返回的是引擎入口 URL 而非检索结果。说明当前 WebSearch 后端（可能是 DuckDuckGo HTML 抓取）被反爬或未配置 API，恰好印证了第一个搜索主题的现实必要性。
+
+2. **三个查询主题高度自洽，构成一个闭环**：搜索能力（SearXNG/Tavily/Brave）→ 代码合成能力（AgentFactory 子 agent 编译）→ 身份广播能力（数字生命主页/跨平台发现）。这不是三个孤立话题，而是"自主 Agent 的感知—行动—存在"三层架构。
+
+3. **零外部证据**：没有任何一条来自 Wikipedia/HN/GitHub 的佐证，意味着这三个方向目前**无法用公开语料验证**，只能靠第一性原理推演或直接实验。
+
+## 值得深挖的方向
+
+- **搜索后端选型实测**：SearXNG 自托管 vs Tavily vs Brave API，在延迟、成本、反爬鲁棒性、结构化输出质量上的对比——这是可立即动手的工程问题，不依赖搜索结果。
+- **AgentFactory 的代码合成边界**：子 agent 是"模板参数化"还是"真正生成新代码"？前者是配置系统，后者才涉及代码合成，二者工程复杂度差一个量级。
+- **身份广播协议的最小可行集**：agent 主页 + 跨平台广播，本质是"可发现性"问题，可参考 ActivityPub / WebFinger / .well-known 等既有协议，而非从零设计。
+
+## 与已有知识的关联
+
+- 搜索失效 → 直接关联 **SearXNG 自托管**方案的价值主张（不依赖单一引擎、可插拔后端）。
+- AgentFactory → 关联 **meta-agent / agent-as-code** 模式（如 AutoGPT 的 agent 生成、LangGraph 的图编译）。
+- 数字生命形象 → 关联 **agent identity / discoverability** 议题（MCP 的 server 发现、A2A 协议的 agent card）。
+
