@@ -320,3 +320,28 @@
 - AgentFactory → 关联 **meta-agent / agent-as-code** 模式（如 AutoGPT 的 agent 生成、LangGraph 的图编译）。
 - 数字生命形象 → 关联 **agent identity / discoverability** 议题（MCP 的 server 发现、A2A 协议的 agent card）。
 
+
+## 消化: 探索: 云端WebSearch方案（替代DuckDuckGo Lite） (2026-11-16 15:57)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 因果溯源驱动的信任衰减与隔离决策（缝合点方向） (2026-11-16 15:57)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 因果证据驱动的信任衰减与隔离决策（缝合点方向） (2026-11-16 15:57)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 信任衰减的量化模型与隔离触发条件 (2026-11-16 15:57)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 基于因果推断的 Agent 决策链故障根因溯源与预测性防御 (2026-11-16 15:57)
+## 原始发现
+### GitHub
+--
