@@ -443,3 +443,4 @@
 ## 原始发现
 ### GitHub
 --
+- [探索: 基于因果推断的故障根因溯源与预测性防御 — 1. **先做文献边界的精确测绘**：用"causal root cause analysis"+"agent decision"、"structural causal model"+"fault localization"、"counterfactual attribution"+"distributed system"三组组合在Semantic Scholar和Google Scholar做引文追踪，确认最近邻工作并明确差异点。这一步决定论文的related work怎么写。 2. **构建最小可行实验**：选一个开源多Agent模拟环境（如PettingZoo或自定义的微服务Agent模...] (来源: 2026-11-17 19:10)
