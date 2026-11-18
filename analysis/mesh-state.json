@@ -827,6 +827,15 @@
     "version": "2"
   },
   {
+    "id": "runnervmccnms-2312",
+    "capability": 100,
+    "cpu": 1,
+    "os": "Linux",
+    "last_seen": "2026-11-18T22:51:14Z",
+    "feeling": "75",
+    "version": "2"
+  },
+  {
     "id": "runnervmccnms-2505",
     "capability": 100,
     "cpu": 1,

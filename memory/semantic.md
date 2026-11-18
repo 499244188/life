@@ -572,3 +572,28 @@
 - GNN+后门防御 → 对应**graph backdoor detection、model fingerprinting**，2022年后有活跃研究。
 
 - [探索: 多Agent信任衰减与BFT共识嫁接的加权投票软隔离机制 — 1. **轮内冻结 vs 攻击窗口**：epoch边界是攻击者集中作恶的窗口（边界攻击）。需要研究epoch长度的安全性下界，或引入**随机化epoch边界**。 2. **影子票的隐私/共谋**：probation节点的影子票若公开，可能被利用来探测隔离阈值；若私密，审计追踪失效。需要**门限披露**方案。 3. **谱半径预警的误报率**：信任图稠密时ρ(A)天然大，需归一化（如ρ(A)/n）并校准阈值，否则级联预警频繁误触。 ...] (来源: 2026-11-19 06:19)
+
+## 消化: 探索: 信任衰减函数与BFT共识阈值的联合设计 (2026-11-19 06:51)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 云端 WebSearch 方案（替代 DuckDuckGo Lite） (2026-11-19 06:51)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 先修复搜索层再谈方案对比（WebSearch集成冒烟测试） (2026-11-19 06:51)
+## 原始发现
+### GitHub
+- Pimzino/spec-workflow-mcp ★4306: A Model Context Protocol (MCP) server that provides structured spec-driven development workflow tools for AI-assisted software development, featuring a real-time web dashboard and VSCode extension for monitoring and managing your project's progress directly in your development environment.
+
+## 消化: 探索: 因果证据驱动的信任衰减与隔离决策（缝合点方向） (2026-11-19 06:51)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-11-19 06:51)
+## 原始发现
+### GitHub
+--
