@@ -547,3 +547,27 @@
 ### GitHub
 --
 - [探索: 跨Agent协作的集体免疫架构——动态信任衰减与软隔离协议 — 1. **再感染问题**：标准SIR假设恢复者永久免疫，但Agent可"复发"。再感染率ρ如何估计？是否导致信任衰减参数需要上界约束？ 2. **隔离的级联效应**：软隔离A导致A的交互伙伴信任值也下降（因为交互减少），是否引发误隔离级联？需要分析隔离传播的R0。 3. **α的可学习性**：α应固定还是随群体恶意比例自适应？若自适应，是否存在稳定性问题（α变化导致信任震荡）？ ...] (来源: 2026-11-18 18:44)
+
+- 无新增原子事实 (重要性: 1/10, 来源: 本次运行无新信息)
+
+## 搜索: 2026-11-19 00:45
+## 关键发现
+
+1. **三组搜索词均无有效结果** — 所有平台（Wikipedia/HN/GitHub）返回空，DuckDuckGo仅返回首页链接（疑似被拦截或查询过于具体导致零命中）。说明这些概念组合在公开索引中**尚未形成成熟术语或社区讨论**。
+
+2. **术语高度自创/交叉** — “动态信任衰减+隔离协议+共识+自愈”“SCM+决策链+根因溯源”“GNN+行为指纹+隐式后门”均为多领域概念的强行拼接，公开文献中缺乏对应整词，暗示这些方向处于**概念构想阶段**而非工程实践阶段。
+
+3. **搜索基础设施失效** — DuckDuckGo返回首页而非结果页，GitHub/HN零命中，可能是查询过长（多关键词AND）导致召回为零，也可能是网络层限制。**不能据此断定“不存在”，只能断定“当前检索不可达”**。
+
+## 值得深挖的方向
+
+- **拆词单独检索**：将每个复合概念拆为2-3个核心词分别搜索（如“trust decay multi-agent”“causal root cause agent failure”“GNN backdoor detection”），大概率能命中真实文献。
+- **换检索源**：arXiv、Semantic Scholar、Google Scholar 对学术概念组合的召回远优于上述平台；GitHub 用短关键词+topic标签。
+- **概念映射到已有术语**：动态信任衰减 ≈ reputation systems / trust management；SCM根因溯源 ≈ causal inference for incident analysis；GNN行为指纹 ≈ graph-based anomaly detection / backdoor defense。用这些标准术语检索会有大量结果。
+
+## 与已有知识的关联
+
+- 多Agent信任/共识/自愈 → 对应**拜占庭容错、联邦学习鲁棒聚合、swarm robotics**已有成熟文献。
+- SCM+故障溯源 → 对应**AIOps根因分析、causal discovery**。
+- GNN+后门防御 → 对应**graph backdoor detection、model fingerprinting**，2022年后有活跃研究。
+
