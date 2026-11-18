@@ -514,3 +514,10 @@
 - 动态信任衰减 ≈ **传染病模型 SIR 的免疫衰减** 与 **信誉系统的时效性衰减** 交叉。
 - LLM + SCM 根因分析 ≈ **AIOps 根因定位** 的因果推断升级版，与 Pearl 因果阶梯（关联→干预→反事实）直接对应。
 
+
+- whisper-sec/whisper-edge 是一个无依赖的 Whisper agent 身份 SDK，支持 Cloudflare Workers、Vercel、Deno、Netlify、Lambda、Supabase 等 serverless/edge 运行时 (重要性: 5/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 提供无密钥的 verify/resolve/RDAP 功能，并附带一个需要 API key 的控制平面 (重要性: 5/10, 来源: whisper-sec/whisper-edge)
+- whisper-edge 当前星数为 0，成熟度未经代码级验证 (重要性: 4/10, 来源: whisper-sec/whisper-edge)
+
+## 搜索: 2026-11-18 15:44
+搜索结果已保存，消化将在下次运行时继续。
