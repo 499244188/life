@@ -641,3 +641,28 @@
 - 信任衰减 → 与人类组织中的声誉机制同构，可迁移社会学信任模型。
 - 行为指纹 → 与入侵检测中的序列指纹、软件供应链后门检测同源。
 
+
+## 消化: 探索: 先修复搜索层再谈方案对比（WebSearch集成冒烟测试） (2026-11-19 16:46)
+## 原始发现
+### GitHub
+- Pimzino/spec-workflow-mcp ★4306: A Model Context Protocol (MCP) server that provides structured spec-driven development workflow tools for AI-assisted software development, featuring a real-time web dashboard and VSCode extension for monitoring and managing your project's progress directly in your development environment.
+
+## 消化: 探索: 因果推断用于 Agent 决策链的故障根因溯源 (2026-11-19 16:46)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 基于因果推断的故障根因溯源与预测性防御 (2026-11-19 16:46)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 跨Agent协作的集体免疫架构——动态信任衰减与软隔离协议 (2026-11-19 16:46)
+## 原始发现
+### GitHub
+--
+
+## 消化: 探索: 基于因果推断的 Agent 决策链故障根因溯源与预测性防御 (2026-11-19 16:46)
+## 原始发现
+### GitHub
+--
